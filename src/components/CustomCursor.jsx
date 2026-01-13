@@ -16,14 +16,20 @@ import { useTheme } from '../context/ThemeContext'
 export default function CustomCursor() {
   const cursorRef = useRef(null)
   const [isHovering, setIsHovering] = useState(false)
+  const [isProjectCard, setIsProjectCard] = useState(false)
   const [hasFinePointer, setHasFinePointer] = useState(false)
   const isHoveringRef = useRef(false) // Use ref to avoid re-running effect
+  const isProjectCardRef = useRef(false)
   const { isDark } = useTheme()
 
-  // Keep ref in sync with state
+  // Keep refs in sync with state
   useEffect(() => {
     isHoveringRef.current = isHovering
   }, [isHovering])
+
+  useEffect(() => {
+    isProjectCardRef.current = isProjectCard
+  }, [isProjectCard])
 
   // Only show cursor on devices with fine pointer (mouse)
   useEffect(() => {
@@ -43,10 +49,11 @@ export default function CustomCursor() {
     // Base size and hover size
     const baseSize = 20
     const hoverSize = 28
+    const projectCardSize = 80
 
     // Direct mouse tracking - use ref for current hover state
     const handleMouseMove = (e) => {
-      const size = isHoveringRef.current ? hoverSize : baseSize
+      const size = isProjectCardRef.current ? projectCardSize : (isHoveringRef.current ? hoverSize : baseSize)
       const offset = size / 2
       cursor.style.transform = `translate(${e.clientX - offset}px, ${e.clientY - offset}px)`
       cursor.style.opacity = '1'
@@ -78,15 +85,27 @@ export default function CustomCursor() {
       )
     }
 
+    // Check if element is a project card
+    const isProjectCardElement = (el) => {
+      if (!el) return false
+      return el.hasAttribute('data-project-card') || el.closest('[data-project-card]')
+    }
+
     // Handle hover state for interactive elements
     const handleMouseOver = (e) => {
-      if (isInteractive(e.target)) {
+      if (isProjectCardElement(e.target)) {
+        setIsProjectCard(true)
+        setIsHovering(true)
+      } else if (isInteractive(e.target)) {
         setIsHovering(true)
       }
     }
 
     const handleMouseOut = (e) => {
-      if (isInteractive(e.target)) {
+      if (isProjectCardElement(e.target)) {
+        setIsProjectCard(false)
+        setIsHovering(false)
+      } else if (isInteractive(e.target)) {
         setIsHovering(false)
       }
     }
@@ -110,20 +129,36 @@ export default function CustomCursor() {
   // Don't render on touch devices
   if (!hasFinePointer) return null
 
+  const cursorSize = isProjectCard ? 80 : (isHovering ? 28 : 20)
+
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center ${
+        isProjectCard ? '' : 'mix-blend-difference'
+      }`}
       style={{
-        width: isHovering ? '28px' : '20px',
-        height: isHovering ? '28px' : '20px',
-        backgroundColor: 'white',
-        border: '2px solid white',
+        width: `${cursorSize}px`,
+        height: `${cursorSize}px`,
+        backgroundColor: isProjectCard ? (isDark ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.9)') : 'white',
+        border: isProjectCard ? 'none' : '2px solid white',
         borderRadius: '50%',
         opacity: 0, // Start hidden until mouse moves
-        transition: 'width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease',
+        transition: 'width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease, background-color 0.3s ease',
       }}
       aria-hidden="true"
-    />
+    >
+      {isProjectCard && (
+        <span
+          className={`font-mono text-[11px] tracking-wide ${isDark ? 'text-black' : 'text-white'}`}
+          style={{
+            opacity: isProjectCard ? 1 : 0,
+            transition: 'opacity 0.2s ease',
+          }}
+        >
+          View →
+        </span>
+      )}
+    </div>
   )
 }

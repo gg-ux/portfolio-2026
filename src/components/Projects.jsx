@@ -258,7 +258,29 @@ const projects = [
 
 function ProjectCard({ project, isDark, index, isVisible }) {
   const [isHovered, setIsHovered] = useState(false)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const cardRef = useRef(null)
+
+  // Handle magnetic tilt effect
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+
+    // Calculate tilt (max ~8 degrees)
+    const tiltX = ((y - centerY) / centerY) * -8
+    const tiltY = ((x - centerX) / centerX) * 8
+
+    setTilt({ x: tiltX, y: tiltY })
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setTilt({ x: 0, y: 0 })
+  }
 
   // Staggered entrance animation
   const entranceStyle = {
@@ -285,14 +307,20 @@ function ProjectCard({ project, isDark, index, isVisible }) {
       className="group block flex-shrink-0 w-[70vw] md:w-[40vw] lg:w-[30vw]"
       style={entranceStyle}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      data-project-card
     >
-      {/* Image container */}
+      {/* Image container with 3D tilt */}
       <div
-        className="aspect-square overflow-hidden rounded-2xl transition-all duration-500"
+        className="aspect-square overflow-hidden rounded-2xl transition-all duration-300"
         style={{
           background: cardBackground,
           boxShadow: cardShadow,
+          transform: isHovered
+            ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`
+            : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
+          transformStyle: 'preserve-3d',
         }}
       >
         {project.transparent ? (
