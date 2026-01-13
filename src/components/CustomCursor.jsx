@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { ArrowRight } from '@phosphor-icons/react'
 import { useTheme } from '../context/ThemeContext'
 
 /**
@@ -138,29 +139,27 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center ${
-        isProjectCard ? '' : 'mix-blend-difference'
-      }`}
+      className="fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference"
       style={{
         width: `${cursorSize}px`,
         height: `${cursorSize}px`,
-        backgroundColor: isProjectCard ? (isDark ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.9)') : 'white',
+        backgroundColor: 'white',
         border: isProjectCard ? 'none' : '2px solid white',
         borderRadius: '50%',
         opacity: 0, // Start hidden until mouse moves
-        transition: 'width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease, background-color 0.3s ease',
+        transition: 'width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease',
       }}
       aria-hidden="true"
     >
       {isProjectCard && (
         <span
-          className={`font-mono text-[11px] tracking-wide ${isDark ? 'text-black' : 'text-white'}`}
+          className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-normal text-black"
           style={{
             opacity: isProjectCard ? 1 : 0,
             transition: 'opacity 0.2s ease',
           }}
         >
-          View →
+          View <ArrowRight size={13} weight="regular" />
         </span>
       )}
     </div>

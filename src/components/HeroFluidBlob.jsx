@@ -144,9 +144,16 @@ export default function HeroFluidBlob() {
               <span className={`font-mono text-[14px] font-light tracking-normal uppercase ${
                 isDark ? 'text-white/80 drop-shadow' : 'text-gray-900'
               }`}>
-                <ScrambleText trigger="mount" iterations={3} speed={25}>
-                  Based in Los Angeles
-                </ScrambleText>
+                <span className="sm:hidden">
+                  <ScrambleText trigger="mount" iterations={3} speed={25}>
+                    Based in LA
+                  </ScrambleText>
+                </span>
+                <span className="hidden sm:inline">
+                  <ScrambleText trigger="mount" iterations={3} speed={25}>
+                    Based in Los Angeles
+                  </ScrambleText>
+                </span>
               </span>
             </div>
           </div>

@@ -22,6 +22,18 @@ export default function Navigation() {
     return () => cancelAnimationFrame(timer)
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   // Track scroll for direction detection
   const lastScrollY = useRef(0)
   const scrollUpDistance = useRef(0)
@@ -121,6 +133,7 @@ export default function Navigation() {
 
 
   return (
+    <>
     <nav
       className={`fixed top-0 left-0 right-0 z-[200] ${
         isScrolledMode
@@ -240,38 +253,121 @@ export default function Navigation() {
             <ThemeToggle size="small" />
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span className={`block h-0.5 transition-all duration-300 ${isDark ? 'bg-white' : 'bg-gray-900'} ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`block h-0.5 transition-all duration-300 ${isDark ? 'bg-white' : 'bg-gray-900'} ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-0.5 transition-all duration-300 ${isDark ? 'bg-white' : 'bg-gray-900'} ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          {/* Mobile: Theme Toggle + Menu Button */}
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 relative w-10 h-10 flex items-center justify-center"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+            <div className="w-[22px] h-[14px] relative">
+              <span
+                className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
+                  isDark ? 'bg-white' : 'bg-gray-900'
+                }`}
+                style={{
+                  top: isMobileMenuOpen ? '6px' : '0px',
+                  transform: isMobileMenuOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                }}
+              />
+              <span
+                className={`absolute left-0 top-[6px] w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
+                  isDark ? 'bg-white' : 'bg-gray-900'
+                }`}
+                style={{
+                  opacity: isMobileMenuOpen ? 0 : 1,
+                  transform: isMobileMenuOpen ? 'scaleX(0)' : 'scaleX(1)',
+                }}
+              />
+              <span
+                className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
+                  isDark ? 'bg-white' : 'bg-gray-900'
+                }`}
+                style={{
+                  top: isMobileMenuOpen ? '6px' : '12px',
+                  transform: isMobileMenuOpen ? 'rotate(-45deg)' : 'rotate(0deg)',
+                }}
+              />
             </div>
-          </button>
+            </button>
+          </div>
         </div>
       </div>
+    </nav>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden absolute top-18 left-0 right-0 backdrop-blur-lg transition-all duration-500 ${
-          isDark ? 'bg-[#0a0a0a]/95 border-b border-white/[0.06]' : 'bg-white/95 border-b border-black/[0.08]'
-        } ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-      >
-        <div className="px-6 py-8 flex flex-col gap-6">
+    {/* Mobile Menu - Full screen overlay (outside nav to avoid transform issues) */}
+    <div
+      className={`md:hidden fixed inset-0 z-[250] transition-all duration-500 ${
+        isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'
+      } ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+      style={{
+        backgroundImage: isDark
+          ? `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`
+          : `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
+        backgroundSize: '60px 60px',
+      }}
+    >
+      {/* Header row - matches nav positioning */}
+      <div className="px-6 h-18 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="block"
+        >
+          <img
+            src="/images/branding/logo.svg"
+            alt="Grace Guo logo"
+            className={`h-6 w-auto ${isDark ? 'invert' : ''}`}
+          />
+        </Link>
+
+        {/* Close button - same hamburger that morphs to X */}
+        <button
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="p-2 relative w-10 h-10 flex items-center justify-center"
+          aria-label="Close menu"
+        >
+          <div className="w-[22px] h-[14px] relative">
+            <span
+              className={`absolute left-0 w-full h-[2px] rounded-full ${
+                isDark ? 'bg-white' : 'bg-gray-900'
+              }`}
+              style={{
+                top: '6px',
+                transform: 'rotate(45deg)',
+              }}
+            />
+            <span
+              className={`absolute left-0 w-full h-[2px] rounded-full ${
+                isDark ? 'bg-white' : 'bg-gray-900'
+              }`}
+              style={{
+                top: '6px',
+                transform: 'rotate(-45deg)',
+              }}
+            />
+          </div>
+        </button>
+      </div>
+
+      {/* Content - centered but shifted slightly up */}
+      <div className="h-[calc(100vh-72px)] flex flex-col justify-center items-center pb-24">
+        {/* Navigation Links */}
+        <div className="flex flex-col items-center gap-6">
           {navLinks.map((link) =>
             link.isRoute ? (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
+                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
                   location.pathname === link.href
-                    ? isDark ? 'text-white' : 'text-gray-900'
-                    : isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                    ? 'theme-heading'
+                    : isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 {link.name}
@@ -281,27 +377,17 @@ export default function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
-                  isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
+                  isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 {link.name}
               </a>
             )
           )}
-
-          {/* Divider */}
-          <div className={`w-full h-px ${isDark ? 'bg-white/[0.06]' : 'bg-black/[0.08]'}`} />
-
-          {/* Theme Toggle */}
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Caption className={isDark ? 'text-gray-400' : 'text-gray-500'}>
-              {isDark ? 'Dark Mode' : 'Light Mode'}
-            </Caption>
-          </div>
         </div>
       </div>
-    </nav>
+    </div>
+    </>
   )
 }

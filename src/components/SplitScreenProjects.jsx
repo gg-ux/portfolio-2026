@@ -366,6 +366,7 @@ export default function SplitScreenProjects() {
   const [isMobile, setIsMobile] = useState(false)
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null)
   const [craftingVisible, setCraftingVisible] = useState(false)
+  const [tiltState, setTiltState] = useState({ x: 0, y: 0 })
 
   // Use simple image effect on low-end devices
   const ImageComponent = canHandleEffects ? RippleImage : SimpleImage
@@ -389,15 +390,33 @@ export default function SplitScreenProjects() {
   }, [])
 
   // Trigger Crafting animation when scrolled into view (mobile only - desktop uses scroll handler)
+  // Also track scroll-based opacity for fade effect
+  const [mobileScrollOpacity, setMobileScrollOpacity] = useState(0)
+  const [mobileWorksOpacity, setMobileWorksOpacity] = useState(0)
   const mobileRafRef = useRef(null)
   useEffect(() => {
-    // Skip if not mobile or already visible
-    if (!isMobile || craftingVisible) return
+    if (!isMobile) return
 
     const checkVisibility = () => {
       if (craftingRef.current) {
         const rect = craftingRef.current.getBoundingClientRect()
-        if (rect.top < window.innerHeight) {
+        const vh = window.innerHeight
+
+        // Calculate opacity based on how far into view the section is
+        // Start fading in when section is 80% down the viewport, fully visible at 50%
+        const fadeStart = vh * 0.8
+        const fadeEnd = vh * 0.4
+        const progress = Math.max(0, Math.min(1, (fadeStart - rect.top) / (fadeStart - fadeEnd)))
+
+        setMobileScrollOpacity(progress)
+
+        // Selected Works fades in later - when Crafting is near center/top
+        const worksFadeStart = vh * 0.5
+        const worksFadeEnd = vh * 0.1
+        const worksProgress = Math.max(0, Math.min(1, (worksFadeStart - rect.top) / (worksFadeStart - worksFadeEnd)))
+        setMobileWorksOpacity(worksProgress)
+
+        if (rect.top < vh && !craftingVisible) {
           setCraftingVisible(true)
         }
       }
@@ -646,17 +665,28 @@ export default function SplitScreenProjects() {
     const containerPadding = isMedium ? 48 : 24 // px-6 = 24px, md:px-12 = 48px
 
     return (
-      <section>
-        {/* Centered "Crafting..." blurb - pulled up with negative margin */}
+      <section
+        className="-mt-32 md:-mt-48 relative z-10"
+        style={{
+          backgroundColor: isDark ? '#0a0a0a' : '#FAF8F4',
+          backgroundImage: isDark
+            ? `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`
+            : `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+          opacity: mobileScrollOpacity,
+          transition: 'opacity 0.15s ease-out',
+        }}
+      >
+        {/* Centered "Crafting..." blurb */}
         <div
           ref={craftingRef}
-          className="-mt-40 min-h-[50vh] flex items-center justify-center px-6 md:px-12 mb-12"
+          className="flex items-center justify-center px-6 md:px-12 pt-8 pb-64 md:pb-72 md:pt-12"
         >
           <div className="max-w-md sm:max-w-xl md:max-w-2xl text-center">
             <h2
-              className={`font-satoshi text-3xl sm:text-4xl md:text-5xl leading-snug tracking-tight ${
-                craftingVisible ? 'animate-fluid-in' : 'opacity-0'
-              }`}
+              className="font-satoshi text-3xl sm:text-4xl md:text-5xl leading-snug tracking-tight"
               style={{
                 color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)',
               }}
@@ -669,11 +699,18 @@ export default function SplitScreenProjects() {
         {/* Anchor for nav link - positioned at project start */}
         <div id="work" />
 
+        {/* Selected Works section - fades in after Crafting */}
+        <div
+          style={{
+            opacity: mobileWorksOpacity,
+            transition: 'opacity 0.15s ease-out',
+          }}
+        >
         {/* Header row: Selected Works + arrows - inside container */}
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-8">
           <div className="flex items-center justify-between">
             <h2
-              className="font-satoshi text-3xl md:text-4xl font-medium tracking-tight opacity-0 animate-fluid-in"
+              className="font-satoshi text-3xl md:text-4xl font-medium tracking-tight"
               style={{
                 color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)',
               }}
@@ -754,6 +791,7 @@ export default function SplitScreenProjects() {
           ))}
           {/* Right padding spacer */}
           <div className="flex-shrink-0" style={{ width: `${containerPadding}px` }} />
+        </div>
         </div>
       </section>
     )
@@ -914,17 +952,31 @@ export default function SplitScreenProjects() {
                     <Link
                       to={project.link}
                       className="group block w-full max-w-xl"
+                      data-project-card
                       onMouseEnter={() => setHoveredCardIndex(index)}
-                      onMouseLeave={() => setHoveredCardIndex(null)}
+                      onMouseLeave={() => {
+                        setHoveredCardIndex(null)
+                        setTiltState({ x: 0, y: 0 })
+                      }}
+                      onMouseMove={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect()
+                        const x = (e.clientX - rect.left) / rect.width - 0.5
+                        const y = (e.clientY - rect.top) / rect.height - 0.5
+                        setTiltState({ x, y })
+                      }}
+                      style={{ perspective: '1000px' }}
                     >
                       <div
-                        className="relative z-[101] aspect-square overflow-hidden rounded-2xl"
+                        className="relative z-[101] aspect-square overflow-hidden rounded-2xl transition-transform duration-150 ease-out"
                         style={{
                           background: isDark ? project.bgDark : project.bgLight,
                           boxShadow: isDark
                             ? '0 0 0 1px rgba(255,255,255,0.06), 0 8px 16px rgba(0,0,0,0.4), 0 24px 48px rgba(0,0,0,0.4)'
                             : '0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.1)',
                           isolation: 'isolate',
+                          transform: hoveredCardIndex === index
+                            ? `rotateY(${tiltState.x * 8}deg) rotateX(${-tiltState.y * 8}deg)`
+                            : 'rotateY(0deg) rotateX(0deg)',
                         }}
                       >
                         {/* Category chip - top left */}

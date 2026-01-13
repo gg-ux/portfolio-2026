@@ -52,7 +52,7 @@ export default function DesignSystemPage() {
       {/* Banner Section */}
       <div className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
         {/* Blob - positioned right */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-[-10%] md:right-[5%] lg:right-[10%] pointer-events-none opacity-80 z-20">
+        <div className="absolute top-1/2 -translate-y-1/2 right-[-10%] md:right-[5%] lg:right-[10%] pointer-events-none opacity-80 z-0">
           <FluidBlob size={500} seed={7} isDark={isDark} />
         </div>
 
