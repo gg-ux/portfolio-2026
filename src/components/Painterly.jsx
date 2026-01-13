@@ -324,9 +324,8 @@ export default function Painterly({ contained = false }) {
     const startTime = Date.now()
 
     const animate = () => {
-      // Skip rendering when not visible for performance
+      // Stop animation loop when not visible (will restart when visible changes)
       if (!isVisible) {
-        animationRef.current = requestAnimationFrame(animate)
         return
       }
 

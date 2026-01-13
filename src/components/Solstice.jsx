@@ -287,9 +287,8 @@ export default function Solstice({ static: isStatic = false, position = 'center'
     }
 
     const animate = (timestamp) => {
-      // Skip heavy calculations when not visible
+      // Stop animation loop when not visible (will restart when visible changes)
       if (!isVisible) {
-        animationRef.current = requestAnimationFrame(animate)
         return
       }
 

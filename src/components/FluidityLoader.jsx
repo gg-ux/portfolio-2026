@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTheme } from '../context/ThemeContext'
 
 /**
  * FluidityLoader - Welcome loader with Soulful color palette
@@ -16,6 +17,7 @@ import { useState, useEffect } from 'react'
  * - Blur fade out at completion
  */
 export default function FluidityLoader({ onComplete, duration = 4000, contained = false }) {
+  const { isDark } = useTheme()
   const [key, setKey] = useState(0)
 
   // Call onComplete when animation finishes
@@ -125,7 +127,7 @@ export default function FluidityLoader({ onComplete, duration = 4000, contained 
         <img
           src="/images/branding/logo.svg"
           alt="Logo"
-          className="h-6 w-auto relative invert"
+          className={`h-6 w-auto relative ${isDark ? 'invert' : ''}`}
           style={{
             animation: `fluidity-breathe 2s ease-in-out infinite, fluidity-fade ${animationDuration} ease-in-out`,
           }}
