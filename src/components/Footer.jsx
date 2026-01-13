@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { H2, Body, Caption } from './Typography'
-import { LinkedinLogo } from '@phosphor-icons/react'
 import { useTheme } from '../context/ThemeContext'
 import ContactForm from './ContactForm'
 
@@ -66,28 +65,25 @@ export default function Footer() {
               &copy; Grace Guo {new Date().getFullYear()}
             </Caption>
 
-            {/* Social + Tagline */}
-            <div className="flex items-center gap-6">
+            {/* Links */}
+            <div className="flex items-center gap-4">
               <a
-                href="https://linkedin.com/in/graceguo"
+                href="https://linkedin.com/in/grace-guo-ux"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`transition-colors duration-300 ${
                   isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                 }`}
-                aria-label="LinkedIn"
               >
-                <LinkedinLogo size={18} weight="fill" />
+                <Caption>LinkedIn</Caption>
               </a>
+              <span className={isDark ? 'text-gray-700' : 'text-gray-400'}>·</span>
               <Link
                 to="/playground"
                 className={`transition-colors duration-300 ${isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
               >
                 <Caption>Playground</Caption>
               </Link>
-              <Caption className={isDark ? 'text-gray-600' : 'text-gray-500'}>
-                Designed & built with intention
-              </Caption>
             </div>
 
             {/* Back to top */}
