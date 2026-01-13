@@ -328,17 +328,18 @@ function ProjectCard({ project, isDark, index, isVisible }) {
           <img
             src={project.image}
             alt={project.name}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+            className="w-full h-full object-contain"
             style={{
               imageRendering: '-webkit-optimize-contrast',
               WebkitFontSmoothing: 'antialiased',
             }}
           />
         ) : (
-          <RippleImage
+          // For non-transparent images, just use regular img (removed WebGL ripple for performance)
+          <img
             src={project.image}
             alt={project.name}
-            isHovered={isHovered}
+            className="w-full h-full object-cover"
           />
         )}
       </div>
