@@ -7,14 +7,13 @@ import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card.png'
 import indiEvImg from '../assets/projects/indi ev/card-indi-ev.png'
 
 // WebGL Ripple Effect Component
-function RippleImage({ src, alt, isHovered, onMouseMove }) {
+function RippleImage({ src, alt, isHovered, mousePosition }) {
   const canvasRef = useRef(null)
   const imageRef = useRef(null)
   const glRef = useRef(null)
   const programRef = useRef(null)
   const textureRef = useRef(null)
   const animationRef = useRef(null)
-  const mouseRef = useRef({ x: 0.5, y: 0.5 })
   const rippleRef = useRef({ active: false, time: 0, x: 0.5, y: 0.5 })
   const [imageLoaded, setImageLoaded] = useState(false)
 
@@ -146,7 +145,9 @@ function RippleImage({ src, alt, isHovered, onMouseMove }) {
       const timeLocation = gl.getUniformLocation(program, 'u_time')
       const intensityLocation = gl.getUniformLocation(program, 'u_intensity')
 
-      gl.uniform2f(mouseLocation, mouseRef.current.x, 1.0 - mouseRef.current.y)
+      const mx = mousePosition?.x ?? 0.5
+      const my = mousePosition?.y ?? 0.5
+      gl.uniform2f(mouseLocation, mx, 1.0 - my)
       gl.uniform1f(timeLocation, time)
       gl.uniform1f(intensityLocation, isHovered ? 1.0 : 0.0)
 
@@ -162,18 +163,7 @@ function RippleImage({ src, alt, isHovered, onMouseMove }) {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isHovered, imageLoaded])
-
-  const handleMouseMove = (e) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const rect = canvas.getBoundingClientRect()
-    mouseRef.current = {
-      x: (e.clientX - rect.left) / rect.width,
-      y: (e.clientY - rect.top) / rect.height
-    }
-    onMouseMove?.(e)
-  }
+  }, [isHovered, imageLoaded, mousePosition])
 
   const handleImageLoad = () => {
     setImageLoaded(true)
@@ -186,7 +176,7 @@ function RippleImage({ src, alt, isHovered, onMouseMove }) {
   }
 
   return (
-    <div className="relative w-full h-full" onMouseMove={handleMouseMove}>
+    <div className="relative w-full h-full pointer-events-none">
       <img
         ref={imageRef}
         src={src}
@@ -259,9 +249,11 @@ const projects = [
 function ProjectCard({ project, isDark, index, isVisible }) {
   const [isHovered, setIsHovered] = useState(false)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
   const cardRef = useRef(null)
+  const imageContainerRef = useRef(null)
 
-  // Handle magnetic tilt effect
+  // Handle magnetic tilt effect and track mouse for ripple
   const handleMouseMove = (e) => {
     if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
@@ -275,6 +267,15 @@ function ProjectCard({ project, isDark, index, isVisible }) {
     const tiltY = ((x - centerX) / centerX) * 8
 
     setTilt({ x: tiltX, y: tiltY })
+
+    // Track mouse position for ripple effect (normalized 0-1)
+    if (imageContainerRef.current) {
+      const imgRect = imageContainerRef.current.getBoundingClientRect()
+      setMousePos({
+        x: (e.clientX - imgRect.left) / imgRect.width,
+        y: (e.clientY - imgRect.top) / imgRect.height,
+      })
+    }
   }
 
   const handleMouseLeave = () => {
@@ -313,6 +314,7 @@ function ProjectCard({ project, isDark, index, isVisible }) {
     >
       {/* Image container with 3D tilt */}
       <div
+        ref={imageContainerRef}
         className="aspect-square overflow-hidden rounded-2xl transition-all duration-300"
         style={{
           background: cardBackground,
@@ -335,11 +337,11 @@ function ProjectCard({ project, isDark, index, isVisible }) {
             }}
           />
         ) : (
-          // For non-transparent images, just use regular img (removed WebGL ripple for performance)
-          <img
+          <RippleImage
             src={project.image}
             alt={project.name}
-            className="w-full h-full object-cover"
+            isHovered={isHovered}
+            mousePosition={mousePos}
           />
         )}
       </div>
