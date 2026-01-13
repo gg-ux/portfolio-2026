@@ -93,7 +93,8 @@ export default function CustomCursor() {
 
     // Handle hover state for interactive elements
     const handleMouseOver = (e) => {
-      if (isProjectCardElement(e.target)) {
+      const onProjectCard = isProjectCardElement(e.target)
+      if (onProjectCard) {
         setIsProjectCard(true)
         setIsHovering(true)
       } else if (isInteractive(e.target)) {
@@ -102,10 +103,13 @@ export default function CustomCursor() {
     }
 
     const handleMouseOut = (e) => {
-      if (isProjectCardElement(e.target)) {
+      // Check if we're moving to another element still inside the project card
+      const stillInProjectCard = e.relatedTarget && isProjectCardElement(e.relatedTarget)
+
+      if (isProjectCardElement(e.target) && !stillInProjectCard) {
         setIsProjectCard(false)
         setIsHovering(false)
-      } else if (isInteractive(e.target)) {
+      } else if (isInteractive(e.target) && !isProjectCardElement(e.relatedTarget)) {
         setIsHovering(false)
       }
     }
