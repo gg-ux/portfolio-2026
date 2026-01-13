@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { H2, Body, Caption } from './Typography'
 import { LinkedinLogo } from '@phosphor-icons/react'
@@ -78,9 +79,11 @@ export default function Footer() {
               >
                 <LinkedinLogo size={18} weight="fill" />
               </a>
-              <Caption className={isDark ? 'text-gray-600' : 'text-gray-500'}>
-                Designed & built with intention
-              </Caption>
+              <Link to="/playground">
+                <Caption className={`transition-colors duration-300 ${isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>
+                  Designed & built with intention
+                </Caption>
+              </Link>
             </div>
 
             {/* Back to top */}
