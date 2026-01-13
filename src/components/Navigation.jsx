@@ -114,7 +114,7 @@ export default function Navigation() {
 
   const navLinks = [
     { name: 'Work', href: isHomePage ? '#work' : '/#work', isRoute: false },
-    { name: 'Resume', href: '/resume', isRoute: true },
+    { name: 'Résumé', href: '/resume', isRoute: true },
     { name: 'Contact', href: '#contact', isRoute: false },
     { name: 'Design System', href: '/design-system', isRoute: true },
   ]

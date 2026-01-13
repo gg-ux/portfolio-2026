@@ -35,7 +35,7 @@ export default function PatternsPage() {
       description: 'Article-style layout optimized for reading'
     },
     {
-      name: 'Resume',
+      name: 'Résumé',
       maxWidth: '896px (max-w-4xl)',
       padding: 'px-6 md:px-12',
       description: 'Document-style layout for resume content'

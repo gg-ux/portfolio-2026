@@ -97,7 +97,7 @@ export default function About() {
                   size="md"
                   direction="right"
                 >
-                  Resume
+                  Résumé
                 </ButtonWithArrow>
                 <ButtonWithArrow
                   href="https://linkedin.com/in/grace-guo-ux"
