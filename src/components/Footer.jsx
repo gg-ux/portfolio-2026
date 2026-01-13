@@ -79,11 +79,15 @@ export default function Footer() {
               >
                 <LinkedinLogo size={18} weight="fill" />
               </a>
-              <Link to="/playground">
-                <Caption className={`transition-colors duration-300 ${isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>
-                  Designed & built with intention
-                </Caption>
+              <Link
+                to="/playground"
+                className={`transition-colors duration-300 ${isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
+              >
+                <Caption>Playground</Caption>
               </Link>
+              <Caption className={isDark ? 'text-gray-600' : 'text-gray-500'}>
+                Designed & built with intention
+              </Caption>
             </div>
 
             {/* Back to top */}
