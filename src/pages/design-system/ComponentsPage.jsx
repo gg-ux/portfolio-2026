@@ -2,13 +2,14 @@ import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
 import { Button, ButtonWithArrow } from '../../components/ui/Button'
 import { Divider, SectionDivider } from '../../components/ui/Divider'
-import { FrostedCard } from '../../components/ui'
+import { FrostedCard, Tag } from '../../components/ui'
 import { Caption, H4, Body } from '../../components/Typography'
 import { Sparkle, ArrowRight } from '@phosphor-icons/react'
 
 const sections = [
   { id: 'cards', label: 'Cards' },
   { id: 'buttons', label: 'Buttons' },
+  { id: 'tags', label: 'Tags' },
   { id: 'dividers', label: 'Dividers' },
   { id: 'charts', label: 'Charts' },
 ]
@@ -50,11 +51,7 @@ export default function ComponentsPage() {
                 </Body>
               </div>
               <div className="flex flex-wrap gap-2 mt-4">
-                <span className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
-                  isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
-                }`}>
-                  Tag
-                </span>
+                <Tag>Tag</Tag>
               </div>
             </div>
           </FrostedCard>
@@ -257,6 +254,77 @@ export default function ComponentsPage() {
                 Primary buttons only - tilt on hover
               </p>
             </div>
+          </div>
+        </div>
+      </DSSection>
+
+      {/* Tags */}
+      <DSSection id="tags" title="Tags">
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Default</h4>
+        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+          <div className="flex flex-wrap gap-2">
+            <Tag>Design</Tag>
+            <Tag>Research</Tag>
+            <Tag>Prototyping</Tag>
+          </div>
+        </div>
+
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Colored</h4>
+        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+          <div className="flex flex-wrap gap-2">
+            <Tag color="#A78BFA">Lavender</Tag>
+            <Tag color="#0F766E">Teal</Tag>
+            <Tag color="#EA580C">Orange</Tag>
+            <Tag color="#6B7280">Neutral</Tag>
+          </div>
+        </div>
+
+        {/* Specs */}
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Specifications</h4>
+        <div className={`${bgSubtle} p-6 rounded-xl mb-8`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Caption className="mb-2 block">Font</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Azeret Mono, 11px, uppercase, tracking-wide
+              </p>
+            </div>
+            <div>
+              <Caption className="mb-2 block">Padding</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                px-2 py-1 (8px horizontal, 4px vertical)
+              </p>
+            </div>
+            <div>
+              <Caption className="mb-2 block">Border Radius</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                rounded-md (6px)
+              </p>
+            </div>
+            <div>
+              <Caption className="mb-2 block">Default Background</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                6% white (dark) / 4% black (light)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Use Cases</h4>
+        <div className={`${bgSubtle} p-6 rounded-xl`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              'Skills and categories on resume',
+              'Project tags and metadata',
+              'Filter chips and labels',
+              'Status indicators (with color)',
+            ].map((item, i) => (
+              <div key={i} className="py-3 first:pt-0 last:pb-0">
+                <span className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  {item}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </DSSection>

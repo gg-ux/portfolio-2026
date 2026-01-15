@@ -34,7 +34,7 @@ export default function IndiEV() {
         role="UX/UI Designer"
         timeline="2022"
         team="Design Lead + Me"
-        coverImage="/images/projects/indi-ev/content/banner.png"
+        coverImage="/assets/projects/indi-ev/content/banner.png"
         darkBanner
       />
 
@@ -57,7 +57,7 @@ export default function IndiEV() {
             40+ high-fidelity mockups of 15+ features in light/dark mode
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/tile-mode.png"
+            src="/assets/projects/indi-ev/content/tile-mode.png"
             alt="INDI EV IVI tile mode showing multiple feature access"
           />
         </ProjectSubsection>
@@ -67,7 +67,7 @@ export default function IndiEV() {
             Complete design system library for IVI with linked components
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/design-system.png"
+            src="/assets/projects/indi-ev/content/design-system.png"
             alt="INDI EV IVI design system with atomic components"
           />
         </ProjectSubsection>
@@ -77,7 +77,7 @@ export default function IndiEV() {
             Demo reel showing 7 key flows to be shown in-vehicle at auto show
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/reel-outline.png"
+            src="/assets/projects/indi-ev/content/reel-outline.png"
             alt="Demo reel storyboard outline for auto show presentation"
           />
         </ProjectSubsection>
@@ -100,7 +100,7 @@ export default function IndiEV() {
             The digital design lead handed off his wireframes of several features and pages. I was given the creative freedom to reimagine them for the final design, though the basic framework had to remain consistent (i.e., navigation bar, AI widget panel).
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/wireframe-nav.png"
+            src="/assets/projects/indi-ev/content/wireframe-nav.png"
             alt="Original wireframes showing navigation and My Day features"
           />
         </ProjectSubsection>
@@ -112,7 +112,7 @@ export default function IndiEV() {
           Upon receiving a download of the product and the wireframes, I held some meetings with the design team about the intended look and feel of the product. As a brand, INDI EV strives to deliver a sleek, modern, and personalized experience. I wanted to create a design language that echoed that.
         </ProjectText>
         <ProjectImageFullWidth
-          src="/images/projects/indi-ev/content/mood-board.png"
+          src="/assets/projects/indi-ev/content/mood-board.png"
           alt="Mood board exploring sleek and modern design directions"
         />
 
@@ -124,7 +124,7 @@ export default function IndiEV() {
             Due to this, I developed a "hybrid" design approach which combines elements of neumorphic and flat design. The goal was to retain enough elements of neumorphic design to give it a 3D effect without being overstated. This resulted in a more lightweight and sleek finish.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/style-comparison.png"
+            src="/assets/projects/indi-ev/content/style-comparison.png"
             alt="Comparison between full neumorphic and hybrid design approaches"
           />
         </ProjectSubsection>
@@ -160,7 +160,7 @@ export default function IndiEV() {
             ]}
           />
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/climate-iteration1.png"
+            src="/assets/projects/indi-ev/content/climate-iteration1.png"
             alt="First climate control iteration with all components visible"
           />
         </ProjectSubsection>
@@ -173,11 +173,11 @@ export default function IndiEV() {
             I recruited 3 people and gave them 4 tasks, timing how long each took. The usability test revealed pain points around Fan Speed & AUTO coupling, inconsistent toggles, and an ambiguous sync icon.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/climate-iteration2.png"
+            src="/assets/projects/indi-ev/content/climate-iteration2.png"
             alt="Second climate iteration with improved visual grouping"
           />
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/usability-testing.png"
+            src="/assets/projects/indi-ev/content/usability-testing.png"
             alt="Usability testing results showing pain points discovered"
           />
         </ProjectSubsection>
@@ -187,7 +187,7 @@ export default function IndiEV() {
             For my final iteration, I reduced clutter significantly by regrouping elements onto a bottom toolbar, getting rid of toggles altogether. I defined rules for toolbar features based on number of tap engagements needed, which freed space for a larger, more usable climate control section.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/images/projects/indi-ev/content/climate-iteration3.png"
+            src="/assets/projects/indi-ev/content/climate-iteration3.png"
             alt="Final climate control design with bottom toolbar and cleaner layout"
           />
         </ProjectSubsection>
@@ -219,11 +219,11 @@ export default function IndiEV() {
         </ProjectText>
         <ProjectImageGrid
           images={[
-            { src: '/images/projects/indi-ev/content/my-day-dark.png', alt: 'My Day welcome screen in dark mode' },
-            { src: '/images/projects/indi-ev/content/dark-cluster.png', alt: 'Cluster display in dark mode' },
-            { src: '/images/projects/indi-ev/content/radio-app.png', alt: 'Radio app interface' },
-            { src: '/images/projects/indi-ev/content/dark-app-store.png', alt: 'App store in dark mode' },
-            { src: '/images/projects/indi-ev/content/indi-explorer.png', alt: 'INDI Explorer native app' },
+            { src: '/assets/projects/indi-ev/content/my-day-dark.png', alt: 'My Day welcome screen in dark mode' },
+            { src: '/assets/projects/indi-ev/content/dark-cluster.png', alt: 'Cluster display in dark mode' },
+            { src: '/assets/projects/indi-ev/content/radio-app.png', alt: 'Radio app interface' },
+            { src: '/assets/projects/indi-ev/content/dark-app-store.png', alt: 'App store in dark mode' },
+            { src: '/assets/projects/indi-ev/content/indi-explorer.png', alt: 'INDI Explorer native app' },
           ]}
           columns={2}
         />
@@ -235,7 +235,7 @@ export default function IndiEV() {
           While creating high-fidelity mockups, I was simultaneously building the design system. I followed an atomic design structure and divided it into the following sections: Typography, Colors, Iconography, Components, Templates, Pages.
         </ProjectText>
         <ProjectImageFullWidth
-          src="/images/projects/indi-ev/content/design-system.png"
+          src="/assets/projects/indi-ev/content/design-system.png"
           alt="INDI EV design system with typography, colors, and components"
         />
 

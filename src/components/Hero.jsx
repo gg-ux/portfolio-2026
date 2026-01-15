@@ -105,7 +105,7 @@ export default function Hero() {
 
           {/* LinkedIn link - right */}
           <a
-            href="https://linkedin.com/in/graceguo"
+            href="https://www.linkedin.com/in/grace-guo-ux/"
             target="_blank"
             rel="noopener noreferrer"
             className="animate-fluid-in opacity-0 hidden md:flex items-center gap-1.5 group"

@@ -143,7 +143,7 @@ export default function Loader({ onComplete }) {
 
         {/* Logo with breathing pulse */}
         <img
-          src="/images/branding/logo.svg"
+          src="/assets/branding/logo.svg"
           alt="Grace Guo"
           className={`h-6 w-auto transition-all ${isDark ? 'invert' : ''} ${
             phase === 'loading' ? 'animate-breathe' : ''

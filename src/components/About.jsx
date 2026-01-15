@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useTheme } from '../context/ThemeContext'
-import { Caption, Body } from './Typography'
+import { Caption, Body, H2 } from './Typography'
 import ScrambleText from './ScrambleText'
 import { ButtonWithArrow } from './ui/Button'
 import bioPic from '../assets/BioPic2.JPG'
@@ -111,18 +111,15 @@ export default function About() {
             {/* Quote + Info */}
             <div className="md:col-span-7 lg:col-span-8">
               {/* Large pull quote */}
-              <blockquote className="mb-8">
-                <p
-                  className="font-satoshi text-2xl md:text-3xl lg:text-4xl leading-snug tracking-tight"
-                  style={{ color: isDark ? 'white' : '#1A1A1A' }}
-                >
-                  I like thinking of the person on the other side of the screen—what they're feeling, what's at stake for them, what would earn their trust.
-                </p>
+              <blockquote className="mb-5">
+                <H2 className="leading-snug">
+                  Meaningful design is care, made&nbsp;visible.
+                </H2>
               </blockquote>
 
               {/* Supporting text */}
-              <Body className="text-xl leading-relaxed mb-10 max-w-2xl">
-                That's shaped 7+ years of work: core experiences at Tesla, healthcare apps built around real patient needs, in-vehicle interfaces that can't afford confusion. These days I'm the only designer at an AI startup, shipping product, web, and code.
+              <Body className="mb-10 max-w-2xl">
+                I want people to feel understood, not processed. This belief has driven 7+ years of work: core experiences at Tesla, a healthcare app for real patients, an in-vehicle interface that can't afford confusion. Now I'm at a mission-driven AI startup, shipping product and code.
               </Body>
 
               {/* Action Buttons */}
@@ -136,7 +133,7 @@ export default function About() {
                   Résumé
                 </ButtonWithArrow>
                 <ButtonWithArrow
-                  href="https://linkedin.com/in/grace-guo-ux"
+                  href="https://www.linkedin.com/in/grace-guo-ux/"
                   external
                   variant="secondary"
                   size="md"

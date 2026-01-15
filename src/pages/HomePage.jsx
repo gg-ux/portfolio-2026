@@ -3,7 +3,7 @@ import HeroScrolling from '../components/HeroScrolling'
 import HeroPainterly from '../components/HeroPainterly'
 import HeroFluidBlob from '../components/HeroFluidBlob'
 import SplitScreenProjects from '../components/SplitScreenProjects'
-import About from '../components/About'
+import BioContactTransition from '../components/BioContactTransition'
 
 // Map hero variants to components
 const heroComponents = {
@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <HeroComponent />
       <SplitScreenProjects />
-      <About />
+      <BioContactTransition />
     </>
   )
 }

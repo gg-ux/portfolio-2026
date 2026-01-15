@@ -83,7 +83,7 @@ export default function ProjectHero({
       {coverImage && (
         <div
           ref={bannerRef}
-          className={`relative w-full aspect-[4/3] md:aspect-[21/9] mb-12 md:mb-16 overflow-hidden ${
+          className={`relative w-full aspect-[4/3] md:aspect-[2/1] mb-12 md:mb-16 overflow-hidden ${
             isDark ? 'bg-[#1a1a1a]' : 'bg-[#f5f5f5]'
           }`}
         >

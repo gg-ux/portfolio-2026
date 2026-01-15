@@ -23,7 +23,7 @@ const Input = forwardRef(function Input({
   const { isDark } = useTheme()
 
   const baseClasses = `
-    w-full px-0 py-3
+    w-full px-0 py-2
     font-satoshi text-base
     bg-transparent
     border-0 border-b
@@ -72,20 +72,22 @@ const Textarea = forwardRef(function Textarea({
   required = false,
   error,
   className = '',
-  rows = 4,
+  rows = 1,
+  resizable = true,
   ...props
 }, ref) {
   const { isDark } = useTheme()
 
   const baseClasses = `
-    w-full px-0 py-3
+    w-full px-0 py-2
     font-satoshi text-base
     bg-transparent
     border-0 border-b
     transition-all duration-300
     outline-none
-    resize-none
+    ${resizable ? 'resize-y' : 'resize-none'}
     rounded-none
+    overflow-hidden
     ${isDark
       ? 'border-white/20 text-white placeholder:text-white/30 focus:border-white/60'
       : 'border-black/20 text-gray-900 placeholder:text-black/30 focus:border-black/60'
@@ -116,6 +118,7 @@ const Textarea = forwardRef(function Textarea({
         ref={ref}
         rows={rows}
         className={baseClasses}
+        style={{ minHeight: `${rows * 1.5 + 1}rem` }}
         {...props}
       />
       {error && <p className={errorClasses}>{error}</p>}

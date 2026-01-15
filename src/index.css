@@ -445,11 +445,13 @@ html.light .theme-caption {
 
 .theme-muted {
   color: #9CA3AF; /* gray-400 */
+  font-weight: 400;
   transition: color 0.5s ease;
 }
 
 html.light .theme-muted {
   color: #6B6B6B;
+  font-weight: 450;
 }
 
 /* Theme-aware backgrounds */
@@ -645,5 +647,79 @@ html.light .theme-accent-border {
 
 .animate-tagline-bounce {
   animation: tagline-bounce 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+/* Print styles for resume */
+@media print {
+  /* Hide non-essential elements */
+  nav,
+  footer,
+  .custom-cursor,
+  button,
+  a[href="/resume.pdf"] {
+    display: none !important;
+  }
+
+  /* Reset background and colors for print */
+  html, body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Adjust page layout */
+  .min-h-screen {
+    min-height: auto !important;
+  }
+
+  /* Reduce top padding for print */
+  .pt-32 {
+    padding-top: 1rem !important;
+  }
+
+  /* Ensure text is dark for readability */
+  h1, h2, h3, h4, p, li, span {
+    color: #1A1A1A !important;
+  }
+
+  /* Muted text slightly lighter */
+  .theme-muted, .text-gray-400, .text-gray-500 {
+    color: #666 !important;
+  }
+
+  /* Keep accent color for visual interest */
+  .theme-accent-bg {
+    background-color: #5B21B6 !important;
+  }
+
+  /* Tags styling for print */
+  .font-mono.text-\[11px\] {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+  }
+
+  /* Company logos */
+  img[alt*="logo"] {
+    filter: none !important;
+  }
+
+  /* Remove shadows and effects */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+
+  /* Hide social icons in print */
+  a[href*="linkedin"],
+  a[href*="dribbble"],
+  a[href*="mailto"] {
+    display: none !important;
+  }
 }
 

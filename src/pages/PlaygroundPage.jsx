@@ -502,7 +502,7 @@ export default function PlaygroundPage() {
 
                   {/* Logo */}
                   <img
-                    src="/images/branding/logo.svg"
+                    src="/assets/branding/logo.svg"
                     alt="Logo"
                     className={`h-6 w-auto relative ${isDark ? 'invert' : ''}`}
                     style={{

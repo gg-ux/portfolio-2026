@@ -39,7 +39,7 @@ export default function CataliaHealth() {
         role="Lead UX Designer + Researcher"
         timeline="April–June 2019"
         team="Team of 4 UX Experts"
-        coverImage="/images/projects/catalia-health/content/banner.png"
+        coverImage="/assets/projects/catalia-health/content/banner.png"
         lightBanner
       />
 
@@ -49,7 +49,7 @@ export default function CataliaHealth() {
           The goal is that by creating a safe space for patients to engage, patients will feel more informed about their condition, more motivated to adhere to their treatment plan, and a heightened sense of social belonging that could ultimately lead to better personal health care management. Following an aggressive timeline, we were able to successfully research and design a high-fidelity prototype of the app, <em>Flourish</em>, in 5 months.
         </ProjectText>
         <ProjectImage
-          src="/images/projects/catalia-health/content/mabu-robot.jpg"
+          src="/assets/projects/catalia-health/content/mabu-robot.jpg"
           alt="Mabu, Catalia Health's interactive personal assistant robot"
           caption="Mabu - Catalia Health's core product, an interactive personal assistant robot"
         />
@@ -80,10 +80,10 @@ export default function CataliaHealth() {
         </ProjectText>
         <PDFCarousel
           pages={[
-            { src: '/images/projects/catalia-health/content/pdf-pages/page-1-cover.png', alt: 'Cover' },
-            { src: '/images/projects/catalia-health/content/pdf-pages/page-2-toc.png', alt: 'Table of Contents' },
-            { src: '/images/projects/catalia-health/content/pdf-pages/page-3-left.png', alt: 'Executive Summary' },
-            { src: '/images/projects/catalia-health/content/pdf-pages/page-3-right.png', alt: 'Meet Our Team' },
+            { src: '/assets/projects/catalia-health/content/pdf-pages/page-1-cover.png', alt: 'Cover' },
+            { src: '/assets/projects/catalia-health/content/pdf-pages/page-2-toc.png', alt: 'Table of Contents' },
+            { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-left.png', alt: 'Executive Summary' },
+            { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-right.png', alt: 'Meet Our Team' },
           ]}
           pdfUrl="https://gg-portfolio.s3-us-west-1.amazonaws.com/FlourishApp-PrintReadySpread.pdf"
         />
@@ -108,7 +108,7 @@ export default function CataliaHealth() {
                 {/* Photo */}
                 <div className="absolute inset-0 z-10 rounded-full overflow-hidden">
                   <img
-                    src={`/images/projects/catalia-health/content/${member.image}`}
+                    src={`/assets/projects/catalia-health/content/${member.image}`}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
@@ -220,7 +220,7 @@ export default function CataliaHealth() {
             We recruited 42 participants for interviews and a survey/card sort exercise. Participants were between the ages of 30-65 and lived across the United States.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/people-2.png"
+            src="/assets/projects/catalia-health/content/people-2.png"
             alt="Team collaborative research work"
           />
         </ProjectSubsection>
@@ -240,14 +240,14 @@ export default function CataliaHealth() {
             Most interviews were conducted using Zoom. Phonecall participants tended to be older—in their 60s—and less likely to engage with online communities, while video chat participants tended to be younger and more engaged.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/card-sort.jpg"
+            src="/assets/projects/catalia-health/content/card-sort.jpg"
             alt="Card sort activity materials"
           />
           <ProjectText>
             We also sent out a card sort activity and survey to discover desired attributes of an online patient community. For the first part, participants completed a survey gauging demographics, behaviors, and devices used. They then sorted 17 cards containing aspects of a patient community into categories by importance.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/topics.png"
+            src="/assets/projects/catalia-health/content/topics.png"
             alt="Community topics visualization"
             caption="17 community topic cards sorted by participants"
           />
@@ -274,7 +274,7 @@ export default function CataliaHealth() {
             From our survey of 29 participants, we found that a large majority engage in online communities and access them using their mobile device. A little more than half would meet up with group members located near them.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/dots.png"
+            src="/assets/projects/catalia-health/content/dots.png"
             alt="Survey data visualization showing participant behaviors"
           />
         </ProjectSubsection>
@@ -284,7 +284,7 @@ export default function CataliaHealth() {
             When asked to indicate their top 3 most important attributes from a list of community attributes, "Respect and kindness", "Access to chronic illness research", and "Info on local support groups and physicians" ranked at the top.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/traits.png"
+            src="/assets/projects/catalia-health/content/traits.png"
             alt="Community traits comparison chart"
             caption="Top community attributes ranked by participants"
           />
@@ -295,7 +295,7 @@ export default function CataliaHealth() {
             The most important community aspects were: ability to discuss a specific diagnosis, educational resources, a safe space to share ideas, a community that can be checked any time, and low sodium diet information. Intimacy, religious support, and an unmoderated community ranked lowest.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/card-sort-2.png"
+            src="/assets/projects/catalia-health/content/card-sort-2.png"
             alt="Card sort results showing community priorities"
             caption="Card sort results revealing patient priorities"
           />
@@ -315,7 +315,7 @@ export default function CataliaHealth() {
             ]}
           />
           <ProjectImage
-            src="/images/projects/catalia-health/content/callouts.png"
+            src="/assets/projects/catalia-health/content/callouts.png"
             alt="Key interview findings callout graphic"
           />
         </ProjectSubsection>
@@ -325,7 +325,7 @@ export default function CataliaHealth() {
             We found three types of community user archetypes: Contributors (mainly female, preferred to be identified), Lurkers (mainly male, preferred anonymity), and Mentors (further along in their journey, wished to give back).
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/archetypes.jpg"
+            src="/assets/projects/catalia-health/content/archetypes.jpg"
             alt="Three user archetypes: Contributors, Lurkers, and Mentors"
             caption="User archetypes: Contributors, Lurkers, and Mentors"
           />
@@ -336,7 +336,7 @@ export default function CataliaHealth() {
             Based on our research, we developed detailed personas representing the spectrum of patients we aimed to serve—from those newly diagnosed to those further along in their health journey.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/screen-09.png"
+            src="/assets/projects/catalia-health/content/screen-09.png"
             alt="Patient personas: Shrini the Beginner and Leslie the Intermediate"
             caption="Personas: Shrini 'The Beginner' and Leslie 'The Intermediate'"
           />
@@ -356,7 +356,7 @@ export default function CataliaHealth() {
             ]}
           />
           <ProjectImage
-            src="/images/projects/catalia-health/content/screen-03.png"
+            src="/assets/projects/catalia-health/content/screen-03.png"
             alt="User story and method diagram showing app concept"
             caption="Core user story: connecting patients to community, education, and services"
           />
@@ -367,7 +367,7 @@ export default function CataliaHealth() {
             We used Miro to organize our thoughts around a potential concept. This took the form of an initial site map for the community. We split into two groups to tackle our initial thoughts—one focusing on person-to-person interactions, the other on patient-to-education interactions.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/screen-01.png"
+            src="/assets/projects/catalia-health/content/screen-01.png"
             alt="Miro brainstorming board with site map concepts"
             caption="Initial site map exploration on Miro"
           />
@@ -387,8 +387,8 @@ export default function CataliaHealth() {
           />
           <ProjectImageGrid
             images={[
-              { src: '/images/projects/catalia-health/content/screen-02.png', alt: 'Crazy Eights design sprint sketches' },
-              { src: '/images/projects/catalia-health/content/screen-04.png', alt: 'Hand-drawn wireframe sketches' },
+              { src: '/assets/projects/catalia-health/content/screen-02.png', alt: 'Crazy Eights design sprint sketches' },
+              { src: '/assets/projects/catalia-health/content/screen-04.png', alt: 'Hand-drawn wireframe sketches' },
             ]}
             columns={2}
           />
@@ -399,7 +399,7 @@ export default function CataliaHealth() {
             We mapped out the community user flow to understand how patients would navigate and engage with the app's core features.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/screen-05.png"
+            src="/assets/projects/catalia-health/content/screen-05.png"
             alt="Community user flow diagram"
             caption="Community feature user flow"
           />
@@ -413,7 +413,7 @@ export default function CataliaHealth() {
             We chose the app name "Flourish" because it means to grow in a healthy way from being in a favorable environment. The logo symbolizes both a flower in full bloom and the intersection of similarities.
           </ProjectText>
           <ProjectImage
-            src="/images/projects/catalia-health/content/banner.png"
+            src="/assets/projects/catalia-health/content/banner.png"
             alt="Flourish app branding and logo"
             caption="Flourish branding - representing growth and connection"
           />
@@ -440,8 +440,8 @@ export default function CataliaHealth() {
         </ProjectSubsection>
         <ProjectImageGrid
           images={[
-            { src: '/images/projects/catalia-health/content/screen-11.png', alt: 'User testing session screenshot' },
-            { src: '/images/projects/catalia-health/content/screen-12.png', alt: 'User testing findings' },
+            { src: '/assets/projects/catalia-health/content/screen-11.png', alt: 'User testing session screenshot' },
+            { src: '/assets/projects/catalia-health/content/screen-12.png', alt: 'User testing findings' },
           ]}
           columns={2}
         />
@@ -454,10 +454,10 @@ export default function CataliaHealth() {
         </ProjectText>
         <ProjectImageGrid
           images={[
-            { src: '/images/projects/catalia-health/content/screen-06.png', alt: 'Flourish app home screen' },
-            { src: '/images/projects/catalia-health/content/screen-07.png', alt: 'Flourish community screen' },
-            { src: '/images/projects/catalia-health/content/screen-08.png', alt: 'Flourish explore screen' },
-            { src: '/images/projects/catalia-health/content/screen-14.png', alt: 'Flourish profile screen' },
+            { src: '/assets/projects/catalia-health/content/screen-06.png', alt: 'Flourish app home screen' },
+            { src: '/assets/projects/catalia-health/content/screen-07.png', alt: 'Flourish community screen' },
+            { src: '/assets/projects/catalia-health/content/screen-08.png', alt: 'Flourish explore screen' },
+            { src: '/assets/projects/catalia-health/content/screen-14.png', alt: 'Flourish profile screen' },
           ]}
           columns={2}
         />

@@ -3,7 +3,7 @@ import { H1, H4, Body, Caption } from '../components/Typography'
 import ScrambleText from '../components/ScrambleText'
 import FluidBlob from '../components/FluidBlob'
 import AuraBeams from '../components/AuraBeams'
-import { FrostedCard } from '../components/ui'
+import { FrostedCard, Tag } from '../components/ui'
 import { useTheme } from '../context/ThemeContext'
 import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/react'
 
@@ -111,14 +111,9 @@ export default function DesignSystemPage() {
                   {/* Items list */}
                   <div className="flex flex-wrap gap-2 mt-4">
                     {category.items.map((item) => (
-                      <span
-                        key={item}
-                        className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
-                          isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
-                        }`}
-                      >
+                      <Tag key={item} muted>
                         <ScrambleText trigger="hover">{item}</ScrambleText>
-                      </span>
+                      </Tag>
                     ))}
                   </div>
                 </div>

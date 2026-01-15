@@ -366,10 +366,8 @@ export default function SplitScreenProjects() {
   const [isMobile, setIsMobile] = useState(false)
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null)
   const [craftingVisible, setCraftingVisible] = useState(false)
+  const [sectionExitProgress, setSectionExitProgress] = useState(0)
   const [tiltState, setTiltState] = useState({ x: 0, y: 0 })
-  const [isStuck, setIsStuck] = useState(false)
-  const [stickWiggle, setStickWiggle] = useState(false)
-  const hasTriggeredStuck = useRef(false)
 
   // Use simple image effect on low-end devices
   const ImageComponent = canHandleEffects ? RippleImage : SimpleImage
@@ -614,6 +612,22 @@ export default function SplitScreenProjects() {
         last.projectProgress = newProjectProgress
       }
 
+      // Calculate section exit progress - only AFTER sticky unsticks and content scrolls up
+      // Sticky unsticks when rect.bottom <= vh, then we start tracking scroll up
+      // Fade starts after it's scrolled up ~30% of viewport, completes at ~100% up (slower fade)
+      let newExitProgress = 0
+      if (rect.bottom < vh) {
+        // Sticky has unstuck, content is scrolling up
+        const scrolledUp = vh - rect.bottom // How much it's scrolled past unstick point
+        const fadeStart = vh * 0.3 // Start fade after scrolling up 30% of viewport
+        const fadeEnd = vh * 1.1 // Complete fade over longer distance (slower)
+        newExitProgress = Math.max(0, Math.min(1, (scrolledUp - fadeStart) / (fadeEnd - fadeStart)))
+      }
+      if (Math.abs(newExitProgress - (last.sectionExitProgress || 0)) > 0.01) {
+        setSectionExitProgress(newExitProgress)
+        last.sectionExitProgress = newExitProgress
+      }
+
       rafRef.current = null
     }
 
@@ -683,60 +697,6 @@ export default function SplitScreenProjects() {
   const humanFirstFillProgress = Math.max(0, Math.min(1, (morphProgress - 0.15) / 0.35))
   const humanFirstFill = easeOutCubic(humanFirstFillProgress) * 100 // 0% → 100%
 
-  // Scrolljack effect - triggers when "soulful" fill completes (desktop only)
-  useEffect(() => {
-    if (isMobile) return
-    if (hasTriggeredStuck.current) return
-    if (humanFirstFill < 100) return
-
-    // Mark as triggered immediately to prevent re-entry
-    hasTriggeredStuck.current = true
-
-    // Delay before triggering the scrolljack (let user see completed fill)
-    const delayTimeout = setTimeout(() => {
-      setIsStuck(true)
-      setStickWiggle(true)
-
-      // Lock scroll position
-      const lockedScrollY = window.scrollY
-
-      // Aggressively prevent all scrolling
-      const preventScroll = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        window.scrollTo(0, lockedScrollY)
-        return false
-      }
-
-      const preventKeyScroll = (e) => {
-        const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40] // space, pgup, pgdn, end, home, arrows
-        if (scrollKeys.includes(e.keyCode)) {
-          e.preventDefault()
-          return false
-        }
-      }
-
-      // Capture phase to intercept before anything else
-      document.addEventListener('wheel', preventScroll, { passive: false, capture: true })
-      document.addEventListener('touchmove', preventScroll, { passive: false, capture: true })
-      document.addEventListener('scroll', preventScroll, { passive: false, capture: true })
-      document.addEventListener('keydown', preventKeyScroll, { passive: false, capture: true })
-
-      // Release after animation
-      setTimeout(() => {
-        setIsStuck(false)
-        setStickWiggle(false)
-        document.removeEventListener('wheel', preventScroll, { capture: true })
-        document.removeEventListener('touchmove', preventScroll, { capture: true })
-        document.removeEventListener('scroll', preventScroll, { capture: true })
-        document.removeEventListener('keydown', preventKeyScroll, { capture: true })
-      }, 1000)
-    }, 400)
-
-    return () => {
-      clearTimeout(delayTimeout)
-    }
-  }, [humanFirstFill, isMobile])
 
   // Mobile/tablet layout
   if (isMobile) {
@@ -908,7 +868,11 @@ export default function SplitScreenProjects() {
   }
 
   // Desktop layout with scroll-based animations
-  const sectionHeight = projects.length * 100 + 130 // vh units
+  const sectionHeight = projects.length * 100 + 60 // vh units - tighter to reduce gap
+
+  // Exit opacity and blur - fade out as bio section overlaps
+  const sectionExitOpacity = 1 - easeOutCubic(sectionExitProgress)
+  const sectionExitBlur = easeOutCubic(sectionExitProgress) * 8 // Max 8px blur
 
   return (
     <section
@@ -920,7 +884,7 @@ export default function SplitScreenProjects() {
       <div id="work" className="absolute" style={{ top: '100vh' }} />
 
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen overflow-hidden" style={{ isolation: 'isolate', zIndex: 101 }}>
+      <div className="sticky top-0 h-screen" style={{ isolation: 'isolate', zIndex: 101 }}>
         {/* Centered "Crafting..." text - GPU-accelerated scroll animation */}
         <div
           ref={craftingRef}
@@ -973,14 +937,7 @@ export default function SplitScreenProjects() {
               </span>
             </span>{' '}
             digital experiences that{' '}
-            <span
-              className={stickWiggle ? 'animate-wiggle' : ''}
-              style={{
-                display: 'inline-block',
-              }}
-            >
-              stick
-            </span>
+            <span>stick</span>
             .
           </h2>
         </div>
@@ -989,8 +946,9 @@ export default function SplitScreenProjects() {
         <div
           className="absolute inset-0 flex items-center pointer-events-none"
           style={{
-            opacity: selectedWorksOpacity,
+            opacity: selectedWorksOpacity * sectionExitOpacity,
             transform: `translateX(${(1 - selectedWorksOpacity) * -30}px)`,
+            filter: sectionExitBlur > 0.5 ? `blur(${sectionExitBlur}px)` : 'none',
           }}
         >
           <div className="w-full h-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative flex items-center">
@@ -1068,31 +1026,32 @@ export default function SplitScreenProjects() {
           </div>
         </div>
 
-        {/* Right side - Project cards with bleeding edges */}
+        {/* Right side - Project cards within max-width */}
         <div
-          className="absolute right-0 top-0 w-1/2 h-full flex items-center justify-center z-20"
+          className="absolute inset-0 flex items-center justify-center z-20 overflow-visible"
           style={{
-            opacity: projectImagesOpacity,
+            opacity: projectImagesOpacity * sectionExitOpacity,
             transform: `translateY(${projectTranslateY}%) scale(${projectImagesScale})`,
-            pointerEvents: morphProgress > 0.5 ? 'auto' : 'none',
+            filter: sectionExitBlur > 0.5 ? `blur(${sectionExitBlur}px)` : 'none',
+            pointerEvents: 'none', // Always none on parent - children handle their own
           }}
         >
-          <div className="h-full w-full relative">
+          <div className="h-full w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative flex items-center justify-end overflow-visible">
             {/* Cards */}
-            <div className="absolute inset-0">
+            <div className="relative w-[45%] h-full overflow-visible">
               {projects.map((project, index) => {
                 const diff = index - activeIndex
                 const isActive = diff === 0
                 const isAdjacent = Math.abs(diff) === 1
                 const opacity = isActive ? 1 : isAdjacent ? 0.4 : 0
-                const translateY = diff * 75 // Spacing that shows peeking cards without overlap
-                const scale = isActive ? 1 : 0.75
+                const translateY = diff * 68 // Spacing that shows peeking cards without overlap
+                const scale = isActive ? 1 : 0.85
                 const zIndex = isActive ? 10 : 1 // Focused card always on top
 
                 return (
                   <div
                     key={project.id}
-                    className="absolute inset-0 flex items-center justify-center p-8"
+                    className="absolute inset-0 flex items-center justify-center p-4"
                     style={{
                       opacity,
                       transform: `translateY(${translateY}%) scale(${scale})`,

@@ -59,6 +59,7 @@ export default function FoundationPage() {
       font: 'Silk Serif',
       weight: '400',
       tracking: 'tight',
+      useCase: 'Hero headlines, page titles',
       element: <H1>Header 1</H1>
     },
     {
@@ -67,7 +68,17 @@ export default function FoundationPage() {
       font: 'Satoshi',
       weight: '500',
       tracking: 'tight',
+      useCase: 'Section headers, feature titles',
       element: <H2>Header 2</H2>
+    },
+    {
+      component: 'Header 2 (Serif)',
+      size: '36–48px',
+      font: 'Silk Serif',
+      weight: '400',
+      tracking: 'tight',
+      useCase: 'Editorial sections, resume headers',
+      element: <H2 serif>Header 2 Serif</H2>
     },
     {
       component: 'Header 3',
@@ -75,6 +86,7 @@ export default function FoundationPage() {
       font: 'Satoshi',
       weight: '500',
       tracking: 'tight',
+      useCase: 'Subsections, card titles',
       element: <H3>Header 3</H3>
     },
     {
@@ -84,16 +96,18 @@ export default function FoundationPage() {
       weightDark: '550',
       weightLight: '600',
       tracking: 'normal',
+      useCase: 'Small headings, list item titles',
       element: <H4>Header 4</H4>
     },
     {
       component: 'Body (Lg)',
-      size: '16–18px',
+      size: '16–17px',
       font: 'Satoshi',
       weightDark: '400',
       weightLight: '450',
       tracking: 'normal',
-      element: <Body>Body text for paragraphs and descriptions.</Body>
+      useCase: 'Paragraphs, descriptions, long-form content',
+      element: <Body>Body</Body>
     },
     {
       component: 'Body (Sm)',
@@ -102,7 +116,8 @@ export default function FoundationPage() {
       weightDark: '400',
       weightLight: '450',
       tracking: 'normal',
-      element: <Body size="sm">Smaller body text for cards and secondary content.</Body>
+      useCase: 'Cards, secondary content, bullet points',
+      element: <Body size="sm">Body (Sm)</Body>
     },
     {
       component: 'Caption',
@@ -110,7 +125,26 @@ export default function FoundationPage() {
       font: 'Azeret Mono',
       weight: '500',
       tracking: 'wide',
-      element: <Caption>Metadata and small text</Caption>
+      useCase: 'Metadata, labels, dates, navigation',
+      element: <Caption>Caption</Caption>
+    },
+    {
+      component: 'Caption (Sm)',
+      size: '11px',
+      font: 'Azeret Mono',
+      weight: '500',
+      tracking: 'wide',
+      useCase: 'Tags, chips, compact labels',
+      element: <Caption size="sm">Caption (Sm)</Caption>
+    },
+    {
+      component: 'Caption (Xs)',
+      size: '10px',
+      font: 'Azeret Mono',
+      weight: '500',
+      tracking: 'wider',
+      useCase: 'Role labels, swatch metadata, subtle descriptors',
+      element: <Caption size="xs">Caption (Xs)</Caption>
     },
   ]
 
@@ -132,22 +166,16 @@ export default function FoundationPage() {
           {typography.map((type) => (
             <div
               key={type.component}
-              className={`grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6 items-center border-b ${borderClass} pb-6`}
+              className={`grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-4 lg:gap-6 items-center border-b ${borderClass} pb-6`}
             >
-              {/* Preview - Left */}
-              <div className="order-2 lg:order-1">
-                {type.element}
-              </div>
-
-              {/* Metadata - Right */}
-              <div className="order-1 lg:order-2 flex flex-col gap-3">
-                <Caption className="block">{type.component}</Caption>
-                <div className={`grid grid-cols-2 gap-x-4 gap-y-1.5 font-mono text-[11px] ${textMutedClass}`}>
-                  <span className={isDark ? 'text-white/30' : 'text-black/30'}>Size</span>
+              {/* Metadata - Right on desktop, below on mobile */}
+              <div className="order-2 lg:order-2">
+                <div className={`grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[11px] ${textMutedClass}`}>
+                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Size</span>
                   <span>{type.size}</span>
-                  <span className={isDark ? 'text-white/30' : 'text-black/30'}>Font</span>
+                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Font</span>
                   <span>{type.font}</span>
-                  <span className={isDark ? 'text-white/30' : 'text-black/30'}>Weight</span>
+                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Weight</span>
                   <span>
                     {type.weight ? (
                       type.weight
@@ -164,9 +192,16 @@ export default function FoundationPage() {
                       </span>
                     )}
                   </span>
-                  <span className={isDark ? 'text-white/30' : 'text-black/30'}>Tracking</span>
+                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Tracking</span>
                   <span>{type.tracking}</span>
+                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Use</span>
+                  <span>{type.useCase}</span>
                 </div>
+              </div>
+
+              {/* Preview - Left on desktop, top on mobile */}
+              <div className="order-1 lg:order-1">
+                {type.element}
               </div>
             </div>
           ))}
@@ -177,7 +212,7 @@ export default function FoundationPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className={`p-8 border ${borderClass} rounded-xl`}>
             <p className={`font-silk text-2xl mb-3 ${textHeadingClass}`}>Silk Serif</p>
-            <Caption>Header 1 only</Caption>
+            <Caption>Header 1, Header 2 (Serif)</Caption>
             <div className={`font-silk text-sm mt-4 ${textMutedClass} leading-relaxed space-y-1`}>
               <p className="break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
               <p className="break-all">abcdefghijklmnopqrstuvwxyz</p>

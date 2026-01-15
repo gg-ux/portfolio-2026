@@ -173,9 +173,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {/* Name & Email row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           id="name"
           name="name"
@@ -217,7 +217,7 @@ export default function ContactForm() {
         required
         value={formData.message}
         onChange={handleChange}
-        rows={4}
+        rows={1}
         error={errors.message}
       />
 
@@ -234,7 +234,7 @@ export default function ContactForm() {
       )}
 
       {/* Submit */}
-      <div className="pt-2 flex justify-end">
+      <div className="pt-1 flex justify-end">
         <div
           onMouseEnter={() => setIsButtonHovered(true)}
           onMouseLeave={() => setIsButtonHovered(false)}

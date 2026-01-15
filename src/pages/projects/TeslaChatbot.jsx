@@ -17,6 +17,7 @@ import {
 } from '../../components/project'
 import { TrendUp, Target, ChatCircle, LinkSimple } from '@phosphor-icons/react'
 import { Caption } from '../../components/Typography'
+import { Tag } from '../../components/ui'
 import { useTheme } from '../../context/ThemeContext'
 
 const sections = [
@@ -40,7 +41,7 @@ export default function TeslaChatbot() {
         role="Lead UX/UI Designer"
         timeline="2023"
         impact="120% increase in sales lead conversion"
-        coverImage="/images/projects/tesla/chatbot/content/banner.jpg"
+        coverImage="/assets/projects/tesla/chatbot/content/banner.jpg"
         coverPosition="center 20%"
         lightBanner
       />
@@ -140,14 +141,7 @@ export default function TeslaChatbot() {
       <ProjectSection id="old-flow" title="Old Chat Flow">
         <div className="flex flex-wrap gap-2 mb-6">
           {['Previous Purchases', 'Product Purchasing', 'Delivery Inquiries', 'Demo Drives'].map((intent) => (
-            <span
-              key={intent}
-              className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
-                isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
-              }`}
-            >
-              {intent}
-            </span>
+            <Tag key={intent}>{intent}</Tag>
           ))}
         </div>
         <ProjectText>
@@ -192,13 +186,7 @@ export default function TeslaChatbot() {
             { label: 'General Purchase', color: '#C084FC' },     // Bright Lavender
             { label: 'Undetermined', color: '#6B7280' },         // Neutral gray
           ].map((category) => (
-            <span
-              key={category.label}
-              className="font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md text-white"
-              style={{ backgroundColor: category.color }}
-            >
-              {category.label}
-            </span>
+            <Tag key={category.label} color={category.color}>{category.label}</Tag>
           ))}
         </div>
         <ProjectText>

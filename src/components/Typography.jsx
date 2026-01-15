@@ -32,9 +32,9 @@ export function H1({ children, className = '', style, as: Tag = 'h1' }) {
 }
 
 // Header 2
-export function H2({ children, className = '', style, as: Tag = 'h2' }) {
+export function H2({ children, className = '', style, as: Tag = 'h2', serif = false }) {
   return (
-    <Tag className={`font-satoshi text-4xl md:text-5xl lg:text-5xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`${serif ? 'font-silk' : 'font-satoshi'} text-4xl md:text-5xl lg:text-5xl tracking-tight theme-heading ${className}`} style={style}>
       {children}
     </Tag>
   )
@@ -71,7 +71,7 @@ export function H5({ children, className = '', style, as: Tag = 'h5' }) {
 export function Body({ children, className = '', size = 'base', style }) {
   const sizeClasses = {
     sm: 'text-[15px]',
-    base: 'text-base md:text-lg',
+    base: 'text-base md:text-[17px]',
     lg: 'text-lg md:text-xl',
   }
   return (
@@ -82,9 +82,14 @@ export function Body({ children, className = '', size = 'base', style }) {
 }
 
 // Metadata, labels, small text
-export function Caption({ children, className = '', uppercase = true, style, scramble = true, trigger = 'inView' }) {
+export function Caption({ children, className = '', uppercase = true, style, scramble = true, trigger = 'inView', size = 'base' }) {
+  const sizeClasses = {
+    base: 'text-[12px] tracking-wide',
+    sm: 'text-[11px] tracking-wide',
+    xs: 'text-[10px] tracking-wider opacity-60',
+  }
   return (
-    <span className={`font-mono text-[12px] tracking-wide theme-caption ${uppercase ? 'uppercase' : ''} ${className}`} style={style}>
+    <span className={`font-mono theme-caption ${sizeClasses[size]} ${uppercase ? 'uppercase' : ''} ${className}`} style={style}>
       {scramble ? (
         <ScrambleText trigger={trigger} iterations={2} speed={20}>
           {children}

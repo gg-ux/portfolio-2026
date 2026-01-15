@@ -125,7 +125,7 @@ export default function FluidityLoader({ onComplete, duration = 4000, contained 
 
         {/* Logo */}
         <img
-          src="/images/branding/logo.svg"
+          src="/assets/branding/logo.svg"
           alt="Logo"
           className={`h-6 w-auto relative ${isDark ? 'invert' : ''}`}
           style={{

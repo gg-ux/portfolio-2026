@@ -139,7 +139,7 @@ export default function SolsticeLoader({ size = 80 }) {
 
       {/* Logo with breathing pulse */}
       <img
-        src="/images/branding/logo.svg"
+        src="/assets/branding/logo.svg"
         alt="Grace Guo"
         className="h-6 w-auto animate-breathe invert"
         style={{

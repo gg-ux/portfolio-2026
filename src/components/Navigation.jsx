@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { useBanner } from '../context/BannerContext'
+import { useContactDrawer } from '../context/ContactDrawerContext'
 import ThemeToggle from './ThemeToggle'
 import ScrambleText from './ScrambleText'
 import { Caption } from './Typography'
@@ -32,6 +33,7 @@ export default function Navigation() {
   const workDropdownRef = useRef(null)
   const { isDark } = useTheme()
   const { isLightBanner, isDarkBanner, isInBannerZone } = useBanner()
+  const { openDrawer } = useContactDrawer()
 
   // When in light banner zone, override to use dark nav colors
   const useDarkNav = isLightBanner && isInBannerZone && !isScrolledMode
@@ -237,7 +239,7 @@ export default function Navigation() {
             className="block"
           >
             <img
-              src="/images/branding/logo.svg"
+              src="/assets/branding/logo.svg"
               alt="Grace Guo logo"
               className={`h-6 w-auto transition-all duration-500 ease-out hover:scale-125 ${(isDark && !useDarkNav) || useLightNav ? 'invert' : ''}`}
             />
@@ -247,7 +249,7 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             {/* Work with dropdown */}
             <div
-              className="relative"
+              className="relative flex items-center"
               onMouseEnter={() => setIsWorkHovered(true)}
             >
               <a
@@ -277,6 +279,18 @@ export default function Navigation() {
                     {link.name}
                   </ScrambleText>
                 </Link>
+              ) : link.name === 'Contact' ? (
+                <button
+                  key={link.name}
+                  onClick={openDrawer}
+                  className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
+                    ((isDark && !useDarkNav) || useLightNav) ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                  }`}
+                >
+                  <ScrambleText trigger="both" iterations={2} speed={20}>
+                    {link.name}
+                  </ScrambleText>
+                </button>
               ) : (
                 <a
                   key={link.name}
@@ -352,11 +366,16 @@ export default function Navigation() {
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-6">
           <div className="hidden md:grid grid-cols-5 gap-4">
-            {workProjects.map((project) => (
+            {workProjects.map((project, index) => (
               <Link
                 key={project.link}
                 to={project.link}
                 className="group"
+                style={{
+                  opacity: isWorkHovered ? 1 : 0,
+                  transform: isWorkHovered ? 'translateX(0)' : 'translateX(-12px)',
+                  transition: `opacity 0.3s ease-out ${index * 50}ms, transform 0.3s ease-out ${index * 50}ms`,
+                }}
               >
                 <div
                   className="aspect-square rounded-xl overflow-hidden mb-2 transition-all duration-300 group-hover:scale-[1.02]"
@@ -410,7 +429,7 @@ export default function Navigation() {
           className="block"
         >
           <img
-            src="/images/branding/logo.svg"
+            src="/assets/branding/logo.svg"
             alt="Grace Guo logo"
             className={`h-6 w-auto ${isDark ? 'invert' : ''}`}
           />
@@ -474,6 +493,19 @@ export default function Navigation() {
               >
                 {link.name}
               </Link>
+            ) : link.name === 'Contact' ? (
+              <button
+                key={link.name}
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  openDrawer()
+                }}
+                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
+                  isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
+                }`}
+              >
+                {link.name}
+              </button>
             ) : (
               <a
                 key={link.name}
