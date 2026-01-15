@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useTheme } from '../context/ThemeContext'
 import { Caption, Body } from './Typography'
@@ -8,6 +9,36 @@ import bioPic from '../assets/BioPic2.JPG'
 export default function About() {
   const [sectionRef, sectionVisible] = useScrollReveal({ threshold: 0.15 })
   const { isDark } = useTheme()
+  const imageRef = useRef(null)
+  const [imageBlur, setImageBlur] = useState(6)
+
+  useEffect(() => {
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
+
+    const handleScroll = () => {
+      if (!imageRef.current) return
+
+      const rect = imageRef.current.getBoundingClientRect()
+      const vh = window.innerHeight
+
+      // Calculate progress: 0 = just entering bottom, 0.5 = centered, 1 = exiting top
+      const imageCenter = rect.top + rect.height / 2
+      const progress = 1 - (imageCenter / vh)
+
+      // Entrance blur: starts at 6px, clears as it approaches center (0 to 0.4 progress)
+      const entranceBlur = (1 - easeOutCubic(Math.min(1, progress / 0.4))) * 6
+
+      // Exit blur: blurs again as it passes center (0.6 to 1 progress)
+      const exitBlur = easeOutCubic(Math.max(0, (progress - 0.6) / 0.4)) * 6
+
+      const blur = entranceBlur + exitBlur
+      setImageBlur(blur)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section id="about" className="py-32 md:py-48" style={{ scrollSnapAlign: 'start' }}>
@@ -25,6 +56,7 @@ export default function About() {
             <div className="hidden md:block md:col-span-5 lg:col-span-4">
               <div className="relative aspect-[3/4] max-w-[280px] mx-auto md:mx-0">
                 <div
+                  ref={imageRef}
                   className="absolute inset-0 z-10 rounded-2xl overflow-hidden"
                   style={{
                     boxShadow: isDark
@@ -36,6 +68,10 @@ export default function About() {
                     src={bioPic}
                     alt="Grace Guo"
                     className="w-full h-full object-cover object-top"
+                    style={{
+                      filter: imageBlur > 0.5 ? `blur(${imageBlur}px)` : 'none',
+                      willChange: 'filter',
+                    }}
                   />
                 </div>
                 {/* Frosted glass frame */}

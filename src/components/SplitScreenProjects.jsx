@@ -367,6 +367,9 @@ export default function SplitScreenProjects() {
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null)
   const [craftingVisible, setCraftingVisible] = useState(false)
   const [tiltState, setTiltState] = useState({ x: 0, y: 0 })
+  const [isStuck, setIsStuck] = useState(false)
+  const [stickWiggle, setStickWiggle] = useState(false)
+  const hasTriggeredStuck = useRef(false)
 
   // Use simple image effect on low-end devices
   const ImageComponent = canHandleEffects ? RippleImage : SimpleImage
@@ -393,6 +396,7 @@ export default function SplitScreenProjects() {
   // Also track scroll-based opacity for fade effect
   const [mobileScrollOpacity, setMobileScrollOpacity] = useState(0)
   const [mobileWorksOpacity, setMobileWorksOpacity] = useState(0)
+  const [mobileSoulfulFill, setMobileSoulfulFill] = useState(0)
   const mobileRafRef = useRef(null)
   useEffect(() => {
     if (!isMobile) return
@@ -401,6 +405,16 @@ export default function SplitScreenProjects() {
       if (craftingRef.current) {
         const rect = craftingRef.current.getBoundingClientRect()
         const vh = window.innerHeight
+        const scrollY = window.scrollY
+
+        // Don't show until user has scrolled past the hero
+        // This prevents the section from being faintly visible on small screens at load
+        if (scrollY < vh * 0.3) {
+          setMobileScrollOpacity(0)
+          setMobileWorksOpacity(0)
+          mobileRafRef.current = null
+          return
+        }
 
         // Calculate opacity based on how far into view the section is
         // Start fading in when section is 80% down the viewport, fully visible at 50%
@@ -409,6 +423,12 @@ export default function SplitScreenProjects() {
         const progress = Math.max(0, Math.min(1, (fadeStart - rect.top) / (fadeStart - fadeEnd)))
 
         setMobileScrollOpacity(progress)
+
+        // "soulful" color fill - starts after text is visible, fills while centered
+        const fillStart = vh * 0.5
+        const fillEnd = vh * 0.25
+        const fillProgress = Math.max(0, Math.min(1, (fillStart - rect.top) / (fillStart - fillEnd)))
+        setMobileSoulfulFill(fillProgress)
 
         // Selected Works fades in later - when Crafting is near center/top
         const worksFadeStart = vh * 0.5
@@ -659,6 +679,65 @@ export default function SplitScreenProjects() {
   // "Selected Works" text fades in with card
   const selectedWorksOpacity = easeOutCubic(Math.max(0, (morphProgress - 0.75) / 0.25))
 
+  // "soulful" color fill progress (during hold phase 0.15→0.5)
+  const humanFirstFillProgress = Math.max(0, Math.min(1, (morphProgress - 0.15) / 0.35))
+  const humanFirstFill = easeOutCubic(humanFirstFillProgress) * 100 // 0% → 100%
+
+  // Scrolljack effect - triggers when "soulful" fill completes (desktop only)
+  useEffect(() => {
+    if (isMobile) return
+    if (hasTriggeredStuck.current) return
+    if (humanFirstFill < 100) return
+
+    // Mark as triggered immediately to prevent re-entry
+    hasTriggeredStuck.current = true
+
+    // Delay before triggering the scrolljack (let user see completed fill)
+    const delayTimeout = setTimeout(() => {
+      setIsStuck(true)
+      setStickWiggle(true)
+
+      // Lock scroll position
+      const lockedScrollY = window.scrollY
+
+      // Aggressively prevent all scrolling
+      const preventScroll = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        window.scrollTo(0, lockedScrollY)
+        return false
+      }
+
+      const preventKeyScroll = (e) => {
+        const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40] // space, pgup, pgdn, end, home, arrows
+        if (scrollKeys.includes(e.keyCode)) {
+          e.preventDefault()
+          return false
+        }
+      }
+
+      // Capture phase to intercept before anything else
+      document.addEventListener('wheel', preventScroll, { passive: false, capture: true })
+      document.addEventListener('touchmove', preventScroll, { passive: false, capture: true })
+      document.addEventListener('scroll', preventScroll, { passive: false, capture: true })
+      document.addEventListener('keydown', preventKeyScroll, { passive: false, capture: true })
+
+      // Release after animation
+      setTimeout(() => {
+        setIsStuck(false)
+        setStickWiggle(false)
+        document.removeEventListener('wheel', preventScroll, { capture: true })
+        document.removeEventListener('touchmove', preventScroll, { capture: true })
+        document.removeEventListener('scroll', preventScroll, { capture: true })
+        document.removeEventListener('keydown', preventKeyScroll, { capture: true })
+      }, 1000)
+    }, 400)
+
+    return () => {
+      clearTimeout(delayTimeout)
+    }
+  }, [humanFirstFill, isMobile])
+
   // Mobile/tablet layout
   if (isMobile) {
     // Calculate left padding to match container
@@ -686,12 +765,43 @@ export default function SplitScreenProjects() {
         >
           <div className="max-w-md sm:max-w-xl md:max-w-2xl text-center">
             <h2
-              className="font-satoshi text-3xl sm:text-4xl md:text-5xl leading-snug tracking-tight"
+              className="font-satoshi text-4xl md:text-5xl lg:text-5xl leading-snug tracking-tight"
               style={{
                 color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)',
               }}
             >
-              Crafting human-first digital experiences across automotive, healthcare, and emerging tech.
+              Shipping{' '}
+              <span className="relative inline-block">
+                <span>soulful</span>
+                <span
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: isDark
+                      ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='%23D4A5A5'/%3E%3Cpath d='M0,0 L100,0 L100,55 Q70,75 40,60 Q15,48 0,65 Z' fill='%23A78BFA'/%3E%3C/svg%3E")`
+                      : `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='%23BE8585'/%3E%3Cpath d='M0,0 L100,0 L100,55 Q70,75 40,60 Q15,48 0,65 Z' fill='%23A78BFA'/%3E%3C/svg%3E")`,
+                    backgroundSize: '100% 100%',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    color: 'transparent',
+                    WebkitTextFillColor: 'transparent',
+                    clipPath: `polygon(
+                      0% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10) * 8}%,
+                      15% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 1) * 6}%,
+                      30% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 2) * 8}%,
+                      50% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 3) * 5}%,
+                      70% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 4) * 7}%,
+                      85% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 5) * 6}%,
+                      100% ${100 - (mobileSoulfulFill * 100) + Math.sin(mobileSoulfulFill * 10 + 6) * 8}%,
+                      100% 100%,
+                      0% 100%
+                    )`,
+                  }}
+                  aria-hidden="true"
+                >
+                  soulful
+                </span>
+              </span>{' '}
+              digital experiences that stick.
             </h2>
           </div>
         </div>
@@ -824,12 +934,54 @@ export default function SplitScreenProjects() {
           }}
         >
           <h2
-            className="font-satoshi text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug tracking-tight"
+            className="font-satoshi text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-snug tracking-tight"
             style={{
               color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)',
             }}
           >
-            Crafting human-first digital experiences across automotive, healthcare, and emerging tech.
+            Shipping{' '}
+            <span className="relative inline-block">
+              {/* Base text (default color) */}
+              <span>soulful</span>
+              {/* Colored overlay - water fill from bottom with wavy top edge + two-tone pattern */}
+              <span
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: isDark
+                    ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='%23D4A5A5'/%3E%3Cpath d='M0,0 L100,0 L100,55 Q70,75 40,60 Q15,48 0,65 Z' fill='%23A78BFA'/%3E%3C/svg%3E")`
+                    : `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='%23BE8585'/%3E%3Cpath d='M0,0 L100,0 L100,55 Q70,75 40,60 Q15,48 0,65 Z' fill='%23A78BFA'/%3E%3C/svg%3E")`,
+                  backgroundSize: '100% 100%',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                  WebkitTextFillColor: 'transparent',
+                  clipPath: `polygon(
+                    0% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1) * 8}%,
+                    15% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 1) * 6}%,
+                    30% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 2) * 8}%,
+                    50% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 3) * 5}%,
+                    70% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 4) * 7}%,
+                    85% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 5) * 6}%,
+                    100% ${100 - humanFirstFill + Math.sin(humanFirstFill * 0.1 + 6) * 8}%,
+                    100% 100%,
+                    0% 100%
+                  )`,
+                }}
+                aria-hidden="true"
+              >
+                soulful
+              </span>
+            </span>{' '}
+            digital experiences that{' '}
+            <span
+              className={stickWiggle ? 'animate-wiggle' : ''}
+              style={{
+                display: 'inline-block',
+              }}
+            >
+              stick
+            </span>
+            .
           </h2>
         </div>
 

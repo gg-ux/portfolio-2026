@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
+import { BannerProvider } from './context/BannerContext'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
@@ -95,10 +96,12 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <AppContent />
-      </BrowserRouter>
+      <BannerProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <AppContent />
+        </BrowserRouter>
+      </BannerProvider>
     </ThemeProvider>
   )
 }

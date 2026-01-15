@@ -1,9 +1,26 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
+import { useBanner } from '../context/BannerContext'
 import ThemeToggle from './ThemeToggle'
 import ScrambleText from './ScrambleText'
 import { Caption } from './Typography'
+
+// Import project thumbnails (same as Explore More section)
+import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card-filled.png'
+import teslaMegaMenuImg from '../assets/projects/tesla/mega menu/mega-menu-card-filled.png'
+import indiEvImg from '../assets/projects/indi ev/card-indi-ev.png'
+import notetracksImg from '../assets/projects/notetracks/notetracks-card-filled.png'
+import cataliaImg from '../assets/projects/catalia health/catalia-card-filled.png'
+
+// Projects for the mega menu
+const workProjects = [
+  { name: 'Tesla Assist', link: '/project/tesla-chatbot', image: teslaChatbotImg, bg: '#B1CCFF' },
+  { name: 'Tesla Mega Menu', link: '/project/tesla-mega-menu', image: teslaMegaMenuImg, bg: '#30409B' },
+  { name: 'INDI EV', link: '/project/indi-ev', image: indiEvImg, bg: '#000000' },
+  { name: 'Catalia Health', link: '/project/catalia-health', image: cataliaImg, bg: '#31ECF6' },
+  { name: 'Notetracks', link: '/project/notetracks', image: notetracksImg, bg: '#1a1a1a' },
+]
 
 export default function Navigation() {
   const [navOpacity, setNavOpacity] = useState(1)
@@ -11,7 +28,15 @@ export default function Navigation() {
   const [isScrolledMode, setIsScrolledMode] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
+  const [isWorkHovered, setIsWorkHovered] = useState(false)
+  const workDropdownRef = useRef(null)
   const { isDark } = useTheme()
+  const { isLightBanner, isDarkBanner, isInBannerZone } = useBanner()
+
+  // When in light banner zone, override to use dark nav colors
+  const useDarkNav = isLightBanner && isInBannerZone && !isScrolledMode
+  // When in dark banner zone (in light mode), override to use light nav colors
+  const useLightNav = isDarkBanner && isInBannerZone && !isScrolledMode && !isDark
 
   const location = useLocation()
   const isHomePage = location.pathname === '/'
@@ -125,37 +150,41 @@ export default function Navigation() {
   }, [isHomePage])
 
   const navLinks = [
-    { name: 'Work', href: isHomePage ? '#work' : '/#work', isRoute: false },
     { name: 'Résumé', href: '/resume', isRoute: true },
     { name: 'Contact', href: '#contact', isRoute: false },
     { name: 'Design System', href: '/design-system', isRoute: true },
   ]
 
+  // Work link handled separately for dropdown
+  const workHref = isHomePage ? '#work' : '/#work'
+
 
   return (
     <>
     <nav
+      ref={workDropdownRef}
       className={`fixed top-0 left-0 right-0 z-[200] ${
-        isScrolledMode
-          ? isDark
-            ? 'bg-[#0a0a0a]/50 backdrop-blur-lg'
-            : 'bg-[#FAF8F4]/50 backdrop-blur-lg'
+        (isScrolledMode || isWorkHovered)
+          ? ((isDark && !useDarkNav) || useLightNav)
+            ? 'bg-[#0a0a0a]/70 backdrop-blur-xl'
+            : 'bg-[#FAF8F4]/70 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
       style={{
-        opacity: isScrolledMode ? (showNav ? 1 : 0) : navOpacity,
+        opacity: (isScrolledMode || isWorkHovered) ? (showNav ? 1 : 0) : navOpacity,
         transform: showNav ? 'translateY(0)' : 'translateY(-100%)',
         transition: hasMounted
           ? showNav
             ? 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out, background-color 0.5s'
             : 'transform 0.3s ease-in, opacity 0.2s ease-in, background-color 0.5s'
           : 'none',
-        pointerEvents: (isScrolledMode ? !showNav : navOpacity < 0.1) ? 'none' : 'auto',
+        pointerEvents: ((isScrolledMode || isWorkHovered) ? !showNav : navOpacity < 0.1) ? 'none' : 'auto',
       }}
+      onMouseLeave={() => setIsWorkHovered(false)}
     >
-      {/* Grain overlay - appears in scrolled mode */}
+      {/* Grain overlay - appears in scrolled mode or when Work is hovered */}
       <svg
-        className={`absolute inset-0 w-full h-full pointer-events-none ${hasMounted ? 'transition-opacity duration-500' : ''} ${isScrolledMode ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 w-full h-full pointer-events-none ${hasMounted ? 'transition-opacity duration-500' : ''} ${(isScrolledMode || isWorkHovered) ? 'opacity-100' : 'opacity-0'}`}
       >
         <defs>
           <filter id="nav-grain" x="0%" y="0%" width="100%" height="100%">
@@ -169,7 +198,7 @@ export default function Navigation() {
             />
             <feColorMatrix
               type="matrix"
-              values={isDark
+              values={((isDark && !useDarkNav) || useLightNav)
                 ? "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0"  // Black, alpha from noise
                 : "0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.35 0"
               }
@@ -182,18 +211,18 @@ export default function Navigation() {
           width="100%"
           height="100%"
           filter="url(#nav-grain)"
-          opacity={isDark ? "0.12" : "0.45"}
-          style={{ mixBlendMode: isDark ? 'normal' : 'overlay' }}
+          opacity={((isDark && !useDarkNav) || useLightNav) ? "0.12" : "0.45"}
+          style={{ mixBlendMode: ((isDark && !useDarkNav) || useLightNav) ? 'normal' : 'overlay' }}
         />
       </svg>
 
-      {/* Bottom divider - only appears when nav slides in from scroll-up */}
+      {/* Bottom divider - appears at bottom of nav (including mega menu when expanded) */}
       <div
-        className={`absolute bottom-0 left-0 right-0 h-px ${isDark ? 'bg-white/[0.06]' : 'bg-black/[0.08]'}`}
+        className={`absolute bottom-0 left-0 right-0 h-px ${((isDark && !useDarkNav) || useLightNav) ? 'bg-white/[0.06]' : 'bg-black/[0.08]'}`}
         style={{
-          opacity: isScrolledMode && showNav ? 1 : 0,
+          opacity: ((isScrolledMode || isWorkHovered) && showNav) ? 1 : 0,
           transition: hasMounted
-            ? isScrolledMode && showNav
+            ? ((isScrolledMode || isWorkHovered) && showNav)
               ? 'opacity 0.3s ease-out'
               : 'opacity 0.15s ease-in'
             : 'none',
@@ -210,12 +239,29 @@ export default function Navigation() {
             <img
               src="/images/branding/logo.svg"
               alt="Grace Guo logo"
-              className={`h-6 w-auto transition-transform duration-500 ease-out hover:scale-125 ${isDark ? 'invert' : ''}`}
+              className={`h-6 w-auto transition-all duration-500 ease-out hover:scale-125 ${(isDark && !useDarkNav) || useLightNav ? 'invert' : ''}`}
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
+            {/* Work with dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsWorkHovered(true)}
+            >
+              <a
+                href={workHref}
+                className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
+                  ((isDark && !useDarkNav) || useLightNav) ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                }`}
+              >
+                <ScrambleText trigger="both" iterations={2} speed={20}>
+                  Work
+                </ScrambleText>
+              </a>
+            </div>
+
             {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
@@ -223,8 +269,8 @@ export default function Navigation() {
                   to={link.href}
                   className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
                     location.pathname === link.href
-                      ? isDark ? 'text-white' : 'text-gray-900'
-                      : isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                      ? ((isDark && !useDarkNav) || useLightNav) ? 'text-white' : 'text-gray-900'
+                      : ((isDark && !useDarkNav) || useLightNav) ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
                   <ScrambleText trigger="both" iterations={2} speed={20}>
@@ -236,7 +282,7 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
-                    isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                    ((isDark && !useDarkNav) || useLightNav) ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
                   <ScrambleText trigger="both" iterations={2} speed={20}>
@@ -247,7 +293,7 @@ export default function Navigation() {
             )}
 
             {/* Divider */}
-            <div className={`w-px h-4 ${isDark ? 'bg-white/10' : 'bg-black/10'}`} />
+            <div className={`w-px h-4 transition-colors duration-300 ${((isDark && !useDarkNav) || useLightNav) ? 'bg-white/10' : 'bg-black/10'}`} />
 
             {/* Theme Toggle */}
             <ThemeToggle size="small" />
@@ -264,7 +310,7 @@ export default function Navigation() {
             <div className="w-[22px] h-[14px] relative">
               <span
                 className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  isDark ? 'bg-white' : 'bg-gray-900'
+                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
                 }`}
                 style={{
                   top: isMobileMenuOpen ? '6px' : '0px',
@@ -273,7 +319,7 @@ export default function Navigation() {
               />
               <span
                 className={`absolute left-0 top-[6px] w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  isDark ? 'bg-white' : 'bg-gray-900'
+                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
                 }`}
                 style={{
                   opacity: isMobileMenuOpen ? 0 : 1,
@@ -282,7 +328,7 @@ export default function Navigation() {
               />
               <span
                 className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  isDark ? 'bg-white' : 'bg-gray-900'
+                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
                 }`}
                 style={{
                   top: isMobileMenuOpen ? '6px' : '12px',
@@ -291,6 +337,51 @@ export default function Navigation() {
               />
             </div>
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mega Menu - Work Projects Grid (inside nav for seamless container) */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-out ${
+          isWorkHovered ? '' : 'pointer-events-none'
+        }`}
+        style={{
+          maxHeight: isWorkHovered ? '320px' : '0px',
+        }}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-6">
+          <div className="hidden md:grid grid-cols-5 gap-4">
+            {workProjects.map((project) => (
+              <Link
+                key={project.link}
+                to={project.link}
+                className="group"
+              >
+                <div
+                  className="aspect-square rounded-xl overflow-hidden mb-2 transition-all duration-300 group-hover:scale-[1.02]"
+                  style={{
+                    backgroundColor: project.bg,
+                    boxShadow: ((isDark && !useDarkNav) || useLightNav)
+                      ? '0 0 0 1px rgba(255,255,255,0.06), 0 4px 12px rgba(0,0,0,0.3)'
+                      : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <span className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-200 ${
+                  ((isDark && !useDarkNav) || useLightNav)
+                    ? 'text-white/70 group-hover:text-white'
+                    : 'text-gray-500 group-hover:text-gray-900'
+                }`}>
+                  {project.name}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -358,6 +449,17 @@ export default function Navigation() {
       <div className="h-[calc(100vh-72px)] flex flex-col justify-center items-center pb-24">
         {/* Navigation Links */}
         <div className="flex flex-col items-center gap-6">
+          {/* Work link */}
+          <a
+            href={workHref}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
+              isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
+            }`}
+          >
+            Work
+          </a>
+
           {navLinks.map((link) =>
             link.isRoute ? (
               <Link

@@ -6,9 +6,17 @@ import {
   ProjectText,
   ProjectList,
   ProjectCallout,
-  ProjectImagePlaceholder,
-  ProjectImageFullWidth
+  ProjectImageFullWidth,
+  ProjectYouTube,
+  ProcessKanban,
+  ExpandableChart,
+  OldFlowChart,
+  OldFlowChartLegend,
+  NewFlowChart,
+  NewFlowChartLegend,
 } from '../../components/project'
+import { TrendUp, Target, ChatCircle, LinkSimple } from '@phosphor-icons/react'
+import { Caption } from '../../components/Typography'
 import { useTheme } from '../../context/ThemeContext'
 
 const sections = [
@@ -24,11 +32,7 @@ export default function TeslaChatbot() {
   const { isDark } = useTheme()
 
   return (
-    <ProjectLayout
-      sections={sections}
-      prevProject={null}
-      nextProject={{ title: 'Mega Menu', href: '/project/tesla-mega-menu' }}
-    >
+    <ProjectLayout sections={sections}>
       <ProjectHero
         company="Tesla"
         title="AI Chatbot"
@@ -36,7 +40,9 @@ export default function TeslaChatbot() {
         role="Lead UX/UI Designer"
         timeline="2023"
         impact="120% increase in sales lead conversion"
-        coverImage="/images/projects/tesla/chatbot/chatbot-card-filled.png"
+        coverImage="/images/projects/tesla/chatbot/content/banner.jpg"
+        coverPosition="center 20%"
+        lightBanner
       />
 
       {/* Overview */}
@@ -44,110 +50,183 @@ export default function TeslaChatbot() {
         <ProjectText>
           The demo below shows the Chatbot making suggestions upon initiation, providing education on a suggested topic, and answering a free-form non-sales question. Only when purchase intent is indicated does the user get prompted to fill out a short contact form, which then redirects them to an advisor.
         </ProjectText>
+        <ProjectYouTube
+          url="https://youtu.be/4iX2oKrVoV4"
+          caption="Tesla Assist AI Chatbot Demo"
+        />
         <ProjectCallout>
-          <ProjectText className="mb-0">
-            Shortly after launch, Tesla Assist achieved a significant <strong className={isDark ? 'text-white' : 'text-gray-900'}>120% increase in sales lead conversion rates</strong>, underscoring its immediate impact and substantial potential as the chatbot evolves.
-          </ProjectText>
+          Shortly after launch, Tesla Assist achieved a significant 120% increase in sales lead conversion rates, underscoring its immediate impact and substantial potential as the chatbot evolves.
         </ProjectCallout>
       </ProjectSection>
 
       {/* Goals */}
       <ProjectSection id="goals" title="Goals">
-        <ProjectList
-          items={[
-            'Boost sales conversions by leveraging the chatbot for non-sales inquiries, allowing advisors to focus on proportionately more sales customers',
-            'Advance business objectives and enhance customer education through suggested topics upon chat initiation',
-            'Ensure 24/7 chatbot for continuous customer support and sales lead capturing',
-          ]}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { title: '+ Conversions', description: 'Leverage the chatbot for non-sales inquiries, allowing advisors to focus on more sales customers', icon: TrendUp },
+            { title: '+ Engagement', description: 'Advance business objectives through suggested topics upon chat initiation', icon: Target },
+            { title: '24/7 Support', description: 'Provide continuous customer support and sales lead capturing around the clock', icon: ChatCircle },
+          ].map((goal, index) => {
+            const Icon = goal.icon
+            return (
+              <div
+                key={index}
+                className={`relative rounded-2xl p-6 border backdrop-blur-md ${
+                  isDark
+                    ? 'border-white/[0.08] bg-white/[0.015]'
+                    : 'border-black/[0.08] bg-white/20'
+                }`}
+              >
+                <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
+                  <Icon size={24} weight="light" />
+                </div>
+                <h4 className={`text-xl mb-3 theme-heading`} style={{ fontWeight: 600 }}>
+                  {goal.title}
+                </h4>
+                <p className={`font-satoshi text-[15px] leading-relaxed ${
+                  isDark ? 'text-white/60' : 'text-gray-600'
+                }`}>
+                  {goal.description}
+                </p>
+              </div>
+            )
+          })}
+        </div>
       </ProjectSection>
 
       {/* Process */}
       <ProjectSection id="process" title="Process">
-        <ProjectSubsection title="Research & Planning">
-          <ProjectList
-            ordered
-            items={[
-              'Research Key Topics: Work with product, analytics, and content teams to break down the most popular support topics',
-              'Create Automation Flows: Work with product and legal teams to ensure business and legal requirements are met',
-              'Propose IA: Present flows to design manager to get approval to continue to next stage',
+          <ProcessKanban
+            columns={[
+              {
+                title: 'Research & Strategy',
+                items: [
+                  { title: 'Research Key Topics', description: 'Work with product, analytics, and content teams to break down the most popular support topics' },
+                  { title: 'Create Automations', description: 'Work with product and legal teams to ensure business and legal requirements are met' },
+                  { title: 'Propose IA', description: 'Present flows to design manager to get approval to continue to next stage' },
+                  { title: 'Audit Competitors', description: 'Research chat experiences of other companies for guidelines on best practices and inspiration' },
+                ],
+              },
+              {
+                title: 'Design & Iteration',
+                items: [
+                  { title: 'Consolidate Chat UI', description: 'Work with app design team to consolidate chat design language across web and app for consistency' },
+                  { title: 'Create Chat Components', description: 'Create Figma UI Kit for all chat components' },
+                  { title: 'Mock Up Key Flows', description: 'Define key flows with product manager, showcasing examples of scenarios that will require different UI elements' },
+                  { title: 'Align on Copy', description: 'Work with copy team on chatbot messages and all other text within the experience' },
+                  { title: 'Iterate on Designs', description: 'Refine designs iteratively based on feedback from leadership, peers, and user testing' },
+                ],
+              },
+              {
+                title: 'Scoping & Approval',
+                items: [
+                  { title: 'Define MVP', description: 'Work with the product manager to define MVP requirements and break the project into 2 phases' },
+                  { title: 'Get Approvals', description: 'Present a final deck to leadership, outlining business benefits, development phases, and timeline' },
+                ],
+              },
+              {
+                title: 'Implementation',
+                items: [
+                  { title: 'Support Engineering', description: 'Support the engineering team with assets and resources for implementation once designs are approved' },
+                  { title: 'Conduct Design QA', description: 'Conduct design QA during staging, creating and supplementing Jira tickets' },
+                  { title: 'Launch It! 🚀', description: 'Ship the chatbot to production and celebrate!' },
+                ],
+              },
             ]}
           />
-        </ProjectSubsection>
-
-        <ProjectSubsection title="Design & Development">
-          <ProjectList
-            ordered
-            items={[
-              'Audit Competitor Designs: Research chat experiences of other companies for guidelines on best practices and inspiration',
-              'Consolidate Chat UI: Work with app design team to consolidate chat design language across web and app for consistency',
-              'Create Chat Components: Create Figma UI Kit for all chat components',
-              'Mock Up Key Flows: Define key flows with product manager, showcasing examples of scenarios that will require different UI elements',
-              'Align on Copy: Work with copy team on chatbot messages and all other text within the experience',
-              'Iterate on Designs: Refine designs iteratively based on feedback from leadership, peers, and user testing',
-              'Define MVP: Work with the product manager to define MVP requirements and break the project into 2 phases',
-              'Get Approvals: Present a final deck to leadership, outlining business benefits, development phases, and timeline',
-            ]}
-          />
-        </ProjectSubsection>
-
-        <ProjectSubsection title="Implementation & Launch">
-          <ProjectList
-            ordered
-            items={[
-              'Support Engineering: Support the engineering team with assets and resources for implementation once designs are approved',
-              'Conduct Design QA: Conduct design QA during staging, creating and supplementing Jira tickets',
-              'Launch It!',
-            ]}
-          />
-        </ProjectSubsection>
       </ProjectSection>
 
       {/* Old Flow */}
       <ProjectSection id="old-flow" title="Old Chat Flow">
+        <div className="flex flex-wrap gap-2 mb-6">
+          {['Previous Purchases', 'Product Purchasing', 'Delivery Inquiries', 'Demo Drives'].map((intent) => (
+            <span
+              key={intent}
+              className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
+                isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
+              }`}
+            >
+              {intent}
+            </span>
+          ))}
+        </div>
         <ProjectText>
-          The previous chat flow captured only four user intents:
+          The previous chat flow captured only four user intents. This limited model lacks breadth in topics and directs non-sales customers to live advisors. With just one sales-focused intent and two non-sales intents, the system overwhelmed advisors with non-sales inquiries, reducing the proportion of sales leads successfully moving through the funnel.
         </ProjectText>
-        <ProjectList
-          items={[
-            'Assistance with Previous Purchases',
-            'Purchasing Tesla Products',
-            'Delivery Inquiries',
-            'Scheduling Demo Drives',
-          ]}
-        />
-        <ProjectText>
-          This limited model lacks breadth in topics and directs non-sales customers to live advisors. With just one sales-focused intent and two non-sales intents, the system overwhelmed advisors with non-sales inquiries, reducing the proportion of sales leads successfully moving through the funnel.
-        </ProjectText>
-        <ProjectImagePlaceholder label="Old Chat Flow Diagram" />
+
+        <ExpandableChart
+          title="Old Chat Flow"
+          width={780}
+          height={520}
+          initialY={-120}
+          legend={<OldFlowChartLegend />}
+          headerPaddingTop={20}
+          headerPaddingBottom={12}
+          legendPaddingTop={12}
+          legendPaddingBottom={16}
+          legendOffset={4}
+        >
+          {({ width, height }) => <OldFlowChart width={width} height={height} />}
+        </ExpandableChart>
 
         <ProjectSubsection title="Old Chat: Demo">
           <ProjectText>
             In this demo, I am given a very limited number of support topics. It does not take long before I am redirected to an advisor or a callback form. The lack of more resources makes it so more users will likely try to speak to an advisor for help, reducing the proportion of sales leads who get through to advisors.
           </ProjectText>
+          <ProjectYouTube
+            url="https://youtu.be/eXQJDCdpSRE"
+            caption="Old Chat Experience Demo"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
       {/* New Flow */}
       <ProjectSection id="new-flow" title="New Chatbot Automation Flow">
+        <div className="flex flex-wrap gap-2 mb-6">
+          {[
+            { label: 'Order Education', color: '#A78BFA' },      // Lavender (brand)
+            { label: 'Vehicle Appointments', color: '#0F766E' }, // Deep Teal (brand)
+            { label: 'Vehicle Education', color: '#8B5CF6' },    // Violet (lavender family)
+            { label: 'Energy Appointments', color: '#EA580C' },  // Burnt Orange (brand)
+            { label: 'Energy Education', color: '#14B8A6' },     // Teal (teal family)
+            { label: 'General Purchase', color: '#C084FC' },     // Bright Lavender
+            { label: 'Undetermined', color: '#6B7280' },         // Neutral gray
+          ].map((category) => (
+            <span
+              key={category.label}
+              className="font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md text-white"
+              style={{ backgroundColor: category.color }}
+            >
+              {category.label}
+            </span>
+          ))}
+        </div>
         <ProjectText>
-          By leveraging AI, we expanded the chatbot's scope to handle more intents, structured under 8 main categories for the MVP:
+          By leveraging AI, we expanded the chatbot's scope to handle more intents, structured under 8 main categories for the MVP. Suggested topics appear when the chat starts, aligning with business goals while proactively providing customers with insights on commonly sought support topics.
         </ProjectText>
-        <ProjectList
-          items={[
-            'Order Education',
-            'Vehicle Appointments',
-            'Vehicle Education',
-            'Energy Appointments',
-            'Energy Education',
-            'General Purchase',
-            'Undetermined',
-          ]}
-        />
-        <ProjectText>
-          Suggested topics appear when the chat starts, aligning with business goals while proactively providing customers with insights on commonly sought support topics.
-        </ProjectText>
-        <ProjectImagePlaceholder label="New Automation Flow Diagram" />
+
+        <ExpandableChart
+          title="New Chatbot Automation Flow"
+          width={800}
+          height={710}
+          legend={<NewFlowChartLegend />}
+          headerPaddingTop={20}
+          headerPaddingBottom={12}
+          legendPaddingTop={12}
+          legendPaddingBottom={12}
+        >
+          {({ width, height }) => <NewFlowChart width={width} height={height} />}
+        </ExpandableChart>
+
+        <ProjectSubsection title="New Chat: Demo">
+          <ProjectText>
+            The new chatbot provides more comprehensive support, handling a wider range of topics before redirecting to an advisor. This allows users to get answers faster while freeing advisors to focus on sales-related inquiries.
+          </ProjectText>
+          <ProjectYouTube
+            url="https://youtu.be/eN_wgNI72IE"
+            caption="New AI Chatbot Experience Demo"
+          />
+        </ProjectSubsection>
 
         <ProjectSubsection title="Advisor Redirect">
           <ProjectText>
@@ -161,17 +240,48 @@ export default function TeslaChatbot() {
         <ProjectText>
           For the next phase, our proposed enhancements aimed to:
         </ProjectText>
-        <ProjectList
-          items={[
-            'Expand the AI\'s knowledge base by incorporating information from support pages',
-            'Drive customer engagement by embedding images and videos in chatbot responses',
-            'Streamline demo drive scheduling through direct chat integration',
-            'Enhance customer satisfaction by integrating with the order management system',
-            'Improve response accuracy using advanced natural language processing',
-            'Boost conversions with personalized recommendations based on customer history',
-          ]}
-        />
+        <div className="relative mt-8">
+          {/* Vertical line */}
+          <div className={`absolute left-3 top-3 bottom-3 w-px ${isDark ? 'bg-white/10' : 'bg-black/10'}`} />
+
+          <div className="space-y-6">
+            {[
+              { title: 'Expand Knowledge Base', description: 'Incorporate information from support pages into AI responses' },
+              { title: 'Rich Media Responses', description: 'Embed images and videos in chatbot responses to drive engagement' },
+              { title: 'Demo Drive Integration', description: 'Streamline demo drive scheduling through direct chat integration' },
+              { title: 'Order Management', description: 'Integrate with order management system to enhance customer satisfaction' },
+              { title: 'Advanced NLP', description: 'Improve response accuracy using advanced natural language processing' },
+              { title: 'Personalized Recommendations', description: 'Boost conversions with recommendations based on customer history' },
+            ].map((item, index) => (
+              <div key={index} className="relative flex gap-4 pl-1">
+                {/* Timeline dot */}
+                <div className={`relative z-10 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                  isDark ? 'bg-white/[0.08]' : 'bg-black/[0.06]'
+                }`}>
+                  <div className={`w-2 h-2 rounded-full ${
+                    isDark ? 'bg-white/40' : 'bg-black/30'
+                  }`} />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 pb-2">
+                  <h4 className={`font-satoshi text-base font-medium mb-1 ${
+                    isDark ? 'text-white/90' : 'text-gray-900'
+                  }`}>
+                    {item.title}
+                  </h4>
+                  <p className={`font-satoshi text-[15px] leading-relaxed ${
+                    isDark ? 'text-white/50' : 'text-gray-500'
+                  }`}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </ProjectSection>
+
     </ProjectLayout>
   )
 }

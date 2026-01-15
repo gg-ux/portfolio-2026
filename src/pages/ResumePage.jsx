@@ -180,7 +180,9 @@ export default function ResumePage() {
                 {skills.design.map((skill) => (
                   <span
                     key={skill}
-                    className={`px-3 py-1.5 rounded-full text-sm font-satoshi ${bgSubtle} ${textSecondary} border ${borderColor}`}
+                    className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
+                      isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
+                    }`}
                   >
                     {skill}
                   </span>
@@ -193,7 +195,9 @@ export default function ResumePage() {
                 {skills.research.map((skill) => (
                   <span
                     key={skill}
-                    className={`px-3 py-1.5 rounded-full text-sm font-satoshi ${bgSubtle} ${textSecondary} border ${borderColor}`}
+                    className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
+                      isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
+                    }`}
                   >
                     {skill}
                   </span>
@@ -206,7 +210,9 @@ export default function ResumePage() {
                 {skills.tools.map((skill) => (
                   <span
                     key={skill}
-                    className={`px-3 py-1.5 rounded-full text-sm font-satoshi ${bgSubtle} ${textSecondary} border ${borderColor}`}
+                    className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
+                      isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
+                    }`}
                   >
                     {skill}
                   </span>
@@ -219,7 +225,9 @@ export default function ResumePage() {
                 {skills.other.map((skill) => (
                   <span
                     key={skill}
-                    className={`px-3 py-1.5 rounded-full text-sm font-satoshi ${bgSubtle} ${textSecondary} border ${borderColor}`}
+                    className={`font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md ${
+                      isDark ? 'bg-white/[0.06] text-white/40' : 'bg-black/[0.04] text-black/40'
+                    }`}
                   >
                     {skill}
                   </span>

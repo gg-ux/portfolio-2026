@@ -15,6 +15,7 @@ import { useTheme } from '../../context/ThemeContext'
 const Input = forwardRef(function Input({
   label,
   optional = false,
+  required = false,
   error,
   className = '',
   ...props
@@ -51,7 +52,7 @@ const Input = forwardRef(function Input({
     <div className={className}>
       {label && (
         <label htmlFor={props.id} className={labelClasses}>
-          {label}
+          {label}{required && ' *'}
           {optional && <span className={optionalClasses}> (optional)</span>}
         </label>
       )}
@@ -68,6 +69,7 @@ const Input = forwardRef(function Input({
 const Textarea = forwardRef(function Textarea({
   label,
   optional = false,
+  required = false,
   error,
   className = '',
   rows = 4,
@@ -106,7 +108,7 @@ const Textarea = forwardRef(function Textarea({
     <div className={className}>
       {label && (
         <label htmlFor={props.id} className={labelClasses}>
-          {label}
+          {label}{required && ' *'}
           {optional && <span className={optionalClasses}> (optional)</span>}
         </label>
       )}

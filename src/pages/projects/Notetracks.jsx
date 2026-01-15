@@ -6,7 +6,7 @@ import {
   ProjectText,
   ProjectList,
   ProjectCallout,
-  ProjectImagePlaceholder,
+  ProjectImage,
   ProjectImageGrid,
 } from '../../components/project'
 import { useTheme } from '../../context/ThemeContext'
@@ -24,18 +24,18 @@ export default function Notetracks() {
   const { isDark } = useTheme()
 
   return (
-    <ProjectLayout
-      sections={sections}
-      prevProject={{ title: 'Patient Community', href: '/project/catalia-health' }}
-      nextProject={null}
-    >
+    <ProjectLayout sections={sections}>
       <ProjectHero
         company="Notetracks"
         title="Audio Collaboration Tool"
         description="Notetracks is an innovative cloud-based platform designed to streamline audio collaboration for students and professionals by enabling precise track annotations. During its critical early startup phase, I collaborated closely with the founder, delivering high-fidelity prototypes and strategic marketing materials."
         role="UX/UI/Graphic Designer"
         timeline="2020–2021"
-        coverImage="/images/projects/notetracks/notetracks-card-filled.png"
+        coverImage="/images/projects/notetracks/content/banner.jpg"
+        coverPosition="center 0%"
+        noLightFilter
+        darkOverlay
+        darkBanner
       />
 
       {/* Overview */}
@@ -61,7 +61,12 @@ export default function Notetracks() {
         <ProjectText>
           I designed commenting features that allowed users to interact precisely within the audio track. Users could incorporate emojis, text, voice notes, or attachments. This multi-modal interaction deepened user engagement by accommodating various communication preferences.
         </ProjectText>
-        <ProjectImagePlaceholder label="Post New Comment - Live Voice Recording" />
+        <ProjectImage
+          src="/images/projects/notetracks/content/comment-first.png"
+          alt="Post new comment with live voice recording feature"
+          caption="Multi-modal commenting: emojis, text, voice notes, and attachments"
+          glassBorder
+        />
 
         <ProjectSubsection title="Replies Panel">
           <ProjectText>
@@ -77,7 +82,14 @@ export default function Notetracks() {
           <ProjectText>
             Due to the heavy engineering scope, we split this effort into phases. Phase 1 closely resembles the existing replying framework.
           </ProjectText>
-          <ProjectImagePlaceholder label="Replies Panel - Phase 1 vs Phase 2" />
+          <ProjectImageGrid
+            images={[
+              { src: '/images/projects/notetracks/content/comments-phase1.png', alt: 'Replies panel phase 1', caption: 'Phase 1 stacked replies' },
+              { src: '/images/projects/notetracks/content/comments-phase2.jpg', alt: 'Replies panel phase 2', caption: 'Phase 2 reply panel' },
+            ]}
+            columns={1}
+            glassBorder
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -90,14 +102,19 @@ export default function Notetracks() {
           To convert guest interactions into active engagements, I implemented a sign-up flow that activates when guests attempt to submit a comment. This flow overlays only part of the screen, keeping the user's comment in view to maintain engagement and context.
         </ProjectText>
         <ProjectCallout>
-          <ProjectText className="mb-0">
-            The sign-up flow requests only an email in the initial step to avoid overwhelming new users, leveraging it for both simplicity and security through multi-factor authentication.
-          </ProjectText>
+          The sign-up flow requests only an email in the initial step to avoid overwhelming new users, leveraging it for both simplicity and security through multi-factor authentication.
         </ProjectCallout>
         <ProjectText>
           After users enter their verification code and become more invested, I then prompt them for their name and password. This phased approach minimizes entry barriers and reduces initial friction.
         </ProjectText>
-        <ProjectImagePlaceholder label="Guest Sign-Up Flow + MFA" />
+        <ProjectImageGrid
+          images={[
+            { src: '/images/projects/notetracks/content/comment-loggedoff.png', alt: 'Guest commenting interface', caption: 'Guest commenting to sign up conversion' },
+            { src: '/images/projects/notetracks/content/guest-verification.png', alt: 'Guest verification flow', caption: 'Multi-factor authentication' },
+          ]}
+          columns={1}
+          glassBorder
+        />
       </ProjectSection>
 
       {/* Editing */}
@@ -109,17 +126,15 @@ export default function Notetracks() {
           I conducted thorough research on leading audio engineering platforms like Ableton to ensure our user interactions were both intuitive and familiar to industry professionals. Wherever ambiguity could arise, I strategically implemented tooltips to enhance clarity.
         </ProjectText>
 
-        <ProjectSubsection title="Select Features">
-          <ProjectList
-            items={[
-              'Right Click Options (Split, Fade, Copy, Cut, Mute, Solo, Delete)',
-              'Fade-In / Fade-Out',
-              'Trim',
-              'Track States (Guidelines for Engineers)',
-            ]}
-          />
-          <ProjectImagePlaceholder label="Editing Features Overview" />
-        </ProjectSubsection>
+        <ProjectImageGrid
+          images={[
+            { src: '/images/projects/notetracks/content/split.png', alt: 'Split feature', caption: 'Right click options (split, fade, copy, cut, mute, solo, delete)' },
+            { src: '/images/projects/notetracks/content/fadein.png', alt: 'Fade in/out feature', caption: 'Fade-in / fade-out' },
+            { src: '/images/projects/notetracks/content/trim.png', alt: 'Trim feature', caption: 'Trim' },
+          ]}
+          columns={1}
+          glassBorder
+        />
       </ProjectSection>
 
       {/* Pricing */}
@@ -136,9 +151,20 @@ export default function Notetracks() {
           ]}
         />
 
-        <ProjectSubsection title="Before & After">
-          <ProjectImagePlaceholder label="Old Pricing Page" />
-          <ProjectImagePlaceholder label="New Pricing Page" />
+        <ProjectSubsection title="Before" className="mb-8">
+          <ProjectImage
+            src="/images/projects/notetracks/content/pricing-old.png"
+            alt="Old pricing page"
+            className="my-4"
+          />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="After">
+          <ProjectImage
+            src="/images/projects/notetracks/content/pricing-new.jpg"
+            alt="New pricing page"
+            className="my-4"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -148,14 +174,27 @@ export default function Notetracks() {
           <ProjectText>
             These were fun to design! I created playful yet on-brand error pages that maintain the user experience even when things go wrong.
           </ProjectText>
-          <ProjectImagePlaceholder label="404 and Maintenance Pages" />
+          <ProjectImageGrid
+            images={[
+              { src: '/images/projects/notetracks/content/404-page.jpg', alt: '404 error page' },
+              { src: '/images/projects/notetracks/content/maintenance.jpg', alt: 'Maintenance page' },
+            ]}
+            columns={2}
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Social Media Advertising Assets">
           <ProjectText>
             Beyond just working on designs for the audio collaboration interface and website, I also created a number of marketing assets. I worked with the founder to come up with taglines and created multiple versions to see which one made the biggest impact.
           </ProjectText>
-          <ProjectImagePlaceholder label="Instagram, Facebook Ads, and Physical Flyers" />
+          <ProjectImageGrid
+            images={[
+              { src: '/images/projects/notetracks/content/ads-ig.png', alt: 'Instagram ad', caption: 'Instagram Ads' },
+              { src: '/images/projects/notetracks/content/ad-banner.png', alt: 'Facebook banner ad', caption: 'Facebook Ads' },
+              { src: '/images/projects/notetracks/content/marketing-flyer.jpg', alt: 'Physical marketing flyer', caption: 'Physical Flyers' },
+            ]}
+            columns={1}
+          />
         </ProjectSubsection>
       </ProjectSection>
     </ProjectLayout>

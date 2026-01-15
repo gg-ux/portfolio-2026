@@ -11,7 +11,7 @@ import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/r
 const categories = [
   {
     title: 'Foundation',
-    description: 'The building blocks of Fluidity. Typography, colors, and spacing scales.',
+    description: 'The building blocks of Gooey. Typography, colors, and spacing scales.',
     icon: Palette,
     href: '/design-system/foundation',
     items: ['Typography', 'Colors', 'Spacing'],
@@ -21,7 +21,7 @@ const categories = [
     description: 'Reusable UI elements with specs, variants, and usage guidelines.',
     icon: Stack,
     href: '/design-system/components',
-    items: ['Cards', 'Buttons', 'Dividers'],
+    items: ['Cards', 'Buttons', 'Dividers', 'Charts'],
   },
   {
     title: 'Motion',
@@ -59,7 +59,7 @@ export default function DesignSystemPage() {
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           {/* Header Content - left aligned */}
           <div className="max-w-2xl">
-            <H1 className="mb-4">Fluidity</H1>
+            <H1 className="mb-4">Gooey</H1>
             <Caption trigger="mount" className="mb-6 block">Developed & Designed by Grace Guo</Caption>
             <Body className="text-xl leading-relaxed">
               A design system built around feeling—where motion, color, and interaction work together to create an experience that feels alive, fluid, and human.

@@ -6,7 +6,8 @@ import {
   ProjectText,
   ProjectList,
   ProjectCallout,
-  ProjectImagePlaceholder,
+  ProjectImageFullWidth,
+  ProjectYouTube,
 } from '../../components/project'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -24,11 +25,7 @@ export default function TeslaMegaMenu() {
   const { isDark } = useTheme()
 
   return (
-    <ProjectLayout
-      sections={sections}
-      prevProject={{ title: 'AI Chatbot', href: '/project/tesla-chatbot' }}
-      nextProject={{ title: 'Electric Car IVI', href: '/project/indi-ev' }}
-    >
+    <ProjectLayout sections={sections}>
       <ProjectHero
         company="Tesla"
         title="Mega Menu"
@@ -36,7 +33,8 @@ export default function TeslaMegaMenu() {
         role="Lead UX/UI Designer"
         timeline="2021–2024"
         impact="Improved content discoverability & scalability"
-        coverImage="/images/projects/tesla/mega-menu/mega-menu-card-filled.png"
+        coverImage="/images/projects/tesla/mega-menu/content/banner.jpg"
+        lightBanner
       />
 
       {/* Overview */}
@@ -44,6 +42,10 @@ export default function TeslaMegaMenu() {
         <ProjectText>
           This pivotal project not only enhanced content discoverability but also ensured robust scalability and flexibility to meet the dynamic needs of Tesla's expanding product line and diverse global markets.
         </ProjectText>
+        <ProjectYouTube
+          url="https://youtu.be/Vu6b4nfHG80"
+          caption="Tesla Mega Menu Demo"
+        />
       </ProjectSection>
 
       {/* Goals */}
@@ -114,14 +116,20 @@ export default function TeslaMegaMenu() {
           <ProjectText>
             On desktop, the navigation featured main vehicle and energy product offerings centered at the top level, with additional links taking users to Shop, Account, and Menu on the right. Not only is this approach not scalable, but it is also visually cluttered, making it difficult for users to discover any content outside of the top level product pages.
           </ProjectText>
-          <ProjectImagePlaceholder label="Old Navigation - Desktop" />
+          <ProjectImageFullWidth
+            src="/images/projects/tesla/mega-menu/content/old-desktop-nav.png"
+            alt="Old Tesla desktop navigation with products across top level"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Old IA: Mobile">
           <ProjectText>
             On mobile, the situation was worse because all pages needed to be nested under the menu due to the limited horizontal space. For those trying to find their account or language settings, they would have to scroll all the way to the bottom.
           </ProjectText>
-          <ProjectImagePlaceholder label="Old Navigation - Mobile" />
+          <ProjectImageFullWidth
+            src="/images/projects/tesla/mega-menu/content/old-mobile-nav.png"
+            alt="Old Tesla mobile navigation requiring excessive scrolling"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -135,20 +143,30 @@ export default function TeslaMegaMenu() {
           <ProjectText>
             The new desktop menu eliminates clutter and improves page discoverability with intuitive categories. "Support" and "Language," previously hidden, are now prominently placed to provide answers and ensure accessibility.
           </ProjectText>
-          <ProjectImagePlaceholder label="New Mega Menu - Desktop" />
+          <ProjectImageFullWidth
+            src="/images/projects/tesla/mega-menu/content/new-desktop-expanded.png"
+            alt="New Tesla mega menu with intuitive categories and featured images"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="New IA: Mobile">
           <ProjectText>
             The mobile navigation is more scalable, and the user journey is more streamlined due to intuitive content categorization. While this adds an extra tap, mobile users are accustomed to tapping. This extra interaction enhances discoverability and provides a sense of control by ensuring predictable navigation outcomes.
           </ProjectText>
-          <ProjectImagePlaceholder label="New Navigation - Mobile" />
+          <ProjectImageFullWidth
+            src="/images/projects/tesla/mega-menu/content/new-mobile-nav.png"
+            alt="New Tesla mobile navigation with streamlined categories"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Responsive Behavior">
           <ProjectText>
             I provided designs and guidelines for 12 breakpoints to ensure the menu would remain accessible and not break, regardless of the viewport.
           </ProjectText>
+          <ProjectYouTube
+            url="https://youtu.be/Y2Al0Cs-frk"
+            caption="Mega Menu Responsive Behavior Across Breakpoints"
+          />
         </ProjectSubsection>
       </ProjectSection>
 

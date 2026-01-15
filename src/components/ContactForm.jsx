@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import { Button, Input, Textarea } from './ui'
-import { ArrowRight, CircleNotch, CheckCircle, WarningCircle } from '@phosphor-icons/react'
+import { ArrowRight, CircleNotch, CheckCircle, WarningCircle, Smiley, Asterisk } from '@phosphor-icons/react'
 
 export default function ContactForm() {
   const { isDark } = useTheme()
@@ -13,6 +13,63 @@ export default function ContactForm() {
     message: '',
   })
   const [errors, setErrors] = useState({})
+  const [isButtonHovered, setIsButtonHovered] = useState(false)
+  const [morphText, setMorphText] = useState('Send Message')
+  const morphAnimationRef = useRef(null)
+
+  // Text morph effect
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const morphToText = (targetText) => {
+    if (morphAnimationRef.current) {
+      clearTimeout(morphAnimationRef.current)
+    }
+
+    const iterations = 1
+    const speed = 8
+    const targetChars = targetText.split('')
+    const totalFrames = targetChars.length * iterations
+    let frame = 0
+
+    const animate = () => {
+      frame++
+      const morphed = targetChars.map((char, index) => {
+        if (char === ' ') return ' '
+        const lockFrame = (index + 1) * iterations
+        if (frame >= lockFrame) {
+          return char
+        } else {
+          return CHARS[Math.floor(Math.random() * CHARS.length)]
+        }
+      }).join('')
+
+      setMorphText(morphed)
+
+      if (frame < totalFrames) {
+        morphAnimationRef.current = setTimeout(animate, speed)
+      } else {
+        setMorphText(targetText)
+      }
+    }
+
+    animate()
+  }
+
+  // Trigger morph on hover state change (only when disabled)
+  const isFormComplete = formData.name.trim() && formData.email.trim() && formData.subject.trim() && formData.message.trim()
+  const isDisabled = formState === 'submitting' || !isFormComplete
+
+  useEffect(() => {
+    if (formState === 'submitting') {
+      setMorphText('Sending...')
+      return
+    }
+
+    if (isDisabled && isButtonHovered) {
+      morphToText('Fill out form first')
+    } else {
+      morphToText('Send Message')
+    }
+  }, [isButtonHovered, isDisabled, formState])
 
   const validate = () => {
     const newErrors = {}
@@ -123,6 +180,7 @@ export default function ContactForm() {
           id="name"
           name="name"
           label="Name"
+          required
           value={formData.name}
           onChange={handleChange}
           error={errors.name}
@@ -133,6 +191,7 @@ export default function ContactForm() {
           id="email"
           name="email"
           label="Email"
+          required
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
@@ -144,6 +203,7 @@ export default function ContactForm() {
         id="subject"
         name="subject"
         label="Subject"
+        required
         value={formData.subject}
         onChange={handleChange}
         error={errors.subject}
@@ -154,6 +214,7 @@ export default function ContactForm() {
         id="message"
         name="message"
         label="Message"
+        required
         value={formData.message}
         onChange={handleChange}
         rows={4}
@@ -174,18 +235,26 @@ export default function ContactForm() {
 
       {/* Submit */}
       <div className="pt-2 flex justify-end">
-        <Button
-          type="submit"
-          variant="primary"
-          size="md"
-          disabled={formState === 'submitting'}
-          icon={formState === 'submitting'
-            ? <CircleNotch size={13} className="animate-spin" />
-            : <ArrowRight size={13} weight="regular" />
-          }
+        <div
+          onMouseEnter={() => setIsButtonHovered(true)}
+          onMouseLeave={() => setIsButtonHovered(false)}
         >
-          {formState === 'submitting' ? 'Sending...' : 'Send Message'}
-        </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            size="md"
+            disabled={isDisabled}
+            icon={formState === 'submitting'
+              ? <CircleNotch size={13} className="animate-spin" />
+              : (isDisabled && isButtonHovered)
+                ? <Asterisk size={13} weight="regular" />
+                : <ArrowRight size={13} weight="regular" />
+            }
+            hoverIcon={!isDisabled && <Smiley size={13} weight="regular" />}
+          >
+            {morphText}
+          </Button>
+        </div>
       </div>
     </form>
   )

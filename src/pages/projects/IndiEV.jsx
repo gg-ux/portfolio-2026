@@ -6,8 +6,9 @@ import {
   ProjectText,
   ProjectList,
   ProjectCallout,
-  ProjectImagePlaceholder,
+  ProjectImageFullWidth,
   ProjectImageGrid,
+  ProjectYouTube,
 } from '../../components/project'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -25,11 +26,7 @@ export default function IndiEV() {
   const { isDark } = useTheme()
 
   return (
-    <ProjectLayout
-      sections={sections}
-      prevProject={{ title: 'Mega Menu', href: '/project/tesla-mega-menu' }}
-      nextProject={{ title: 'Patient Community', href: '/project/catalia-health' }}
-    >
+    <ProjectLayout sections={sections}>
       <ProjectHero
         company="INDI EV"
         title="Electric Car IVI"
@@ -37,7 +34,8 @@ export default function IndiEV() {
         role="UX/UI Designer"
         timeline="2022"
         team="Design Lead + Me"
-        coverImage="/images/projects/indi-ev/card-indi-ev.png"
+        coverImage="/images/projects/indi-ev/content/banner.png"
+        darkBanner
       />
 
       {/* Overview */}
@@ -58,21 +56,30 @@ export default function IndiEV() {
           <ProjectText>
             40+ high-fidelity mockups of 15+ features in light/dark mode
           </ProjectText>
-          <ProjectImagePlaceholder label="IVI Mockups Overview" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/tile-mode.png"
+            alt="INDI EV IVI tile mode showing multiple feature access"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Design System">
           <ProjectText>
             Complete design system library for IVI with linked components
           </ProjectText>
-          <ProjectImagePlaceholder label="Design System Preview" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/design-system.png"
+            alt="INDI EV IVI design system with atomic components"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Demo Reel">
           <ProjectText>
             Demo reel showing 7 key flows to be shown in-vehicle at auto show
           </ProjectText>
-          <ProjectImagePlaceholder label="Demo Reel Stills" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/reel-outline.png"
+            alt="Demo reel storyboard outline for auto show presentation"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -92,7 +99,10 @@ export default function IndiEV() {
           <ProjectText>
             The digital design lead handed off his wireframes of several features and pages. I was given the creative freedom to reimagine them for the final design, though the basic framework had to remain consistent (i.e., navigation bar, AI widget panel).
           </ProjectText>
-          <ProjectImagePlaceholder label="Original Wireframes" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/wireframe-nav.png"
+            alt="Original wireframes showing navigation and My Day features"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -101,7 +111,10 @@ export default function IndiEV() {
         <ProjectText>
           Upon receiving a download of the product and the wireframes, I held some meetings with the design team about the intended look and feel of the product. As a brand, INDI EV strives to deliver a sleek, modern, and personalized experience. I wanted to create a design language that echoed that.
         </ProjectText>
-        <ProjectImagePlaceholder label="Mood Board" />
+        <ProjectImageFullWidth
+          src="/images/projects/indi-ev/content/mood-board.png"
+          alt="Mood board exploring sleek and modern design directions"
+        />
 
         <ProjectSubsection title="Hybrid Approach">
           <ProjectText>
@@ -110,7 +123,10 @@ export default function IndiEV() {
           <ProjectText>
             Due to this, I developed a "hybrid" design approach which combines elements of neumorphic and flat design. The goal was to retain enough elements of neumorphic design to give it a 3D effect without being overstated. This resulted in a more lightweight and sleek finish.
           </ProjectText>
-          <ProjectImagePlaceholder label="Neumorphic vs Hybrid Comparison" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/style-comparison.png"
+            alt="Comparison between full neumorphic and hybrid design approaches"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -143,7 +159,10 @@ export default function IndiEV() {
               'Overall too visually cluttered',
             ]}
           />
-          <ProjectImagePlaceholder label="Climate Iteration 1" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/climate-iteration1.png"
+            alt="First climate control iteration with all components visible"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Iteration 2 (Usability Testing)">
@@ -153,14 +172,24 @@ export default function IndiEV() {
           <ProjectText>
             I recruited 3 people and gave them 4 tasks, timing how long each took. The usability test revealed pain points around Fan Speed & AUTO coupling, inconsistent toggles, and an ambiguous sync icon.
           </ProjectText>
-          <ProjectImagePlaceholder label="Climate Iteration 2 + Test Results" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/climate-iteration2.png"
+            alt="Second climate iteration with improved visual grouping"
+          />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/usability-testing.png"
+            alt="Usability testing results showing pain points discovered"
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Iteration 3 (Final)">
           <ProjectText>
             For my final iteration, I reduced clutter significantly by regrouping elements onto a bottom toolbar, getting rid of toggles altogether. I defined rules for toolbar features based on number of tap engagements needed, which freed space for a larger, more usable climate control section.
           </ProjectText>
-          <ProjectImagePlaceholder label="Climate Final Design" />
+          <ProjectImageFullWidth
+            src="/images/projects/indi-ev/content/climate-iteration3.png"
+            alt="Final climate control design with bottom toolbar and cleaner layout"
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -188,7 +217,16 @@ export default function IndiEV() {
         <ProjectText>
           For each screen, I created a dark and light mode version.
         </ProjectText>
-        <ProjectImagePlaceholder label="Mockup Gallery" aspectRatio="21/9" />
+        <ProjectImageGrid
+          images={[
+            { src: '/images/projects/indi-ev/content/my-day-dark.png', alt: 'My Day welcome screen in dark mode' },
+            { src: '/images/projects/indi-ev/content/dark-cluster.png', alt: 'Cluster display in dark mode' },
+            { src: '/images/projects/indi-ev/content/radio-app.png', alt: 'Radio app interface' },
+            { src: '/images/projects/indi-ev/content/dark-app-store.png', alt: 'App store in dark mode' },
+            { src: '/images/projects/indi-ev/content/indi-explorer.png', alt: 'INDI Explorer native app' },
+          ]}
+          columns={2}
+        />
       </ProjectSection>
 
       {/* Design System */}
@@ -196,13 +234,19 @@ export default function IndiEV() {
         <ProjectText>
           While creating high-fidelity mockups, I was simultaneously building the design system. I followed an atomic design structure and divided it into the following sections: Typography, Colors, Iconography, Components, Templates, Pages.
         </ProjectText>
-        <ProjectImagePlaceholder label="Design System Overview" />
+        <ProjectImageFullWidth
+          src="/images/projects/indi-ev/content/design-system.png"
+          alt="INDI EV design system with typography, colors, and components"
+        />
 
         <ProjectSubsection title="Demo Reel">
           <ProjectText>
             Lastly, I worked with an animator to bring the designs to life in a demo reel that was displayed inside a model car during an auto show. For the film, we had to make sure that all 3 screens (cluster, driver, and passenger displays) were in sync. I provided the animator with all the screens for each flow and we determined the interaction animations as a team.
           </ProjectText>
-          <ProjectImagePlaceholder label="Demo Reel Storyboard" />
+          <ProjectYouTube
+            url="https://youtu.be/2y1L2txpWsM"
+            caption="INDI EV Demo Reel - Auto Show Presentation"
+          />
         </ProjectSubsection>
       </ProjectSection>
     </ProjectLayout>

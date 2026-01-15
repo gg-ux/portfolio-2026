@@ -83,25 +83,9 @@ export default function HeroFluidBlob() {
   const blobTranslateY = -scrollProgress * window.innerHeight * 0.3
 
   return (
-    <section
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: isDark ? '#0a0a0f' : '#FAF8F4' }}
-    >
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: isDark
-            ? `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`
-            : `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-      />
-
+    <section className="relative h-screen overflow-hidden">
       {/* Content container with blob and text */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+      <div className="relative z-10 h-full flex items-center justify-center max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Centered blob */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -136,7 +120,7 @@ export default function HeroFluidBlob() {
               <span className={`font-mono text-[14px] font-light tracking-normal uppercase ${
                 isDark ? 'text-white/80 drop-shadow' : 'text-gray-900'
               }`}>
-                <ScrambleText trigger="mount" iterations={3} speed={25}>
+                <ScrambleText trigger="mount" iterations={2} speed={8}>
                   UX/UI Designer, MHCI+D
                 </ScrambleText>
               </span>
@@ -145,12 +129,12 @@ export default function HeroFluidBlob() {
                 isDark ? 'text-white/80 drop-shadow' : 'text-gray-900'
               }`}>
                 <span className="sm:hidden">
-                  <ScrambleText trigger="mount" iterations={3} speed={25}>
+                  <ScrambleText trigger="mount" iterations={2} speed={8}>
                     Based in LA
                   </ScrambleText>
                 </span>
                 <span className="hidden sm:inline">
-                  <ScrambleText trigger="mount" iterations={3} speed={25}>
+                  <ScrambleText trigger="mount" iterations={2} speed={8}>
                     Based in Los Angeles
                   </ScrambleText>
                 </span>

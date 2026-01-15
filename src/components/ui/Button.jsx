@@ -48,20 +48,35 @@ export function Button({
   type = 'button',
   disabled = false,
   icon,
+  hoverIcon,
   iconPosition = 'right',
 }) {
   const { isDark } = useTheme()
   const variants = getVariants(isDark)
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`
 
+  // Icon with optional hover swap
+  const iconElement = icon && (
+    <span className={`relative ${iconPosition === 'left' ? 'mr-2' : 'ml-2'}`}>
+      <span className={`inline-flex transition-all duration-300 ${hoverIcon ? 'group-hover:opacity-0 group-hover:scale-75' : ''}`}>
+        {icon}
+      </span>
+      {hoverIcon && (
+        <span className="absolute inset-0 inline-flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+          {hoverIcon}
+        </span>
+      )}
+    </span>
+  )
+
   const content = (
     <span
-      className="inline-flex items-center group-hover:scale-[1.05]"
+      className={`inline-flex items-center ${disabled ? '' : 'group-hover:scale-[1.05]'}`}
       style={{ transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
-      {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
+      {iconPosition === 'left' && iconElement}
       {children}
-      {icon && iconPosition === 'right' && <span className="ml-2">{icon}</span>}
+      {iconPosition === 'right' && iconElement}
     </span>
   )
 
@@ -86,6 +101,7 @@ export function Button({
       onClick={onClick}
       disabled={disabled}
       className={`group ${classes}`}
+      style={disabled ? { cursor: 'not-allowed' } : undefined}
     >
       {content}
     </button>

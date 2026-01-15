@@ -46,7 +46,7 @@ export default function PatternsPage() {
     <DSLayout title="Patterns" sections={sections}>
       {/* Page Layout */}
       <DSSection id="page-layout" title="Page Layout">
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Page Types</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Page Types</h4>
         <div className="space-y-4 mb-8">
           {pageTypes.map((page) => (
             <div key={page.name} className={`p-6 border ${borderClass} rounded-xl`}>
@@ -75,60 +75,92 @@ export default function PatternsPage() {
         </div>
 
         {/* Navigation Behavior */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Navigation Behavior</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Navigation Behavior</h4>
         <div className={`${bgSubtle} p-6 rounded-xl`}>
-          <ul className={`space-y-3 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-            <li className="font-satoshi text-sm">• Transparent at top of page</li>
-            <li className="font-satoshi text-sm">• Hidden on scroll down (after 100px threshold)</li>
-            <li className="font-satoshi text-sm">• Revealed with blur backdrop on scroll up</li>
-            <li className="font-satoshi text-sm">• Consistent behavior across all pages</li>
-          </ul>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              'Transparent at top of page',
+              'Hidden on scroll down (after 100px threshold)',
+              'Revealed with blur backdrop on scroll up',
+              'Consistent behavior across all pages',
+            ].map((item, i) => (
+              <div key={i} className="py-3 first:pt-0 last:pb-0">
+                <span className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </DSSection>
 
       {/* Project Pages */}
       <DSSection id="project-pages" title="Project Pages">
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Structure</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Structure</h4>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-6">
             {/* Hero Section */}
             <div className={`p-4 rounded-lg ${bgSubtle}`}>
-              <Caption className="block mb-2">Hero Section</Caption>
-              <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
-                <li className="font-satoshi text-sm">• Cover image at top (1440px)</li>
-                <li className="font-satoshi text-sm">• Company label with decode effect</li>
-                <li className="font-satoshi text-sm">• Title (H1 style, Satoshi font)</li>
-                <li className="font-satoshi text-sm">• Description paragraph</li>
-                <li className="font-satoshi text-sm">• Metadata grid: Role, Timeline, Team, Impact</li>
-              </ul>
+              <Caption className="block mb-3">Hero Section</Caption>
+              <div className={`divide-y ${isDark ? 'divide-white/[0.04]' : 'divide-black/[0.04]'}`}>
+                {[
+                  'Cover image at top (1440px)',
+                  'Company label with decode effect',
+                  'Title (H1 style, Satoshi font)',
+                  'Description paragraph',
+                  'Metadata grid: Role, Timeline, Team, Impact',
+                ].map((item, i) => (
+                  <div key={i} className="py-2 first:pt-0 last:pb-0">
+                    <span className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Content Sections */}
             <div className={`p-4 rounded-lg ${bgSubtle}`}>
-              <Caption className="block mb-2">Content Sections</Caption>
-              <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
-                <li className="font-satoshi text-sm">• Scroll-reveal animation on enter</li>
-                <li className="font-satoshi text-sm">• Section title (Satoshi, text-xl/2xl)</li>
-                <li className="font-satoshi text-sm">• Body text (Satoshi, text-base/lg)</li>
-                <li className="font-satoshi text-sm">• Optional subsections with smaller titles</li>
-              </ul>
+              <Caption className="block mb-3">Content Sections</Caption>
+              <div className={`divide-y ${isDark ? 'divide-white/[0.04]' : 'divide-black/[0.04]'}`}>
+                {[
+                  'Scroll-reveal animation on enter',
+                  'Section title (Satoshi, text-xl/2xl)',
+                  'Body text (Satoshi, text-base/lg)',
+                  'Optional subsections with smaller titles',
+                ].map((item, i) => (
+                  <div key={i} className="py-2 first:pt-0 last:pb-0">
+                    <span className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Side Navigation */}
             <div className={`p-4 rounded-lg ${bgSubtle}`}>
-              <Caption className="block mb-2">Side Navigation</Caption>
-              <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
-                <li className="font-satoshi text-sm">• Sticky positioned (top: 128px)</li>
-                <li className="font-satoshi text-sm">• IntersectionObserver tracks active section</li>
-                <li className="font-satoshi text-sm">• Smooth scroll on click (100px offset)</li>
-                <li className="font-satoshi text-sm">• Desktop only (hidden lg:block)</li>
-              </ul>
+              <Caption className="block mb-3">Side Navigation</Caption>
+              <div className={`divide-y ${isDark ? 'divide-white/[0.04]' : 'divide-black/[0.04]'}`}>
+                {[
+                  'Sticky positioned (top: 128px)',
+                  'IntersectionObserver tracks active section',
+                  'Smooth scroll on click (100px offset)',
+                  'Desktop only (hidden lg:block)',
+                ].map((item, i) => (
+                  <div key={i} className="py-2 first:pt-0 last:pb-0">
+                    <span className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Content Width */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Content Width</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Content Width</h4>
         <div className={`${bgSubtle} p-6 rounded-xl mb-8`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -153,7 +185,7 @@ export default function PatternsPage() {
         </div>
 
         {/* Components */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Available Components</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Available Components</h4>
         <div className={`p-6 border ${borderClass} rounded-xl`}>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {['ProjectHero', 'ProjectSection', 'ProjectSubsection', 'ProjectText', 'ProjectList', 'ProjectCallout', 'ProjectQuote', 'ProjectImage'].map((component) => (

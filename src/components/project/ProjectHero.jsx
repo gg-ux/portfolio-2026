@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../../context/ThemeContext'
-import { Caption } from '../Typography'
+import { useBanner } from '../../context/BannerContext'
+import { H2, Body, Caption } from '../Typography'
 
 /**
  * ProjectHero - Header section for project introduction
@@ -15,17 +16,37 @@ export default function ProjectHero({
   team,
   impact,
   coverImage,
-  coverImageAlt = 'Project cover'
+  coverImageAlt = 'Project cover',
+  coverPosition = 'center 30%',
+  lightBanner = false,
+  darkBanner = false,
+  noLightFilter = false,
+  darkOverlay = false,
 }) {
   const { isDark } = useTheme()
+  const { setLightBanner, setDarkBanner, setBannerHeight: setContextBannerHeight } = useBanner()
   const [scrollY, setScrollY] = useState(0)
   const bannerRef = useRef(null)
   const [bannerHeight, setBannerHeight] = useState(0)
 
+  // Set light banner mode in context
+  useEffect(() => {
+    setLightBanner(lightBanner)
+    return () => setLightBanner(false)
+  }, [lightBanner, setLightBanner])
+
+  // Set dark banner mode in context (for light nav text over dark banners in light mode)
+  useEffect(() => {
+    setDarkBanner(darkBanner)
+    return () => setDarkBanner(false)
+  }, [darkBanner, setDarkBanner])
+
   useEffect(() => {
     const updateBannerHeight = () => {
       if (bannerRef.current) {
-        setBannerHeight(bannerRef.current.offsetHeight)
+        const height = bannerRef.current.offsetHeight
+        setBannerHeight(height)
+        setContextBannerHeight(height + 72) // Include nav height offset
       }
     }
 
@@ -40,8 +61,9 @@ export default function ProjectHero({
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateBannerHeight)
+      setContextBannerHeight(0)
     }
-  }, [])
+  }, [setContextBannerHeight])
 
   // Calculate parallax and scale based on scroll
   const scrollProgress = Math.min(scrollY / (bannerHeight || 1), 1)
@@ -56,12 +78,14 @@ export default function ProjectHero({
   ].filter(Boolean)
 
   return (
-    <header className="pt-[72px]">
-      {/* Cover Image - Full bleed with parallax and scale */}
+    <header>
+      {/* Cover Image - Full bleed with parallax and scale, extends behind nav */}
       {coverImage && (
         <div
           ref={bannerRef}
-          className="relative w-full aspect-[21/9] mb-12 md:mb-16 overflow-hidden"
+          className={`relative w-full aspect-[4/3] md:aspect-[21/9] mb-12 md:mb-16 overflow-hidden ${
+            isDark ? 'bg-[#1a1a1a]' : 'bg-[#f5f5f5]'
+          }`}
         >
           <img
             src={coverImage}
@@ -70,8 +94,19 @@ export default function ProjectHero({
             style={{
               transform: `translateY(${parallaxY}px) scale(${scale})`,
               transformOrigin: 'center top',
+              objectPosition: coverPosition,
+              filter: isDark || noLightFilter ? 'none' : 'sepia(0.05) saturate(1.05)',
             }}
           />
+          {/* Dark gradient overlay for nav visibility */}
+          {darkOverlay && (
+            <div
+              className="absolute inset-x-0 top-0 h-32 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%)',
+              }}
+            />
+          )}
         </div>
       )}
 
@@ -83,32 +118,24 @@ export default function ProjectHero({
             {company}
           </Caption>
         </div>
-        <h1
-          className={`font-satoshi text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.15] mb-6 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}
-        >
+        <H2 as="h1" className="leading-[1.15] mb-6">
           {title}
-        </h1>
-        <p
-          className={`font-satoshi text-lg leading-relaxed ${
-            isDark ? 'text-white/70' : 'text-gray-600'
-          }`}
-        >
+        </H2>
+        <Body>
           {description}
-        </p>
+        </Body>
 
         {/* Metadata Grid */}
         <div className={`mt-10 pt-8 border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'}`}>
           <div className="grid grid-cols-2 gap-6">
             {metadata.map(({ label, value }) => (
               <div key={label}>
-                <Caption className={isDark ? 'text-white/40' : 'text-black/40'}>
+                <Caption className="theme-caption">
                   {label}
                 </Caption>
-                <p className={`font-satoshi text-sm mt-2 ${isDark ? 'text-white/80' : 'text-gray-700'}`}>
+                <Body size="sm" className="mt-1 mb-0">
                   {value}
-                </p>
+                </Body>
               </div>
             ))}
           </div>

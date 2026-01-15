@@ -23,47 +23,47 @@ import ScrambleText from './ScrambleText'
  */
 
 // Header 1
-export function H1({ children, className = '', style }) {
+export function H1({ children, className = '', style, as: Tag = 'h1' }) {
   return (
-    <h1 className={`font-silk text-8xl sm:text-9xl md:text-8xl lg:text-8xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`font-silk text-8xl sm:text-9xl md:text-8xl lg:text-8xl tracking-tight theme-heading ${className}`} style={style}>
       {children}
-    </h1>
+    </Tag>
   )
 }
 
 // Header 2
-export function H2({ children, className = '', style }) {
+export function H2({ children, className = '', style, as: Tag = 'h2' }) {
   return (
-    <h2 className={`font-satoshi text-4xl md:text-5xl lg:text-5xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`font-satoshi text-4xl md:text-5xl lg:text-5xl tracking-tight theme-heading ${className}`} style={style}>
       {children}
-    </h2>
+    </Tag>
   )
 }
 
 // Header 3
-export function H3({ children, className = '', style }) {
+export function H3({ children, className = '', style, as: Tag = 'h3' }) {
   return (
-    <h3 className={`font-satoshi text-2xl sm:text-3xl md:text-4xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`font-satoshi text-2xl sm:text-3xl md:text-4xl tracking-tight theme-heading ${className}`} style={style}>
       {children}
-    </h3>
+    </Tag>
   )
 }
 
 // Header 4
-export function H4({ children, className = '', style }) {
+export function H4({ children, className = '', style, as: Tag = 'h4' }) {
   return (
-    <h4 className={`font-satoshi text-xl md:text-2xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`font-satoshi text-xl tracking-normal theme-heading-h4 ${className}`} style={style}>
       {children}
-    </h4>
+    </Tag>
   )
 }
 
 // Header 5
-export function H5({ children, className = '', style }) {
+export function H5({ children, className = '', style, as: Tag = 'h5' }) {
   return (
-    <h5 className={`font-satoshi text-lg tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`font-satoshi text-lg tracking-tight theme-heading ${className}`} style={style}>
       {children}
-    </h5>
+    </Tag>
   )
 }
 

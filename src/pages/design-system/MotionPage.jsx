@@ -44,7 +44,7 @@ export default function MotionPage() {
       {/* Animations */}
       <DSSection id="animations" title="Animations">
         {/* Decode Effect */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Decode Effect</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Decode Effect</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-6">
             <div>
@@ -72,7 +72,7 @@ export default function MotionPage() {
         </div>
 
         {/* Scroll Reveal */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Scroll Reveal</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Scroll Reveal</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-4">
             <Body className={isDark ? 'text-white/70' : 'text-gray-600'}>
@@ -88,7 +88,7 @@ export default function MotionPage() {
         </div>
 
         {/* Exit Animation */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Exit Animation</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Exit Animation</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-4">
             <Body className={isDark ? 'text-white/70' : 'text-gray-600'}>
@@ -104,7 +104,7 @@ export default function MotionPage() {
         </div>
 
         {/* Fluid In/Out */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Fluid In / Out</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Fluid In / Out</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Caption className="mb-6 block">Primary entrance/exit animation pair with blur and skew</Caption>
 
@@ -167,7 +167,7 @@ export default function MotionPage() {
         </div>
 
         {/* Entrance Animations */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Entrance Animations</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Entrance Animations</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Caption className="mb-6 block">Hero sequence with directional entrances</Caption>
 
@@ -238,7 +238,7 @@ export default function MotionPage() {
         </div>
 
         {/* Specs */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Timing Guidelines</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Timing Guidelines</h4>
         <div className={`${bgSubtle} p-6 rounded-xl`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -272,7 +272,7 @@ export default function MotionPage() {
       {/* Background Effects */}
       <DSSection id="background-effects" title="Background Effects">
         {/* Aurora Blob */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Aurora Blob</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Aurora Blob</h4>
         <div className={`relative border ${borderClass} rounded-xl mb-8 overflow-hidden`} style={{ height: '320px' }}>
           <Solstice static scale={0.6} />
           <div className="absolute inset-0 flex items-end p-6">
@@ -287,18 +287,26 @@ export default function MotionPage() {
 
         <div className={`${bgSubtle} p-6 rounded-xl mb-8`}>
           <h5 className={`font-satoshi font-medium mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Features</h5>
-          <ul className={`space-y-2 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-            <li className="font-satoshi text-sm">• 6 layered gradients (teal, lavender, orange)</li>
-            <li className="font-satoshi text-sm">• Magnetic drift toward cursor</li>
-            <li className="font-satoshi text-sm">• Stretch deformation on interaction</li>
-            <li className="font-satoshi text-sm">• Ripple effects on mouse enter</li>
-            <li className="font-satoshi text-sm">• Scroll-based parallax and fade</li>
-            <li className="font-satoshi text-sm">• Grain texture overlay</li>
-          </ul>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              '6 layered gradients (teal, lavender, orange)',
+              'Magnetic drift toward cursor',
+              'Stretch deformation on interaction',
+              'Ripple effects on mouse enter',
+              'Scroll-based parallax and fade',
+              'Grain texture overlay',
+            ].map((item, i) => (
+              <div key={i} className="py-3 first:pt-0 last:pb-0">
+                <span className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Aura Beams */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Aura Beams</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Aura Beams</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Body className={isDark ? 'text-white/70' : 'text-gray-600'}>
             Cursor-reactive glowing grid lines that emanate from the mouse position. Uses the brand color palette (lavender, teal, orange) with animated pulses.
@@ -314,7 +322,7 @@ export default function MotionPage() {
         </div>
 
         {/* Grid Background */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Grid Background</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Grid Background</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Body className={isDark ? 'text-white/70' : 'text-gray-600'}>
             Subtle line grid that fades in during scroll on the home page only. Creates visual rhythm during the hero-to-content transition.
@@ -330,7 +338,7 @@ export default function MotionPage() {
         </div>
 
         {/* Global Grain */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Global Grain Overlay</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Global Grain Overlay</h4>
         <div className={`p-8 border ${borderClass} rounded-xl`}>
           <Body className={isDark ? 'text-white/70' : 'text-gray-600'}>
             Full-screen SVG noise filter applied to the entire page for a subtle textured feel.

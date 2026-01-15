@@ -10,6 +10,7 @@ const sections = [
   { id: 'cards', label: 'Cards' },
   { id: 'buttons', label: 'Buttons' },
   { id: 'dividers', label: 'Dividers' },
+  { id: 'charts', label: 'Charts' },
 ]
 
 export default function ComponentsPage() {
@@ -24,7 +25,7 @@ export default function ComponentsPage() {
     <DSLayout title="Components" sections={sections}>
       {/* Cards */}
       <DSSection id="cards" title="Cards">
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Frosted Card</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Frosted Card</h4>
         <div className="mb-8">
           {/* Live card demo */}
           <FrostedCard className="h-[280px] max-w-[300px] cursor-pointer">
@@ -60,7 +61,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Specs */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Specifications</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Specifications</h4>
         <div className={`${bgSubtle} p-6 rounded-xl mb-8`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -102,7 +103,7 @@ export default function ComponentsPage() {
           </div>
         </div>
 
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Icon Morph Effect</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Icon Morph Effect</h4>
         <div className={`${bgSubtle} p-6 rounded-xl`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -136,7 +137,7 @@ export default function ComponentsPage() {
       {/* Buttons */}
       <DSSection id="buttons" title="Buttons">
         {/* Variants */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Variants</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Variants</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex flex-wrap items-center gap-6">
             <div className="text-center">
@@ -155,7 +156,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Sizes */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Sizes</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Sizes</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex flex-wrap items-center gap-6">
             <div className="text-center">
@@ -174,7 +175,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Size Usage Guidelines */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>When to Use Each Size</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">When to Use Each Size</h4>
         <div className={`${bgSubtle} p-6 rounded-xl mb-8`}>
           <div className="space-y-6">
             <div>
@@ -210,7 +211,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* With Icons */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>With Icons</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">With Icons</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex flex-wrap items-center gap-6">
             <div className="text-center">
@@ -229,7 +230,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Specs */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Specifications</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Specifications</h4>
         <div className={`${bgSubtle} p-6 rounded-xl`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -262,7 +263,7 @@ export default function ComponentsPage() {
 
       {/* Dividers */}
       <DSSection id="dividers" title="Dividers">
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Horizontal</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Horizontal</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-8">
             <div>
@@ -276,7 +277,7 @@ export default function ComponentsPage() {
           </div>
         </div>
 
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Vertical</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Vertical</h4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex items-center justify-center gap-8 h-24">
             <span className={`font-satoshi ${isDark ? 'text-white/60' : 'text-gray-600'}`}>Left</span>
@@ -286,7 +287,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Specs */}
-        <h4 className={`font-satoshi text-lg mb-6 ${textHeadingClass}`}>Specifications</h4>
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Specifications</h4>
         <div className={`${bgSubtle} p-6 rounded-xl`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -301,6 +302,66 @@ export default function ComponentsPage() {
                 Theme-aware via divider-color class
               </p>
             </div>
+          </div>
+        </div>
+      </DSSection>
+
+      {/* Charts */}
+      <DSSection id="charts" title="Charts">
+        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+          Charts follow a minimal, premium aesthetic with slim elements and subtle grid treatments.
+        </Body>
+
+        {/* Bars */}
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Bar Style</h4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <Caption className="block mb-3">Standard Bar (4px height)</Caption>
+          <div className={`h-8 relative ${bgSubtle} rounded-lg`}>
+            <div
+              className="absolute top-1/2 -translate-y-1/2 left-4 h-1 rounded-full"
+              style={{ width: '60%', backgroundColor: isDark ? '#A78BFA' : '#8B5CF6' }}
+            />
+          </div>
+          <p className={`font-mono text-xs mt-2 ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
+            h-1 (4px) • rounded-full • scaleX animation
+          </p>
+        </div>
+
+        {/* Grid Lines */}
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Grid Lines</h4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <Caption className="block mb-3">Dashed Vertical Lines</Caption>
+          <div className={`h-24 relative ${bgSubtle} rounded-lg flex`}>
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="flex-1 border-l border-dashed"
+                style={{ borderColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)' }}
+              />
+            ))}
+          </div>
+          <p className={`font-mono text-xs mt-2 ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
+            border-dashed • 15% opacity dark / 15% light
+          </p>
+        </div>
+
+        {/* Guidelines */}
+        <h4 className="font-satoshi text-lg mb-6 theme-heading-h4">Guidelines</h4>
+        <div className={`${bgSubtle} p-6 rounded-xl`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              'Use 4px (h-1) height for all chart bars',
+              'Always use rounded-full for pill-shaped ends',
+              'Animate with transform: scaleX for entry',
+              'Use staggered delays for multiple bars',
+              'Keep grid lines subtle (15% opacity max)',
+            ].map((item, i) => (
+              <div key={i} className="py-3 first:pt-0 last:pb-0">
+                <span className={`font-satoshi text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  {item}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </DSSection>

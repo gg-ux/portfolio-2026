@@ -36,27 +36,18 @@ export default function GridBackground() {
           newOpacity = 0
         }
       } else {
-        // Home page: Grid fades IN at 50% hero scroll, fades OUT before projects
+        // Home page: Grid visible through hero and Crafting blurb, fades out before projects
         newTranslateY = 0
 
-        // Easing function for smooth transitions
         const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
 
-        // Fade in: starts at 0, fully visible by 50% of hero (0.5vh)
-        const fadeInEnd = vh * 0.5
-        // Fade out: before projects appear
-        const fadeOutStart = vh * 1.0
-        const fadeOutEnd = vh * 1.5
+        // Fade out after Crafting blurb (around 1.3-1.6vh)
+        const fadeOutStart = vh * 1.3
+        const fadeOutEnd = vh * 1.6
 
-        if (scrollY < fadeInEnd) {
-          // Fading in (eased)
-          const progress = scrollY / fadeInEnd
-          newOpacity = easeOutCubic(progress)
-        } else if (scrollY < fadeOutStart) {
-          // Fully visible
+        if (scrollY < fadeOutStart) {
           newOpacity = 1
         } else if (scrollY < fadeOutEnd) {
-          // Fading out (eased)
           const progress = (scrollY - fadeOutStart) / (fadeOutEnd - fadeOutStart)
           newOpacity = 1 - easeOutCubic(progress)
         } else {
@@ -91,10 +82,10 @@ export default function GridBackground() {
       className="fixed inset-0 pointer-events-none z-0"
       style={{
         backgroundImage: isDark
-          ? `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-             linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`
-          : `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-             linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
+          ? `linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)`
+          : `linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)`,
         backgroundSize: '60px 60px',
         opacity: scrollEffects.opacity,
       }}

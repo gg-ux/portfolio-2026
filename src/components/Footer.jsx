@@ -20,8 +20,14 @@ export default function Footer() {
           }`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            {/* Left: Header */}
-            <div>
+            {/* Left: Header - slides in from left */}
+            <div
+              className={`transition-all duration-1000 ease-out ${
+                ctaVisible
+                  ? 'opacity-100 translate-x-0 blur-0'
+                  : 'opacity-0 -translate-x-8 blur-[8px]'
+              }`}
+            >
               <H2 className="mb-6">Have a project in mind?</H2>
               <Body size="lg" className={`mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 I'm always open to discussing new opportunities or creative ideas. Fill out the form and I'll get back to you soon.
@@ -43,8 +49,14 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Right: Form */}
-            <div>
+            {/* Right: Form - slides in from right */}
+            <div
+              className={`transition-all duration-1000 ease-out delay-150 ${
+                ctaVisible
+                  ? 'opacity-100 translate-x-0 blur-0'
+                  : 'opacity-0 translate-x-8 blur-[8px]'
+              }`}
+            >
               <ContactForm />
             </div>
           </div>
