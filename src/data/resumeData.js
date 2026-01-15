@@ -59,13 +59,10 @@ export const experience = [
     bullets: [
       'Created error-detection tool that automatically flagged background check inconsistencies, streamlining QA review',
       'Enhanced background check experience with improved information architecture and streamlined ID verification',
-      'Designed key website flows for Pricing, Account Settings, and Project Dashboard',
-      'Created marketing materials for social media ads and flyers',
     ],
     printBullets: [
       'Created error-detection tool that automatically flagged background check inconsistencies, streamlining QA review',
       'Enhanced background check experience with improved IA and streamlined ID verification',
-      'Designed key website flows for Pricing, Account Settings, and Project Dashboard',
     ],
   },
   {
@@ -75,9 +72,10 @@ export const experience = [
     title: 'UX/UI Designer',
     dates: 'Nov 2019 – Jan 2021',
     bullets: [
-      'Collaborated with founder to enhance collaborative cloud-based audio arranging and note-taking tool',
+      'Collaborated with founder to enhance collaborative cloud-based audio arranging and note-taking web app',
       'Iteratively designed and refined user experiences through BETA user feedback',
       'Designed key website flows for Pricing, Account Settings, and Project Dashboard',
+      'Created marketing materials for social media ads and flyers',
     ],
     showInPrint: true, // Show in print version
   },

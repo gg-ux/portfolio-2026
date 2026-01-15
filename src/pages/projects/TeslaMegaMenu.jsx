@@ -8,7 +8,9 @@ import {
   ProjectCallout,
   ProjectImageFullWidth,
   ProjectYouTube,
+  ProcessKanban,
 } from '../../components/project'
+import { MagnifyingGlass, ArrowsOut, Globe } from '@phosphor-icons/react'
 import { useTheme } from '../../context/ThemeContext'
 
 const sections = [
@@ -50,54 +52,79 @@ export default function TeslaMegaMenu() {
 
       {/* Goals */}
       <ProjectSection id="goals" title="Goals">
-        <ProjectList
-          items={[
-            'Improve discoverability of key content with new IA',
-            'Make navigation scalable as products and offerings increase',
-            'Ensure adaptability to evolving needs of the business and different locales',
-          ]}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { title: 'Discoverability', description: 'Improve discoverability of key content with new information architecture', icon: MagnifyingGlass },
+            { title: 'Scalability', description: 'Make navigation scalable as products and offerings increase over time', icon: ArrowsOut },
+            { title: 'Adaptability', description: 'Ensure adaptability to evolving needs of the business and different locales', icon: Globe },
+          ].map((goal, index) => {
+            const Icon = goal.icon
+            return (
+              <div
+                key={index}
+                className={`relative rounded-2xl p-6 border backdrop-blur-md ${
+                  isDark
+                    ? 'border-white/[0.08] bg-white/[0.015]'
+                    : 'border-black/[0.08] bg-white/20'
+                }`}
+              >
+                <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
+                  <Icon size={24} weight="light" />
+                </div>
+                <h4 className={`text-xl mb-3 theme-heading`} style={{ fontWeight: 600 }}>
+                  {goal.title}
+                </h4>
+                <p className={`font-satoshi text-[15px] leading-relaxed ${
+                  isDark ? 'text-white/60' : 'text-gray-600'
+                }`}>
+                  {goal.description}
+                </p>
+              </div>
+            )
+          })}
+        </div>
       </ProjectSection>
 
       {/* Process */}
       <ProjectSection id="process" title="Process">
-        <ProjectSubsection title="Research & Planning">
-          <ProjectList
-            ordered
-            items={[
-              'Identify Pain Points: Document key inefficiencies in the existing information architecture to justify a redesign',
-              'Document Current IA: Collaborate with content management and product teams to map pages for categorization',
-              'Perform Card Sorting: Recruit participants for card sorting to gain insight into intuitive naming and groupings',
-              'Propose IA Concepts: Create IA proposals based on research and business needs, refining them with feedback',
-              'Get Leadership Buy-In: Present the final IA proposal to secure leadership approval',
-            ]}
-          />
-        </ProjectSubsection>
-
-        <ProjectSubsection title="Design & Development">
-          <ProjectList
-            ordered
-            items={[
-              'Conduct Competitor Audit: Research and compile menu designs from other companies for inspiration',
-              'Create Design Concepts: Create several design concepts',
-              'Iterate on Designs: Refine designs iteratively based on feedback from leadership, peers, and user testing',
-              'Define MVP: Work with the product manager to define MVP requirements and break the project into phases',
-              'Get Approvals: Present a final deck to leadership, outlining business benefits, development phases, and timeline',
-              'Define Interaction Rules: Provide engineers with detailed guidelines on animations, interactivity and responsive behavior',
-            ]}
-          />
-        </ProjectSubsection>
-
-        <ProjectSubsection title="Implementation & Launch">
-          <ProjectList
-            ordered
-            items={[
-              'Support Engineering: Support the engineering team with assets and resources',
-              'Conduct Design QA: Conduct design QA during staging, creating and supplementing Jira tickets',
-              'Launch It!',
-            ]}
-          />
-        </ProjectSubsection>
+        <ProcessKanban
+          columns={[
+            {
+              title: 'Research & Discovery',
+              items: [
+                { title: 'Identify Pain Points', description: 'Document key inefficiencies in the existing information architecture' },
+                { title: 'Document Current IA', description: 'Collaborate with content management and product teams to map pages for categorization' },
+                { title: 'Perform Card Sorting', description: 'Recruit participants for card sorting to gain insight into intuitive naming and groupings' },
+                { title: 'Conduct Competitor Audit', description: 'Research and compile menu designs from other companies for inspiration' },
+              ],
+            },
+            {
+              title: 'Strategy & Approval',
+              items: [
+                { title: 'Propose IA Concepts', description: 'Create IA proposals based on research and business needs, refining them with feedback' },
+                { title: 'Get Leadership Buy-In', description: 'Present the final IA proposal to secure leadership approval' },
+              ],
+            },
+            {
+              title: 'Design & Iteration',
+              items: [
+                { title: 'Create Design Concepts', description: 'Explore multiple design directions with varying approaches' },
+                { title: 'Iterate on Designs', description: 'Refine designs based on feedback from leadership, peers, and user testing' },
+                { title: 'Define MVP', description: 'Work with the product manager to define MVP requirements and break the project into phases' },
+                { title: 'Define Interaction Rules', description: 'Provide engineers with detailed guidelines on animations, interactivity and responsive behavior' },
+              ],
+            },
+            {
+              title: 'Implementation',
+              items: [
+                { title: 'Final Sign-Off', description: 'Present a final deck to leadership, outlining business benefits, development phases, and timeline' },
+                { title: 'Support Engineering', description: 'Support the engineering team with assets and resources for implementation' },
+                { title: 'Conduct Design QA', description: 'Review staging builds, filing and updating Jira tickets as needed' },
+                { title: 'Launch It! 🚀', description: 'Ship the new mega menu to production and celebrate!' },
+              ],
+            },
+          ]}
+        />
       </ProjectSection>
 
       {/* Old IA */}

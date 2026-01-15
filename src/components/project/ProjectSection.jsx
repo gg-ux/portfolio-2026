@@ -81,10 +81,10 @@ export function ProjectList({ items, ordered = false, size = 'lg', className = '
       <ol className={`mb-6 space-y-4 ml-4 ${className}`}>
         {items.map((item, index) => (
           <li key={index} className="flex gap-2">
-            <span className={`font-satoshi ${sizeClasses[size]} leading-relaxed theme-body flex-shrink-0`}>
+            <span className={`font-satoshi ${sizeClasses[size]} leading-snug theme-body flex-shrink-0`}>
               {index + 1}.
             </span>
-            <span className={`font-satoshi ${sizeClasses[size]} leading-relaxed theme-body`}>
+            <span className={`font-satoshi ${sizeClasses[size]} leading-snug theme-body`}>
               {item}
             </span>
           </li>
@@ -94,7 +94,7 @@ export function ProjectList({ items, ordered = false, size = 'lg', className = '
   }
 
   return (
-    <ul className={`mb-6 space-y-2 ml-4 ${className}`}>
+    <ul className={`mb-6 space-y-3 ml-4 ${className}`}>
       {items.map((item, index) => (
         <li key={index} className="flex gap-3">
           <span
@@ -106,7 +106,7 @@ export function ProjectList({ items, ordered = false, size = 'lg', className = '
               <circle cx="2.5" cy="2.5" r="2.5" />
             </svg>
           </span>
-          <span className={`font-satoshi ${sizeClasses[size]} leading-relaxed theme-body`}>
+          <span className={`font-satoshi ${sizeClasses[size]} leading-snug theme-body`}>
             {item}
           </span>
         </li>

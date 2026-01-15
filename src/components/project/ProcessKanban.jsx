@@ -19,14 +19,18 @@ export default function ProcessKanban({ columns }) {
     '#22C55E', // green - Implementation
   ]
 
-  const scrollCardWidth = 280 + 16 // card width + gap
+  const cardWidth = 280
+  const cardGap = 16 // ml-4 on cards after first
+  const spacerWidth = 24 // w-6 spacer
 
   const handleScroll = (e) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.target
     const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10
+    // Account for spacer in scroll calculation
+    const adjustedScroll = Math.max(0, scrollLeft - spacerWidth)
     const newIndex = isAtEnd
       ? columns.length - 1
-      : Math.round(scrollLeft / scrollCardWidth)
+      : Math.round(adjustedScroll / (cardWidth + cardGap))
 
     if (newIndex !== activeIndex && newIndex >= 0 && newIndex < columns.length) {
       setActiveIndex(newIndex)
@@ -36,8 +40,13 @@ export default function ProcessKanban({ columns }) {
   const scrollToIndex = (index) => {
     setActiveIndex(index)
     if (carouselRef.current) {
+      // First card: scroll to 0 to show spacer (aligned with title)
+      // Other cards: scroll past the spacer for edge-to-edge
+      const targetScroll = index === 0
+        ? 0
+        : spacerWidth + (index * cardWidth) + (index * cardGap)
       carouselRef.current.scrollTo({
-        left: index * scrollCardWidth,
+        left: targetScroll,
         behavior: 'smooth'
       })
     }
@@ -78,14 +87,20 @@ export default function ProcessKanban({ columns }) {
         ))}
       </div>
 
-      {/* Mobile/Tablet: Horizontal scroll - full bleed right */}
+      {/* Mobile/Tablet: Horizontal scroll - right side bleed only */}
       <div
         ref={carouselRef}
-        className="md:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mr-6 pr-6"
+        className="md:hidden flex overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mr-6"
         onScroll={handleScroll}
       >
+        {/* Left spacer - creates margin for first card, scrolls away */}
+        <div className="flex-shrink-0 snap-start w-6" aria-hidden="true" />
         {columns.map((column, colIndex) => (
-          <div key={column.title} className="flex-shrink-0 snap-start" style={{ width: '280px' }}>
+          <div
+            key={column.title}
+            className={`flex-shrink-0 snap-start ${colIndex > 0 ? 'ml-4' : ''}`}
+            style={{ width: '280px' }}
+          >
             <KanbanColumn
               title={column.title}
               items={column.items}
@@ -94,6 +109,8 @@ export default function ProcessKanban({ columns }) {
             />
           </div>
         ))}
+        {/* Right spacer */}
+        <div className="flex-shrink-0 w-6" aria-hidden="true" />
       </div>
     </div>
   )

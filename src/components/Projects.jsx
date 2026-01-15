@@ -476,7 +476,7 @@ export default function Projects() {
       <div ref={headerRef} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 mb-12">
         <div className="flex items-end justify-between">
           <H2 className={`opacity-0 ${headerVisible ? 'animate-fluid-in' : ''}`}>
-            Selected Works
+            Featured Projects
           </H2>
 
           {/* Arrow buttons */}

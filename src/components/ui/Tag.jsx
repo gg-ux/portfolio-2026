@@ -18,7 +18,7 @@ import { useTheme } from '../../context/ThemeContext'
 export function Tag({ children, color, muted = false, className = '' }) {
   const { isDark } = useTheme()
 
-  const baseStyles = 'font-mono text-[11px] tracking-wide uppercase px-2 py-1 rounded-md'
+  const baseStyles = 'font-mono font-light text-[11px] tracking-wide uppercase px-2 py-1 rounded-md'
 
   if (color) {
     return (

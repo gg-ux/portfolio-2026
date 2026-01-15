@@ -428,7 +428,7 @@ export default function SplitScreenProjects() {
         const fillProgress = Math.max(0, Math.min(1, (fillStart - rect.top) / (fillStart - fillEnd)))
         setMobileSoulfulFill(fillProgress)
 
-        // Selected Works fades in later - when Crafting is near center/top
+        // Featured Projects fades in later - when Crafting is near center/top
         const worksFadeStart = vh * 0.5
         const worksFadeEnd = vh * 0.1
         const worksProgress = Math.max(0, Math.min(1, (worksFadeStart - rect.top) / (worksFadeStart - worksFadeEnd)))
@@ -690,7 +690,7 @@ export default function SplitScreenProjects() {
   // Scale: starts at unfocused card scale (0.75), grows to 1.0
   const projectImagesScale = 0.75 + (easedEntrance * 0.25) // 0.75 → 1.0
 
-  // "Selected Works" text fades in with card
+  // "Featured Projects" text fades in with card
   const selectedWorksOpacity = easeOutCubic(Math.max(0, (morphProgress - 0.75) / 0.25))
 
   // "soulful" color fill progress (during hold phase 0.15→0.5)
@@ -769,14 +769,14 @@ export default function SplitScreenProjects() {
         {/* Anchor for nav link - positioned at project start */}
         <div id="work" />
 
-        {/* Selected Works section - fades in after Crafting */}
+        {/* Featured Projects section - fades in after Crafting */}
         <div
           style={{
             opacity: mobileWorksOpacity,
             transition: 'opacity 0.15s ease-out',
           }}
         >
-        {/* Header row: Selected Works + arrows - inside container */}
+        {/* Header row: Featured Projects + arrows - inside container */}
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-8">
           <div className="flex items-center justify-between">
             <h2
@@ -785,7 +785,7 @@ export default function SplitScreenProjects() {
                 color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)',
               }}
             >
-              Selected Works
+              Featured Projects
             </h2>
 
             {/* Carousel indicators */}

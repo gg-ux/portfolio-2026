@@ -30,6 +30,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
   const [isWorkHovered, setIsWorkHovered] = useState(false)
+  const [mobileMenuLayer, setMobileMenuLayer] = useState('main') // 'main' or 'work'
   const workDropdownRef = useRef(null)
   const { isDark } = useTheme()
   const { isLightBanner, isDarkBanner, isInBannerZone } = useBanner()
@@ -55,6 +56,8 @@ export default function Navigation() {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      // Reset to main layer when menu closes
+      setMobileMenuLayer('main')
     }
     return () => {
       document.body.style.overflow = ''
@@ -259,7 +262,7 @@ export default function Navigation() {
                 }`}
               >
                 <ScrambleText trigger="both" iterations={2} speed={20}>
-                  Work
+                  Projects
                 </ScrambleText>
               </a>
             </div>
@@ -305,9 +308,6 @@ export default function Navigation() {
                 </a>
               )
             )}
-
-            {/* Divider */}
-            <div className={`w-px h-4 transition-colors duration-300 ${((isDark && !useDarkNav) || useLightNav) ? 'bg-white/10' : 'bg-black/10'}`} />
 
             {/* Theme Toggle */}
             <ThemeToggle size="small" />
@@ -408,9 +408,9 @@ export default function Navigation() {
 
     {/* Mobile Menu - Full screen overlay (outside nav to avoid transform issues) */}
     <div
-      className={`md:hidden fixed inset-0 z-[250] transition-all duration-500 ${
+      className={`md:hidden fixed inset-0 z-[250] flex flex-col transition-all duration-500 ${
         isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'
-      } ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+      } ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'} overflow-hidden`}
       style={{
         backgroundImage: isDark
           ? `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
@@ -420,105 +420,273 @@ export default function Navigation() {
         backgroundSize: '60px 60px',
       }}
     >
-      {/* Header row - matches nav positioning */}
-      <div className="px-6 h-18 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          to="/"
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="block"
-        >
-          <img
-            src="/assets/branding/logo.svg"
-            alt="Grace Guo logo"
-            className={`h-6 w-auto ${isDark ? 'invert' : ''}`}
-          />
-        </Link>
+      {/* Header row - absolute on work layer to allow content scrolling underneath */}
+      <div className={`px-6 h-18 flex items-center justify-between ${
+        mobileMenuLayer === 'work'
+          ? `absolute top-0 left-0 right-0 z-20 ${isDark ? 'bg-[#0a0a0a]/60 backdrop-blur-xl' : 'bg-[#FAF8F4]/60 backdrop-blur-xl'}`
+          : 'relative z-20 bg-transparent'
+      }`}>
+        {/* Grain overlay - only on work layer */}
+        {mobileMenuLayer === 'work' && (
+          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+            <defs>
+              <filter id="mobile-nav-grain" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.7"
+                  numOctaves="4"
+                  seed="42"
+                  stitchTiles="stitch"
+                  result="noise"
+                />
+                <feColorMatrix
+                  type="matrix"
+                  values={isDark
+                    ? "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0"
+                    : "0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.35 0"
+                  }
+                  in="noise"
+                  result="coloredNoise"
+                />
+              </filter>
+            </defs>
+            <rect
+              width="100%"
+              height="100%"
+              filter="url(#mobile-nav-grain)"
+              opacity={isDark ? "0.12" : "0.45"}
+              style={{ mixBlendMode: isDark ? 'normal' : 'overlay' }}
+            />
+          </svg>
+        )}
+        {/* Logo and Back button - both rendered, animated */}
+        {/* Width matches right side (theme toggle + close button) for centered title */}
+        <div className="relative h-10 flex items-center flex-shrink-0 w-[92px]">
+          {/* Logo - left aligned to match main nav */}
+          <Link
+            to="/"
+            onClick={(e) => {
+              if (mobileMenuLayer !== 'main') {
+                e.preventDefault()
+                return
+              }
+              setIsMobileMenuOpen(false)
+            }}
+            className="transition-all duration-300 ease-out"
+            style={{
+              opacity: mobileMenuLayer === 'main' ? 1 : 0,
+              transform: mobileMenuLayer === 'main' ? 'scale(1) rotate(0deg)' : 'scale(0.5) rotate(-90deg)',
+              pointerEvents: mobileMenuLayer === 'main' ? 'auto' : 'none',
+            }}
+          >
+            <img
+              src="/assets/branding/logo.svg"
+              alt="Grace Guo logo"
+              className={`h-6 w-auto ${isDark ? 'invert' : ''}`}
+            />
+          </Link>
 
-        {/* Close button - same hamburger that morphs to X */}
-        <button
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="p-2 relative w-10 h-10 flex items-center justify-center"
-          aria-label="Close menu"
+          {/* Back chevron - absolutely positioned to same spot */}
+          <button
+            onClick={() => mobileMenuLayer !== 'main' && setMobileMenuLayer('main')}
+            className={`absolute left-0 transition-all duration-300 ease-out ${
+              isDark ? 'text-white hover:text-white' : 'text-gray-900 hover:text-gray-900'
+            }`}
+            style={{
+              opacity: mobileMenuLayer === 'work' ? 1 : 0,
+              transform: mobileMenuLayer === 'work' ? 'scale(1) rotate(0deg)' : 'scale(0.5) rotate(90deg)',
+              pointerEvents: mobileMenuLayer === 'work' ? 'auto' : 'none',
+            }}
+            aria-label="Back to main menu"
+          >
+            <svg
+              width="11"
+              height="18"
+              viewBox="0 0 11 18"
+              fill="none"
+              className="stroke-current"
+            >
+              <path
+                d="M10 1L1 9L10 17"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Center title - fades in on work layer */}
+        <span
+          className={`flex-1 text-center font-satoshi text-2xl tracking-tight transition-all duration-300 ease-out ${
+            isDark ? 'text-white/90' : 'text-gray-900'
+          }`}
+          style={{
+            opacity: mobileMenuLayer === 'work' ? 1 : 0,
+            transform: mobileMenuLayer === 'work' ? 'translateY(0)' : 'translateY(-8px)',
+          }}
         >
-          <div className="w-[22px] h-[14px] relative">
-            <span
-              className={`absolute left-0 w-full h-[2px] rounded-full ${
-                isDark ? 'bg-white' : 'bg-gray-900'
-              }`}
-              style={{
-                top: '6px',
-                transform: 'rotate(45deg)',
-              }}
-            />
-            <span
-              className={`absolute left-0 w-full h-[2px] rounded-full ${
-                isDark ? 'bg-white' : 'bg-gray-900'
-              }`}
-              style={{
-                top: '6px',
-                transform: 'rotate(-45deg)',
-              }}
-            />
-          </div>
-        </button>
+          Projects
+        </span>
+
+        {/* Theme Toggle + Close button - matches main nav layout */}
+        {/* Width matches left side for centered title */}
+        <div className="flex items-center justify-end gap-3 flex-shrink-0 w-[92px]">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="p-2 relative w-10 h-10 flex items-center justify-center"
+            aria-label="Close menu"
+          >
+            <div className="w-[22px] h-[14px] relative">
+              <span
+                className={`absolute left-0 w-full h-[2px] rounded-full ${
+                  isDark ? 'bg-white' : 'bg-gray-900'
+                }`}
+                style={{
+                  top: '6px',
+                  transform: 'rotate(45deg)',
+                }}
+              />
+              <span
+                className={`absolute left-0 w-full h-[2px] rounded-full ${
+                  isDark ? 'bg-white' : 'bg-gray-900'
+                }`}
+                style={{
+                  top: '6px',
+                  transform: 'rotate(-45deg)',
+                }}
+              />
+            </div>
+          </button>
+        </div>
       </div>
 
-      {/* Content - centered but shifted slightly up */}
-      <div className="h-[calc(100vh-72px)] flex flex-col justify-center items-center pb-24">
-        {/* Navigation Links */}
-        <div className="flex flex-col items-center gap-6">
-          {/* Work link */}
-          <a
-            href={workHref}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
-              isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
-            }`}
-          >
-            Work
-          </a>
-
-          {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link
-                key={link.name}
-                to={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
-                  location.pathname === link.href
-                    ? 'theme-heading'
-                    : isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ) : link.name === 'Contact' ? (
-              <button
-                key={link.name}
-                onClick={() => {
-                  setIsMobileMenuOpen(false)
-                  openDrawer()
+      {/* Content container with sliding layers - full height on work layer since header is absolute */}
+      <div className={`relative overflow-hidden ${mobileMenuLayer === 'work' ? 'h-full' : 'flex-1'}`}>
+        {/* Main Navigation Layer */}
+        <div
+          className="absolute inset-0 flex flex-col justify-center items-center px-8 pb-24 transition-transform duration-400 ease-out"
+          style={{
+            transform: mobileMenuLayer === 'main' ? 'translateX(0)' : 'translateX(-100%)',
+          }}
+        >
+          {/* Navigation Links - Centered */}
+          <div className="flex flex-col items-center gap-1">
+            {/* Projects link with chevron */}
+            <button
+              onClick={() => setMobileMenuLayer('work')}
+              className={`relative font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
+                isDark ? 'text-white/90 hover:text-white' : 'text-gray-900 hover:text-gray-900'
+              }`}
+            >
+              Projects
+              {/* Right chevron - positioned outside the text */}
+              <svg
+                width="22"
+                height="14"
+                viewBox="0 0 22 14"
+                fill="none"
+                className="absolute -right-8 top-1/2 -translate-y-1/2 animate-bounce-right"
+                style={{
+                  stroke: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.3)'
                 }}
-                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
-                  isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
-                }`}
               >
-                {link.name}
-              </button>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
+                <path
+                  d="M7 1L14 7L7 13"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
+                    isDark ? 'text-white/90 hover:text-white' : 'text-gray-900 hover:text-gray-900'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ) : link.name === 'Contact' ? (
+                <button
+                  key={link.name}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    openDrawer()
+                  }}
+                  className={`text-left font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
+                    isDark ? 'text-white/90 hover:text-white' : 'text-gray-900 hover:text-gray-900'
+                  }`}
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
+                    isDark ? 'text-white/90 hover:text-white' : 'text-gray-900 hover:text-gray-900'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              )
+            )}
+          </div>
+        </div>
+
+        {/* Work Projects Layer - scrollable with content passing under header */}
+        <div
+          className="absolute inset-0 overflow-y-auto transition-transform duration-400 ease-out"
+          style={{
+            transform: mobileMenuLayer === 'work' ? 'translateX(0)' : 'translateX(100%)',
+          }}
+        >
+          {/* Projects Grid - 2 cols on mobile, 3 cols on tablet */}
+          {/* pt-[76px] accounts for h-18 (72px) header + 4px spacing */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-6 pt-[76px] pb-8">
+            {workProjects.map((project, index) => (
+              <Link
+                key={project.link}
+                to={project.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-satoshi text-3xl tracking-tight transition-colors duration-300 py-2 ${
-                  isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900'
-                }`}
+                className="group"
+                style={{
+                  opacity: mobileMenuLayer === 'work' ? 1 : 0,
+                  transform: mobileMenuLayer === 'work' ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+                  transition: `opacity 0.4s ease-out ${index * 60}ms, transform 0.4s ease-out ${index * 60}ms`,
+                }}
               >
-                {link.name}
-              </a>
-            )
-          )}
+                <div
+                  className="aspect-[4/3] rounded-xl overflow-hidden mb-1.5 transition-transform duration-300 group-active:scale-95"
+                  style={{
+                    backgroundColor: project.bg,
+                    boxShadow: isDark
+                      ? '0 0 0 1px rgba(255,255,255,0.06), 0 4px 12px rgba(0,0,0,0.3)'
+                      : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className={`font-mono text-[11px] tracking-wide uppercase ${
+                  isDark ? 'text-white/70' : 'text-gray-500'
+                }`}>
+                  {project.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

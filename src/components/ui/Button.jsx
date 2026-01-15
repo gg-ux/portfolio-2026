@@ -42,6 +42,7 @@ export function Button({
   variant = 'primary',
   size = 'md',
   href,
+  download,
   external = false,
   className = '',
   onClick,
@@ -85,6 +86,7 @@ export function Button({
     return (
       <a
         href={href}
+        download={download}
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
         className={`group ${classes}`}

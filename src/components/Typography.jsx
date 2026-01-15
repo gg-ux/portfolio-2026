@@ -41,9 +41,9 @@ export function H2({ children, className = '', style, as: Tag = 'h2', serif = fa
 }
 
 // Header 3
-export function H3({ children, className = '', style, as: Tag = 'h3' }) {
+export function H3({ children, className = '', style, as: Tag = 'h3', serif = false }) {
   return (
-    <Tag className={`font-satoshi text-2xl sm:text-3xl md:text-4xl tracking-tight theme-heading ${className}`} style={style}>
+    <Tag className={`${serif ? 'font-silk' : 'font-satoshi'} text-2xl sm:text-3xl md:text-4xl tracking-tight theme-heading ${className}`} style={style}>
       {children}
     </Tag>
   )
