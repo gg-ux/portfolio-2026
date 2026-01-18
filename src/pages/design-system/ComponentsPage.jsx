@@ -4,7 +4,8 @@ import DSLayout, { DSSection } from './DSLayout'
 import { Button, ButtonWithArrow } from '../../components/ui/Button'
 import { FrostedCard, Tag } from '../../components/ui'
 import { Input, Textarea, Select } from '../../components/ui/Input'
-import { Caption, H4, Body } from '../../components/Typography'
+import { Caption, H4, Body, Paragraph } from '../../components/Typography'
+import { Divider } from '../../components/ui/Divider'
 import { Sparkle, ArrowRight } from '@phosphor-icons/react'
 
 const sections = [
@@ -235,9 +236,9 @@ export default function ComponentsPage() {
 
       {/* Form Inputs */}
       <DSSection id="inputs" title="Form Inputs">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-8">
           Minimal underline-style inputs that focus attention on the content rather than the container.
-        </Body>
+        </Paragraph>
 
         {/* Text Input */}
         <H4 className="mb-6">Text Input</H4>
@@ -405,9 +406,9 @@ export default function ComponentsPage() {
 
       {/* Loaders */}
       <DSSection id="loaders" title="Loaders">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-8">
           A branded page loader with progress ring and bloom effect for initial page load.
-        </Body>
+        </Paragraph>
 
         {/* Visual Preview */}
         <H4 className="mb-6">Page Loader</H4>
@@ -521,9 +522,9 @@ export default function ComponentsPage() {
 
       {/* Charts */}
       <DSSection id="charts" title="Charts">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-8">
           Charts follow a minimal, premium aesthetic with slim elements and subtle grid treatments.
-        </Body>
+        </Paragraph>
 
         {/* Bars */}
         <H4 className="mb-6">Bar Style</H4>
@@ -597,9 +598,9 @@ export default function ComponentsPage() {
 
         {/* Flow Charts */}
         <H4 className="mb-6">Flow Charts</H4>
-        <Body className={`mb-6 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-6">
           SVG-based flow diagrams with consistent node styles, path routing, and semantic color coding.
-        </Body>
+        </Paragraph>
 
         {/* Flow Chart Colors */}
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>

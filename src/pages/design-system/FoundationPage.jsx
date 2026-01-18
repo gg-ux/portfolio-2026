@@ -1,4 +1,4 @@
-import { H1, H2, H3, H4, Body, Caption, ChartContainer } from '../../components/Typography'
+import { H4, Body, Caption, ChartContainer, Text, Display, Heading, Paragraph, Label, Mono } from '../../components/Typography'
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
 import { Divider, SectionDivider } from '../../components/ui/Divider'
@@ -25,8 +25,6 @@ export default function FoundationPage() {
   const { isDark } = useTheme()
 
   const borderClass = isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'
-  const textHeadingClass = isDark ? 'text-white' : 'text-gray-900'
-  const textMutedClass = isDark ? 'text-gray-400' : 'text-gray-500'
 
   // Soulful palette - Brand colors with primary/secondary roles (theme-aware)
   const soulfulPalette = [
@@ -56,9 +54,6 @@ export default function FoundationPage() {
   // System colors - theme aware
   const systemColors = [
     { name: 'Background', hex: isDark ? '#0A0A0A' : '#FAF8F4', displayHex: isDark ? '#0A0A0A' : '#FAF8F4', textColor: isDark ? 'text-white' : 'text-black' },
-    { name: 'Heading', hex: isDark ? '#FFFFFF' : '#111827', displayHex: isDark ? '#FFFFFF' : '#111827', textColor: isDark ? 'text-black' : 'text-white' },
-    { name: 'Body Text', hex: isDark ? '#D1D5DB' : '#3A3A3A', displayHex: isDark ? '#D1D5DB' : '#3A3A3A', textColor: isDark ? 'text-black' : 'text-white' },
-    { name: 'Caption', hex: isDark ? '#6B7280' : '#9CA3AF', displayHex: isDark ? '#6B7280' : '#9CA3AF', textColor: 'text-white' },
     { name: 'Border', hex: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)', displayHex: isDark ? 'white/6%' : 'black/8%', textColor: isDark ? 'text-white' : 'text-black', isTransparent: true },
     { name: 'Card Surface', hex: isDark ? 'rgba(255,255,255,0.015)' : 'rgba(255,255,255,0.2)', displayHex: isDark ? 'white/1.5%' : 'white/20%', textColor: isDark ? 'text-white' : 'text-black', isTransparent: true },
     { name: 'Error', hex: isDark ? '#EF4444' : '#DC2626', displayHex: isDark ? '#EF4444' : '#DC2626', textColor: 'text-white' },
@@ -69,128 +64,6 @@ export default function FoundationPage() {
   ]
 
 
-  const typography = [
-    {
-      component: 'Header 1',
-      size: '96px',
-      font: 'Silk Serif',
-      weight: '400',
-      tracking: 'tight',
-      useCase: 'Hero headlines, page titles',
-      element: <H1>Header 1</H1>
-    },
-    {
-      component: 'Header 2',
-      size: '36–48px',
-      font: 'Satoshi',
-      weight: '500',
-      tracking: 'tight',
-      useCase: 'Section headers, feature titles',
-      element: <H2>Header 2</H2>
-    },
-    {
-      component: 'Header 2 (Serif)',
-      size: '36–48px',
-      font: 'Silk Serif',
-      weight: '400',
-      tracking: 'tight',
-      useCase: 'Editorial sections, resume headers',
-      element: <H2 serif>Header 2 Serif</H2>
-    },
-    {
-      component: 'Header 3',
-      size: '24–36px',
-      font: 'Satoshi',
-      weight: '500',
-      tracking: 'tight',
-      useCase: 'Subsections, card titles',
-      element: <H3>Header 3</H3>
-    },
-    {
-      component: 'Header 4',
-      size: '20px',
-      font: 'Satoshi',
-      weightDark: '550',
-      weightLight: '600',
-      tracking: 'normal',
-      useCase: 'Small headings, list item titles',
-      element: <H4>Header 4</H4>
-    },
-    {
-      component: 'Body',
-      size: '16–17px',
-      font: 'Satoshi',
-      weightDark: '400',
-      weightLight: '450',
-      tracking: 'normal',
-      useCase: 'Paragraphs, descriptions, long-form content',
-      element: <Body>Body</Body>
-    },
-    {
-      component: 'Emphasis',
-      size: '16–17px',
-      font: 'Satoshi',
-      weight: '600',
-      tracking: 'normal',
-      useCase: 'Spec titles, emphasis within body text',
-      element: <Body weight="bold">Emphasis</Body>
-    },
-    {
-      component: 'Body Small',
-      size: '15px',
-      font: 'Satoshi',
-      weightDark: '400',
-      weightLight: '450',
-      tracking: 'normal',
-      useCase: 'Cards, secondary content, bullet points',
-      element: <Body size="sm">Body Small</Body>
-    },
-    {
-      component: 'Label',
-      size: '13px',
-      font: 'Satoshi',
-      weight: '500',
-      tracking: 'normal',
-      useCase: 'Form labels, icon names, readable small text',
-      element: <span className="font-satoshi text-[13px] font-medium">Label</span>
-    },
-    {
-      component: 'Label Caption',
-      size: '11px',
-      font: 'Satoshi',
-      weight: '400',
-      tracking: 'normal',
-      useCase: 'Secondary labels, icon metadata, subtle descriptors',
-      element: <span className="font-satoshi text-[11px] font-normal opacity-60">Label Caption</span>
-    },
-    {
-      component: 'Caption',
-      size: '12px',
-      font: 'Azeret Mono',
-      weight: '500',
-      tracking: 'wide',
-      useCase: 'Metadata, labels, dates, navigation',
-      element: <Caption>Caption</Caption>
-    },
-    {
-      component: 'Caption Small',
-      size: '11px',
-      font: 'Azeret Mono',
-      weight: '500',
-      tracking: 'wide',
-      useCase: 'Tags, chips, compact labels',
-      element: <Caption size="sm">Caption Small</Caption>
-    },
-    {
-      component: 'Caption XS',
-      size: '10px',
-      font: 'Azeret Mono',
-      weight: '500',
-      tracking: 'wider',
-      useCase: 'Role labels, swatch metadata, subtle descriptors',
-      element: <Caption size="xs">Caption XS</Caption>
-    },
-  ]
 
   const spacing = [
     { name: 'xs', value: '4px', tailwind: 'p-1' },
@@ -206,87 +79,307 @@ export default function FoundationPage() {
     <DSLayout title="Foundation" sections={sections}>
       {/* Typography */}
       <DSSection id="typography" title="Typography">
-        <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
-          {typography.map((type) => (
-            <div key={type.component} className={`p-6 border ${borderClass} rounded-xl mb-4 last:mb-0`}>
-              {/* Preview */}
-              <div className="mb-4">
-                {type.element}
-              </div>
-
-              {/* Properties - horizontal grid */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div>
-                  <Caption className="block mb-1" size="xs">Size</Caption>
-                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.size}</p>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Font</Caption>
-                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.font}</p>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Weight</Caption>
-                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
-                    {type.weight ? (
-                      type.weight
-                    ) : (
-                      <span className="inline-flex items-center gap-2">
-                        <span className="inline-flex items-center gap-0.5" style={{ color: '#a78bfa' }}>
-                          <Moon size={10} weight="fill" />
-                          {type.weightDark}
-                        </span>
-                        <span className="inline-flex items-center gap-0.5" style={{ color: '#f59e0b' }}>
-                          <Sun size={10} weight="fill" />
-                          {type.weightLight}
-                        </span>
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Tracking</Caption>
-                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.tracking}</p>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Use</Caption>
-                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.useCase}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Paragraph className="mb-12 max-w-3xl">
+          Type should feel warm but never loud—confident enough to lead, quiet enough to let the work speak. A layered system balances expression with clarity: elegant when it needs to make an impression, functional when it needs to communicate. Fluid scaling and optical adjustments across themes ensure consistency without rigidity.
+        </Paragraph>
 
         {/* Font Families */}
         <H4 className="mb-6">Font Families</H4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className={`p-8 border ${borderClass} rounded-xl`}>
-            <p className={`font-silk text-2xl mb-3 ${textHeadingClass}`}>Silk Serif</p>
-            <Caption>Header 1, Header 2 (Serif)</Caption>
-            <div className={`font-silk text-sm mt-4 ${textMutedClass} leading-relaxed space-y-1`}>
+            <div className="h-12 flex items-end mb-4">
+              <Text family="serif" size="2xl" color="heading" className="leading-none whitespace-nowrap">Silk Serif</Text>
+            </div>
+            <div className="font-silk text-sm theme-caption leading-relaxed space-y-1">
               <p className="break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
               <p className="break-all">abcdefghijklmnopqrstuvwxyz</p>
               <p>0123456789</p>
             </div>
           </div>
           <div className={`p-8 border ${borderClass} rounded-xl`}>
-            <p className={`font-satoshi text-2xl mb-3 ${textHeadingClass}`}>Satoshi</p>
-            <Caption>Headings, Body & Buttons</Caption>
-            <div className={`font-satoshi text-sm mt-4 ${textMutedClass} leading-relaxed space-y-1`}>
+            <div className="h-12 flex items-end mb-4">
+              <Text family="sans" size="2xl" color="heading" className="leading-none whitespace-nowrap">Satoshi</Text>
+            </div>
+            <div className="font-satoshi text-sm theme-caption leading-relaxed space-y-1">
               <p className="break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
               <p className="break-all">abcdefghijklmnopqrstuvwxyz</p>
               <p>0123456789</p>
             </div>
           </div>
           <div className={`p-8 border ${borderClass} rounded-xl`}>
-            <p className={`font-mono text-2xl mb-3 ${textHeadingClass} normal-case`}>Azeret Mono</p>
-            <Caption>Metadata & Labels</Caption>
-            <div className={`font-mono text-sm mt-4 ${textMutedClass} leading-relaxed space-y-1`}>
-              <p className="break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+            <div className="h-12 flex items-end mb-4">
+              <Text family="mono" size="xl" color="heading" className="leading-none whitespace-nowrap">Azeret Mono</Text>
+            </div>
+            <div className="font-mono text-xs theme-caption leading-relaxed space-y-1 tracking-wide normal-case">
+              <p className="break-all uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
               <p className="break-all">abcdefghijklmnopqrstuvwxyz</p>
               <p>0123456789</p>
             </div>
           </div>
         </div>
+
+        {/* Type Styles */}
+        <H4 className="mb-6">Type Styles</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-12`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {/* Display */}
+            <div className="py-6 first:pt-0">
+              <Display size="lg" className="!text-5xl mb-3">Display</Display>
+              <div className="flex items-baseline gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Silk Serif</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">4XL</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal 400</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Heading</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Tight</Text>
+              </div>
+            </div>
+
+            {/* Heading */}
+            <div className="py-6">
+              <Heading level={2} className="mb-3">Heading</Heading>
+              <div className="flex items-baseline gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Satoshi</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">3XL–L</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal 400</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Heading</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Tight</Text>
+              </div>
+            </div>
+
+            {/* Paragraph */}
+            <div className="py-6">
+              <Paragraph className="mb-3">Paragraph</Paragraph>
+              <div className="flex items-center gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Satoshi</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">M</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <span className="flex items-center gap-1.5">
+                  <Moon size={10} weight="fill" className="text-[#A78BFA]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">400</Text>
+                  <Sun size={10} weight="fill" className="text-[#F59E0B]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">450</Text>
+                </span>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Body</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal</Text>
+              </div>
+            </div>
+
+            {/* Paragraph 2 */}
+            <div className="py-6">
+              <Text color="body" className="mb-3 block text-[15px]">Paragraph 2</Text>
+              <div className="flex items-center gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Satoshi</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">S</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <span className="flex items-center gap-1.5">
+                  <Moon size={10} weight="fill" className="text-[#A78BFA]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">400</Text>
+                  <Sun size={10} weight="fill" className="text-[#F59E0B]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">450</Text>
+                </span>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Body</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal</Text>
+              </div>
+            </div>
+
+            {/* Label */}
+            <div className="py-6">
+              <Label className="mb-3 block">Label</Label>
+              <div className="flex items-baseline gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Satoshi</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">XS</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Medium 500</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Body</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal</Text>
+              </div>
+            </div>
+
+            {/* Mono Caption */}
+            <div className="py-6">
+              <Mono uppercase className="mb-3 block">Mono Caption</Mono>
+              <div className="flex items-baseline gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Azeret Mono</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">2XS</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal 400</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Caption</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Wide</Text>
+              </div>
+            </div>
+
+            {/* Mono Muted */}
+            <div className="py-6 last:pb-0">
+              <Text family="mono" size="caption" color="muted" className="mb-3 block">Mono Muted</Text>
+              <div className="flex items-center gap-4 flex-wrap">
+                <Text family="mono" size="caption" color="caption" tracking="wide">Azeret Mono</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">2XS</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <span className="flex items-center gap-1.5">
+                  <Moon size={10} weight="fill" className="text-[#A78BFA]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">400</Text>
+                  <Sun size={10} weight="fill" className="text-[#F59E0B]" />
+                  <Text family="mono" size="caption" color="caption" tracking="wide">450</Text>
+                </span>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Muted</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">·</Text>
+                <Text family="mono" size="caption" color="caption" tracking="wide">Normal</Text>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Size Scale */}
+        <H4 className="mb-6">Size</H4>
+        <div className={`pt-3 pb-6 px-6 border ${borderClass} rounded-xl mb-12`}>
+          {/* Size Scale - 3x3 on mobile/tablet, baseline-aligned 9-col on desktop */}
+          {(() => {
+            const sizes = [
+              { name: 'display', label: '4XL', size: '60–128px' },
+              { name: 'h1', label: '3XL', size: '40–72px' },
+              { name: 'h2', label: '2XL', size: '32–48px' },
+              { name: 'h3', label: 'XL', size: '24–30px' },
+              { name: 'h4', label: 'L', size: '20px' },
+              { name: 'body', label: 'M', size: '16–17px' },
+              { label: 'S', size: '15px', customClass: 'text-[15px]' },
+              { name: 'label', label: 'XS', size: '13px' },
+              { name: 'caption', label: '2XS', size: '11px' },
+            ]
+            return (
+              <>
+                {/* Mobile/Tablet: 3x3 grid with baseline alignment per row */}
+                <div className="lg:hidden space-y-6">
+                  {[0, 3, 6].map((startIdx) => {
+                    const rowSizes = sizes.slice(startIdx, startIdx + 3)
+                    return (
+                      <div key={startIdx}>
+                        <div className="grid grid-cols-3 items-baseline">
+                          {rowSizes.map(({ name, label, customClass }) => (
+                            <div key={label} className="text-center">
+                              <Text size={name} color="heading" className={customClass || ''}>Aa</Text>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="grid grid-cols-3 -mt-1">
+                          {rowSizes.map(({ label, size }) => (
+                            <div key={label} className="text-center">
+                              <Label className="block">{label}</Label>
+                              <Text family="mono" size="caption" color="muted">{size}</Text>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Desktop: baseline-aligned 9-col */}
+                <div className="hidden lg:block">
+                  <div className="grid items-baseline" style={{ gridTemplateColumns: '2.5fr 1.8fr 1.4fr 1.2fr 1fr 1fr 1fr 1fr 1fr' }}>
+                    {sizes.map(({ name, label, customClass }) => (
+                      <div key={label} className="text-center">
+                        <Text size={name} color="heading" className={customClass || ''}>Aa</Text>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid -mt-5" style={{ gridTemplateColumns: '2.5fr 1.8fr 1.4fr 1.2fr 1fr 1fr 1fr 1fr 1fr' }}>
+                    {sizes.map(({ label, size }) => (
+                      <div key={label} className="text-center">
+                        <Label className="block">{label}</Label>
+                        <Text family="mono" size="caption" color="muted">{size}</Text>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )
+          })()}
+        </div>
+
+        {/* Weight */}
+        <H4 className="mb-6">Weight</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-12`}>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            {[
+              { label: 'Light', value: 300 },
+              { label: 'Normal', value: 400 },
+              { label: 'Medium', value: 500 },
+              { label: 'Semibold', value: 600 },
+              { label: 'Bold', value: 700 },
+            ].map(({ label, value }) => (
+              <div key={value} className="text-center">
+                <Text size="h3" color="heading" className="block mb-3" style={{ fontWeight: value }}>Aa</Text>
+                <Label className="block leading-none">{label}</Label>
+                <Text family="mono" size="caption" color="muted" className="leading-none">{value}</Text>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tracking */}
+        <H4 className="mb-6">Tracking</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-12`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              { tracking: 'tighter', use: 'Display headlines' },
+              { tracking: 'tight', use: 'Headings' },
+              { tracking: 'normal', use: 'Body text' },
+              { tracking: 'wide', use: 'Captions, labels' },
+              { tracking: 'wider', use: 'Small uppercase' },
+            ].map(({ tracking, use }) => (
+              <div key={tracking} className="py-3 first:pt-0 last:pb-0 grid grid-cols-12 gap-4 items-center">
+                <Text size="base" tracking={tracking} color="heading" className="col-span-3">GOOEY</Text>
+                <Text family="mono" size="xs" color="body" tracking="wide" className="col-span-3">{tracking}</Text>
+                <Text size="label" color="body" className="col-span-6">{use}</Text>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Text Color */}
+        <H4 className="mb-6">Text Color</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-12`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              { color: 'heading', hex: isDark ? '#FFFFFF' : '#1A1A1A', use: 'Titles, headings, emphasis' },
+              { color: 'body', hex: isDark ? '#D4D4D4' : '#3A3A3A', use: 'Paragraphs, descriptions' },
+              { color: 'caption', hex: isDark ? '#A3A3A3' : '#5A5A5A', use: 'Metadata, labels, timestamps' },
+              { color: 'muted', hex: isDark ? '#737373' : '#8A8A8A', use: 'Subtle, de-emphasized text' },
+            ].map(({ color, hex, use }) => (
+              <div key={color} className="py-3 first:pt-0 last:pb-0 grid grid-cols-12 gap-4 items-center">
+                <div className="col-span-3 flex items-center gap-3">
+                  <span className={`w-3 h-3 rounded theme-${color}`} style={{ backgroundColor: 'currentColor' }} />
+                  <Text family="mono" size="caption" color={color}>{hex}</Text>
+                </div>
+                <Text family="mono" size="caption" color="body" tracking="wide" className="col-span-3">{color}</Text>
+                <Text size="label" color="body" className="col-span-6">{use}</Text>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </DSSection>
 
       {/* Colors */}
@@ -294,7 +387,7 @@ export default function FoundationPage() {
         {/* Brand Palette */}
         <div className="mb-12">
           <H4 className="mb-2">Brand Palette</H4>
-          <Body className={`mb-4 ${textMutedClass}`}>Soulful — emotional, warm, unconventional</Body>
+          <Paragraph size="sm" className="mb-4">Soulful — emotional, warm, unconventional</Paragraph>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {soulfulPalette.map((color) => {
               const Icon = color.icon
@@ -310,7 +403,7 @@ export default function FoundationPage() {
                       {color.role}
                     </span>
                   </div>
-                  <Caption uppercase={false}>{color.name}</Caption>
+                  <Mono uppercase>{color.name}</Mono>
                 </div>
               )
             })}
@@ -320,7 +413,7 @@ export default function FoundationPage() {
         {/* Blob Shader - Theme aware */}
         <div className="mb-12">
           <H4 className="mb-2">Blob Shader</H4>
-          <Body className={`mb-4 ${textMutedClass}`}>FluidBlob gradient colors — switch theme to see variants</Body>
+          <Paragraph size="sm" className="mb-4">FluidBlob gradient colors — switch theme to see variants</Paragraph>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {blobColors.map((color) => (
               <div key={color.name} className="group">
@@ -331,7 +424,7 @@ export default function FoundationPage() {
                   <span className={`font-mono text-xs ${color.textColor} opacity-60`}>{color.hex}</span>
                   <span className={`font-mono text-[10px] ${color.textColor} opacity-40 mt-1 uppercase tracking-wider`}>{color.role}</span>
                 </div>
-                <Caption uppercase={false}>{color.name}</Caption>
+                <Mono uppercase>{color.name}</Mono>
               </div>
             ))}
           </div>
@@ -340,7 +433,7 @@ export default function FoundationPage() {
         {/* System Colors - Theme aware */}
         <div className="mb-12">
           <H4 className="mb-2">System Colors</H4>
-          <Body className={`mb-4 ${textMutedClass}`}>Functional UI colors — switch theme to see variants</Body>
+          <Paragraph size="sm" className="mb-4">Functional UI colors — switch theme to see variants</Paragraph>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {systemColors.map((color) => {
               const Icon = color.icon
@@ -357,7 +450,7 @@ export default function FoundationPage() {
                       </span>
                     )}
                   </div>
-                  <Caption uppercase={false}>{color.name}</Caption>
+                  <Mono uppercase>{color.name}</Mono>
                 </div>
               )
             })}
@@ -368,9 +461,9 @@ export default function FoundationPage() {
 
       {/* Iconography */}
       <DSSection id="iconography" title="Iconography">
-        <Body className={`mb-4 ${textMutedClass}`}>
+        <Paragraph className="mb-12 max-w-3xl">
           Icons from Phosphor Icons — a flexible icon family with multiple weights for visual hierarchy.
-        </Body>
+        </Paragraph>
 
         {/* Icon Library */}
         <H4 className="mb-4">Icon Library</H4>
@@ -394,25 +487,25 @@ export default function FoundationPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <Caption className="block mb-1" size="xs">Package</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>@phosphor-icons/react</p>
+              <Text size="label" color="body">@phosphor-icons/react</Text>
             </div>
             <div>
               <Caption className="block mb-1" size="xs">Icons</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>1,200+ available</p>
+              <Text size="label" color="body">1,200+ available</Text>
             </div>
             <div>
               <Caption className="block mb-1" size="xs">Weights Used</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>5 of 6</p>
+              <Text size="label" color="body">5 of 6</Text>
             </div>
             <div>
               <Caption className="block mb-1" size="xs">License</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>MIT</p>
+              <Text size="label" color="body">MIT</Text>
             </div>
           </div>
         </div>
 
         {/* Weights with Usage */}
-        <H4 className="mb-6">Weights & When to Use</H4>
+        <H4 className="mb-6">Icon Weights</H4>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
             {[
@@ -424,11 +517,11 @@ export default function FoundationPage() {
             ].map(({ weight, label, use, example }) => (
               <div key={weight} className="py-3 first:pt-0 last:pb-0 grid grid-cols-12 gap-4 items-center">
                 <div className="col-span-1">
-                  <Sun size={20} weight={weight} className={textHeadingClass} />
+                  <Sun size={20} weight={weight} className="theme-heading" />
                 </div>
-                <span className={`col-span-2 font-satoshi text-sm font-medium ${isDark ? 'text-white/80' : 'text-gray-700'}`}>{label}</span>
-                <span className={`col-span-5 font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-600'}`}>{use}</span>
-                <span className={`col-span-4 font-satoshi text-sm ${isDark ? 'text-white/40' : 'text-gray-400'}`}>{example}</span>
+                <Text family="mono" size="caption" color="body" tracking="wide" className="col-span-2 uppercase">{label}</Text>
+                <Label className="col-span-5">{use}</Label>
+                <Label muted className="col-span-4">{example}</Label>
               </div>
             ))}
           </div>
@@ -437,67 +530,32 @@ export default function FoundationPage() {
         {/* Site Icons */}
         <H4 className="mb-6">Site Icons</H4>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <Caption className="block mb-4">Navigation & Actions</Caption>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
+          <div className="grid grid-cols-4 md:grid-cols-7 gap-6">
             {[
-              { icon: ArrowRight, name: 'ArrowRight', weight: 'regular' },
-              { icon: ArrowUp, name: 'ArrowUp', weight: 'bold' },
-              { icon: ArrowDown, name: 'ArrowDown', weight: 'bold' },
-              { icon: ArrowUpRight, name: 'ArrowUpRight', weight: 'bold' },
-              { icon: X, name: 'X', weight: 'light' },
-              { icon: ListBullets, name: 'ListBullets', weight: 'bold' },
-              { icon: MagnifyingGlass, name: 'Search', weight: 'regular' },
-              { icon: ArrowsOut, name: 'ArrowsOut', weight: 'regular' },
-            ].map(({ icon: Icon, name, weight }) => (
-              <div key={name} className="text-center group">
-                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
-                  <Icon size={22} weight={weight} className={textHeadingClass} />
-                </div>
-                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
-                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
-              </div>
-            ))}
-          </div>
-
-          <Caption className="block mb-4">Status & Feedback</Caption>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
-            {[
-              { icon: CheckCircle, name: 'Success', weight: 'regular' },
-              { icon: WarningCircle, name: 'Warning', weight: 'regular' },
-              { icon: Info, name: 'Info', weight: 'regular' },
-              { icon: CircleNotch, name: 'Loading', weight: 'light' },
-              { icon: Sparkle, name: 'Sparkle', weight: 'light' },
-              { icon: Medal, name: 'Medal', weight: 'fill' },
-              { icon: TrendUp, name: 'TrendUp', weight: 'light' },
-              { icon: Target, name: 'Target', weight: 'light' },
-            ].map(({ icon: Icon, name, weight }) => (
-              <div key={name} className="text-center group">
-                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
-                  <Icon size={22} weight={weight} className={textHeadingClass} />
-                </div>
-                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
-                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
-              </div>
-            ))}
-          </div>
-
-          <Caption className="block mb-4">Theme & Communication</Caption>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-            {[
-              { icon: Sun, name: 'Sun', weight: 'fill' },
-              { icon: Moon, name: 'Moon', weight: 'fill' },
-              { icon: ChatCircle, name: 'Chat', weight: 'regular' },
-              { icon: EnvelopeSimple, name: 'Email', weight: 'regular' },
-              { icon: LinkedinLogo, name: 'LinkedIn', weight: 'regular' },
-              { icon: Globe, name: 'Globe', weight: 'regular' },
-              { icon: LinkSimple, name: 'Link', weight: 'bold' },
-            ].map(({ icon: Icon, name, weight }) => (
-              <div key={name} className="text-center group">
-                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
-                  <Icon size={22} weight={weight} className={textHeadingClass} />
-                </div>
-                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
-                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+              { icon: ArrowRight, name: 'ArrowRight' },
+              { icon: ArrowUp, name: 'ArrowUp' },
+              { icon: ArrowDown, name: 'ArrowDown' },
+              { icon: ArrowUpRight, name: 'ArrowUpRight' },
+              { icon: X, name: 'X' },
+              { icon: ListBullets, name: 'ListBullets' },
+              { icon: MagnifyingGlass, name: 'Search' },
+              { icon: ArrowsOut, name: 'ArrowsOut' },
+              { icon: CheckCircle, name: 'CheckCircle' },
+              { icon: WarningCircle, name: 'WarningCircle' },
+              { icon: Info, name: 'Info' },
+              { icon: CircleNotch, name: 'CircleNotch' },
+              { icon: Sparkle, name: 'Sparkle' },
+              { icon: Sun, name: 'Sun' },
+              { icon: Moon, name: 'Moon' },
+              { icon: ChatCircle, name: 'ChatCircle' },
+              { icon: EnvelopeSimple, name: 'EnvelopeSimple' },
+              { icon: LinkedinLogo, name: 'LinkedinLogo' },
+              { icon: Globe, name: 'Globe' },
+              { icon: LinkSimple, name: 'LinkSimple' },
+            ].map(({ icon: Icon, name }) => (
+              <div key={name} className="text-center">
+                <Icon size={24} weight="regular" className="theme-heading mx-auto mb-3" />
+                <Label className="block leading-none">{name}</Label>
               </div>
             ))}
           </div>
@@ -516,11 +574,11 @@ export default function FoundationPage() {
             ].map(({ size, use, weight }) => (
               <div key={size} className="text-center">
                 <div className={`h-14 flex items-center justify-center mb-3`}>
-                  <ArrowRight size={size} weight={weight} className={textHeadingClass} />
+                  <ArrowRight size={size} weight={weight} className="theme-heading" />
                 </div>
-                <span className="font-satoshi text-[13px] font-medium block">{size}px</span>
-                <span className="font-satoshi text-[13px] font-medium block">{use}</span>
-                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+                <Label className="block">{size}px</Label>
+                <Label className="block">{use}</Label>
+                <Text size="caption" color="muted" className="block capitalize">{weight}</Text>
               </div>
             ))}
           </div>
@@ -536,13 +594,13 @@ export default function FoundationPage() {
                 key={space.name}
                 className="flex items-center gap-6"
               >
-                <Caption className="w-12 text-right">{space.name}</Caption>
+                <Mono size="xs" color="caption" className="w-12 text-right">{space.name}</Mono>
                 <div
                   className="h-6 rounded transition-all duration-300 hover:opacity-80 theme-accent-bg"
                   style={{ width: space.value }}
                 />
-                <Caption className="text-gray-500 w-16">{space.value}</Caption>
-                <Caption className="text-gray-600">{space.tailwind}</Caption>
+                <Mono size="xs" color="muted" className="w-16">{space.value}</Mono>
+                <Mono size="xs" color="muted">{space.tailwind}</Mono>
               </div>
             ))}
           </div>
@@ -551,128 +609,49 @@ export default function FoundationPage() {
 
       {/* Containers */}
       <DSSection id="containers" title="Containers">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph className="mb-12 max-w-3xl">
           Three container styles serve different purposes. Choose based on the content's intent and how much visual prominence it needs.
-        </Body>
+        </Paragraph>
 
-        {/* Comparison */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* Container Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* ChartContainer */}
-          <div>
-            <H4 className="mb-4">ChartContainer</H4>
-            <ChartContainer className="h-[180px] flex items-center justify-center mb-4">
-              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                Subtle 2% fill
-              </span>
+          <div className={`p-6 border ${borderClass} rounded-xl`}>
+            <Label className="block mb-4">ChartContainer</Label>
+            <ChartContainer className="h-[140px] flex items-center justify-center mb-4">
+              <Mono size="xs" color="muted">Subtle 2% fill</Mono>
             </ChartContainer>
-            <div className="space-y-2">
-              <Caption className="block">Use for</Caption>
-              <Body size="sm">
-                Data visualizations, charts, research findings, tables, article body content
-              </Body>
-            </div>
+            <Mono size="xs" color="muted" className="block mb-4">2% fill · no blur · no border</Mono>
+            <Label className="block mb-2">Use for</Label>
+            <Paragraph size="sm" muted>
+              Data visualizations, charts, research findings, tables, article body content
+            </Paragraph>
           </div>
 
           {/* FrostedCard */}
-          <div>
-            <H4 className="mb-4">FrostedCard</H4>
-            <FrostedCard className="h-[180px] flex items-center justify-center mb-4">
-              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                Frosted glass + grain
-              </span>
+          <div className={`p-6 border ${borderClass} rounded-xl`}>
+            <Label className="block mb-4">FrostedCard</Label>
+            <FrostedCard className="h-[140px] flex items-center justify-center mb-4">
+              <Mono size="xs" color="muted">Frosted glass + grain</Mono>
             </FrostedCard>
-            <div className="space-y-2">
-              <Caption className="block">Use for</Caption>
-              <Body size="sm">
-                Category cards, navigation, key stats, callouts, feature showcases
-              </Body>
-            </div>
+            <Mono size="xs" color="muted" className="block mb-4">1.5% fill · 12px blur · 8% border</Mono>
+            <Label className="block mb-2">Use for</Label>
+            <Paragraph size="sm" muted>
+              Category cards, navigation, key stats, callouts, feature showcases
+            </Paragraph>
           </div>
 
           {/* Transparent */}
-          <div>
-            <H4 className="mb-4">Transparent</H4>
-            <div className={`h-[180px] flex items-center justify-center mb-4 rounded-2xl`}>
-              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                No background
-              </span>
+          <div className={`p-6 border ${borderClass} rounded-xl`}>
+            <Label className="block mb-4">Transparent</Label>
+            <div className="h-[140px] flex items-center justify-center mb-4 rounded-2xl">
+              <Mono size="xs" color="muted">No background</Mono>
             </div>
-            <div className="space-y-2">
-              <Caption className="block">Use for</Caption>
-              <Body size="sm">
-                Kanban boards, flows, floating elements, content on hero backgrounds
-              </Body>
-            </div>
-          </div>
-        </div>
-
-        {/* Specs Comparison */}
-        <H4 className="mb-6">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <Caption className="mb-4 block">ChartContainer</Caption>
-              <div className="space-y-3">
-                <div>
-                  <Caption className="block mb-1" size="xs">Background</Caption>
-                  <Body size="sm">2% white/black</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Border</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Blur</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Grain</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Caption className="mb-4 block">FrostedCard</Caption>
-              <div className="space-y-3">
-                <div>
-                  <Caption className="block mb-1" size="xs">Background</Caption>
-                  <Body size="sm">1.5% / 20% white</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Border</Caption>
-                  <Body size="sm">1px at 8%</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Blur</Caption>
-                  <Body size="sm">12px</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Grain</Caption>
-                  <Body size="sm">8%/6% opacity</Body>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Caption className="mb-4 block">Transparent</Caption>
-              <div className="space-y-3">
-                <div>
-                  <Caption className="block mb-1" size="xs">Background</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Border</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Blur</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-                <div>
-                  <Caption className="block mb-1" size="xs">Grain</Caption>
-                  <Body size="sm">None</Body>
-                </div>
-              </div>
-            </div>
+            <Mono size="xs" color="muted" className="block mb-4">no fill · no blur · no border</Mono>
+            <Label className="block mb-2">Use for</Label>
+            <Paragraph size="sm" muted>
+              Kanban boards, flows, floating elements, content on hero backgrounds
+            </Paragraph>
           </div>
         </div>
       </DSSection>
@@ -696,9 +675,9 @@ export default function FoundationPage() {
         <H4 className="mb-6">Vertical</H4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex items-center justify-center gap-8 h-24">
-            <Body className={isDark ? 'text-white/60' : 'text-gray-600'}>Left</Body>
+            <Text color="body">Left</Text>
             <Divider orientation="vertical" />
-            <Body className={isDark ? 'text-white/60' : 'text-gray-600'}>Right</Body>
+            <Text color="body">Right</Text>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
-import { Caption, Body, H4 } from '../../components/Typography'
+import { Caption, Body, H4, Paragraph } from '../../components/Typography'
 
 const sections = [
   { id: 'navigation', label: 'Navigation' },
@@ -48,9 +48,9 @@ export default function PatternsPage() {
     <DSLayout title="Patterns" sections={sections}>
       {/* Navigation */}
       <DSSection id="navigation" title="Navigation">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-8">
           A responsive navigation system with scroll-aware behavior, mega menu on desktop, and full-screen mobile menu.
-        </Body>
+        </Paragraph>
 
         {/* Scroll Behavior */}
         <H4 className="mb-6">Scroll Behavior</H4>
@@ -272,9 +272,9 @@ export default function PatternsPage() {
 
         {/* Components */}
         <H4 className="mb-4">Content Components</H4>
-        <Body className={`mb-4 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-4">
           Reusable content blocks for consistent project page structure.
-        </Body>
+        </Paragraph>
 
         {/* ProjectSection */}
         <div className={`p-6 border ${borderClass} rounded-xl mb-6`}>
@@ -410,9 +410,9 @@ export default function PatternsPage() {
 
         {/* Media Components */}
         <H4 className="mb-4 mt-12">Media Components</H4>
-        <Body className={`mb-4 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-4">
           Image and video components with consistent styling.
-        </Body>
+        </Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl`}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['ProjectImage', 'ProjectImageGrid', 'ProjectImageFullWidth', 'ProjectVideo', 'ProjectVimeo', 'ProjectYouTube', 'PDFCarousel', 'ChartCaption'].map((component) => (
@@ -431,9 +431,9 @@ export default function PatternsPage() {
 
       {/* Footer */}
       <DSSection id="footer" title="Footer">
-        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+        <Paragraph size="sm" className="mb-8">
           A minimal footer with copyright, social links, and back-to-top functionality.
-        </Body>
+        </Paragraph>
 
         {/* Structure */}
         <H4 className="mb-6">Structure</H4>

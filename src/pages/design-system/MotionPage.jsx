@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
-import { Caption, Body, H4 } from '../../components/Typography'
+import { Caption, Body, Paragraph } from '../../components/Typography'
 import ScrambleText from '../../components/ScrambleText'
 import AuraBeams from '../../components/AuraBeams'
 
 const sections = [
-  { id: 'animations', label: 'Animations' },
+  { id: 'text-animations', label: 'Text Animations' },
+  { id: 'scroll-animations', label: 'Scroll Animations' },
+  { id: 'entrance-animations', label: 'Entrance Animations' },
+  { id: 'exit-animations', label: 'Exit Animations' },
   { id: 'background-effects', label: 'Background Effects' },
 ]
 
@@ -19,8 +22,6 @@ export default function MotionPage() {
   const [vaporOutVisible, setVaporOutVisible] = useState(true)
 
   const borderClass = isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'
-  const textHeadingClass = isDark ? 'text-white' : 'text-gray-900'
-  const textMutedClass = isDark ? 'text-gray-400' : 'text-gray-500'
   const bgSubtle = isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
 
   const replayScramble = () => {
@@ -38,18 +39,14 @@ export default function MotionPage() {
   const replayVaporOut = () => {
     setVaporOutVisible(true)
     setVaporOutKey(prev => prev + 1)
-    // Auto-trigger the out animation after a brief moment
     setTimeout(() => setVaporOutVisible(false), 100)
   }
 
   return (
     <DSLayout title="Motion" sections={sections}>
-      {/* Animations */}
-      <DSSection id="animations" title="Animations">
-        {/* Text Animations */}
-        <H4 className="mb-6">Text Animations</H4>
-
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+      {/* Text Animations */}
+      <DSSection id="text-animations" title="Text Animations">
+        <div className={`p-8 border ${borderClass} rounded-xl`}>
           <Caption className="mb-1 block">Typewriter scramble for mono text</Caption>
           <Body weight="bold" className="mb-6">Decode</Body>
 
@@ -89,18 +86,18 @@ export default function MotionPage() {
             </div>
           </div>
         </div>
+      </DSSection>
 
-        {/* Scroll Animations */}
-        <H4 className="mb-6">Scroll Animations</H4>
-
+      {/* Scroll Animations */}
+      <DSSection id="scroll-animations" title="Scroll Animations">
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Caption className="mb-1 block">Content reveal on scroll</Caption>
           <Body weight="bold" className="mb-6">Scroll Reveal</Body>
-          <Body className={`mb-4 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+          <Paragraph size="sm" className="mb-4">
             Content sections use IntersectionObserver to reveal on scroll with a subtle fade-up animation.
-          </Body>
+          </Paragraph>
           <div className={`${bgSubtle} p-4 rounded-lg`}>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <Caption className="block mb-1" size="xs">Transition</Caption>
                 <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>opacity + transform 1000ms</p>
@@ -113,14 +110,14 @@ export default function MotionPage() {
           </div>
         </div>
 
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+        <div className={`p-8 border ${borderClass} rounded-xl`}>
           <Caption className="mb-1 block">Hero exit on scroll</Caption>
           <Body weight="bold" className="mb-6">Scroll Fade</Body>
-          <Body className={`mb-4 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+          <Paragraph size="sm" className="mb-4">
             Hero elements fade out with a progressive blur effect when scrolling past.
-          </Body>
+          </Paragraph>
           <div className={`${bgSubtle} p-4 rounded-lg`}>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <Caption className="block mb-1" size="xs">Blur</Caption>
                 <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>0 → 8px over 0.6vh</p>
@@ -132,11 +129,11 @@ export default function MotionPage() {
             </div>
           </div>
         </div>
+      </DSSection>
 
-        {/* Entrance Animations */}
-        <H4 className="mb-6">Entrance Animations</H4>
-
-        {/* Blur In Demo */}
+      {/* Entrance Animations */}
+      <DSSection id="entrance-animations" title="Entrance Animations">
+        {/* Blur In */}
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <Caption className="mb-1 block">Primary entrance with blur and skew</Caption>
           <Body weight="bold" className="mb-6">Blur In</Body>
@@ -182,8 +179,8 @@ export default function MotionPage() {
           </div>
         </div>
 
-        {/* Directional Entrances Demo */}
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+        {/* Directional */}
+        <div className={`p-8 border ${borderClass} rounded-xl`}>
           <Caption className="mb-1 block">Hero sequence with slide entrances</Caption>
           <Body weight="bold" className="mb-6">Directional</Body>
 
@@ -236,12 +233,11 @@ export default function MotionPage() {
             </div>
           </div>
         </div>
+      </DSSection>
 
-        {/* Exit Animations */}
-        <H4 className="mb-6">Exit Animations</H4>
-
-        {/* Vapor Out Demo */}
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+      {/* Exit Animations */}
+      <DSSection id="exit-animations" title="Exit Animations">
+        <div className={`p-8 border ${borderClass} rounded-xl`}>
           <Caption className="mb-1 block">Primary exit with blur, lift, and skew</Caption>
           <Body weight="bold" className="mb-6">Vapor Out</Body>
 
@@ -285,68 +281,47 @@ export default function MotionPage() {
             </div>
           </div>
         </div>
-
-        {/* Specs */}
-        <H4 className="mb-6">Timing Guidelines</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-2">Micro Interactions</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>300-500ms ease-out</p>
-            </div>
-            <div>
-              <Caption className="block mb-2">Page Transitions</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>800-1000ms ease</p>
-            </div>
-            <div>
-              <Caption className="block mb-2">Decode Effect</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>2 iterations, 20ms/frame</p>
-            </div>
-            <div>
-              <Caption className="block mb-2">Hover States</Caption>
-              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>300ms</p>
-            </div>
-          </div>
-        </div>
       </DSSection>
 
       {/* Background Effects */}
       <DSSection id="background-effects" title="Background Effects">
-        {/* Aura Beams */}
-        <H4 className="mb-6">Aura Beams</H4>
-        <Body className={`mb-6 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-          Cursor-reactive ambient lighting effect. Can be used alone for subtle depth, or paired with the grid overlay for a more dynamic, layered effect.
-        </Body>
-        <div className={`relative border ${borderClass} rounded-xl mb-8 overflow-hidden`} style={{ height: '320px' }}>
-          <AuraBeams contained />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <Caption scramble={false} className={isDark ? 'text-white/40' : 'text-black/30'}>
-              Move cursor to interact
-            </Caption>
-          </div>
-        </div>
+        <div className={`p-8 border ${borderClass} rounded-xl`}>
+          <Caption className="mb-1 block">Cursor-reactive ambient lighting</Caption>
+          <Body weight="bold" className="mb-4">Aura Beams</Body>
+          <Paragraph size="sm" className="mb-6">
+            Can be used alone for subtle depth, or paired with the grid overlay for a more dynamic, layered effect.
+          </Paragraph>
 
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-2">Grid</Caption>
-              <Body size="sm">60px spacing</Body>
-            </div>
-            <div>
-              <Caption className="block mb-2">Effect Radius</Caption>
-              <Body size="sm">200px from cursor</Body>
-            </div>
-            <div>
-              <Caption className="block mb-2">Smooth Follow</Caption>
-              <Body size="sm">0.06 lerp</Body>
-            </div>
-            <div>
-              <Caption className="block mb-2">Scope</Caption>
-              <Body size="sm">Home page only</Body>
+          <div className={`relative border ${borderClass} rounded-xl mb-6 overflow-hidden`} style={{ height: '280px' }}>
+            <AuraBeams contained />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <Caption scramble={false} className={isDark ? 'text-white/40' : 'text-black/30'}>
+                Move cursor to interact
+              </Caption>
             </div>
           </div>
-        </div>
 
+          <div className={`${bgSubtle} p-4 rounded-lg`}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div>
+                <Caption className="block mb-1" size="xs">Grid</Caption>
+                <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>60px spacing</p>
+              </div>
+              <div>
+                <Caption className="block mb-1" size="xs">Effect Radius</Caption>
+                <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>200px from cursor</p>
+              </div>
+              <div>
+                <Caption className="block mb-1" size="xs">Smooth Follow</Caption>
+                <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>0.06 lerp</p>
+              </div>
+              <div>
+                <Caption className="block mb-1" size="xs">Scope</Caption>
+                <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>Home page only</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </DSSection>
     </DSLayout>
   )
