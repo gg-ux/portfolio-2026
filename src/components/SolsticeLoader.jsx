@@ -109,9 +109,9 @@ export default function SolsticeLoader({ size = 80 }) {
             id="solsticeLoaderGradient"
             gradientTransform={`rotate(${gradientRotation}, 0.5, 0.5)`}
           >
-            <stop offset="0%" stopColor="#A78BFA" />
-            <stop offset="50%" stopColor="#0F766E" />
-            <stop offset="100%" stopColor="#A78BFA" />
+            <stop offset="0%" stopColor="#BF92F0" />
+            <stop offset="50%" stopColor="#0B96A3" />
+            <stop offset="100%" stopColor="#BF92F0" />
           </linearGradient>
         </defs>
         {/* Background circle */}

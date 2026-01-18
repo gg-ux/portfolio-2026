@@ -8,13 +8,34 @@ import {
   ProjectCallout,
   ProjectImage,
   ProjectImageGrid,
+  ChartCaption,
   ProjectVimeo,
   DoubleDiamond,
   PDFCarousel,
   ResearchTimeline,
   SurveyStats,
+  AgeDemographics,
+  ResearchMethodologies,
+  ResearchRequirements,
+  TopicCardsTable,
+  SurveyFindingsChart,
+  SurveyFindingsDots,
+  TopCommunityAttributes,
+  CardSortResults,
+  CardSortMatrix,
+  InteractionComparison,
+  UserArchetypes,
+  PersonasChart,
+  CoreUserStory,
+  CommunityUserFlow,
+  UsabilityScenario,
+  ExploreUserFlow,
+  MiroBoard,
+  FlourishBranding,
 } from '../../components/project'
+import { Body, H4 } from '../../components/Typography'
 import { useTheme } from '../../context/ThemeContext'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -24,11 +45,11 @@ const sections = [
   { id: 'design', label: 'Design' },
   { id: 'testing', label: 'Testing' },
   { id: 'outcome', label: 'Outcome' },
-  { id: 'case-study', label: 'Case Study' },
 ]
 
 export default function CataliaHealth() {
   const { isDark } = useTheme()
+  const [teamRef, teamVisible] = useScrollReveal({ threshold: 0.2 })
 
   return (
     <ProjectLayout sections={sections}>
@@ -38,7 +59,8 @@ export default function CataliaHealth() {
         description="Catalia Health is a digital healthcare management company. Their core product is an interactive personal assistant robot, Mabu. The mission was to create a HIPAA-compliant patient community to improve patients' well-being through access to a greater patient community and personalized resources."
         role="Lead UX Designer + Researcher"
         timeline="April–June 2019"
-        team="Team of 4 UX Experts"
+        team="Team of 4"
+        output="Patient-tested prototype + case study PDF"
         coverImage="/assets/projects/catalia-health/content/banner.png"
         lightBanner
       />
@@ -46,47 +68,28 @@ export default function CataliaHealth() {
       {/* Overview */}
       <ProjectSection id="overview" title="Overview">
         <ProjectText>
-          The goal is that by creating a safe space for patients to engage, patients will feel more informed about their condition, more motivated to adhere to their treatment plan, and a heightened sense of social belonging that could ultimately lead to better personal health care management. Following an aggressive timeline, we were able to successfully research and design a high-fidelity prototype of the app, <em>Flourish</em>, in 5 months.
+          Flourish is a patient community app designed to help chronically ill patients feel more informed, motivated to follow their treatment plans, and connected to others with similar experiences. In 5 months, our team conducted extensive research and delivered a high-fidelity prototype.
         </ProjectText>
-        <ProjectImage
-          src="/assets/projects/catalia-health/content/mabu-robot.jpg"
-          alt="Mabu, Catalia Health's interactive personal assistant robot"
-          caption="Mabu - Catalia Health's core product, an interactive personal assistant robot"
-        />
+        <ProjectVimeo url="https://vimeo.com/358226687" className="mb-16" />
 
         <ProjectSubsection title="Research Requirements">
-          <ProjectList
-            ordered
-            items={[
-              'Secondary research',
-              'Generative primary research with chronically ill patients',
-              'Iterative research with prototypes',
+          <ResearchRequirements />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Case Study">
+          <ProjectText>
+            As part of our deliverables, I designed a comprehensive 36-page print-ready case study, documenting our research methodology, key findings, and design process from start to finish.
+          </ProjectText>
+          <PDFCarousel
+            pages={[
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-1-cover.png', alt: 'Cover' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-2-toc.png', alt: 'Table of Contents' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-left.png', alt: 'Executive Summary' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-right.png', alt: 'Meet Our Team' },
             ]}
+            pdfUrl="https://gg-portfolio.s3-us-west-1.amazonaws.com/FlourishApp-PrintReadySpread.pdf"
           />
         </ProjectSubsection>
-
-        <ProjectSubsection title="Successful Output">
-          <ProjectText>
-            A high-fidelity prototype, tested with chronically ill patients, which outlines the solution and demonstrates 2-3 user flows of key community features.
-          </ProjectText>
-          <ProjectVimeo url="https://vimeo.com/358226687" />
-        </ProjectSubsection>
-      </ProjectSection>
-
-      {/* Case Study */}
-      <ProjectSection id="case-study" title="Case Study">
-        <ProjectText>
-          As part of our deliverables, Catalia Health required a comprehensive booklet to present to their stakeholders. I owned the design of the complete 36-page print-ready case study, documenting our research methodology, key findings, and design process from start to finish.
-        </ProjectText>
-        <PDFCarousel
-          pages={[
-            { src: '/assets/projects/catalia-health/content/pdf-pages/page-1-cover.png', alt: 'Cover' },
-            { src: '/assets/projects/catalia-health/content/pdf-pages/page-2-toc.png', alt: 'Table of Contents' },
-            { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-left.png', alt: 'Executive Summary' },
-            { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-right.png', alt: 'Meet Our Team' },
-          ]}
-          pdfUrl="https://gg-portfolio.s3-us-west-1.amazonaws.com/FlourishApp-PrintReadySpread.pdf"
-        />
       </ProjectSection>
 
       {/* Team */}
@@ -96,14 +99,22 @@ export default function CataliaHealth() {
         </ProjectText>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8">
+        <div ref={teamRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8">
           {[
-            { name: 'Alex Rosales', role: 'Product Manager', image: 'Catalia-Alex.png' },
             { name: 'Grace Guo', role: 'Lead UX/UI Designer\nUser Researcher', image: 'Catalia-Grace.png' },
             { name: 'Renee Reid', role: 'Lead User Researcher', image: 'Catalia-Renee.png' },
+            { name: 'Alex Rosales', role: 'Product Manager', image: 'Catalia-Alex.png' },
             { name: 'Alexa Steinhauser', role: 'UX/UI Designer\nUser Researcher', image: 'Catalia-Alexa.png' },
           ].map((member, index) => (
-            <div key={member.name} className="text-center">
+            <div
+              key={member.name}
+              className="text-center"
+              style={{
+                opacity: teamVisible ? 1 : 0,
+                transform: teamVisible ? 'translateX(0)' : 'translateX(-20px)',
+                transition: `opacity 0.5s ease-out ${index * 0.15}s, transform 0.5s ease-out ${index * 0.15}s`,
+              }}
+            >
               <div className="relative w-28 h-28 md:w-32 md:h-32 mx-auto mb-4">
                 {/* Photo */}
                 <div className="absolute inset-0 z-10 rounded-full overflow-hidden">
@@ -147,9 +158,9 @@ export default function CataliaHealth() {
               <p className={`font-satoshi font-semibold text-base md:text-lg mb-1 ${isDark ? 'text-white' : 'text-black'}`}>
                 {member.name}
               </p>
-              <p className={`font-satoshi text-[15px] whitespace-pre-line ${isDark ? 'text-white/50' : 'text-black/50'}`}>
+              <Body size="sm" className={`mb-0 whitespace-pre-line ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                 {member.role}
-              </p>
+              </Body>
             </div>
           ))}
         </div>
@@ -219,10 +230,7 @@ export default function CataliaHealth() {
           <ProjectText>
             We recruited 42 participants for interviews and a survey/card sort exercise. Participants were between the ages of 30-65 and lived across the United States.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/people-2.png"
-            alt="Team collaborative research work"
-          />
+          <AgeDemographics />
         </ProjectSubsection>
 
         <ProjectSubsection title="Methodologies">
@@ -236,21 +244,14 @@ export default function CataliaHealth() {
               'Get feedback on features important for an online patient community',
             ]}
           />
+          <ResearchMethodologies />
           <ProjectText>
             Most interviews were conducted using Zoom. Phonecall participants tended to be older—in their 60s—and less likely to engage with online communities, while video chat participants tended to be younger and more engaged.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/card-sort.jpg"
-            alt="Card sort activity materials"
-          />
           <ProjectText>
             We also sent out a card sort activity and survey to discover desired attributes of an online patient community. For the first part, participants completed a survey gauging demographics, behaviors, and devices used. They then sorted 17 cards containing aspects of a patient community into categories by importance.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/topics.png"
-            alt="Community topics visualization"
-            caption="17 community topic cards sorted by participants"
-          />
+          <TopicCardsTable />
         </ProjectSubsection>
 
         <ProjectSubsection title="HIPAA Compliance">
@@ -273,32 +274,26 @@ export default function CataliaHealth() {
           <ProjectText>
             From our survey of 29 participants, we found that a large majority engage in online communities and access them using their mobile device. A little more than half would meet up with group members located near them.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/dots.png"
-            alt="Survey data visualization showing participant behaviors"
-          />
+          <SurveyFindingsDots />
         </ProjectSubsection>
 
         <ProjectSubsection title="Top Community Attributes">
           <ProjectText>
             When asked to indicate their top 3 most important attributes from a list of community attributes, "Respect and kindness", "Access to chronic illness research", and "Info on local support groups and physicians" ranked at the top.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/traits.png"
-            alt="Community traits comparison chart"
-            caption="Top community attributes ranked by participants"
-          />
+          <TopCommunityAttributes />
         </ProjectSubsection>
 
         <ProjectSubsection title="Card Sort Findings">
           <ProjectText>
-            The most important community aspects were: ability to discuss a specific diagnosis, educational resources, a safe space to share ideas, a community that can be checked any time, and low sodium diet information. Intimacy, religious support, and an unmoderated community ranked lowest.
+            When 20 participants sorted 17 community attributes by importance, a clear pattern emerged: patients prioritized features that helped them understand and manage their condition over social features. Educational content and peer discussions about diagnoses consistently ranked highest, while intimacy, religious support, and unmoderated spaces ranked lowest—suggesting patients want structure and relevance over open-ended social connection.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/card-sort-2.png"
-            alt="Card sort results showing community priorities"
-            caption="Card sort results revealing patient priorities"
-          />
+          <CardSortMatrix />
+          <H4 className="mt-12 mb-4">Key Priorities</H4>
+          <ProjectText>
+            Synthesizing these results, clear priorities emerged around what patients valued most—and least—in an online community.
+          </ProjectText>
+          <CardSortResults />
         </ProjectSubsection>
 
         <ProjectSubsection title="Key Interview Findings">
@@ -306,6 +301,7 @@ export default function CataliaHealth() {
             We uncovered 5 major themes that informed us of patient attitudes and behaviors:
           </ProjectText>
           <ProjectList
+            ordered
             items={[
               'Patients use community for a sense of belonging and giving back',
               'Identified (vs. anonymous) users made patients feel more supported',
@@ -314,33 +310,22 @@ export default function CataliaHealth() {
               'Common pain points: transportation and maintaining a good diet',
             ]}
           />
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/callouts.png"
-            alt="Key interview findings callout graphic"
-          />
+          <InteractionComparison />
         </ProjectSubsection>
 
         <ProjectSubsection title="Archetypes">
           <ProjectText>
-            We found three types of community user archetypes: Contributors (mainly female, preferred to be identified), Lurkers (mainly male, preferred anonymity), and Mentors (further along in their journey, wished to give back).
+            We found three types of community user archetypes—two (Contributors and Lurkers) whose characteristics were independent of their patient journey progress, and one (Mentors) whose behavior was tied to how long they had been a patient.
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/archetypes.jpg"
-            alt="Three user archetypes: Contributors, Lurkers, and Mentors"
-            caption="User archetypes: Contributors, Lurkers, and Mentors"
-          />
+          <ProjectText>
+            Contributors and Lurkers displayed opposite characteristics. Contributors were mainly female, preferred to be identified, and focused on building relationships. Lurkers were mainly male, preferred anonymity, and prioritized finding answers through education over relationship-building. Both groups noted these tendencies weren't specific to patient communities.
+          </ProjectText>
+          <ProjectText>
+            Mentors were further along in their journey and wished to give back—many started their own communities or became moderators. They felt more responsibility for others in the community than for themselves and typically didn't join for educational content.
+          </ProjectText>
+          <UserArchetypes />
         </ProjectSubsection>
 
-        <ProjectSubsection title="Personas">
-          <ProjectText>
-            Based on our research, we developed detailed personas representing the spectrum of patients we aimed to serve—from those newly diagnosed to those further along in their health journey.
-          </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-09.png"
-            alt="Patient personas: Shrini the Beginner and Leslie the Intermediate"
-            caption="Personas: Shrini 'The Beginner' and Leslie 'The Intermediate'"
-          />
-        </ProjectSubsection>
       </ProjectSection>
 
       {/* Design */}
@@ -355,22 +340,26 @@ export default function CataliaHealth() {
               'What kind of engagements would facilitate a positive increase in a patient\'s overall well-being?',
             ]}
           />
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-03.png"
-            alt="User story and method diagram showing app concept"
-            caption="Core user story: connecting patients to community, education, and services"
-          />
+          <ProjectText>
+            Our North Star was to increase the duration of patient engagement and improve health outcomes through engaging, dynamic content. Since what's "engaging" varies by where a patient is in their journey, we knew personalization would be key—content needed to adapt based on how long someone had been living with their condition.
+          </ProjectText>
+          <ProjectText>
+            The prototype needed to give users the ability to: see an overview of their health journey and use it to seek or give guidance, maintain privacy while sharing personal information, educate themselves through credible articles, and share experiences around topics like diet, medications, and symptom management.
+          </ProjectText>
+          <CoreUserStory />
         </ProjectSubsection>
 
         <ProjectSubsection title="Brainstorming">
           <ProjectText>
-            We used Miro to organize our thoughts around a potential concept. This took the form of an initial site map for the community. We split into two groups to tackle our initial thoughts—one focusing on person-to-person interactions, the other on patient-to-education interactions.
+            Using our north star and research priorities, we used Miro to brainstorm the community's information architecture. This exercise helped us answer key questions: What's the main framework? Which findings should appear in navigation? Should we integrate Mabu, and how?
           </ProjectText>
-          <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-01.png"
-            alt="Miro brainstorming board with site map concepts"
-            caption="Initial site map exploration on Miro"
-          />
+          <ProjectText>
+            We split into two groups to explore different site map approaches, which helped us understand potential IA structures and prioritize features. For scope, we focused on online community and resource features, saving Mabu integration and in-person interactions for future development.
+          </ProjectText>
+          <MiroBoard variant={1} />
+          <ChartCaption>This board focuses on person-to-person interactions and connecting others with in-person resources</ChartCaption>
+          <MiroBoard variant={2} />
+          <ChartCaption>This board focuses on patient-to-education interactions and integration with the existing Mabu product</ChartCaption>
         </ProjectSubsection>
 
         <ProjectSubsection title="Concept Sketching">
@@ -385,37 +374,82 @@ export default function CataliaHealth() {
               'Incorporating Mabu as a mascot or other Catalia Health-generated prompts',
             ]}
           />
-          <ProjectImageGrid
-            images={[
-              { src: '/assets/projects/catalia-health/content/screen-02.png', alt: 'Crazy Eights design sprint sketches' },
-              { src: '/assets/projects/catalia-health/content/screen-04.png', alt: 'Hand-drawn wireframe sketches' },
-            ]}
-            columns={2}
+          <ProjectImage
+            src="/assets/projects/catalia-health/content/screen-04.png"
+            alt="Hand-drawn wireframe sketches from Crazy Eights design sprint"
           />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Developing the Wireframes">
+          <ProjectText>
+            We collaborated on transforming the most compelling sketches into organized, streamlined screens. Using a whiteboard for rapid iteration, we first established the navigation hierarchy—which revealed "Explore" and "Community" as the app's core pages.
+          </ProjectText>
+          <ProjectText>
+            "Explore" would serve as the homepage, with content personalized based on onboarding data that maps users to their patient journey stage. Both official publications and community content would be featured under "Recommended Articles" and "Recommended Posts"—articles curated by Catalia Health or moderators, posts surfaced based on user preferences. Users could bookmark or comment on any featured content.
+          </ProjectText>
+          <ProjectText>
+            With these two key features defined, we mapped out two separate user journeys and used them as a framework to build the wireframes, walking through each to match users' mental models.
+          </ProjectText>
         </ProjectSubsection>
 
         <ProjectSubsection title="User Flows">
           <ProjectText>
-            We mapped out the community user flow to understand how patients would navigate and engage with the app's core features.
+            We mapped out the community and explore user flows to understand how patients would navigate and engage with the app's core features.
+          </ProjectText>
+          <CommunityUserFlow />
+          <ExploreUserFlow />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Whiteboard Sessions">
+          <ProjectText>
+            Using whiteboard collaboration, we transformed our user flows into organized screen layouts. We established a navigation hierarchy with "Explore" and "Community" as the app's two core pages, then sketched detailed wireframes for each feature.
+          </ProjectText>
+          <ProjectText>
+            For "Explore," we designed a personalized homepage where content adapts based on the patient's journey stage. Users see "Recommended Articles" (curated by Catalia Health) and "Recommended Posts" (from other patients) with options to bookmark or comment. For "Community," we organized discussions by topic categories—allowing patients to browse, post stories, and connect with others facing similar challenges.
           </ProjectText>
           <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-05.png"
-            alt="Community user flow diagram"
-            caption="Community feature user flow"
+            src="/assets/projects/catalia-health/content/screen-06.png"
+            alt="Whiteboard wireframes for Community feature"
           />
+          <ProjectImage
+            src="/assets/projects/catalia-health/content/screen-08.png"
+            alt="Whiteboard wireframes for Explore feature"
+          />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Collaborating with Catalia">
+          <ProjectText>
+            To maximize our working day with Catalia Health, we began by sharing our developed wireframes, referencing the two main user journeys we mapped out for our prototype. The purpose of this meeting was to show the client our current progress and receive feedback on the development of our work.
+          </ProjectText>
+          <ProjectText>
+            Working closely with Catalia Health's lead UX designer, Stacey Seronick, we iterated on the wireframes together. She suggested implementing their existing personas to help personalize the user journeys. The personas most applicable to our design were those representing "Beginner" and "Intermediate" patient types—these patients would benefit most from engaging with the community and its content.
+          </ProjectText>
+          <PersonasChart />
+          <ProjectText>
+            Together, we fleshed out how the community's content could change dynamically based on how long a patient has been diagnosed. At the micro level, we still needed to make design decisions around what information would be most important for personalization—but at the macro level, this collaboration helped us pivot toward a product that could actually be used by congestive heart failure patients.
+          </ProjectText>
         </ProjectSubsection>
 
         <ProjectSubsection title="Final Look">
           <ProjectText>
-            For the main color, we chose a shade of teal (#47bcca) that complements Catalia Health's blue and orange but also stands well on its own. The shade represents genuinity and organic growth.
+            For the main color, we chose a shade of teal (#47bcca) that complements Catalia Health's blue and orange while standing on its own. The warmer teal represents a merging of blue and green—genuinity and organic growth. For typography, we selected Avenir, a modern sans-serif that's clean and easy to read.
           </ProjectText>
           <ProjectText>
-            We chose the app name "Flourish" because it means to grow in a healthy way from being in a favorable environment. The logo symbolizes both a flower in full bloom and the intersection of similarities.
+            The interface is designed to feel lightweight through a minimal color palette, careful white space, and subtle shadows—making the app intuitive and delightful to use.
+          </ProjectText>
+          <ProjectText>
+            We named the app "Flourish" because it means to grow in a healthy way from being in a favorable environment. The logo symbolizes both a flower in full bloom and the intersection of like minds—users meeting, growing together, and flourishing within the community.
+          </ProjectText>
+          <FlourishBranding />
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Prototyping">
+          <ProjectText>
+            After increasing the fidelity of our wireframes in Sketch, we used Figma to create high-fidelity mockups. We then developed a working prototype using Figma's prototyping tools, building out the navigation and each screen according to the user flows we had defined.
           </ProjectText>
           <ProjectImage
-            src="/assets/projects/catalia-health/content/banner.png"
-            alt="Flourish app branding and logo"
-            caption="Flourish branding - representing growth and connection"
+            src="/assets/projects/catalia-health/content/screen-11.png"
+            alt="High-fidelity prototype screens in Figma"
           />
         </ProjectSubsection>
       </ProjectSection>
@@ -423,11 +457,15 @@ export default function CataliaHealth() {
       {/* Testing */}
       <ProjectSection id="testing" title="User Testing">
         <ProjectText>
-          Upon completion of the first working prototype, we conducted user tests to validate our design work. 5 participants volunteered to work with us to test the prototype remotely.
+          With the first working prototype complete, we conducted remote usability tests to validate our design decisions around usability, information architecture, and the personalization mental model. We reached out to participants from our earlier interviews—5 volunteered to share their screens and provide commentary as they performed tasks. Our goals were to:
         </ProjectText>
-        <ProjectText>
-          The goals were to understand how patients engage with the prototype's "Explore" and "Community" features, and understand patient expectations for content types along their patient journey.
-        </ProjectText>
+        <ProjectList
+          items={[
+            'Understand how patients engage with the "Explore" and "Community" features',
+            'Gauge expectations for content types at different stages of the patient journey',
+          ]}
+        />
+        <UsabilityScenario />
 
         <ProjectSubsection title="Key Findings">
           <ProjectList
@@ -438,13 +476,6 @@ export default function CataliaHealth() {
             ]}
           />
         </ProjectSubsection>
-        <ProjectImageGrid
-          images={[
-            { src: '/assets/projects/catalia-health/content/screen-11.png', alt: 'User testing session screenshot' },
-            { src: '/assets/projects/catalia-health/content/screen-12.png', alt: 'User testing findings' },
-          ]}
-          columns={2}
-        />
       </ProjectSection>
 
       {/* Outcome */}
@@ -452,14 +483,13 @@ export default function CataliaHealth() {
         <ProjectText>
           Our team was able to provide an interactive high-fidelity prototype, tested with chronically ill patients, which outlines the solution and demonstrates 2-3 user flows of key community features.
         </ProjectText>
-        <ProjectImageGrid
-          images={[
-            { src: '/assets/projects/catalia-health/content/screen-06.png', alt: 'Flourish app home screen' },
-            { src: '/assets/projects/catalia-health/content/screen-07.png', alt: 'Flourish community screen' },
-            { src: '/assets/projects/catalia-health/content/screen-08.png', alt: 'Flourish explore screen' },
-            { src: '/assets/projects/catalia-health/content/screen-14.png', alt: 'Flourish profile screen' },
-          ]}
-          columns={2}
+        <ProjectImage
+          src="/assets/projects/catalia-health/content/screen-14.png"
+          alt="Flourish profile screen"
+        />
+        <ProjectImage
+          src="/assets/projects/catalia-health/content/community-screens.png"
+          alt="Flourish app screens overview"
         />
 
         <ProjectSubsection title="Next Steps">

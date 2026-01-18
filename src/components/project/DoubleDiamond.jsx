@@ -1,15 +1,24 @@
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { ChartTitle } from '../Typography'
 
 export default function DoubleDiamond() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
   const strokeColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.35)'
-  const textColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'
-  const labelColor = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.35)'
-  const phaseColor1 = isDark ? '#7A9AC4' : '#3d5a80'
-  const phaseColor2 = isDark ? '#7A9AC4' : '#5B7A9E'
+  const captionColor = isDark ? '#6B7280' : '#6B6B6B'
+  const captionSmColor = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.35)'
+  const fontMono = "'Azeret Mono', monospace"
+
+  // Phase colors from brand palette: Amethyst, Lilac, Rose, Gold
+  const discoverColor = '#5835B0'  // Amethyst
+  const defineColor = '#BF92F0'    // Lilac
+  const developColor = '#D78F8D'   // Rose
+  const deliverColor = '#DBA166'   // Gold
+
+  // Path lengths for draw animation (must be >= actual path length)
+  const diamondHalfPath = 400
 
   return (
     <div
@@ -20,12 +29,7 @@ export default function DoubleDiamond() {
     >
       <div className={`rounded-2xl p-6 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
         {/* Header */}
-        <h3
-          className="font-mono text-sm tracking-wide uppercase font-medium mb-6 md:mb-8"
-          style={{ color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }}
-        >
-          Double Diamond Process Model
-        </h3>
+        <ChartTitle>Double Diamond Process Model</ChartTitle>
 
         {/* Desktop SVG */}
         <svg
@@ -34,103 +38,129 @@ export default function DoubleDiamond() {
         >
           {/* Problem Label - left side, rotated */}
           <text x="12" y="100" textAnchor="middle" transform="rotate(-90, 12, 100)"
-            style={{ fontSize: '11px', fill: textColor, fontFamily: 'var(--font-mono)', fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            style={{
+              fontSize: '10px',
+              fill: captionColor,
+              fontFamily: fontMono,
+              fontWeight: '400',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              opacity: isVisible ? 1 : 0,
+              transition: 'opacity 0.6s ease-out 0.8s'
+            }}>
             Problem
           </text>
 
           {/* Solution Label - right side, rotated */}
           <text x="588" y="100" textAnchor="middle" transform="rotate(-90, 588, 100)"
-            style={{ fontSize: '11px', fill: textColor, fontFamily: 'var(--font-mono)', fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            style={{
+              fontSize: '10px',
+              fill: captionColor,
+              fontFamily: fontMono,
+              fontWeight: '400',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              opacity: isVisible ? 1 : 0,
+              transition: 'opacity 0.6s ease-out 0.8s'
+            }}>
             Solution
           </text>
 
-          {/* First Diamond - outline with rounded left corner */}
+          {/* First Diamond - left half (draw animation) */}
           <path
-            d="M 45 100 Q 40 100 43 95 L 170 15 L 170 185 L 43 105 Q 40 100 45 100 Z"
+            d="M 45 100 L 170 15 M 170 185 L 45 100"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.2s' }}
+            strokeDasharray={diamondHalfPath}
+            strokeDashoffset={isVisible ? 0 : diamondHalfPath}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0s' }}
           />
+          {/* First Diamond - right half */}
           <path
             d="M 170 15 L 300 100 L 170 185"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.3s' }}
+            strokeDasharray={diamondHalfPath}
+            strokeDashoffset={isVisible ? 0 : diamondHalfPath}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.2s' }}
           />
 
-          {/* Second Diamond - outline with rounded right corner */}
+          {/* Second Diamond - left half */}
           <path
-            d="M 300 100 L 430 15 L 430 185 L 300 100"
+            d="M 300 100 L 430 15 M 430 185 L 300 100"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.4s' }}
+            strokeDasharray={diamondHalfPath}
+            strokeDashoffset={isVisible ? 0 : diamondHalfPath}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.4s' }}
           />
+          {/* Second Diamond - right half */}
           <path
-            d="M 430 15 L 555 100 Q 560 100 557 105 L 430 185 L 430 15"
+            d="M 430 15 L 555 100 L 430 185"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.5s' }}
+            strokeDasharray={diamondHalfPath}
+            strokeDashoffset={isVisible ? 0 : diamondHalfPath}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.6s' }}
           />
 
-          {/* Dashed vertical lines at peaks */}
-          <line x1="170" y1="15" x2="170" y2="185"
+          {/* Dashed vertical lines at diamond centers */}
+          <line x1="170.5" y1="15" x2="170.5" y2="185"
             stroke={strokeColor}
             strokeWidth="1"
-            strokeDasharray="4 4"
+            strokeDasharray="6 4"
+            shapeRendering="crispEdges"
             opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.6s' }}
+            style={{ transition: 'opacity 0.6s ease-out 0.8s' }}
           />
-          <line x1="430" y1="15" x2="430" y2="185"
+          <line x1="430.5" y1="15" x2="430.5" y2="185"
             stroke={strokeColor}
             strokeWidth="1"
-            strokeDasharray="4 4"
+            strokeDasharray="6 4"
+            shapeRendering="crispEdges"
             opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.7s' }}
+            style={{ transition: 'opacity 0.6s ease-out 1s' }}
           />
 
           {/* Divergent/Convergent Labels - First Diamond */}
-          <text x="95" y="50" textAnchor="middle" transform="rotate(-40, 95, 50)"
-            style={{ fontSize: '10px', fill: labelColor, fontFamily: 'var(--font-mono)', fontWeight: '400', fontStyle: 'italic' }}>
+          <text x="100" y="52" textAnchor="middle" transform="rotate(-34, 100, 52)"
+            style={{ fontSize: '9px', fill: captionSmColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 1s' }}>
             Divergent
           </text>
-          <text x="245" y="50" textAnchor="middle" transform="rotate(40, 245, 50)"
-            style={{ fontSize: '10px', fill: labelColor, fontFamily: 'var(--font-mono)', fontWeight: '400', fontStyle: 'italic' }}>
+          <text x="240" y="52" textAnchor="middle" transform="rotate(34, 240, 52)"
+            style={{ fontSize: '9px', fill: captionSmColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 1s' }}>
             Convergent
           </text>
 
           {/* Divergent/Convergent Labels - Second Diamond */}
-          <text x="355" y="50" textAnchor="middle" transform="rotate(-40, 355, 50)"
-            style={{ fontSize: '10px', fill: labelColor, fontFamily: 'var(--font-mono)', fontWeight: '400', fontStyle: 'italic' }}>
+          <text x="360" y="52" textAnchor="middle" transform="rotate(-34, 360, 52)"
+            style={{ fontSize: '9px', fill: captionSmColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 1s' }}>
             Divergent
           </text>
-          <text x="505" y="50" textAnchor="middle" transform="rotate(40, 505, 50)"
-            style={{ fontSize: '10px', fill: labelColor, fontFamily: 'var(--font-mono)', fontWeight: '400', fontStyle: 'italic' }}>
+          <text x="500" y="52" textAnchor="middle" transform="rotate(34, 500, 52)"
+            style={{ fontSize: '9px', fill: captionSmColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 1s' }}>
             Convergent
           </text>
 
-          {/* Phase Labels */}
-          <text x="110" y="105" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '12px', fill: phaseColor1, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          {/* Phase Labels - fade in after lines draw */}
+          <text x="120" y="100" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '10px', fill: discoverColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 0.6s' }}>
             Discover
           </text>
-          <text x="235" y="105" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '12px', fill: phaseColor1, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <text x="220" y="100" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '10px', fill: defineColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 0.8s' }}>
             Define
           </text>
-          <text x="365" y="105" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '12px', fill: phaseColor2, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <text x="380" y="100" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '10px', fill: developColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 1s' }}>
             Develop
           </text>
-          <text x="490" y="105" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '12px', fill: phaseColor2, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <text x="480" y="100" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '10px', fill: deliverColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 1.2s' }}>
             Deliver
           </text>
         </svg>
@@ -142,83 +172,91 @@ export default function DoubleDiamond() {
         >
           {/* Problem Label - left side */}
           <text x="8" y="80" textAnchor="middle" transform="rotate(-90, 8, 80)"
-            style={{ fontSize: '9px', fill: textColor, fontFamily: 'var(--font-mono)', fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            style={{ fontSize: '9px', fill: captionColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 0.8s' }}>
             Problem
           </text>
 
           {/* Solution Label - right side */}
           <text x="352" y="80" textAnchor="middle" transform="rotate(-90, 352, 80)"
-            style={{ fontSize: '9px', fill: textColor, fontFamily: 'var(--font-mono)', fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            style={{ fontSize: '9px', fill: captionColor, fontFamily: fontMono, fontWeight: '400', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease-out 0.8s' }}>
             Solution
           </text>
 
-          {/* First Diamond - outline */}
+          {/* First Diamond - left half */}
           <path
-            d="M 25 80 Q 20 80 23 75 L 95 20 L 95 140 L 23 85 Q 20 80 25 80 Z"
+            d="M 25 80 L 95 20 M 95 140 L 25 80"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.2s' }}
+            strokeDasharray={300}
+            strokeDashoffset={isVisible ? 0 : 300}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0s' }}
           />
+          {/* First Diamond - right half */}
           <path
             d="M 95 20 L 170 80 L 95 140"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.3s' }}
+            strokeDasharray={300}
+            strokeDashoffset={isVisible ? 0 : 300}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.2s' }}
           />
 
-          {/* Second Diamond - outline */}
+          {/* Second Diamond - left half */}
           <path
-            d="M 170 80 L 245 20 L 245 140 L 170 80"
+            d="M 170 80 L 245 20 M 245 140 L 170 80"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.4s' }}
+            strokeDasharray={300}
+            strokeDashoffset={isVisible ? 0 : 300}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.4s' }}
           />
+          {/* Second Diamond - right half */}
           <path
-            d="M 245 20 L 320 80 Q 325 80 322 85 L 245 140 L 245 20"
+            d="M 245 20 L 320 80 L 245 140"
             fill="none"
             stroke={strokeColor}
             strokeWidth="1"
-            opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.5s' }}
+            strokeDasharray={300}
+            strokeDashoffset={isVisible ? 0 : 300}
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out 0.6s' }}
           />
 
-          {/* Dashed vertical lines at peaks */}
-          <line x1="95" y1="20" x2="95" y2="140"
+          {/* Dashed vertical lines at diamond centers */}
+          <line x1="95.5" y1="20" x2="95.5" y2="140"
             stroke={strokeColor}
             strokeWidth="1"
-            strokeDasharray="3 3"
+            strokeDasharray="4 3"
+            shapeRendering="crispEdges"
             opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.6s' }}
+            style={{ transition: 'opacity 0.6s ease-out 0.8s' }}
           />
-          <line x1="245" y1="20" x2="245" y2="140"
+          <line x1="245.5" y1="20" x2="245.5" y2="140"
             stroke={strokeColor}
             strokeWidth="1"
-            strokeDasharray="3 3"
+            strokeDasharray="4 3"
+            shapeRendering="crispEdges"
             opacity={isVisible ? 1 : 0}
-            style={{ transition: 'opacity 0.6s ease-out 0.7s' }}
+            style={{ transition: 'opacity 0.6s ease-out 1s' }}
           />
 
-          {/* Phase Labels */}
-          <text x="58" y="83" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '9px', fill: phaseColor1, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          {/* Phase Labels - fade in after lines draw */}
+          <text x="68" y="80" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '9px', fill: discoverColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 0.6s' }}>
             Discover
           </text>
-          <text x="132" y="83" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '9px', fill: phaseColor1, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <text x="122" y="80" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '9px', fill: defineColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 0.8s' }}>
             Define
           </text>
-          <text x="208" y="83" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '9px', fill: phaseColor2, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <text x="218" y="80" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '9px', fill: developColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 1s' }}>
             Develop
           </text>
-          <text x="282" y="83" textAnchor="middle" dominantBaseline="middle"
-            style={{ fontSize: '9px', fill: phaseColor2, fontFamily: 'var(--font-mono)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <text x="272" y="80" textAnchor="middle" dominantBaseline="middle"
+            style={{ fontSize: '9px', fill: deliverColor, fontFamily: fontMono, fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease-out 1.2s' }}>
             Deliver
           </text>
         </svg>

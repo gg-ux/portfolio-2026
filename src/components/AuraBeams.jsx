@@ -9,9 +9,9 @@ const PALETTES = {
     { r: 234, g: 88, b: 12 },   // Orange #EA580C
   ],
   soulful: [
-    { r: 91, g: 33, b: 182 },   // Violet Twilight #5B21B6
-    { r: 192, g: 132, b: 252 }, // Bright Lavender #C084FC
-    { r: 212, g: 165, b: 165 }, // Dusty Rose #D4A5A5
+    { r: 88, g: 53, b: 176 },   // Amethyst #5835B0
+    { r: 191, g: 146, b: 240 }, // Lilac #BF92F0
+    { r: 215, g: 143, b: 141 }, // Rose #D78F8D
   ],
 }
 

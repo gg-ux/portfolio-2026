@@ -1,12 +1,24 @@
-import { H1, H2, H3, H4, Body, Caption } from '../../components/Typography'
+import { H1, H2, H3, H4, Body, Caption, ChartContainer } from '../../components/Typography'
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
-import { Sun, Moon } from '@phosphor-icons/react'
+import { Divider, SectionDivider } from '../../components/ui/Divider'
+import { FrostedCard } from '../../components/ui'
+import {
+  Sun, Moon, ArrowRight, ArrowUp, ArrowUpRight, ArrowDown,
+  X, ListBullets, ChatCircle, EnvelopeSimple, CheckCircle,
+  WarningCircle, CircleNotch, Sparkle, MagnifyingGlass,
+  LinkedinLogo, DribbbleLogo, Globe, LinkSimple,
+  Palette, Stack, Lightning, Layout, Info, Medal,
+  Person, UsersThree, Heartbeat, TrendUp, Target, ArrowsOut
+} from '@phosphor-icons/react'
 
 const sections = [
   { id: 'typography', label: 'Typography' },
   { id: 'colors', label: 'Colors' },
+  { id: 'iconography', label: 'Iconography' },
   { id: 'spacing', label: 'Spacing' },
+  { id: 'containers', label: 'Containers' },
+  { id: 'dividers', label: 'Dividers' },
 ]
 
 export default function FoundationPage() {
@@ -18,11 +30,14 @@ export default function FoundationPage() {
 
   // Soulful palette - Brand colors with primary/secondary roles (theme-aware)
   const soulfulPalette = [
-    { name: 'Violet Twilight', hex: isDark ? '#7C3AED' : '#5B21B6', textColor: 'text-white', role: 'primary', icon: Sun },
-    { name: 'Bright Lavender', hex: isDark ? '#C084FC' : '#A855F7', textColor: 'text-black', role: 'primary', icon: Moon },
-    { name: 'Dusty Rose', hex: isDark ? '#D4A5A5' : '#BE8585', textColor: 'text-black', role: 'secondary' },
-    { name: 'Dusty Blue', hex: isDark ? '#7A9AC4' : '#5B7A9E', textColor: 'text-black', role: 'secondary' },
-    { name: 'Soft Slate', hex: isDark ? '#A8BCD8' : '#98AACA', textColor: 'text-black', role: 'secondary' },
+    { name: 'Amethyst', hex: '#5835B0', textColor: 'text-white', role: 'primary', icon: Sun },
+    { name: 'Lilac', hex: '#BF92F0', textColor: 'text-black', role: 'primary', icon: Moon },
+    { name: 'Rose', hex: '#D78F8D', textColor: 'text-black', role: 'secondary' },
+    { name: 'Gold', hex: '#DBA166', textColor: 'text-black', role: 'secondary' },
+    { name: 'Turquoise', hex: '#36CBC6', textColor: 'text-black', role: 'secondary' },
+    { name: 'Lagoon', hex: '#0B96A3', textColor: 'text-white', role: 'secondary' },
+    { name: 'Peridot', hex: '#87AA61', textColor: 'text-black', role: 'secondary' },
+    { name: 'Forest', hex: '#2F7255', textColor: 'text-white', role: 'secondary' },
   ]
 
   // Blob shader colors - theme aware
@@ -49,6 +64,8 @@ export default function FoundationPage() {
     { name: 'Error', hex: isDark ? '#EF4444' : '#DC2626', displayHex: isDark ? '#EF4444' : '#DC2626', textColor: 'text-white' },
     { name: 'Success', hex: isDark ? '#22C55E' : '#16A34A', displayHex: isDark ? '#22C55E' : '#16A34A', textColor: 'text-white' },
     { name: 'Warning', hex: isDark ? '#F59E0B' : '#D97706', displayHex: isDark ? '#F59E0B' : '#D97706', textColor: 'text-black' },
+    { name: 'Dark Mode', hex: '#A78BFA', displayHex: '#A78BFA', textColor: 'text-black', icon: Moon },
+    { name: 'Light Mode', hex: '#F59E0B', displayHex: '#F59E0B', textColor: 'text-black', icon: Sun },
   ]
 
 
@@ -100,7 +117,7 @@ export default function FoundationPage() {
       element: <H4>Header 4</H4>
     },
     {
-      component: 'Body (Lg)',
+      component: 'Body',
       size: '16–17px',
       font: 'Satoshi',
       weightDark: '400',
@@ -110,14 +127,41 @@ export default function FoundationPage() {
       element: <Body>Body</Body>
     },
     {
-      component: 'Body (Sm)',
+      component: 'Emphasis',
+      size: '16–17px',
+      font: 'Satoshi',
+      weight: '600',
+      tracking: 'normal',
+      useCase: 'Spec titles, emphasis within body text',
+      element: <Body weight="bold">Emphasis</Body>
+    },
+    {
+      component: 'Body Small',
       size: '15px',
       font: 'Satoshi',
       weightDark: '400',
       weightLight: '450',
       tracking: 'normal',
       useCase: 'Cards, secondary content, bullet points',
-      element: <Body size="sm">Body (Sm)</Body>
+      element: <Body size="sm">Body Small</Body>
+    },
+    {
+      component: 'Label',
+      size: '13px',
+      font: 'Satoshi',
+      weight: '500',
+      tracking: 'normal',
+      useCase: 'Form labels, icon names, readable small text',
+      element: <span className="font-satoshi text-[13px] font-medium">Label</span>
+    },
+    {
+      component: 'Label Caption',
+      size: '11px',
+      font: 'Satoshi',
+      weight: '400',
+      tracking: 'normal',
+      useCase: 'Secondary labels, icon metadata, subtle descriptors',
+      element: <span className="font-satoshi text-[11px] font-normal opacity-60">Label Caption</span>
     },
     {
       component: 'Caption',
@@ -129,22 +173,22 @@ export default function FoundationPage() {
       element: <Caption>Caption</Caption>
     },
     {
-      component: 'Caption (Sm)',
+      component: 'Caption Small',
       size: '11px',
       font: 'Azeret Mono',
       weight: '500',
       tracking: 'wide',
       useCase: 'Tags, chips, compact labels',
-      element: <Caption size="sm">Caption (Sm)</Caption>
+      element: <Caption size="sm">Caption Small</Caption>
     },
     {
-      component: 'Caption (Xs)',
+      component: 'Caption XS',
       size: '10px',
       font: 'Azeret Mono',
       weight: '500',
       tracking: 'wider',
       useCase: 'Role labels, swatch metadata, subtle descriptors',
-      element: <Caption size="xs">Caption (Xs)</Caption>
+      element: <Caption size="xs">Caption XS</Caption>
     },
   ]
 
@@ -162,21 +206,27 @@ export default function FoundationPage() {
     <DSLayout title="Foundation" sections={sections}>
       {/* Typography */}
       <DSSection id="typography" title="Typography">
-        <div className="space-y-6 mb-12">
+        <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
           {typography.map((type) => (
-            <div
-              key={type.component}
-              className={`grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-4 lg:gap-6 items-center border-b ${borderClass} pb-6`}
-            >
-              {/* Metadata - Right on desktop, below on mobile */}
-              <div className="order-2 lg:order-2">
-                <div className={`grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[11px] ${textMutedClass}`}>
-                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Size</span>
-                  <span>{type.size}</span>
-                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Font</span>
-                  <span>{type.font}</span>
-                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Weight</span>
-                  <span>
+            <div key={type.component} className={`p-6 border ${borderClass} rounded-xl mb-4 last:mb-0`}>
+              {/* Preview */}
+              <div className="mb-4">
+                {type.element}
+              </div>
+
+              {/* Properties - horizontal grid */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div>
+                  <Caption className="block mb-1" size="xs">Size</Caption>
+                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.size}</p>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Font</Caption>
+                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.font}</p>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Weight</Caption>
+                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
                     {type.weight ? (
                       type.weight
                     ) : (
@@ -191,17 +241,16 @@ export default function FoundationPage() {
                         </span>
                       </span>
                     )}
-                  </span>
-                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Tracking</span>
-                  <span>{type.tracking}</span>
-                  <span className={`text-right ${isDark ? 'text-white/30' : 'text-black/30'}`}>Use</span>
-                  <span>{type.useCase}</span>
+                  </p>
                 </div>
-              </div>
-
-              {/* Preview - Left on desktop, top on mobile */}
-              <div className="order-1 lg:order-1">
-                {type.element}
+                <div>
+                  <Caption className="block mb-1" size="xs">Tracking</Caption>
+                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.tracking}</p>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Use</Caption>
+                  <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>{type.useCase}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -245,14 +294,14 @@ export default function FoundationPage() {
         {/* Brand Palette */}
         <div className="mb-12">
           <H4 className="mb-2">Brand Palette</H4>
-          <Body className={`mb-6 ${textMutedClass}`}>Soulful — emotional, warm, unconventional</Body>
+          <Body className={`mb-4 ${textMutedClass}`}>Soulful — emotional, warm, unconventional</Body>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {soulfulPalette.map((color) => {
               const Icon = color.icon
               return (
                 <div key={color.name} className="group">
                   <div
-                    className={`aspect-[3/2] rounded-xl mb-2 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]`}
+                    className={`aspect-[3/2] rounded-xl mb-1.5 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]`}
                     style={{ backgroundColor: color.hex }}
                   >
                     <span className={`font-mono text-xs ${color.textColor} opacity-60`}>{color.hex}</span>
@@ -271,12 +320,12 @@ export default function FoundationPage() {
         {/* Blob Shader - Theme aware */}
         <div className="mb-12">
           <H4 className="mb-2">Blob Shader</H4>
-          <Body className={`mb-6 ${textMutedClass}`}>FluidBlob gradient colors — switch theme to see variants</Body>
+          <Body className={`mb-4 ${textMutedClass}`}>FluidBlob gradient colors — switch theme to see variants</Body>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {blobColors.map((color) => (
               <div key={color.name} className="group">
                 <div
-                  className={`aspect-[3/2] rounded-xl mb-2 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]`}
+                  className={`aspect-[3/2] rounded-xl mb-1.5 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]`}
                   style={{ backgroundColor: color.hex }}
                 >
                   <span className={`font-mono text-xs ${color.textColor} opacity-60`}>{color.hex}</span>
@@ -291,22 +340,191 @@ export default function FoundationPage() {
         {/* System Colors - Theme aware */}
         <div className="mb-12">
           <H4 className="mb-2">System Colors</H4>
-          <Body className={`mb-6 ${textMutedClass}`}>Functional UI colors — switch theme to see variants</Body>
+          <Body className={`mb-4 ${textMutedClass}`}>Functional UI colors — switch theme to see variants</Body>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {systemColors.map((color) => (
-              <div key={color.name} className="group">
-                <div
-                  className={`aspect-[3/2] rounded-xl mb-2 flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] border ${borderClass}`}
-                  style={{ backgroundColor: color.hex }}
-                >
-                  <span className={`font-mono text-xs ${color.textColor} opacity-60`}>{color.displayHex}</span>
+            {systemColors.map((color) => {
+              const Icon = color.icon
+              return (
+                <div key={color.name} className="group">
+                  <div
+                    className={`aspect-[3/2] rounded-xl mb-1.5 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] border ${borderClass}`}
+                    style={{ backgroundColor: color.hex }}
+                  >
+                    <span className={`font-mono text-xs ${color.textColor} opacity-60`}>{color.displayHex}</span>
+                    {Icon && (
+                      <span className={`${color.textColor} opacity-40 mt-1`}>
+                        <Icon size={12} weight="fill" />
+                      </span>
+                    )}
+                  </div>
+                  <Caption uppercase={false}>{color.name}</Caption>
                 </div>
-                <Caption uppercase={false}>{color.name}</Caption>
+              )
+            })}
+          </div>
+        </div>
+
+      </DSSection>
+
+      {/* Iconography */}
+      <DSSection id="iconography" title="Iconography">
+        <Body className={`mb-4 ${textMutedClass}`}>
+          Icons from Phosphor Icons — a flexible icon family with multiple weights for visual hierarchy.
+        </Body>
+
+        {/* Icon Library */}
+        <H4 className="mb-4">Icon Library</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <div className="flex items-center gap-4 mb-6">
+            <a
+              href="https://phosphoricons.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-2 font-mono text-xs px-3 py-1.5 rounded-lg transition-colors ${
+                isDark
+                  ? 'bg-white/[0.06] hover:bg-white/[0.1] text-white/70'
+                  : 'bg-black/[0.04] hover:bg-black/[0.08] text-gray-600'
+              }`}
+            >
+              <Globe size={14} weight="regular" />
+              phosphoricons.com
+              <ArrowUpRight size={12} weight="bold" />
+            </a>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <Caption className="block mb-1" size="xs">Package</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>@phosphor-icons/react</p>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Icons</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>1,200+ available</p>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Weights Used</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>5 of 6</p>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">License</Caption>
+              <p className={`font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-500'}`}>MIT</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Weights with Usage */}
+        <H4 className="mb-6">Weights & When to Use</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+            {[
+              { weight: 'thin', label: 'Thin', use: 'Large decorative icons (40px+)', example: 'Data viz accents' },
+              { weight: 'light', label: 'Light', use: 'Decorative, subtle UI elements', example: 'Card icons, close buttons' },
+              { weight: 'regular', label: 'Regular', use: 'Default for all UI', example: 'Nav, buttons, actions' },
+              { weight: 'bold', label: 'Bold', use: 'Small sizes, emphasis', example: 'Arrows at 10-12px' },
+              { weight: 'fill', label: 'Fill', use: 'Active states, status indicators', example: 'Theme toggle, badges' },
+            ].map(({ weight, label, use, example }) => (
+              <div key={weight} className="py-3 first:pt-0 last:pb-0 grid grid-cols-12 gap-4 items-center">
+                <div className="col-span-1">
+                  <Sun size={20} weight={weight} className={textHeadingClass} />
+                </div>
+                <span className={`col-span-2 font-satoshi text-sm font-medium ${isDark ? 'text-white/80' : 'text-gray-700'}`}>{label}</span>
+                <span className={`col-span-5 font-satoshi text-sm ${isDark ? 'text-white/60' : 'text-gray-600'}`}>{use}</span>
+                <span className={`col-span-4 font-satoshi text-sm ${isDark ? 'text-white/40' : 'text-gray-400'}`}>{example}</span>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Site Icons */}
+        <H4 className="mb-6">Site Icons</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <Caption className="block mb-4">Navigation & Actions</Caption>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
+            {[
+              { icon: ArrowRight, name: 'ArrowRight', weight: 'regular' },
+              { icon: ArrowUp, name: 'ArrowUp', weight: 'bold' },
+              { icon: ArrowDown, name: 'ArrowDown', weight: 'bold' },
+              { icon: ArrowUpRight, name: 'ArrowUpRight', weight: 'bold' },
+              { icon: X, name: 'X', weight: 'light' },
+              { icon: ListBullets, name: 'ListBullets', weight: 'bold' },
+              { icon: MagnifyingGlass, name: 'Search', weight: 'regular' },
+              { icon: ArrowsOut, name: 'ArrowsOut', weight: 'regular' },
+            ].map(({ icon: Icon, name, weight }) => (
+              <div key={name} className="text-center group">
+                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
+                  <Icon size={22} weight={weight} className={textHeadingClass} />
+                </div>
+                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
+                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+              </div>
+            ))}
+          </div>
+
+          <Caption className="block mb-4">Status & Feedback</Caption>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
+            {[
+              { icon: CheckCircle, name: 'Success', weight: 'regular' },
+              { icon: WarningCircle, name: 'Warning', weight: 'regular' },
+              { icon: Info, name: 'Info', weight: 'regular' },
+              { icon: CircleNotch, name: 'Loading', weight: 'light' },
+              { icon: Sparkle, name: 'Sparkle', weight: 'light' },
+              { icon: Medal, name: 'Medal', weight: 'fill' },
+              { icon: TrendUp, name: 'TrendUp', weight: 'light' },
+              { icon: Target, name: 'Target', weight: 'light' },
+            ].map(({ icon: Icon, name, weight }) => (
+              <div key={name} className="text-center group">
+                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
+                  <Icon size={22} weight={weight} className={textHeadingClass} />
+                </div>
+                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
+                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+              </div>
+            ))}
+          </div>
+
+          <Caption className="block mb-4">Theme & Communication</Caption>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+            {[
+              { icon: Sun, name: 'Sun', weight: 'fill' },
+              { icon: Moon, name: 'Moon', weight: 'fill' },
+              { icon: ChatCircle, name: 'Chat', weight: 'regular' },
+              { icon: EnvelopeSimple, name: 'Email', weight: 'regular' },
+              { icon: LinkedinLogo, name: 'LinkedIn', weight: 'regular' },
+              { icon: Globe, name: 'Globe', weight: 'regular' },
+              { icon: LinkSimple, name: 'Link', weight: 'bold' },
+            ].map(({ icon: Icon, name, weight }) => (
+              <div key={name} className="text-center group">
+                <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-3 transition-colors ${isDark ? 'bg-white/[0.04] group-hover:bg-white/[0.08]' : 'bg-black/[0.02] group-hover:bg-black/[0.04]'}`}>
+                  <Icon size={22} weight={weight} className={textHeadingClass} />
+                </div>
+                <span className="font-satoshi text-[13px] font-medium block">{name}</span>
+                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sizing */}
+        <H4 className="mb-6">Sizing</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl`}>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {[
+              { size: 10, use: 'Tight inline arrows', weight: 'bold' },
+              { size: 14, use: 'Compact UI, tags', weight: 'regular' },
+              { size: 20, use: 'Default size', weight: 'regular' },
+              { size: 24, use: 'Buttons, feature cards', weight: 'light' },
+              { size: 40, use: 'Data viz decorative', weight: 'thin' },
+            ].map(({ size, use, weight }) => (
+              <div key={size} className="text-center">
+                <div className={`h-14 flex items-center justify-center mb-3`}>
+                  <ArrowRight size={size} weight={weight} className={textHeadingClass} />
+                </div>
+                <span className="font-satoshi text-[13px] font-medium block">{size}px</span>
+                <span className="font-satoshi text-[13px] font-medium block">{use}</span>
+                <span className={`font-satoshi text-[11px] block capitalize ${isDark ? 'text-white/40' : 'text-black/40'}`}>{weight}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </DSSection>
 
       {/* Spacing */}
@@ -327,6 +545,175 @@ export default function FoundationPage() {
                 <Caption className="text-gray-600">{space.tailwind}</Caption>
               </div>
             ))}
+          </div>
+        </div>
+      </DSSection>
+
+      {/* Containers */}
+      <DSSection id="containers" title="Containers">
+        <Body className={`mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+          Three container styles serve different purposes. Choose based on the content's intent and how much visual prominence it needs.
+        </Body>
+
+        {/* Comparison */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* ChartContainer */}
+          <div>
+            <H4 className="mb-4">ChartContainer</H4>
+            <ChartContainer className="h-[180px] flex items-center justify-center mb-4">
+              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                Subtle 2% fill
+              </span>
+            </ChartContainer>
+            <div className="space-y-2">
+              <Caption className="block">Use for</Caption>
+              <Body size="sm">
+                Data visualizations, charts, research findings, tables, article body content
+              </Body>
+            </div>
+          </div>
+
+          {/* FrostedCard */}
+          <div>
+            <H4 className="mb-4">FrostedCard</H4>
+            <FrostedCard className="h-[180px] flex items-center justify-center mb-4">
+              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                Frosted glass + grain
+              </span>
+            </FrostedCard>
+            <div className="space-y-2">
+              <Caption className="block">Use for</Caption>
+              <Body size="sm">
+                Category cards, navigation, key stats, callouts, feature showcases
+              </Body>
+            </div>
+          </div>
+
+          {/* Transparent */}
+          <div>
+            <H4 className="mb-4">Transparent</H4>
+            <div className={`h-[180px] flex items-center justify-center mb-4 rounded-2xl`}>
+              <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                No background
+              </span>
+            </div>
+            <div className="space-y-2">
+              <Caption className="block">Use for</Caption>
+              <Body size="sm">
+                Kanban boards, flows, floating elements, content on hero backgrounds
+              </Body>
+            </div>
+          </div>
+        </div>
+
+        {/* Specs Comparison */}
+        <H4 className="mb-6">Specifications</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl`}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <Caption className="mb-4 block">ChartContainer</Caption>
+              <div className="space-y-3">
+                <div>
+                  <Caption className="block mb-1" size="xs">Background</Caption>
+                  <Body size="sm">2% white/black</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Border</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Blur</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Grain</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+              </div>
+            </div>
+            <div>
+              <Caption className="mb-4 block">FrostedCard</Caption>
+              <div className="space-y-3">
+                <div>
+                  <Caption className="block mb-1" size="xs">Background</Caption>
+                  <Body size="sm">1.5% / 20% white</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Border</Caption>
+                  <Body size="sm">1px at 8%</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Blur</Caption>
+                  <Body size="sm">12px</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Grain</Caption>
+                  <Body size="sm">8%/6% opacity</Body>
+                </div>
+              </div>
+            </div>
+            <div>
+              <Caption className="mb-4 block">Transparent</Caption>
+              <div className="space-y-3">
+                <div>
+                  <Caption className="block mb-1" size="xs">Background</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Border</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Blur</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+                <div>
+                  <Caption className="block mb-1" size="xs">Grain</Caption>
+                  <Body size="sm">None</Body>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DSSection>
+
+      {/* Dividers */}
+      <DSSection id="dividers" title="Dividers">
+        <H4 className="mb-6">Horizontal</H4>
+        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+          <div className="space-y-8">
+            <div>
+              <Caption className="mb-4 block">Full Width</Caption>
+              <SectionDivider />
+            </div>
+            <div>
+              <Caption className="mb-4 block">Standard</Caption>
+              <Divider />
+            </div>
+          </div>
+        </div>
+
+        <H4 className="mb-6">Vertical</H4>
+        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
+          <div className="flex items-center justify-center gap-8 h-24">
+            <Body className={isDark ? 'text-white/60' : 'text-gray-600'}>Left</Body>
+            <Divider orientation="vertical" />
+            <Body className={isDark ? 'text-white/60' : 'text-gray-600'}>Right</Body>
+          </div>
+        </div>
+
+        {/* Specs */}
+        <H4 className="mb-6">Specifications</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Caption className="block mb-1" size="xs">Height/Width</Caption>
+              <Body size="sm">1px</Body>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Color</Caption>
+              <Body size="sm">Theme-aware via divider-color class</Body>
+            </div>
           </div>
         </div>
       </DSSection>

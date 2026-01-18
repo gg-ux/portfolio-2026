@@ -5,9 +5,9 @@ import { useTheme } from '../context/ThemeContext'
  * FluidityLoader - Welcome loader with Soulful color palette
  *
  * Same concept as the Welcome Loader but using the Soulful colors:
- * - Bright Lavender #C084FC
- * - Violet Twilight #5B21B6
- * - Dusty Rose #D4A5A5
+ * - Lilac #BF92F0
+ * - Amethyst #5835B0
+ * - Rose #D78F8D
  *
  * Features:
  * - Progress ring that fills then fades with blur
@@ -65,7 +65,7 @@ export default function FluidityLoader({ onComplete, duration = 4000, contained 
           style={{
             width: 120,
             height: 120,
-            background: 'radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, rgba(91, 33, 182, 0.2) 50%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(191, 146, 240, 0.4) 0%, rgba(88, 53, 176, 0.2) 50%, transparent 70%)',
             filter: 'blur(20px)',
             animation: `fluidity-bloom ${animationDuration} ease-in-out`,
           }}
@@ -78,15 +78,15 @@ export default function FluidityLoader({ onComplete, duration = 4000, contained 
           className="absolute"
           style={{
             transform: 'rotate(-90deg)',
-            filter: 'drop-shadow(0 0 8px rgba(192, 132, 252, 0.5)) drop-shadow(0 0 16px rgba(91, 33, 182, 0.3))',
+            filter: 'drop-shadow(0 0 8px rgba(191, 146, 240, 0.5)) drop-shadow(0 0 16px rgba(88, 53, 176, 0.3))',
             animation: `fluidity-fade ${animationDuration} ease-in-out`,
           }}
         >
           <defs>
             <linearGradient id="fluidityLoaderGradient">
-              <stop offset="0%" stopColor="#C084FC" />
-              <stop offset="50%" stopColor="#5B21B6" />
-              <stop offset="100%" stopColor="#D4A5A5" />
+              <stop offset="0%" stopColor="#BF92F0" />
+              <stop offset="50%" stopColor="#5835B0" />
+              <stop offset="100%" stopColor="#D78F8D" />
               <animateTransform
                 attributeName="gradientTransform"
                 type="rotate"

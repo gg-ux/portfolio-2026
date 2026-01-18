@@ -98,7 +98,7 @@ function AppContent() {
     <>
       {isHomePage && isLoading && <Loader onComplete={handleLoaderComplete} />}
       <div className="min-h-screen theme-bg relative">
-        <GridBackground />
+        {!isDesignSystemSubpage && <GridBackground />}
         {!isDesignSystemSubpage && <AuraBeams palette="soulful" />}
         <GlobalGrain />
         <CustomCursor />
@@ -120,7 +120,7 @@ function AppContent() {
             <Route path="/project/notetracks" element={<Notetracks />} />
           </Routes>
         </main>
-        <Footer />
+        {!isDesignSystemSubpage && <Footer />}
       </div>
     </>
   )

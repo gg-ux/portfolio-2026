@@ -419,16 +419,16 @@ export function NewFlowChart({ width = 800, height = 710 }) {
   const textColor = isDark ? '#ffffff' : '#1f2937'
   const textMuted = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'
 
-  // Category colors
+  // Category colors - Brand palette
   const catColors = {
-    orderEdu: { bg: isDark ? 'rgba(167, 139, 250, 0.18)' : 'rgba(167, 139, 250, 0.15)', border: isDark ? 'rgba(167, 139, 250, 0.35)' : 'rgba(167, 139, 250, 0.3)' },
-    vehicleAppt: { bg: isDark ? 'rgba(15, 118, 110, 0.25)' : 'rgba(15, 118, 110, 0.15)', border: isDark ? 'rgba(15, 118, 110, 0.5)' : 'rgba(15, 118, 110, 0.35)' },
-    vehicleEdu: { bg: isDark ? 'rgba(139, 92, 246, 0.18)' : 'rgba(139, 92, 246, 0.15)', border: isDark ? 'rgba(139, 92, 246, 0.35)' : 'rgba(139, 92, 246, 0.3)' },
-    energyAppt: { bg: isDark ? 'rgba(234, 88, 12, 0.2)' : 'rgba(234, 88, 12, 0.12)', border: isDark ? 'rgba(234, 88, 12, 0.4)' : 'rgba(234, 88, 12, 0.3)' },
-    energyEdu: { bg: isDark ? 'rgba(20, 184, 166, 0.2)' : 'rgba(20, 184, 166, 0.12)', border: isDark ? 'rgba(20, 184, 166, 0.4)' : 'rgba(20, 184, 166, 0.3)' },
-    general: { bg: isDark ? 'rgba(107, 114, 128, 0.2)' : 'rgba(107, 114, 128, 0.12)', border: isDark ? 'rgba(107, 114, 128, 0.4)' : 'rgba(107, 114, 128, 0.3)' },
-    purchase: { bg: isDark ? 'rgba(192, 132, 252, 0.18)' : 'rgba(192, 132, 252, 0.15)', border: isDark ? 'rgba(192, 132, 252, 0.35)' : 'rgba(192, 132, 252, 0.3)' },
-    undetermined: { bg: isDark ? 'rgba(107, 114, 128, 0.15)' : 'rgba(107, 114, 128, 0.1)', border: isDark ? 'rgba(107, 114, 128, 0.3)' : 'rgba(107, 114, 128, 0.25)' },
+    orderEdu: { bg: isDark ? 'rgba(88, 53, 176, 0.25)' : 'rgba(88, 53, 176, 0.15)', border: isDark ? 'rgba(88, 53, 176, 0.45)' : 'rgba(88, 53, 176, 0.35)' },           // Amethyst
+    vehicleAppt: { bg: isDark ? 'rgba(219, 161, 102, 0.25)' : 'rgba(219, 161, 102, 0.18)', border: isDark ? 'rgba(219, 161, 102, 0.5)' : 'rgba(219, 161, 102, 0.4)' },  // Gold
+    vehicleEdu: { bg: isDark ? 'rgba(54, 203, 198, 0.25)' : 'rgba(54, 203, 198, 0.15)', border: isDark ? 'rgba(54, 203, 198, 0.45)' : 'rgba(54, 203, 198, 0.35)' },     // Turquoise
+    energyAppt: { bg: isDark ? 'rgba(215, 143, 141, 0.25)' : 'rgba(215, 143, 141, 0.18)', border: isDark ? 'rgba(215, 143, 141, 0.5)' : 'rgba(215, 143, 141, 0.4)' },   // Rose
+    energyEdu: { bg: isDark ? 'rgba(11, 150, 163, 0.25)' : 'rgba(11, 150, 163, 0.18)', border: isDark ? 'rgba(11, 150, 163, 0.5)' : 'rgba(11, 150, 163, 0.4)' },        // Lagoon
+    general: { bg: isDark ? 'rgba(107, 114, 128, 0.2)' : 'rgba(107, 114, 128, 0.12)', border: isDark ? 'rgba(107, 114, 128, 0.4)' : 'rgba(107, 114, 128, 0.3)' },       // Neutral
+    purchase: { bg: isDark ? 'rgba(191, 146, 240, 0.25)' : 'rgba(191, 146, 240, 0.15)', border: isDark ? 'rgba(191, 146, 240, 0.45)' : 'rgba(191, 146, 240, 0.35)' },   // Lilac
+    undetermined: { bg: isDark ? 'rgba(107, 114, 128, 0.15)' : 'rgba(107, 114, 128, 0.1)', border: isDark ? 'rgba(107, 114, 128, 0.3)' : 'rgba(107, 114, 128, 0.25)' }, // Neutral
   }
 
   // Layout constants

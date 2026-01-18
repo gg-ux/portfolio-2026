@@ -28,13 +28,13 @@
   --font-mono: 'Azeret Mono', monospace;
 
   --color-deep-black: #0a0a0a;
-  --color-lavender: #A78BFA;
+  --color-lavender: #BF92F0;
   --color-burnt-orange: #EA580C;
   --color-deep-teal: #0F766E;
 
   /* Brand accent colors */
-  --color-accent-bright: #C084FC;   /* Bright Lavender - dark mode */
-  --color-accent-deep: #5B21B6;     /* Violet Twilight - light mode */
+  --color-accent-bright: #BF92F0;   /* Lilac - dark mode */
+  --color-accent-deep: #5835B0;     /* Amethyst - light mode */
 
   /* Light mode colors */
   --color-light-bg: #FAF8F4;
@@ -508,30 +508,30 @@ html.light .divider-color {
 
 /* Theme-aware accent color */
 .theme-accent {
-  color: #C084FC; /* Bright Lavender */
+  color: #BF92F0; /* Lilac */
   transition: color 0.5s ease;
 }
 
 html.light .theme-accent {
-  color: #5B21B6; /* Violet Twilight */
+  color: #5835B0; /* Amethyst */
 }
 
 .theme-accent-bg {
-  background-color: #C084FC;
+  background-color: #BF92F0;
   transition: background-color 0.5s ease;
 }
 
 html.light .theme-accent-bg {
-  background-color: #5B21B6;
+  background-color: #5835B0;
 }
 
 .theme-accent-border {
-  border-color: #C084FC;
+  border-color: #BF92F0;
   transition: border-color 0.5s ease;
 }
 
 html.light .theme-accent-border {
-  border-color: #5B21B6;
+  border-color: #5835B0;
 }
 
 /* Energy beam animation for secondary buttons */
@@ -566,9 +566,9 @@ html.light .theme-accent-border {
     from var(--gradient-angle),
     transparent 0%,
     transparent 70%,
-    #A78BFA 78%,
-    #0F766E 88%,
-    #A78BFA 95%,
+    #BF92F0 78%,
+    #0B96A3 88%,
+    #BF92F0 95%,
     transparent 100%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -594,7 +594,7 @@ html.light .theme-accent-border {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(-45deg, #A78BFA 0%, #EA580C 100%);
+  background: linear-gradient(-45deg, #BF92F0 0%, #DBA166 100%);
   transform: translateX(-100%);
   transition: transform 0.4s ease-out;
   z-index: -1;
@@ -703,7 +703,7 @@ html.light .theme-accent-border {
 
   /* Keep accent color for visual interest */
   .theme-accent-bg {
-    background-color: #5B21B6 !important;
+    background-color: #5835B0 !important;
   }
 
   /* Tags styling for print */

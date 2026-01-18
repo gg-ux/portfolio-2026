@@ -15,6 +15,7 @@ export default function ProjectHero({
   timeline,
   team,
   impact,
+  output,
   coverImage,
   coverImageAlt = 'Project cover',
   coverPosition = 'center 30%',
@@ -75,6 +76,7 @@ export default function ProjectHero({
     { label: 'Timeline', value: timeline },
     team && { label: 'Team', value: team },
     impact && { label: 'Impact', value: impact },
+    output && { label: 'Output', value: output },
   ].filter(Boolean)
 
   return (

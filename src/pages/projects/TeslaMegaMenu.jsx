@@ -10,6 +10,7 @@ import {
   ProjectYouTube,
   ProcessKanban,
 } from '../../components/project'
+import { Body } from '../../components/Typography'
 import { MagnifyingGlass, ArrowsOut, Globe } from '@phosphor-icons/react'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -33,7 +34,7 @@ export default function TeslaMegaMenu() {
         title="Mega Menu"
         description="From 2021 to 2024, I was a key member of Tesla's Discovery Team, focusing on enhancing the user experience for top-of-funnel experiences on tesla.com. I spearheaded a comprehensive overhaul of the site's information architecture and successfully launched the new mega menu."
         role="Lead UX/UI Designer"
-        timeline="2021–2024"
+        timeline="Q1 2023"
         impact="Improved content discoverability & scalability"
         coverImage="/assets/projects/tesla/mega-menu/content/banner.jpg"
         lightBanner
@@ -62,10 +63,8 @@ export default function TeslaMegaMenu() {
             return (
               <div
                 key={index}
-                className={`relative rounded-2xl p-6 border backdrop-blur-md ${
-                  isDark
-                    ? 'border-white/[0.08] bg-white/[0.015]'
-                    : 'border-black/[0.08] bg-white/20'
+                className={`relative rounded-2xl p-6 ${
+                  isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
                 }`}
               >
                 <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
@@ -74,11 +73,9 @@ export default function TeslaMegaMenu() {
                 <h4 className={`text-xl mb-3 theme-heading`} style={{ fontWeight: 600 }}>
                   {goal.title}
                 </h4>
-                <p className={`font-satoshi text-[15px] leading-relaxed ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
-                }`}>
+                <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
                   {goal.description}
-                </p>
+                </Body>
               </div>
             )
           })}
@@ -95,7 +92,7 @@ export default function TeslaMegaMenu() {
                 { title: 'Identify Pain Points', description: 'Document key inefficiencies in the existing information architecture' },
                 { title: 'Document Current IA', description: 'Collaborate with content management and product teams to map pages for categorization' },
                 { title: 'Perform Card Sorting', description: 'Recruit participants for card sorting to gain insight into intuitive naming and groupings' },
-                { title: 'Conduct Competitor Audit', description: 'Research and compile menu designs from other companies for inspiration' },
+                { title: 'Audit Competitors', description: 'Research and compile menu designs from other companies for inspiration' },
               ],
             },
             {

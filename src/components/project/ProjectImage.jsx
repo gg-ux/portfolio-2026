@@ -18,10 +18,13 @@ export default function ProjectImage({
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
+  // Tighter spacing when no caption (matches space-y-6 gap between chart elements)
+  const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
   return (
     <figure
       ref={ref}
-      className={`my-8 md:my-12 transition-all duration-1000 ${
+      className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
@@ -142,10 +145,13 @@ export function ProjectImageFullWidth({
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
+  // Tighter spacing when no caption
+  const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
   return (
     <figure
       ref={ref}
-      className={`my-8 md:my-12 transition-all duration-1000 ${
+      className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
@@ -187,10 +193,13 @@ export function ProjectVideo({
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
+  // Tighter spacing when no caption
+  const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
   return (
     <figure
       ref={ref}
-      className={`my-8 md:my-12 transition-all duration-1000 ${
+      className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
@@ -241,23 +250,33 @@ export function ProjectVimeo({
   const videoId = getVimeoId(url)
   if (!videoId) return null
 
+  // Tighter spacing when no caption
+  const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
   return (
     <figure
       ref={ref}
-      className={`my-8 md:my-12 transition-all duration-1000 ${
+      className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
       <div
-        className={`overflow-hidden rounded-xl ${
+        className={`overflow-hidden rounded-xl md:rounded-2xl isolate relative ${
           isDark ? 'bg-[#111111]' : 'bg-gray-100'
         }`}
-        style={{ aspectRatio }}
+        style={{ aspectRatio, transform: 'translateZ(0)' }}
       >
         <iframe
           src={`https://player.vimeo.com/video/${videoId}?h=0&title=0&byline=0&portrait=0`}
-          className="w-full h-full"
-          frameBorder="0"
+          className="absolute block"
+          style={{
+            border: 0,
+            width: '103%',
+            height: '103%',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
         />
@@ -302,10 +321,13 @@ export function ProjectYouTube({
   const videoId = getYouTubeId(url)
   if (!videoId) return null
 
+  // Tighter spacing when no caption
+  const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
   return (
     <figure
       ref={ref}
-      className={`my-8 md:my-12 transition-all duration-1000 ${
+      className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
@@ -331,6 +353,20 @@ export function ProjectYouTube({
         </figcaption>
       )}
     </figure>
+  )
+}
+
+/**
+ * ChartCaption - Consistent caption for charts and visualizations
+ * Centered, mono font, uppercase, theme-aware
+ */
+export function ChartCaption({ children, className = '' }) {
+  return (
+    <figcaption className={`mt-6 mb-10 text-center ${className}`}>
+      <span className="font-mono text-[12px] tracking-wide uppercase theme-caption">
+        {children}
+      </span>
+    </figcaption>
   )
 }
 

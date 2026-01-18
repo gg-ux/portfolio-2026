@@ -43,6 +43,7 @@ export default function Navigation() {
 
   const location = useLocation()
   const isHomePage = location.pathname === '/'
+  const isDesignSystemSubpage = location.pathname.startsWith('/design-system/')
 
   // Prevent transition flicker on initial mount
   useEffect(() => {
@@ -152,7 +153,7 @@ export default function Navigation() {
       window.removeEventListener('scroll', handleScroll)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [isHomePage])
+  }, [isHomePage, isDesignSystemSubpage])
 
   const navLinks = [
     { name: 'Résumé', href: '/resume', isRoute: true },
@@ -160,12 +161,55 @@ export default function Navigation() {
     { name: 'Design System', href: '/design-system', isRoute: true },
   ]
 
-  // Work link handled separately for dropdown
-  const workHref = isHomePage ? '#work' : '/#work'
-
-
   return (
     <>
+    {/* Mega menu backdrop overlay - desktop only */}
+    <div
+      className={`hidden md:block fixed inset-0 z-[199] transition-all duration-500 ${
+        isWorkHovered
+          ? 'opacity-100 pointer-events-auto'
+          : 'opacity-0 pointer-events-none'
+      }`}
+      style={{
+        backgroundColor: ((isDark && !useDarkNav) || useLightNav)
+          ? 'rgba(0,0,0,0.64)'
+          : 'rgba(250,248,244,0.6)',
+        backdropFilter: 'blur(12px) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(12px) saturate(1.2)',
+      }}
+      onClick={() => setIsWorkHovered(false)}
+      aria-hidden="true"
+    >
+      {/* Grain texture */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        <defs>
+          <filter id="backdrop-grain" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.7"
+              numOctaves="4"
+              seed="42"
+              stitchTiles="stitch"
+              result="noise"
+            />
+            <feColorMatrix
+              type="matrix"
+              values={((isDark && !useDarkNav) || useLightNav)
+                ? "0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0"
+                : "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0"
+              }
+              in="noise"
+              result="coloredNoise"
+            />
+          </filter>
+        </defs>
+        <rect
+          width="100%"
+          height="100%"
+          filter="url(#backdrop-grain)"
+        />
+      </svg>
+    </div>
     <nav
       ref={workDropdownRef}
       className={`fixed top-0 left-0 right-0 z-[200] ${
@@ -255,8 +299,8 @@ export default function Navigation() {
               className="relative flex items-center"
               onMouseEnter={() => setIsWorkHovered(true)}
             >
-              <a
-                href={workHref}
+              <button
+                onClick={() => setIsWorkHovered(!isWorkHovered)}
                 className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-300 ${
                   ((isDark && !useDarkNav) || useLightNav) ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                 }`}
@@ -264,7 +308,7 @@ export default function Navigation() {
                 <ScrambleText trigger="both" iterations={2} speed={20}>
                   Projects
                 </ScrambleText>
-              </a>
+              </button>
             </div>
 
             {navLinks.map((link) =>
@@ -573,32 +617,13 @@ export default function Navigation() {
         >
           {/* Navigation Links - Centered */}
           <div className="flex flex-col items-center gap-1">
-            {/* Projects link with chevron */}
             <button
               onClick={() => setMobileMenuLayer('work')}
-              className={`relative font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
+              className={`font-satoshi text-4xl tracking-tight transition-colors duration-300 py-3 ${
                 isDark ? 'text-white/90 hover:text-white' : 'text-gray-900 hover:text-gray-900'
               }`}
             >
               Projects
-              {/* Right chevron - positioned outside the text */}
-              <svg
-                width="22"
-                height="14"
-                viewBox="0 0 22 14"
-                fill="none"
-                className="absolute -right-8 top-1/2 -translate-y-1/2 animate-bounce-right"
-                style={{
-                  stroke: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.3)'
-                }}
-              >
-                <path
-                  d="M7 1L14 7L7 13"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
             </button>
 
             {navLinks.map((link) =>
@@ -665,7 +690,7 @@ export default function Navigation() {
                 }}
               >
                 <div
-                  className="aspect-[4/3] rounded-xl overflow-hidden mb-1.5 transition-transform duration-300 group-active:scale-95"
+                  className="relative aspect-square rounded-xl overflow-hidden transition-transform duration-300 group-active:scale-95"
                   style={{
                     backgroundColor: project.bg,
                     boxShadow: isDark
@@ -678,12 +703,13 @@ export default function Navigation() {
                     alt={project.name}
                     className="w-full h-full object-cover"
                   />
+                  {/* Gradient overlay with name */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
+                    <span className="font-mono text-[11px] text-white tracking-wide uppercase">
+                      {project.name}
+                    </span>
+                  </div>
                 </div>
-                <span className={`font-mono text-[11px] tracking-wide uppercase ${
-                  isDark ? 'text-white/70' : 'text-gray-500'
-                }`}>
-                  {project.name}
-                </span>
               </Link>
             ))}
           </div>

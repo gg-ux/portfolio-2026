@@ -136,18 +136,18 @@ export default function ProjectLayout({
       {sections.length > 0 && (
         <button
           onClick={() => setIsPanelOpen(true)}
-          className={`fixed left-6 bottom-6 z-40 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
+          className={`fixed left-10 bottom-10 z-40 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
             showNav && !isPanelOpen
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-4 pointer-events-none'
           } ${
             isDark
-              ? 'bg-white/10 backdrop-blur-md border border-white/10 hover:bg-white/15 text-white/70 hover:text-white'
-              : 'bg-black/5 backdrop-blur-md border border-black/10 hover:bg-black/10 text-black/50 hover:text-black/70'
+              ? 'bg-[#1a1a1a]/90 backdrop-blur-md border border-white/[0.08] text-white/70 hover:bg-[#1a1a1a] hover:text-white shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+              : 'bg-[#FAF8F4]/90 backdrop-blur-md border border-black/[0.08] text-gray-600 hover:bg-[#FAF8F4] hover:text-gray-900 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
           }`}
           aria-label="Open table of contents"
         >
-          <ListBullets size={20} weight="regular" />
+          <ListBullets size={22} weight="bold" />
         </button>
       )}
 

@@ -71,9 +71,10 @@ export function ProjectText({ children, size = 'lg', className = '' }) {
 export function ProjectList({ items, ordered = false, size = 'lg', className = '' }) {
   const { isDark } = useTheme()
 
+  // Match Body component sizing for consistency
   const sizeClasses = {
-    lg: 'text-base md:text-lg',
-    sm: 'text-[15px]',
+    lg: 'text-base md:text-[17px]',  // matches Body size="base"
+    sm: 'text-[15px]',                // matches Body size="sm"
   }
 
   if (ordered) {

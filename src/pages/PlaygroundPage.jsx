@@ -532,17 +532,17 @@ export default function PlaygroundPage() {
           <div className="mb-16">
             <div className={`relative h-[500px] w-full rounded-2xl overflow-hidden border ${borderFaint}`}>
               <Painterly contained />
-              {/* Hero text overlay */}
+              {/* Hero text overlay - always light text on dark background */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10">
-                <h3 className={`font-silk text-[15vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-tight ${textHeading}`}>
+                <h3 className="font-silk text-[15vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-tight text-white">
                   Grace Guo
                 </h3>
                 <div className="flex items-center gap-3 mt-4">
-                  <span className={`font-mono text-[12px] font-light tracking-normal uppercase ${textBody}`}>
+                  <span className="font-mono text-[12px] font-light tracking-normal uppercase text-white/80">
                     UX/UI Designer, MHCI+D
                   </span>
-                  <span className={`${textMuted} text-[10px]`}>✦</span>
-                  <span className={`font-mono text-[12px] font-light tracking-normal uppercase ${textBody}`}>
+                  <span className="text-white/60 text-[10px]">✦</span>
+                  <span className="font-mono text-[12px] font-light tracking-normal uppercase text-white/80">
                     Based in Los Angeles
                   </span>
                 </div>

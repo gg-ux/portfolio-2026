@@ -11,12 +11,12 @@ export default function ProcessKanban({ columns }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const carouselRef = useRef(null)
 
-  // Column colors (matching common kanban tools)
+  // Column colors from brand palette
   const columnColors = [
-    '#A855F7', // purple - Research
-    '#3B82F6', // blue - Design
-    '#F59E0B', // amber - Scoping
-    '#22C55E', // green - Implementation
+    '#5835B0', // Amethyst - Research
+    '#BF92F0', // Lilac - Design
+    '#DBA166', // Gold - Scoping
+    '#36CBC6', // Turquoise - Implementation
   ]
 
   const cardWidth = 280
@@ -87,13 +87,13 @@ export default function ProcessKanban({ columns }) {
         ))}
       </div>
 
-      {/* Mobile/Tablet: Horizontal scroll - right side bleed only */}
+      {/* Mobile/Tablet: Horizontal scroll - full bleed both sides */}
       <div
         ref={carouselRef}
-        className="md:hidden flex overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mr-6"
+        className="md:hidden flex overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-6"
         onScroll={handleScroll}
       >
-        {/* Left spacer - creates margin for first card, scrolls away */}
+        {/* Left spacer - aligns first card with title, scrolls away for edge-to-edge on cards 2+ */}
         <div className="flex-shrink-0 snap-start w-6" aria-hidden="true" />
         {columns.map((column, colIndex) => (
           <div
@@ -200,7 +200,7 @@ function KanbanCard({ title, description, isDark }) {
           style={{ backfaceVisibility: 'hidden' }}
         >
           <p
-            className={`font-satoshi text-base leading-snug font-medium pr-6 ${
+            className={`font-satoshi text-sm leading-snug font-medium pr-6 ${
               isDark ? 'text-white/90' : 'text-gray-900'
             }`}
           >

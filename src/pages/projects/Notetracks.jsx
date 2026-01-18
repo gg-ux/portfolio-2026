@@ -30,7 +30,7 @@ export default function Notetracks() {
         title="Audio Collaboration Tool"
         description="Notetracks is an innovative cloud-based platform designed to streamline audio collaboration for students and professionals by enabling precise track annotations. During its critical early startup phase, I collaborated closely with the founder, delivering high-fidelity prototypes and strategic marketing materials."
         role="UX/UI/Graphic Designer"
-        timeline="2020–2021"
+        timeline="Nov 2019 – Jan 2021"
         coverImage="/assets/projects/notetracks/content/banner.jpg"
         coverPosition="center 0%"
         noLightFilter

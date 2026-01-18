@@ -16,7 +16,7 @@ import {
   NewFlowChartLegend,
 } from '../../components/project'
 import { TrendUp, Target, ChatCircle, LinkSimple } from '@phosphor-icons/react'
-import { Caption } from '../../components/Typography'
+import { Body, Caption } from '../../components/Typography'
 import { Tag } from '../../components/ui'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -39,7 +39,7 @@ export default function TeslaChatbot() {
         title="AI Chatbot"
         description="In 2023, I led the design of Tesla Assist, an innovative AI chatbot on tesla.com. Collaborating with product and engineering teams, I developed automation flows and tackled complex edge cases, establishing a cohesive design language for Tesla's chat interactions."
         role="Lead UX/UI Designer"
-        timeline="2023"
+        timeline="Q3 2023"
         impact="120% increase in sales lead conversion"
         coverImage="/assets/projects/tesla/chatbot/content/banner.jpg"
         coverPosition="center 20%"
@@ -72,10 +72,8 @@ export default function TeslaChatbot() {
             return (
               <div
                 key={index}
-                className={`relative rounded-2xl p-6 border backdrop-blur-md ${
-                  isDark
-                    ? 'border-white/[0.08] bg-white/[0.015]'
-                    : 'border-black/[0.08] bg-white/20'
+                className={`relative rounded-2xl p-6 ${
+                  isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
                 }`}
               >
                 <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
@@ -84,11 +82,9 @@ export default function TeslaChatbot() {
                 <h4 className={`text-xl mb-3 theme-heading`} style={{ fontWeight: 600 }}>
                   {goal.title}
                 </h4>
-                <p className={`font-satoshi text-[15px] leading-relaxed ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
-                }`}>
+                <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
                   {goal.description}
-                </p>
+                </Body>
               </div>
             )
           })}
@@ -178,13 +174,13 @@ export default function TeslaChatbot() {
       <ProjectSection id="new-flow" title="New Chatbot Automation Flow">
         <div className="flex flex-wrap gap-2 mb-6">
           {[
-            { label: 'Order Education', color: '#A78BFA' },      // Lavender (brand)
-            { label: 'Vehicle Appointments', color: '#0F766E' }, // Deep Teal (brand)
-            { label: 'Vehicle Education', color: '#8B5CF6' },    // Violet (lavender family)
-            { label: 'Energy Appointments', color: '#EA580C' },  // Burnt Orange (brand)
-            { label: 'Energy Education', color: '#14B8A6' },     // Teal (teal family)
-            { label: 'General Purchase', color: '#C084FC' },     // Bright Lavender
-            { label: 'Undetermined', color: '#6B7280' },         // Neutral gray
+            { label: 'Order Education', color: '#5835B0' },      // Amethyst
+            { label: 'Vehicle Appointments', color: '#DBA166' }, // Gold
+            { label: 'Vehicle Education', color: '#36CBC6' },    // Turquoise
+            { label: 'Energy Appointments', color: '#D78F8D' },  // Rose
+            { label: 'Energy Education', color: '#0B96A3' },     // Lagoon
+            { label: 'General Purchase', color: '#BF92F0' },     // Lilac
+            { label: 'Undetermined', color: '#6B7280' },         // Neutral
           ].map((category) => (
             <Tag key={category.label} color={category.color}>{category.label}</Tag>
           ))}
@@ -258,11 +254,9 @@ export default function TeslaChatbot() {
                   }`}>
                     {item.title}
                   </h4>
-                  <p className={`font-satoshi text-[15px] leading-relaxed ${
-                    isDark ? 'text-white/50' : 'text-gray-500'
-                  }`}>
+                  <Body size="sm" className={`mb-0 ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     {item.description}
-                  </p>
+                  </Body>
                 </div>
               </div>
             ))}

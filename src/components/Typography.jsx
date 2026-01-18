@@ -1,4 +1,5 @@
 import ScrambleText from './ScrambleText'
+import { useTheme } from '../context/ThemeContext'
 
 /**
  * Typography System
@@ -11,12 +12,14 @@ import ScrambleText from './ScrambleText'
  * - Header 5: Subsection labels (text-lg)
  * - Body: Main content text (text-base to text-lg)
  * - Caption: Metadata, labels, small text (12px, tracking-wide, uppercase)
+ * - ChartTitle: Chart/visualization titles (14px, mono, uppercase, 0.7 opacity)
+ * - ChartContainer: Subtle 2% fill container for charts, data, articles (see also: FrostedCard in ui/)
  * - Button: Button and link text (text-sm to text-base)
  *
  * Fonts:
  * - Silk Serif 400: Display headlines (Header 1 only)
  * - Satoshi 400-500: Everything else (Header 2-4, body, buttons)
- * - Azeret Mono 300-400: Captions, metadata, code
+ * - Azeret Mono 300-400: Captions, metadata, code, chart titles
  *
  * Theme Support:
  * - All components use theme-aware classes that respond to html.dark/html.light
@@ -68,14 +71,23 @@ export function H5({ children, className = '', style, as: Tag = 'h5' }) {
 }
 
 // Main body text
-export function Body({ children, className = '', size = 'base', style }) {
+export function Body({ children, className = '', size = 'base', weight = 'normal', style }) {
   const sizeClasses = {
     sm: 'text-[15px]',
     base: 'text-base md:text-[17px]',
     lg: 'text-lg md:text-xl',
   }
+  // Use inline styles for weight to override .theme-body CSS
+  const weightStyles = {
+    normal: {},
+    medium: { fontWeight: 500 },
+    bold: { fontWeight: 600 },
+  }
   return (
-    <p className={`leading-relaxed theme-body ${sizeClasses[size]} ${className}`} style={style}>
+    <p
+      className={`leading-relaxed theme-body ${sizeClasses[size]} ${className}`}
+      style={{ ...weightStyles[weight], ...style }}
+    >
       {children}
     </p>
   )
@@ -98,6 +110,15 @@ export function Caption({ children, className = '', uppercase = true, style, scr
         children
       )}
     </span>
+  )
+}
+
+// Chart/visualization title (mono, 14px, uppercase, 0.7 opacity)
+export function ChartTitle({ children, className = '', as: Tag = 'h3' }) {
+  return (
+    <Tag className={`font-mono text-sm tracking-wide uppercase font-medium mb-6 md:mb-8 theme-heading opacity-70 ${className}`}>
+      {children}
+    </Tag>
   )
 }
 
@@ -140,5 +161,23 @@ export function LinkText({ children, className = '' }) {
     <span className={`font-satoshi text-sm theme-muted hover:theme-heading transition-colors duration-300 ${className}`}>
       {children}
     </span>
+  )
+}
+
+// Chart container with subtle 2% fill background
+// Use for: data visualizations, charts, research findings, tables, article content
+// See also: FrostedCard in ui/ for elevated, cinematic containers
+export function ChartContainer({ children, className = '', padding = 'default' }) {
+  const { isDark } = useTheme()
+  const paddingClasses = {
+    none: '',
+    sm: 'p-4 md:p-6',
+    default: 'p-6 md:p-8',
+    lg: 'p-8 md:p-10',
+  }
+  return (
+    <div className={`rounded-2xl ${paddingClasses[padding]} ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'} ${className}`}>
+      {children}
+    </div>
   )
 }

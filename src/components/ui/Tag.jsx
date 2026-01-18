@@ -24,7 +24,11 @@ export function Tag({ children, color, muted = false, className = '' }) {
     return (
       <span
         className={`${baseStyles} text-white ${className}`}
-        style={{ backgroundColor: color }}
+        style={{
+          background: isDark
+            ? `linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), ${color}`
+            : color
+        }}
       >
         {children}
       </span>
