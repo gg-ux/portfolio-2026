@@ -265,16 +265,16 @@ html.light ::-webkit-scrollbar-thumb:hover {
   clip-path: inset(0 100% 0 0);
   opacity: 0;
   filter: blur(8px);
-  animation: clip-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: clip-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 1s ease-out forwards;
+  animation: fade-in-up 1s ease-out both;
 }
 
 /* Fade In now uses Fluid In for consistency */
 .animate-fade-in {
-  animation: fluid-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fluid-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes bounce-subtle {
@@ -372,7 +372,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-scale-in {
-  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Staggered delays for animations */

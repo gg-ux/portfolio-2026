@@ -223,6 +223,9 @@ export default function IndiEV() {
               'Change the direction of the airflow to the top position for the driver\'s seat',
             ]}
           />
+          <ProjectText>
+            For each task, I measured three things: whether they completed it successfully, how long it took, and how easy they felt it was on a 7-point scale. The ease rating uses the Single Ease Question (SEQ)—a standard UX metric where 7 means "very easy" and 1 means "very difficult." A score of 5.5 or above generally indicates good usability.
+          </ProjectText>
           <UsabilityResultsTaskCentric />
         </ProjectSubsection>
 

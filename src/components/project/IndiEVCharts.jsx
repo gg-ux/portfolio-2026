@@ -242,9 +242,9 @@ export function UsabilityResults() {
   const maxTime = 23 // for scaling
 
   const systemEaseData = [
-    { task: 'T1', value: 6.6, label: '6.6' },
+    { task: 'T1', value: 6.7, label: '6.7' },
     { task: 'T2', value: 4, label: '4' },
-    { task: 'T3', value: 5.6, label: '5.6' },
+    { task: 'T3', value: 5.7, label: '5.7' },
     { task: 'T4', value: 6, label: '6' },
   ]
   const maxEase = 7 // score out of 7
@@ -364,9 +364,9 @@ export function UsabilityResultsHighlighted() {
   const maxTime = 23
 
   const systemEaseData = [
-    { task: 'T1', value: 6.6, label: '6.6', highlight: false },
+    { task: 'T1', value: 6.7, label: '6.7', highlight: false },
     { task: 'T2', value: 4, label: '4', highlight: true },
-    { task: 'T3', value: 5.6, label: '5.6', highlight: false },
+    { task: 'T3', value: 5.7, label: '5.7', highlight: false },
     { task: 'T4', value: 6, label: '6', highlight: false },
   ]
   const maxEase = 7
@@ -487,7 +487,7 @@ export function UsabilityResultsTaskCentric() {
       name: 'Turn on AC',
       success: { value: 100, label: '100%' },
       time: { value: 2.6, label: '2.6s' },
-      ease: { value: 6.6, label: '6.6' },
+      ease: { value: 6.7, label: '6.7' },
       highlight: false,
     },
     {
@@ -501,7 +501,7 @@ export function UsabilityResultsTaskCentric() {
       name: 'Sync temperatures',
       success: { value: 100, label: '100%' },
       time: { value: 5, label: '5s' },
-      ease: { value: 5.6, label: '5.6' },
+      ease: { value: 5.7, label: '5.7' },
       highlight: false,
     },
     {
@@ -692,14 +692,14 @@ export function UsabilityResultsValidation() {
       name: 'Sync temperatures',
       success: { value: 100, label: '100%' },
       time: { value: 3.8, label: '3.8s' },
-      ease: { value: 6.4, label: '6.4' },
+      ease: { value: 6.3, label: '6.3' },
       highlight: false,
     },
     {
       name: 'Change airflow direction',
       success: { value: 100, label: '100%' },
       time: { value: 4.6, label: '4.6s' },
-      ease: { value: 6.2, label: '6.2' },
+      ease: { value: 6.3, label: '6.3' },
       highlight: false,
     },
   ]
