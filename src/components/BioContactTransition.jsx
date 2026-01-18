@@ -119,7 +119,7 @@ export default function BioContactTransition() {
               >
                 <blockquote className="mb-5">
                   <H2>
-                    Meaningful design is care, made&nbsp;visible.
+                    Meaningful design is care,<br />made visible.
                   </H2>
                 </blockquote>
                 <Body className="mb-10 max-w-2xl">

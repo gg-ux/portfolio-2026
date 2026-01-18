@@ -14,28 +14,28 @@ const categories = [
     description: 'The building blocks of Gooey. Typography, colors, and spacing scales.',
     icon: Palette,
     href: '/design-system/foundation',
-    items: ['Typography', 'Colors', 'Spacing'],
+    items: ['Typography', 'Colors', 'Icons', 'Spacing'],
   },
   {
     title: 'Components',
     description: 'Reusable UI elements with specs, variants, and usage guidelines.',
     icon: Stack,
     href: '/design-system/components',
-    items: ['Cards', 'Buttons', 'Dividers', 'Charts'],
+    items: ['Buttons', 'Inputs', 'Tags', 'Data Viz'],
   },
   {
     title: 'Motion',
     description: 'Animations and background effects that bring the experience to life.',
     icon: Lightning,
     href: '/design-system/motion',
-    items: ['Animations', 'Background Effects'],
+    items: ['Scroll', 'Animations', 'Cursor Effects'],
   },
   {
     title: 'Patterns',
     description: 'Layout structures and page templates for consistent experiences.',
     icon: Layout,
     href: '/design-system/patterns',
-    items: ['Page Layout', 'Project Pages'],
+    items: ['Navigation', 'Layouts', 'Projects', 'Footer'],
   },
 ]
 

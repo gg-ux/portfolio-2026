@@ -157,9 +157,9 @@ export default function Navigation() {
   }, [isHomePage, isDesignSystemSubpage])
 
   const navLinks = [
+    { name: 'Design System', href: '/design-system', isRoute: true },
     { name: 'Résumé', href: '/resume', isRoute: true },
     { name: 'Contact', href: '#contact', isRoute: false },
-    { name: 'Design System', href: '/design-system', isRoute: true },
   ]
 
   return (

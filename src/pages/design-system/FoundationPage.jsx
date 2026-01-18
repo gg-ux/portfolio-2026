@@ -80,7 +80,7 @@ export default function FoundationPage() {
       {/* Typography */}
       <DSSection id="typography" title="Typography">
         <Paragraph className="mb-12 max-w-3xl">
-          Type should feel warm but never loud—confident enough to lead, quiet enough to let the work speak. A layered system balances expression with clarity: elegant when it needs to make an impression, functional when it needs to communicate. Fluid scaling and optical adjustments across themes ensure consistency without rigidity.
+          Warm but not loud. Confident enough to lead, quiet enough to let the work speak. Fluid scaling across themes keeps things consistent without being rigid.
         </Paragraph>
 
         {/* Font Families */}
@@ -384,6 +384,10 @@ export default function FoundationPage() {
 
       {/* Colors */}
       <DSSection id="colors" title="Colors">
+        <Paragraph className="mb-12 max-w-3xl">
+          Organic, dreamy, yet grounded. Pulled from golden hour hikes, California sunsets, wildflowers, and ocean views.
+        </Paragraph>
+
         {/* Brand Palette */}
         <div id="brand-palette" className="mb-12">
           <H4 className="mb-2">Brand Palette</H4>
