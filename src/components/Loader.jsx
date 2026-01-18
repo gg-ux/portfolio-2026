@@ -145,7 +145,7 @@ export default function Loader({ onComplete }) {
         <img
           src="/assets/branding/logo.svg"
           alt="Grace Guo"
-          className={`h-6 w-auto transition-all ${isDark ? 'invert' : ''} ${
+          className={`h-6 w-auto transition-all ${isDark ? '' : 'invert'} ${
             phase === 'loading' ? 'animate-breathe' : ''
           }`}
           style={{
