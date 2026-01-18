@@ -104,7 +104,7 @@ export default function HeroTestPage() {
           }}
         >
           <h1
-            className="font-silk text-[18vw] md:text-[15vw] lg:text-[12vw] leading-[0.85] tracking-tight text-center animate-fluid-in opacity-0"
+            className="font-silk text-[18vw] md:text-[15vw] lg:text-[12vw] leading-[0.85] tracking-tight text-center animate-fluid-in"
             style={{
               color: isDark ? 'white' : '#1A1A1A',
               animationDelay: '200ms'
@@ -123,7 +123,7 @@ export default function HeroTestPage() {
           }}
         >
           <div
-            className="flex items-center gap-3 mt-6 md:mt-8 animate-fade-up opacity-0"
+            className="flex items-center gap-3 mt-6 md:mt-8 animate-fade-up"
             style={{ animationDelay: '600ms' }}
           >
             <span className="font-mono text-[14px] font-light tracking-normal uppercase">
@@ -149,7 +149,7 @@ export default function HeroTestPage() {
           }}
         >
           <div
-            className="flex items-center gap-2 animate-fade-up opacity-0"
+            className="flex items-center gap-2 animate-fade-up"
             style={{ animationDelay: '1000ms' }}
           >
             <span

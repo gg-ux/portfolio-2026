@@ -150,7 +150,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-fluid-in {
-  animation: fluid-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fluid-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Fluid exit - complementary to fluid-in, exits upward with blur and skew */
@@ -186,7 +186,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Slot machine roll - vertical scroll with blur */

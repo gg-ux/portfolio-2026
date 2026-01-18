@@ -102,7 +102,7 @@ export default function HeroFluidBlob() {
           {/* Name */}
           <div style={nameStyle}>
             <h1
-              className={`font-silk text-[18vw] md:text-[15vw] lg:text-[12vw] leading-[0.85] tracking-tight text-center animate-fluid-in opacity-0 ${
+              className={`font-silk text-[18vw] md:text-[15vw] lg:text-[12vw] leading-[0.85] tracking-tight text-center animate-fluid-in ${
                 isDark ? 'text-white drop-shadow-lg' : 'text-gray-900'
               }`}
               style={{ animationDelay: '200ms' }}
@@ -114,7 +114,7 @@ export default function HeroFluidBlob() {
           {/* Caption */}
           <div style={captionStyle}>
             <div
-              className="flex items-center gap-3 mt-6 md:mt-8 animate-fade-up opacity-0"
+              className="flex items-center gap-3 mt-6 md:mt-8 animate-fade-up"
               style={{ animationDelay: '600ms' }}
             >
               <span className={`font-mono text-[14px] font-light tracking-normal uppercase ${
@@ -153,7 +153,7 @@ export default function HeroFluidBlob() {
           }}
         >
           <div
-            className="flex items-center gap-2 animate-fade-up opacity-0"
+            className="flex items-center gap-2 animate-fade-up"
             style={{ animationDelay: '1000ms' }}
           >
             <span className={`font-mono text-[11px] tracking-wide uppercase ${

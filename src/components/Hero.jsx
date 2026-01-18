@@ -69,13 +69,13 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           {/* Left - Name and Bio */}
           <div className="max-w-lg">
-            <H1 className="leading-[0.85] tracking-tight mb-8 animate-fluid-in opacity-0" style={{ animationDelay: '200ms' }}>
+            <H1 className="leading-[0.85] tracking-tight mb-8 animate-fluid-in" style={{ animationDelay: '200ms' }}>
               <span className="block md:inline">Grace</span>{' '}
               <span className="block md:inline">Guo</span>
             </H1>
 
             <Body
-              className="animate-fluid-in opacity-0"
+              className="animate-fluid-in"
               style={{
                 animationDelay: '500ms',
                 textShadow: isDark ? '0 2px 20px rgba(0,0,0,0.5)' : 'none'
@@ -86,7 +86,7 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div
-              className="flex flex-row gap-3 mt-8 animate-fluid-in opacity-0"
+              className="flex flex-row gap-3 mt-8 animate-fluid-in"
               style={{ animationDelay: '650ms' }}
             >
               <ButtonWithArrow href="#work" variant="primary" size="sm">
@@ -108,7 +108,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/grace-guo-ux/"
             target="_blank"
             rel="noopener noreferrer"
-            className="animate-fluid-in opacity-0 hidden md:flex items-center gap-1.5 group"
+            className="animate-fluid-in hidden md:flex items-center gap-1.5 group"
             style={{ animationDelay: '750ms' }}
           >
             <Caption trigger="hover" className="group-hover:theme-heading transition-colors duration-300">

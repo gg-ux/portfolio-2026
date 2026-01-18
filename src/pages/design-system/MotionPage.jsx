@@ -114,7 +114,7 @@ export default function MotionPage() {
             <H4 className="mb-4">Blur In</H4>
             <div className={`relative border ${borderClass} rounded-xl aspect-video`}>
               <div className="absolute inset-0 flex items-center justify-center" key={blurInKey}>
-                <span className={`font-satoshi text-2xl animate-fluid-in opacity-0 ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
+                <span className={`font-satoshi text-2xl animate-fluid-in ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
                   Hello
                 </span>
               </div>
