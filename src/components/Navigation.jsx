@@ -8,11 +8,11 @@ import ScrambleText from './ScrambleText'
 import { Caption } from './Typography'
 
 // Import project thumbnails (same as Explore More section)
-import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card-filled.png'
-import teslaMegaMenuImg from '../assets/projects/tesla/mega menu/mega-menu-card-filled.png'
-import indiEvImg from '../assets/projects/indi ev/card-indi-ev.png'
-import notetracksImg from '../assets/projects/notetracks/notetracks-card-filled.png'
-import cataliaImg from '../assets/projects/catalia health/catalia-card-filled.png'
+import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card-filled.webp'
+import teslaMegaMenuImg from '../assets/projects/tesla/mega menu/mega-menu-card-filled.webp'
+import indiEvImg from '../assets/projects/indi ev/card-indi-ev.webp'
+import notetracksImg from '../assets/projects/notetracks/notetracks-card-filled.webp'
+import cataliaImg from '../assets/projects/catalia health/catalia-card-filled.webp'
 
 // Projects for the mega menu
 const workProjects = [

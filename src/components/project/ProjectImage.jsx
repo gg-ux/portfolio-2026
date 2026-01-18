@@ -140,6 +140,7 @@ export function ProjectImageFullWidth({
   src,
   alt,
   caption,
+  noBg = false,
   className = ''
 }) {
   const { isDark } = useTheme()
@@ -157,7 +158,7 @@ export function ProjectImageFullWidth({
     >
       <div
         className={`overflow-hidden rounded-xl md:rounded-2xl ${
-          isDark ? 'bg-[#111111]' : 'bg-gray-100'
+          noBg ? '' : isDark ? 'bg-[#111111]' : 'bg-gray-100'
         }`}
       >
         <img

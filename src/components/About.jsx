@@ -111,9 +111,9 @@ export default function About() {
             {/* Quote + Info */}
             <div className="md:col-span-7 lg:col-span-8">
               {/* Large pull quote */}
-              <blockquote className="mb-5">
+              <blockquote className="mb-5 max-w-2xl">
                 <H2 className="leading-snug">
-                  Meaningful design is care, made&nbsp;visible.
+                  Meaningful design is care,<br />made visible.
                 </H2>
               </blockquote>
 

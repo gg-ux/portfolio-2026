@@ -41,7 +41,7 @@ export default function TeslaChatbot() {
         role="Lead UX/UI Designer"
         timeline="Q3 2023"
         impact="120% increase in sales lead conversion"
-        coverImage="/assets/projects/tesla/chatbot/content/banner.jpg"
+        coverImage="/assets/projects/tesla/chatbot/content/banner.webp"
         coverPosition="center 20%"
         lightBanner
       />

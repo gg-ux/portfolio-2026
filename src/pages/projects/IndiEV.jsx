@@ -57,7 +57,7 @@ export default function IndiEV() {
         role="UX/UI Designer"
         timeline="Aug 2020 – Sep 2021"
         impact="Debuted at Automobility LA 2021"
-        coverImage="/assets/projects/indi-ev/content/banner.png"
+        coverImage="/assets/projects/indi-ev/content/banner.webp"
         darkBanner
       />
 
@@ -129,12 +129,12 @@ export default function IndiEV() {
             The digital design lead handed off his wireframes of several features and pages. I was given the creative freedom to reimagine them for the final design, though the basic framework had to remain consistent (i.e., navigation bar, AI widget panel).
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/indi-ev/content/wireframe-nav.png"
+            src="/assets/projects/indi-ev/content/wireframe-nav.webp"
             alt="Navigation wireframe created by design lead"
             caption="Navigation wireframe created by design lead"
           />
           <ProjectImageFullWidth
-            src="/assets/projects/indi-ev/content/my-day-main.png"
+            src="/assets/projects/indi-ev/content/my-day-main.webp"
             alt="My Day wireframe created by design lead"
             caption="My Day wireframe created by design lead"
           />
@@ -147,7 +147,7 @@ export default function IndiEV() {
           Upon receiving a download of the product and the wireframes, I held some meetings with the design team about the intended look and feel of the product. As a brand, INDI EV strives to deliver a sleek, modern, and personalized experience. I wanted to create a design language that echoed that.
         </ProjectText>
         <ProjectImageFullWidth
-          src="/assets/projects/indi-ev/content/mood-board.png"
+          src="/assets/projects/indi-ev/content/mood-board.webp"
           alt="Mood board exploring sleek and modern design directions"
         />
 
@@ -177,7 +177,7 @@ export default function IndiEV() {
           ]}
         />
         <ProjectImageFullWidth
-          src="/assets/projects/indi-ev/content/wireframe-climate.png"
+          src="/assets/projects/indi-ev/content/wireframe-climate.webp"
           alt="Initial climate control wireframe by design lead"
           caption="Climate wireframe by previous designer"
         />
@@ -195,7 +195,7 @@ export default function IndiEV() {
             ]}
           />
           <ProjectImageFullWidth
-            src="/assets/projects/indi-ev/content/climate-iteration1.png"
+            src="/assets/projects/indi-ev/content/climate-iteration1.webp"
             alt="First climate control iteration with all components visible"
           />
         </ProjectSubsection>
@@ -205,7 +205,7 @@ export default function IndiEV() {
             For the second iteration, I made several improvements: created three distinct groups, changed the circular slider to semi-circles, updated iconography, and repositioned seat warmers for accessibility.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/indi-ev/content/climate-iteration2.png"
+            src="/assets/projects/indi-ev/content/climate-iteration2.webp"
             alt="Second climate iteration with improved visual grouping"
           />
         </ProjectSubsection>
@@ -296,12 +296,12 @@ export default function IndiEV() {
         </div>
         <ProjectImageGrid
           images={[
-            { src: '/assets/projects/indi-ev/content/dark-cluster.png', alt: 'Cluster display in dark mode', caption: 'Cluster (Dark Mode)' },
-            { src: '/assets/projects/indi-ev/content/tile-mode.png', alt: 'INDI EV IVI tile mode showing multiple feature access', caption: 'Tiles (Dark Mode)' },
-            { src: '/assets/projects/indi-ev/content/my-day-dark.png', alt: 'Welcome screen in dark mode', caption: 'Welcome Screen (Dark Mode)' },
-            { src: '/assets/projects/indi-ev/content/radio-app.png', alt: 'Radio app interface', caption: 'Radio (Light Mode)' },
-            { src: '/assets/projects/indi-ev/content/dark-app-store.png', alt: 'App store in dark mode', caption: 'App Store (Dark Mode)' },
-            { src: '/assets/projects/indi-ev/content/indi-explorer.png', alt: 'INDI Explorer native app', caption: 'Navigation (Light Mode)' },
+            { src: '/assets/projects/indi-ev/content/dark-cluster.webp', alt: 'Cluster display in dark mode', caption: 'Cluster (Dark Mode)' },
+            { src: '/assets/projects/indi-ev/content/tile-mode.webp', alt: 'INDI EV IVI tile mode showing multiple feature access', caption: 'Tiles (Dark Mode)' },
+            { src: '/assets/projects/indi-ev/content/my-day-dark.webp', alt: 'Welcome screen in dark mode', caption: 'Welcome Screen (Dark Mode)' },
+            { src: '/assets/projects/indi-ev/content/radio-app.webp', alt: 'Radio app interface', caption: 'Radio (Light Mode)' },
+            { src: '/assets/projects/indi-ev/content/dark-app-store.webp', alt: 'App store in dark mode', caption: 'App Store (Dark Mode)' },
+            { src: '/assets/projects/indi-ev/content/indi-explorer.webp', alt: 'INDI Explorer native app', caption: 'Navigation (Light Mode)' },
           ]}
           columns={1}
         />
@@ -313,7 +313,7 @@ export default function IndiEV() {
           While creating high-fidelity mockups, I was simultaneously building the design system. I followed an atomic design structure and divided it into the following sections: Typography, Colors, Iconography, Components, Templates, Pages.
         </ProjectText>
         <ProjectImageFullWidth
-          src="/assets/projects/indi-ev/content/design-system.png"
+          src="/assets/projects/indi-ev/content/design-system.webp"
           alt="INDI EV design system with typography, colors, and components"
           caption="Atomic design structure: Typography, Colors, Iconography, Components, Templates, Pages"
         />
@@ -325,15 +325,15 @@ export default function IndiEV() {
           Lastly, I worked with an animator to bring the designs to life in a demo reel that was displayed inside a model car during an auto show. For the film, we had to make sure that all 3 screens (cluster, driver, and passenger displays) were in sync. I provided the animator with all the screens for each flow and we determined the interaction animations as a team.
         </ProjectText>
         <ProjectImageFullWidth
-          src="/assets/projects/indi-ev/content/reel-outline.png"
+          src="/assets/projects/indi-ev/content/reel-outline.webp"
           alt="Demo reel frame showing IVI interface"
           caption="IVI Display"
         />
         <ProjectImageGrid
           images={[
-            { src: '/assets/projects/indi-ev/content/demo-reel-1.png', alt: 'Demo reel storyboard outline showing key flows', caption: 'Demo reel outline showing 7 key flows' },
-            { src: '/assets/projects/indi-ev/content/demo-reel-2.png', alt: 'Demo reel frame showing navigation', caption: 'Navigation Flow' },
-            { src: '/assets/projects/indi-ev/content/reel-cluster.png', alt: 'Demo reel frame showing cluster display', caption: 'Cluster Display' },
+            { src: '/assets/projects/indi-ev/content/demo-reel-1.webp', alt: 'Demo reel storyboard outline showing key flows', caption: 'Demo reel outline showing 7 key flows' },
+            { src: '/assets/projects/indi-ev/content/demo-reel-2.webp', alt: 'Demo reel frame showing navigation', caption: 'Navigation Flow' },
+            { src: '/assets/projects/indi-ev/content/reel-cluster.webp', alt: 'Demo reel frame showing cluster display', caption: 'Cluster Display' },
           ]}
           columns={1}
         />
@@ -349,7 +349,7 @@ export default function IndiEV() {
             style={{ aspectRatio: '16/9' }}
           >
             <img
-              src="/assets/projects/indi-ev/content/autoshow.jpeg"
+              src="/assets/projects/indi-ev/content/autoshow.webp"
               alt="INDI ONE on display at Automobility LA 2021"
               className="w-full h-full object-cover"
               loading="lazy"

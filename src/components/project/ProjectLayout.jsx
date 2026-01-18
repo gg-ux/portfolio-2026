@@ -5,11 +5,11 @@ import { ListBullets, X } from '@phosphor-icons/react'
 import { Caption, H2, H4 } from '../Typography'
 
 // Import project images
-import teslaMegaMenuImg from '../../assets/projects/tesla/mega menu/mega-menu-card-filled.png'
-import teslaChatbotImg from '../../assets/projects/tesla/chatbot/chatbot-card-filled.png'
-import indiEvImg from '../../assets/projects/indi ev/card-indi-ev.png'
-import notetracksImg from '../../assets/projects/notetracks/notetracks-card-filled.png'
-import cataliaImg from '../../assets/projects/catalia health/catalia-card-filled.png'
+import teslaMegaMenuImg from '../../assets/projects/tesla/mega menu/mega-menu-card-filled.webp'
+import teslaChatbotImg from '../../assets/projects/tesla/chatbot/chatbot-card-filled.webp'
+import indiEvImg from '../../assets/projects/indi ev/card-indi-ev.webp'
+import notetracksImg from '../../assets/projects/notetracks/notetracks-card-filled.webp'
+import cataliaImg from '../../assets/projects/catalia health/catalia-card-filled.webp'
 
 const projects = [
   {

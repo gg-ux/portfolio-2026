@@ -31,7 +31,7 @@ export default function Notetracks() {
         description="Notetracks is an innovative cloud-based platform designed to streamline audio collaboration for students and professionals by enabling precise track annotations. During its critical early startup phase, I collaborated closely with the founder, delivering high-fidelity prototypes and strategic marketing materials."
         role="UX/UI/Graphic Designer"
         timeline="Nov 2019 – Jan 2021"
-        coverImage="/assets/projects/notetracks/content/banner.jpg"
+        coverImage="/assets/projects/notetracks/content/banner.webp"
         coverPosition="center 0%"
         noLightFilter
         darkOverlay
@@ -62,7 +62,7 @@ export default function Notetracks() {
           I designed commenting features that allowed users to interact precisely within the audio track. Users could incorporate emojis, text, voice notes, or attachments. This multi-modal interaction deepened user engagement by accommodating various communication preferences.
         </ProjectText>
         <ProjectImage
-          src="/assets/projects/notetracks/content/comment-first.png"
+          src="/assets/projects/notetracks/content/comment-first.webp"
           alt="Post new comment with live voice recording feature"
           caption="Multi-modal commenting: emojis, text, voice notes, and attachments"
           glassBorder
@@ -84,8 +84,8 @@ export default function Notetracks() {
           </ProjectText>
           <ProjectImageGrid
             images={[
-              { src: '/assets/projects/notetracks/content/comments-phase1.png', alt: 'Replies panel phase 1', caption: 'Phase 1 stacked replies' },
-              { src: '/assets/projects/notetracks/content/comments-phase2.jpg', alt: 'Replies panel phase 2', caption: 'Phase 2 reply panel' },
+              { src: '/assets/projects/notetracks/content/comments-phase1.webp', alt: 'Replies panel phase 1', caption: 'Phase 1 stacked replies' },
+              { src: '/assets/projects/notetracks/content/comments-phase2.webp', alt: 'Replies panel phase 2', caption: 'Phase 2 reply panel' },
             ]}
             columns={1}
             glassBorder
@@ -109,8 +109,8 @@ export default function Notetracks() {
         </ProjectText>
         <ProjectImageGrid
           images={[
-            { src: '/assets/projects/notetracks/content/comment-loggedoff.png', alt: 'Guest commenting interface', caption: 'Guest commenting to sign up conversion' },
-            { src: '/assets/projects/notetracks/content/guest-verification.png', alt: 'Guest verification flow', caption: 'Multi-factor authentication' },
+            { src: '/assets/projects/notetracks/content/comment-loggedoff.webp', alt: 'Guest commenting interface', caption: 'Guest commenting to sign up conversion' },
+            { src: '/assets/projects/notetracks/content/guest-verification.webp', alt: 'Guest verification flow', caption: 'Multi-factor authentication' },
           ]}
           columns={1}
           glassBorder
@@ -128,9 +128,9 @@ export default function Notetracks() {
 
         <ProjectImageGrid
           images={[
-            { src: '/assets/projects/notetracks/content/split.png', alt: 'Split feature', caption: 'Right click options (split, fade, copy, cut, mute, solo, delete)' },
-            { src: '/assets/projects/notetracks/content/fadein.png', alt: 'Fade in/out feature', caption: 'Fade-in / fade-out' },
-            { src: '/assets/projects/notetracks/content/trim.png', alt: 'Trim feature', caption: 'Trim' },
+            { src: '/assets/projects/notetracks/content/split.webp', alt: 'Split feature', caption: 'Right click options (split, fade, copy, cut, mute, solo, delete)' },
+            { src: '/assets/projects/notetracks/content/fadein.webp', alt: 'Fade in/out feature', caption: 'Fade-in / fade-out' },
+            { src: '/assets/projects/notetracks/content/trim.webp', alt: 'Trim feature', caption: 'Trim' },
           ]}
           columns={1}
           glassBorder
@@ -153,7 +153,7 @@ export default function Notetracks() {
 
         <ProjectSubsection title="Before" className="mb-8">
           <ProjectImage
-            src="/assets/projects/notetracks/content/pricing-old.png"
+            src="/assets/projects/notetracks/content/pricing-old.webp"
             alt="Old pricing page"
             className="my-4"
           />
@@ -161,7 +161,7 @@ export default function Notetracks() {
 
         <ProjectSubsection title="After">
           <ProjectImage
-            src="/assets/projects/notetracks/content/pricing-new.jpg"
+            src="/assets/projects/notetracks/content/pricing-new.webp"
             alt="New pricing page"
             className="my-4"
           />
@@ -176,8 +176,8 @@ export default function Notetracks() {
           </ProjectText>
           <ProjectImageGrid
             images={[
-              { src: '/assets/projects/notetracks/content/404-page.jpg', alt: '404 error page' },
-              { src: '/assets/projects/notetracks/content/maintenance.jpg', alt: 'Maintenance page' },
+              { src: '/assets/projects/notetracks/content/404-page.webp', alt: '404 error page' },
+              { src: '/assets/projects/notetracks/content/maintenance.webp', alt: 'Maintenance page' },
             ]}
             columns={2}
           />
@@ -189,9 +189,9 @@ export default function Notetracks() {
           </ProjectText>
           <ProjectImageGrid
             images={[
-              { src: '/assets/projects/notetracks/content/ads-ig.png', alt: 'Instagram ad', caption: 'Instagram Ads' },
-              { src: '/assets/projects/notetracks/content/ad-banner.png', alt: 'Facebook banner ad', caption: 'Facebook Ads' },
-              { src: '/assets/projects/notetracks/content/marketing-flyer.jpg', alt: 'Physical marketing flyer', caption: 'Physical Flyers' },
+              { src: '/assets/projects/notetracks/content/ads-ig.webp', alt: 'Instagram ad', caption: 'Instagram Ads' },
+              { src: '/assets/projects/notetracks/content/ad-banner.webp', alt: 'Facebook banner ad', caption: 'Facebook Ads' },
+              { src: '/assets/projects/notetracks/content/marketing-flyer.webp', alt: 'Physical marketing flyer', caption: 'Physical Flyers' },
             ]}
             columns={1}
           />

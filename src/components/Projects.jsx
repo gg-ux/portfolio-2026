@@ -2,9 +2,9 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { H2, H4, Caption } from './Typography'
 import { useTheme } from '../context/ThemeContext'
-import teslaMegaMenuImg from '../assets/projects/tesla/mega menu/tesla-mega-menu-card.png'
-import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card.png'
-import indiEvImg from '../assets/projects/indi ev/card-indi-ev.png'
+import teslaMegaMenuImg from '../assets/projects/tesla/mega menu/tesla-mega-menu-card.webp'
+import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card.webp'
+import indiEvImg from '../assets/projects/indi ev/card-indi-ev.webp'
 
 // WebGL Ripple Effect Component
 function RippleImage({ src, alt, isHovered, mousePosition }) {

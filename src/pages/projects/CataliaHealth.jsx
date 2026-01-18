@@ -61,7 +61,7 @@ export default function CataliaHealth() {
         timeline="April–June 2019"
         team="Team of 4"
         output="Patient-tested prototype + case study PDF"
-        coverImage="/assets/projects/catalia-health/content/banner.png"
+        coverImage="/assets/projects/catalia-health/content/banner.webp"
         lightBanner
       />
 
@@ -82,10 +82,10 @@ export default function CataliaHealth() {
           </ProjectText>
           <PDFCarousel
             pages={[
-              { src: '/assets/projects/catalia-health/content/pdf-pages/page-1-cover.png', alt: 'Cover' },
-              { src: '/assets/projects/catalia-health/content/pdf-pages/page-2-toc.png', alt: 'Table of Contents' },
-              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-left.png', alt: 'Executive Summary' },
-              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-right.png', alt: 'Meet Our Team' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-1-cover.webp', alt: 'Cover' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-2-toc.webp', alt: 'Table of Contents' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-left.webp', alt: 'Executive Summary' },
+              { src: '/assets/projects/catalia-health/content/pdf-pages/page-3-right.webp', alt: 'Meet Our Team' },
             ]}
             pdfUrl="https://gg-portfolio.s3-us-west-1.amazonaws.com/FlourishApp-PrintReadySpread.pdf"
           />
@@ -375,7 +375,7 @@ export default function CataliaHealth() {
             ]}
           />
           <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-04.png"
+            src="/assets/projects/catalia-health/content/screen-04.webp"
             alt="Hand-drawn wireframe sketches from Crazy Eights design sprint"
           />
         </ProjectSubsection>
@@ -408,11 +408,11 @@ export default function CataliaHealth() {
             For "Explore," we designed a personalized homepage where content adapts based on the patient's journey stage. Users see "Recommended Articles" (curated by Catalia Health) and "Recommended Posts" (from other patients) with options to bookmark or comment. For "Community," we organized discussions by topic categories—allowing patients to browse, post stories, and connect with others facing similar challenges.
           </ProjectText>
           <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-06.png"
+            src="/assets/projects/catalia-health/content/screen-06.webp"
             alt="Whiteboard wireframes for Community feature"
           />
           <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-08.png"
+            src="/assets/projects/catalia-health/content/screen-08.webp"
             alt="Whiteboard wireframes for Explore feature"
           />
         </ProjectSubsection>
@@ -448,7 +448,7 @@ export default function CataliaHealth() {
             After increasing the fidelity of our wireframes in Sketch, we used Figma to create high-fidelity mockups. We then developed a working prototype using Figma's prototyping tools, building out the navigation and each screen according to the user flows we had defined.
           </ProjectText>
           <ProjectImage
-            src="/assets/projects/catalia-health/content/screen-11.png"
+            src="/assets/projects/catalia-health/content/screen-11.webp"
             alt="High-fidelity prototype screens in Figma"
           />
         </ProjectSubsection>
@@ -484,11 +484,11 @@ export default function CataliaHealth() {
           Our team was able to provide an interactive high-fidelity prototype, tested with chronically ill patients, which outlines the solution and demonstrates 2-3 user flows of key community features.
         </ProjectText>
         <ProjectImage
-          src="/assets/projects/catalia-health/content/screen-14.png"
+          src="/assets/projects/catalia-health/content/screen-14.webp"
           alt="Flourish profile screen"
         />
         <ProjectImage
-          src="/assets/projects/catalia-health/content/community-screens.png"
+          src="/assets/projects/catalia-health/content/community-screens.webp"
           alt="Flourish app screens overview"
         />
 

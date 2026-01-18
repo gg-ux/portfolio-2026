@@ -36,7 +36,7 @@ export default function TeslaMegaMenu() {
         role="Lead UX/UI Designer"
         timeline="Q1 2023"
         impact="Improved content discoverability & scalability"
-        coverImage="/assets/projects/tesla/mega-menu/content/banner.jpg"
+        coverImage="/assets/projects/tesla/mega-menu/content/banner.webp"
         lightBanner
       />
 
@@ -141,7 +141,7 @@ export default function TeslaMegaMenu() {
             On desktop, the navigation featured main vehicle and energy product offerings centered at the top level, with additional links taking users to Shop, Account, and Menu on the right. Not only is this approach not scalable, but it is also visually cluttered, making it difficult for users to discover any content outside of the top level product pages.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/tesla/mega-menu/content/old-desktop-nav.png"
+            src="/assets/projects/tesla/mega-menu/content/old-desktop-nav.webp"
             alt="Old Tesla desktop navigation with products across top level"
           />
         </ProjectSubsection>
@@ -151,8 +151,9 @@ export default function TeslaMegaMenu() {
             On mobile, the situation was worse because all pages needed to be nested under the menu due to the limited horizontal space. For those trying to find their account or language settings, they would have to scroll all the way to the bottom.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/tesla/mega-menu/content/old-mobile-nav.png"
+            src="/assets/projects/tesla/mega-menu/content/old-mobile-nav.webp"
             alt="Old Tesla mobile navigation requiring excessive scrolling"
+            noBg
           />
         </ProjectSubsection>
       </ProjectSection>
@@ -168,7 +169,7 @@ export default function TeslaMegaMenu() {
             The new desktop menu eliminates clutter and improves page discoverability with intuitive categories. "Support" and "Language," previously hidden, are now prominently placed to provide answers and ensure accessibility.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/tesla/mega-menu/content/new-desktop-expanded.png"
+            src="/assets/projects/tesla/mega-menu/content/new-desktop-expanded.webp"
             alt="New Tesla mega menu with intuitive categories and featured images"
           />
         </ProjectSubsection>
@@ -178,8 +179,9 @@ export default function TeslaMegaMenu() {
             The mobile navigation is more scalable, and the user journey is more streamlined due to intuitive content categorization. While this adds an extra tap, mobile users are accustomed to tapping. This extra interaction enhances discoverability and provides a sense of control by ensuring predictable navigation outcomes.
           </ProjectText>
           <ProjectImageFullWidth
-            src="/assets/projects/tesla/mega-menu/content/new-mobile-nav.png"
+            src="/assets/projects/tesla/mega-menu/content/new-mobile-nav.webp"
             alt="New Tesla mobile navigation with streamlined categories"
+            noBg
           />
         </ProjectSubsection>
 
