@@ -145,18 +145,20 @@ export default function Loader({ onComplete }) {
         <img
           src="/assets/branding/logo.svg"
           alt="Grace Guo"
-          className={`h-6 w-auto transition-all ${isDark ? '' : 'invert'} ${
+          className={`h-6 w-auto transition-all ${
             phase === 'loading' ? 'animate-breathe' : ''
           }`}
           style={{
             transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
             transitionDuration: phase === 'exit' ? '800ms' : '500ms',
             opacity: phase === 'enter' ? 0 : phase === 'exit' ? 0 : 1,
-            filter: phase === 'enter'
-              ? 'blur(8px)'
-              : phase === 'exit'
-              ? 'blur(16px)'
-              : 'blur(0)',
+            filter: `${isDark ? 'invert(1) ' : ''}${
+              phase === 'enter'
+                ? 'blur(8px)'
+                : phase === 'exit'
+                ? 'blur(16px)'
+                : 'blur(0)'
+            }`,
             transform: phase === 'enter'
               ? 'scale(0.8)'
               : phase === 'exit'
