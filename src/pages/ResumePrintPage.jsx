@@ -362,19 +362,22 @@ export default function ResumePrintPage() {
           gap: 6px;
         }
 
-        .contact-link {
+        .contact-item-text {
           font-size: 7.5pt;
           font-weight: 500;
           color: #333;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          gap: 6px;
+          display: block;
+          margin-bottom: 4px;
         }
 
-        .contact-link svg {
-          color: #5B21B6 !important;
-          flex-shrink: 0;
+        .contact-icon {
+          color: #5B21B6;
+          font-size: 8pt;
+          font-weight: 600;
+          margin-right: 6px;
+          display: inline-block;
+          width: 14px;
+          text-align: center;
         }
 
         /* Skills */
@@ -522,18 +525,14 @@ export default function ResumePrintPage() {
           <section>
             <h2 className="section-title">Contact</h2>
             <div className="contact-list">
-              <a href={`mailto:${personalInfo.email}`} className="contact-link">
-                <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor">
-                  <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/>
-                </svg>
+              <span className="contact-item-text">
+                <span className="contact-icon">✉</span>
                 {personalInfo.email}
-              </a>
-              <a href={personalInfo.linkedinUrl} className="contact-link">
-                <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor">
-                  <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/>
-                </svg>
+              </span>
+              <span className="contact-item-text">
+                <span className="contact-icon">in</span>
                 {personalInfo.linkedin}
-              </a>
+              </span>
             </div>
           </section>
 
