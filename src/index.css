@@ -208,7 +208,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-slot-roll {
-  animation: slot-roll 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slot-roll 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Card edge ripple - rings pulsing outward */
@@ -334,7 +334,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-slide-in-left {
-  animation: slide-in-left 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slide-in-left 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Slide in from right - for hero location */
@@ -352,7 +352,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 
 .animate-slide-in-right {
-  animation: slide-in-right 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slide-in-right 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Scale in - for star separator with bounce overshoot (scale only, no opacity) */
