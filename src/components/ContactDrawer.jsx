@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X } from '@phosphor-icons/react'
+import { X, Sparkle, LinkedinLogo, Envelope } from '@phosphor-icons/react'
 import { useTheme } from '../context/ThemeContext'
 import { useContactDrawer } from '../context/ContactDrawerContext'
 import { H2, Body } from './Typography'
@@ -51,7 +51,7 @@ export default function ContactDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className={`fixed top-0 right-0 h-full w-full max-w-lg z-[999] overflow-y-auto ${
+            className={`fixed top-0 right-0 h-full w-full max-w-lg z-[999] overflow-hidden ${
               isDark ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'
             }`}
             style={{
@@ -76,25 +76,48 @@ export default function ContactDrawer() {
             </div>
 
             {/* Content */}
-            <div className="px-8 pb-12">
-              <H2 className="mb-8">Say hello</H2>
-              <ContactForm />
+            <div className="flex flex-col h-[calc(100%-72px)] px-8">
+              <div>
+                <div className="mb-10">
+                  <div className="flex items-center gap-3 mb-2">
+                    <H2>Say hello</H2>
+                    <Sparkle
+                      size={28}
+                      weight="fill"
+                      style={{ color: '#DBA166' }}
+                    />
+                  </div>
+                  <Body className={`${isDark ? 'text-white/50' : 'text-black/50'}`}>
+                    Let's make something meaningful together.
+                  </Body>
+                </div>
+                <ContactForm />
+              </div>
 
-              {/* Email fallback */}
-              <div className={`mt-8 pt-8 border-t ${
+              {/* Footer with email and social - pinned to bottom */}
+              <div className={`mt-auto pt-8 pb-10 border-t ${
                 isDark ? 'border-white/10' : 'border-black/10'
               }`}>
-                <div className={`inline-flex items-center gap-2 font-mono text-[11px] tracking-wide ${
-                  isDark ? 'text-white/40' : 'text-black/40'
-                }`}>
-                  <span>Or email directly:</span>
+                <div className={`flex flex-wrap items-center gap-6 font-mono text-[11px] tracking-wide`}>
                   <a
                     href="mailto:graceguo.design@gmail.com"
-                    className={`transition-colors ${
-                      isDark ? 'text-white/60 hover:text-white' : 'text-black/60 hover:text-black'
+                    className={`flex items-center gap-1.5 transition-colors ${
+                      isDark ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black'
                     }`}
                   >
-                    graceguo.design@gmail.com
+                    <Envelope size={16} weight="regular" />
+                    <span>graceguo.design@gmail.com</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/grace-guo-ux/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-1.5 transition-colors ${
+                      isDark ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black'
+                    }`}
+                  >
+                    <LinkedinLogo size={16} weight="regular" />
+                    <span>LinkedIn</span>
                   </a>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 
 /**
@@ -35,7 +35,7 @@ const Input = forwardRef(function Input({
       : 'border-black/20 text-gray-900 placeholder:text-black/30 focus:border-black/60'
     }
     ${error
-      ? isDark ? '!border-red-400/60' : '!border-red-500/60'
+      ? isDark ? '!border-[#c45c5c]/60' : '!border-[#d46a6a]/60'
       : ''
     }
   `
@@ -46,7 +46,7 @@ const Input = forwardRef(function Input({
   `
 
   const optionalClasses = isDark ? 'text-white/30' : 'text-black/30'
-  const errorClasses = 'mt-1.5 font-mono text-[10px] tracking-wide text-red-400'
+  const errorClasses = `mt-1.5 font-mono text-[10px] tracking-wide ${isDark ? 'text-[#c45c5c]' : 'text-[#d46a6a]'}`
 
   return (
     <div className={className}>
@@ -73,19 +73,29 @@ const Textarea = forwardRef(function Textarea({
   error,
   className = '',
   rows = 1,
-  resizable = true,
+  autoExpand = true,
   ...props
 }, ref) {
   const { isDark } = useTheme()
+  const internalRef = useRef(null)
+  const textareaRef = ref || internalRef
+
+  const handleInput = (e) => {
+    if (autoExpand && e.target) {
+      e.target.style.height = 'auto'
+      e.target.style.height = `${e.target.scrollHeight}px`
+    }
+    props.onInput?.(e)
+  }
 
   const baseClasses = `
     w-full px-0 py-2
     font-satoshi text-base
     bg-transparent
     border-0 border-b
-    transition-all duration-300
+    transition-colors duration-300
     outline-none
-    ${resizable ? 'resize-y' : 'resize-none'}
+    resize-y
     rounded-none
     overflow-hidden
     ${isDark
@@ -93,7 +103,7 @@ const Textarea = forwardRef(function Textarea({
       : 'border-black/20 text-gray-900 placeholder:text-black/30 focus:border-black/60'
     }
     ${error
-      ? isDark ? '!border-red-400/60' : '!border-red-500/60'
+      ? isDark ? '!border-[#c45c5c]/60' : '!border-[#d46a6a]/60'
       : ''
     }
   `
@@ -104,7 +114,7 @@ const Textarea = forwardRef(function Textarea({
   `
 
   const optionalClasses = isDark ? 'text-white/30' : 'text-black/30'
-  const errorClasses = 'mt-1.5 font-mono text-[10px] tracking-wide text-red-400'
+  const errorClasses = `mt-1.5 font-mono text-[10px] tracking-wide ${isDark ? 'text-[#c45c5c]' : 'text-[#d46a6a]'}`
 
   return (
     <div className={className}>
@@ -115,10 +125,10 @@ const Textarea = forwardRef(function Textarea({
         </label>
       )}
       <textarea
-        ref={ref}
+        ref={textareaRef}
         rows={rows}
         className={baseClasses}
-        style={{ minHeight: `${rows * 1.5 + 1}rem` }}
+        onInput={handleInput}
         {...props}
       />
       {error && <p className={errorClasses}>{error}</p>}
@@ -136,6 +146,8 @@ const Select = forwardRef(function Select({
 }, ref) {
   const { isDark } = useTheme()
 
+  const hasValue = props.value && props.value !== ''
+
   const baseClasses = `
     w-full px-0 py-3
     font-satoshi text-base
@@ -147,12 +159,11 @@ const Select = forwardRef(function Select({
     cursor-pointer
     rounded-none
     ${isDark
-      ? 'border-white/20 text-white focus:border-white/60'
-      : 'border-black/20 text-gray-900 focus:border-black/60'
+      ? `border-white/20 focus:border-white/60 ${hasValue ? 'text-white' : 'text-white/30'}`
+      : `border-black/20 focus:border-black/60 ${hasValue ? 'text-gray-900' : 'text-black/30'}`
     }
-    ${!props.value ? (isDark ? 'text-white/30' : 'text-black/30') : ''}
     ${error
-      ? isDark ? '!border-red-400/60' : '!border-red-500/60'
+      ? isDark ? '!border-[#c45c5c]/60' : '!border-[#d46a6a]/60'
       : ''
     }
   `
@@ -163,7 +174,7 @@ const Select = forwardRef(function Select({
   `
 
   const optionalClasses = isDark ? 'text-white/30' : 'text-black/30'
-  const errorClasses = 'mt-1.5 font-mono text-[10px] tracking-wide text-red-400'
+  const errorClasses = `mt-1.5 font-mono text-[10px] tracking-wide ${isDark ? 'text-[#c45c5c]' : 'text-[#d46a6a]'}`
 
   return (
     <div className={className}>

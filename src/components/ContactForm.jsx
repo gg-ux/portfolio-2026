@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import { Button, Input, Textarea } from './ui'
-import { ArrowRight, CircleNotch, CheckCircle, WarningCircle, Smiley, Asterisk } from '@phosphor-icons/react'
+import { ArrowRight, CircleNotch, CheckCircle, WarningCircle, Smiley, Flower } from '@phosphor-icons/react'
 
 export default function ContactForm() {
   const { isDark } = useTheme()
@@ -152,7 +152,8 @@ export default function ContactForm() {
         <CheckCircle
           size={48}
           weight="light"
-          className="mx-auto mb-4 text-emerald-400"
+          className="mx-auto mb-4"
+          style={{ color: isDark ? '#5c9a6a' : '#6aaa78' }}
         />
         <h3 className={`font-satoshi text-xl mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
           Message sent!
@@ -173,7 +174,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-4">
       {/* Name & Email row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
@@ -224,10 +225,10 @@ export default function ContactForm() {
       {/* Error state */}
       {formState === 'error' && (
         <div className={`flex items-center gap-2 p-3 rounded-lg ${
-          isDark ? 'bg-red-500/10 border border-red-500/20' : 'bg-red-50 border border-red-200'
+          isDark ? 'bg-[#c45c5c]/10 border border-[#c45c5c]/20' : 'bg-[#d46a6a]/10 border border-[#d46a6a]/20'
         }`}>
-          <WarningCircle size={18} className="text-red-400 flex-shrink-0" />
-          <p className={`font-satoshi text-sm ${isDark ? 'text-red-300' : 'text-red-600'}`}>
+          <WarningCircle size={18} className="flex-shrink-0" style={{ color: isDark ? '#c45c5c' : '#d46a6a' }} />
+          <p className="font-satoshi text-sm" style={{ color: isDark ? '#c45c5c' : '#d46a6a' }}>
             Something went wrong. Please try again or email me directly.
           </p>
         </div>
@@ -247,7 +248,7 @@ export default function ContactForm() {
             icon={formState === 'submitting'
               ? <CircleNotch size={13} className="animate-spin" />
               : (isDisabled && isButtonHovered)
-                ? <Asterisk size={13} weight="regular" />
+                ? <Flower size={13} weight="regular" />
                 : <ArrowRight size={13} weight="regular" />
             }
             hoverIcon={!isDisabled && <Smiley size={13} weight="regular" />}

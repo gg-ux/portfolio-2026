@@ -3,7 +3,7 @@ import { H1, H4, Body, Caption } from '../components/Typography'
 import ScrambleText from '../components/ScrambleText'
 import FluidBlob from '../components/FluidBlob'
 import AuraBeams from '../components/AuraBeams'
-import { FrostedCard, Tag } from '../components/ui'
+import { FrostedContainer, Tag } from '../components/ui'
 import { useTheme } from '../context/ThemeContext'
 import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/react'
 
@@ -74,7 +74,7 @@ export default function DesignSystemPage() {
           {categories.map((category) => {
             const Icon = category.icon
             return (
-              <FrostedCard
+              <FrostedContainer
                 key={category.title}
                 as={Link}
                 to={category.href}
@@ -117,7 +117,7 @@ export default function DesignSystemPage() {
                     ))}
                   </div>
                 </div>
-              </FrostedCard>
+              </FrostedContainer>
             )
           })}
         </div>

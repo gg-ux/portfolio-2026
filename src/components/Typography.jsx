@@ -440,8 +440,8 @@ export function LinkText({ children, className = '' }) {
   )
 }
 
-// ChartContainer - not typography but kept for compatibility
-export function ChartContainer({ children, className = '', padding = 'default' }) {
+// SubtleContainer - 2% fill container for charts, data viz, content
+export function SubtleContainer({ children, className = '', padding = 'default' }) {
   const { isDark } = useTheme()
   const paddingClasses = {
     none: '',

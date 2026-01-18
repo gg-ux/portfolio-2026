@@ -6,6 +6,7 @@ import { useContactDrawer } from '../context/ContactDrawerContext'
 import ThemeToggle from './ThemeToggle'
 import ScrambleText from './ScrambleText'
 import { Caption } from './Typography'
+import { List, X } from '@phosphor-icons/react'
 
 // Import project thumbnails (same as Explore More section)
 import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card-filled.webp'
@@ -362,38 +363,31 @@ export default function Navigation() {
             <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 relative w-10 h-10 flex items-center justify-center"
+              className={`p-2 relative w-10 h-10 flex items-center justify-center ${
+                ((isDark && !useDarkNav) || useLightNav) ? 'text-white' : 'text-gray-900'
+              }`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-            <div className="w-[22px] h-[14px] relative">
-              <span
-                className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
+              {/* List icon - morphs out when open */}
+              <div
+                className={`absolute transition-all duration-300 ease-out ${
+                  isMobileMenuOpen
+                    ? 'opacity-0 scale-50 rotate-45'
+                    : 'opacity-100 scale-100 rotate-0'
                 }`}
-                style={{
-                  top: isMobileMenuOpen ? '6px' : '0px',
-                  transform: isMobileMenuOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                }}
-              />
-              <span
-                className={`absolute left-0 top-[6px] w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
+              >
+                <List size={24} weight="light" />
+              </div>
+              {/* X icon - morphs in when open */}
+              <div
+                className={`absolute transition-all duration-300 ease-out ${
+                  isMobileMenuOpen
+                    ? 'opacity-100 scale-100 rotate-0'
+                    : 'opacity-0 scale-50 -rotate-45'
                 }`}
-                style={{
-                  opacity: isMobileMenuOpen ? 0 : 1,
-                  transform: isMobileMenuOpen ? 'scaleX(0)' : 'scaleX(1)',
-                }}
-              />
-              <span
-                className={`absolute left-0 w-full h-[2px] rounded-full transition-all duration-300 ease-out ${
-                  ((isDark && !useDarkNav) || useLightNav) ? 'bg-white' : 'bg-gray-900'
-                }`}
-                style={{
-                  top: isMobileMenuOpen ? '6px' : '12px',
-                  transform: isMobileMenuOpen ? 'rotate(-45deg)' : 'rotate(0deg)',
-                }}
-              />
-            </div>
+              >
+                <X size={24} weight="light" />
+              </div>
             </button>
           </div>
         </div>
@@ -579,29 +573,12 @@ export default function Navigation() {
           <ThemeToggle />
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 relative w-10 h-10 flex items-center justify-center"
+            className={`p-2 relative w-10 h-10 flex items-center justify-center ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}
             aria-label="Close menu"
           >
-            <div className="w-[22px] h-[14px] relative">
-              <span
-                className={`absolute left-0 w-full h-[2px] rounded-full ${
-                  isDark ? 'bg-white' : 'bg-gray-900'
-                }`}
-                style={{
-                  top: '6px',
-                  transform: 'rotate(45deg)',
-                }}
-              />
-              <span
-                className={`absolute left-0 w-full h-[2px] rounded-full ${
-                  isDark ? 'bg-white' : 'bg-gray-900'
-                }`}
-                style={{
-                  top: '6px',
-                  transform: 'rotate(-45deg)',
-                }}
-              />
-            </div>
+            <X size={24} weight="light" />
           </button>
         </div>
       </div>

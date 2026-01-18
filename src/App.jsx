@@ -102,7 +102,7 @@ function AppContent() {
         {!isDesignSystemSubpage && <AuraBeams palette="soulful" />}
         <GlobalGrain />
         <CustomCursor />
-        <Navigation />
+        {!(isHomePage && isLoading) && <Navigation />}
         <ContactDrawer />
         <main>
           <Routes>

@@ -1,7 +1,7 @@
 import { useTheme } from '../../context/ThemeContext'
 
 /**
- * FrostedCard - A sleek frosted glass card component
+ * FrostedContainer - A sleek frosted glass container component
  *
  * Features:
  * - Backdrop blur for glass effect
@@ -14,7 +14,7 @@ import { useTheme } from '../../context/ThemeContext'
  * @param {string} as - Element type to render (default: 'div')
  * @param {object} props - Additional props passed to the element
  */
-export default function FrostedCard({
+export default function FrostedContainer({
   className = '',
   children,
   as: Component = 'div',

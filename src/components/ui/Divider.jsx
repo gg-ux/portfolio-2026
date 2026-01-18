@@ -17,7 +17,7 @@ export function Divider({
 
   if (orientation === 'vertical') {
     return (
-      <div className={`w-px h-full ${baseStyles} ${className}`} />
+      <div className={`w-px ${baseStyles} ${className}`} />
     )
   }
 

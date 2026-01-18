@@ -6,7 +6,7 @@
  * ATOMS (basic building blocks)
  * - Button, ButtonWithArrow
  * - Divider, SectionDivider, GridDivider
- * - FrostedCard
+ * - FrostedContainer
  *
  * MOLECULES (combinations of atoms)
  * - (future: NavLink, ImageGrid, etc.)
@@ -19,5 +19,5 @@
 export { Button, ButtonWithArrow } from './Button'
 export { Divider, SectionDivider, GridDivider } from './Divider'
 export { Input, Textarea, Select } from './Input'
-export { default as FrostedCard } from './FrostedCard'
+export { default as FrostedContainer } from './FrostedContainer'
 export { Tag } from './Tag'

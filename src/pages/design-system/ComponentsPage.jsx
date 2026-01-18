@@ -1,335 +1,139 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
 import { Button, ButtonWithArrow } from '../../components/ui/Button'
-import { FrostedCard, Tag } from '../../components/ui'
+import { Tag } from '../../components/ui'
 import { Input, Textarea, Select } from '../../components/ui/Input'
-import { Caption, H4, Body, Paragraph } from '../../components/Typography'
-import { Divider } from '../../components/ui/Divider'
-import { Sparkle, ArrowRight } from '@phosphor-icons/react'
+import { Caption, H4, Paragraph } from '../../components/Typography'
+import { MagnifyingGlass, PencilSimple, Code, Person, Moon, Sun, ArrowsOut, X, ArrowUpRight } from '@phosphor-icons/react'
 
 const sections = [
-  { id: 'cards', label: 'Cards' },
   { id: 'buttons', label: 'Buttons' },
   { id: 'inputs', label: 'Form Inputs' },
   { id: 'tags', label: 'Tags' },
   { id: 'loaders', label: 'Loaders' },
-  { id: 'charts', label: 'Charts' },
+  { id: 'data-viz', label: 'Data Visualization' },
 ]
 
 export default function ComponentsPage() {
   const { isDark } = useTheme()
   const [selectValue, setSelectValue] = useState('')
+  const [flowChartExpanded, setFlowChartExpanded] = useState(false)
+  const [loaderKey, setLoaderKey] = useState(0)
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (flowChartExpanded) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [flowChartExpanded])
 
   const borderClass = isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'
-  const textHeadingClass = isDark ? 'text-white' : 'text-gray-900'
-  const textMutedClass = isDark ? 'text-gray-400' : 'text-gray-500'
   const bgSubtle = isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
 
   return (
     <DSLayout title="Components" sections={sections}>
-      {/* Cards */}
-      <DSSection id="cards" title="Cards">
-        <H4 className="mb-6">Frosted Card</H4>
-        <div className="mb-8">
-          {/* Live card demo */}
-          <FrostedCard className="h-[280px] max-w-[300px] cursor-pointer">
-            {/* Icon - morphs to arrow */}
-            <div className={`absolute top-6 right-6 ${
-              isDark ? 'text-white/20 group-hover:text-white/40' : 'text-black/15 group-hover:text-black/30'
-            }`} style={{ transition: 'color 500ms' }}>
-              <div className="transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]">
-                <Sparkle size={24} weight="light" />
-              </div>
-              <div className="absolute inset-0 transition-all duration-[400ms] ease-out opacity-0 scale-50 -rotate-45 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-0">
-                <ArrowRight size={24} weight="light" />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 flex flex-col h-full p-6">
-              <div className="flex-1 pt-2">
-                <H4 className="mb-3 pr-10">Example Card</H4>
-                <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
-                  Frosted glass effect with subtle grain texture.
-                </Body>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-4">
-                <Tag>Tag</Tag>
-              </div>
-            </div>
-          </FrostedCard>
-        </div>
-
-        {/* Specs */}
-        <H4 className="mb-4">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Background</Caption>
-              <Body size="sm">Semi-transparent fill (1.5% white dark, 20% white light)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Backdrop Blur</Caption>
-              <Body size="sm">backdrop-blur-md (12px)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Border</Caption>
-              <Body size="sm">1px at 8% opacity (white/black)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Grain Overlay</Caption>
-              <Body size="sm">SVG feTurbulence, 8% opacity dark / 6% light</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Border Radius</Caption>
-              <Body size="sm">2xl (1rem)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Hover State</Caption>
-              <Body size="sm">+2% overlay opacity</Body>
-            </div>
-          </div>
-        </div>
-
-        <H4 className="mb-4">Icon Morph Effect</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Icon Out</Caption>
-              <Body size="sm">Scale 50%, rotate 45°, blur 2px, fade out</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Arrow In</Caption>
-              <Body size="sm">Scale 50% → 100%, rotate -45° → 0°, fade in</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Duration</Caption>
-              <Body size="sm">400ms ease-out</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Color Change</Caption>
-              <Body size="sm">20% → 40% opacity on hover</Body>
-            </div>
-          </div>
-        </div>
-      </DSSection>
-
       {/* Buttons */}
       <DSSection id="buttons" title="Buttons">
-        {/* Variants */}
-        <H4 className="mb-6">Variants</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="text-center">
-              <Button variant="primary">Primary</Button>
-              <Caption className="mt-3 block">Primary</Caption>
-            </div>
-            <div className="text-center">
-              <Button variant="secondary">Secondary</Button>
-              <Caption className="mt-3 block">Secondary</Caption>
-            </div>
-            <div className="text-center">
-              <Button variant="ghost">Ghost</Button>
-              <Caption className="mt-3 block">Ghost</Caption>
-            </div>
-          </div>
-        </div>
-
-        {/* Sizes */}
-        <H4 className="mb-6">Sizes</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="text-center">
-              <Button size="sm">Small</Button>
-              <Caption className="mt-3 block">sm</Caption>
-            </div>
-            <div className="text-center">
-              <Button size="md">Medium</Button>
-              <Caption className="mt-3 block">md</Caption>
-            </div>
-            <div className="text-center">
-              <Button size="lg">Large</Button>
-              <Caption className="mt-3 block">lg</Caption>
-            </div>
-          </div>
-        </div>
-
-        {/* Size Usage Guidelines */}
-        <H4 className="mb-6">When to Use Each Size</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="space-y-6">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <Button size="lg" className="pointer-events-none">Large</Button>
-                <Caption className="block">Hero CTAs, standalone actions</Caption>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          {/* Variants */}
+          <div>
+            <H4 className="mb-4">Variants</H4>
+            <div className={`p-6 border ${borderClass} rounded-xl`}>
+              <div className="flex flex-wrap items-center gap-4">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="ghost">Ghost</Button>
               </div>
-              <Body size="sm" className={isDark ? 'text-white/50' : 'text-gray-500'}>
-                Use when the button is THE action on the page. Hero sections, pricing pages, empty states, onboarding flows. Limit to one per viewport.
-              </Body>
             </div>
-            <Divider />
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <Button size="md" className="pointer-events-none">Medium</Button>
-                <Caption className="block">Default choice</Caption>
+          </div>
+
+          {/* Sizes */}
+          <div>
+            <H4 className="mb-4">Sizes</H4>
+            <div className={`p-6 border ${borderClass} rounded-xl`}>
+              <div className="flex flex-wrap items-center gap-4">
+                <Button size="sm">Small</Button>
+                <Button size="md">Medium</Button>
+                <Button size="lg">Large</Button>
               </div>
-              <Body size="sm" className={isDark ? 'text-white/50' : 'text-gray-500'}>
-                Forms, cards, modals, section-level actions. When there are 1-2 actions side by side or the button shares space with content.
-              </Body>
-            </div>
-            <Divider />
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <Button size="sm" className="pointer-events-none">Small</Button>
-                <Caption className="block">Supporting actions</Caption>
-              </div>
-              <Body size="sm" className={isDark ? 'text-white/50' : 'text-gray-500'}>
-                Inline with text, tables, lists, repeated actions. When space is tight or the button shouldn't compete with nearby primary actions.
-              </Body>
             </div>
           </div>
         </div>
 
-        {/* With Icons */}
-        <H4 className="mb-6">With Icons</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="text-center">
-              <ButtonWithArrow direction="right">Continue</ButtonWithArrow>
-              <Caption className="mt-3 block">Arrow Right</Caption>
-            </div>
-            <div className="text-center">
-              <ButtonWithArrow direction="up">Back to Top</ButtonWithArrow>
-              <Caption className="mt-3 block">Arrow Up</Caption>
-            </div>
-            <div className="text-center">
-              <ButtonWithArrow direction="external" external href="#">External</ButtonWithArrow>
-              <Caption className="mt-3 block">External Link</Caption>
-            </div>
-          </div>
-        </div>
-
-        {/* Specs */}
-        <H4 className="mb-6">Specifications</H4>
+        {/* Hover Interactions */}
+        <H4 className="mb-2">Hover Interactions</H4>
+        <Paragraph size="sm" className="mb-4">Arrow nudges in its direction on hover.</Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Font</Caption>
-              <Body size="sm">Satoshi Medium, uppercase, tracking-wider</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Border Radius</Caption>
-              <Body size="sm">Full (rounded-full)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Transition</Caption>
-              <Body size="sm">500ms all properties</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">3D Effect</Caption>
-              <Body size="sm">Primary buttons only - tilt on hover</Body>
-            </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <ButtonWithArrow direction="right">Continue</ButtonWithArrow>
+            <ButtonWithArrow direction="up">Back to Top</ButtonWithArrow>
+            <ButtonWithArrow direction="external" external href="#">External</ButtonWithArrow>
           </div>
         </div>
+
       </DSSection>
 
       {/* Form Inputs */}
       <DSSection id="inputs" title="Form Inputs">
-        <Paragraph size="sm" className="mb-8">
-          Minimal underline-style inputs that focus attention on the content rather than the container.
-        </Paragraph>
-
         {/* Text Input */}
-        <H4 className="mb-6">Text Input</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="max-w-md space-y-6">
-            <Input
-              label="Full Name"
-              placeholder="Enter your name"
-              required
-            />
-            <Input
-              label="Website"
-              placeholder="https://example.com"
-              optional
-            />
-            <Input
-              label="Email"
-              placeholder="you@example.com"
-              error="Please enter a valid email"
-            />
+        <H4 className="mb-2">Text Input</H4>
+        <Paragraph size="sm" className="mb-4">Default, filled, and error states.</Paragraph>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <Input label="Name" />
+            </div>
+            <div>
+              <Input label="Name" value="Grace" readOnly />
+            </div>
+            <div>
+              <Input label="Email" value="grace@" error="Invalid email" readOnly />
+            </div>
           </div>
         </div>
 
-        {/* Textarea */}
-        <H4 className="mb-6">Textarea</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="max-w-md space-y-6">
-            <Textarea
-              label="Message"
-              placeholder="Tell us about your project..."
-              rows={3}
-            />
-            <Textarea
-              label="Bio"
-              placeholder="A brief description..."
-              rows={2}
-              resizable={false}
-              optional
-            />
-          </div>
-        </div>
-
-        {/* Select */}
-        <H4 className="mb-6">Select</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="max-w-md">
-            <Select
-              label="Project Type"
-              value={selectValue}
-              onChange={(e) => setSelectValue(e.target.value)}
-              options={[
-                { value: '', label: 'Select an option...' },
-                { value: 'design', label: 'Design System' },
-                { value: 'product', label: 'Product Design' },
-                { value: 'research', label: 'UX Research' },
-                { value: 'branding', label: 'Brand Identity' },
-              ]}
-            />
-          </div>
-        </div>
-
-        {/* Specs */}
-        <H4 className="mb-6">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
+        {/* Multi-line */}
+        <H4 className="mb-2">Multi-line</H4>
+        <Paragraph size="sm" className="mb-4">Automatically expands as you type.</Paragraph>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <Caption className="block mb-1">Label</Caption>
-              <Body size="sm">Azeret Mono, 11px, uppercase, tracking-wide</Body>
+              <Textarea label="Message" rows={1} />
             </div>
             <div>
-              <Caption className="block mb-1">Input Text</Caption>
-              <Body size="sm">Satoshi, 16px (base)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Border</Caption>
-              <Body size="sm">Bottom only, 20% opacity → 60% on focus</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Error State</Caption>
-              <Body size="sm">Red border (60%), error text below</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Transition</Caption>
-              <Body size="sm">300ms all properties</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Padding</Caption>
-              <Body size="sm">py-2, px-0 (underline style)</Body>
+              <Textarea label="Message" defaultValue="I'd love to collaborate on..." rows={1} />
             </div>
           </div>
         </div>
+
+        {/* Dropdown */}
+        <H4 className="mb-4">Dropdown</H4>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Select
+                label="Project Type"
+                value=""
+                onChange={() => {}}
+                options={[{ value: '', label: 'Select an option...' }]}
+              />
+            </div>
+            <div>
+              <Select
+                label="Project Type"
+                value="design"
+                onChange={() => {}}
+                options={[{ value: 'design', label: 'Design System' }]}
+              />
+            </div>
+          </div>
+        </div>
+
       </DSSection>
 
       {/* Tags */}
@@ -358,81 +162,75 @@ export default function ComponentsPage() {
           </div>
         </div>
 
-        {/* Specs */}
-        <H4 className="mb-6">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Font</Caption>
-              <Body size="sm">Azeret Mono, 11px, uppercase, tracking-wide</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Padding</Caption>
-              <Body size="sm">px-2 py-1 (8px horizontal, 4px vertical)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Border Radius</Caption>
-              <Body size="sm">rounded-md (6px)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Default Background</Caption>
-              <Body size="sm">6% white (dark) / 4% black (light)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Colored Tags (Dark Mode)</Caption>
-              <Body size="sm">5% black overlay on background color</Body>
-            </div>
-          </div>
-        </div>
-
-        <H4 className="mb-6">Use Cases</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
-            {[
-              'Skills and categories on resume',
-              'Project tags and metadata',
-              'Filter chips and labels',
-              'Status indicators (with color)',
-            ].map((item, i) => (
-              <div key={i} className="py-3 first:pt-0 last:pb-0">
-                <Body size="sm">
-                  {item}
-                </Body>
-              </div>
-            ))}
-          </div>
-        </div>
       </DSSection>
 
       {/* Loaders */}
       <DSSection id="loaders" title="Loaders">
-        <Paragraph size="sm" className="mb-8">
-          A branded page loader with progress ring and bloom effect for initial page load.
+        <H4 className="mb-2">Welcome Loader</H4>
+        <Paragraph size="sm" className="mb-4">
+          Page loader with progress ring, breathing logo, and bloom effect.
         </Paragraph>
 
-        {/* Visual Preview */}
-        <H4 className="mb-6">Page Loader</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex items-center justify-center h-48">
-            {/* Static preview of loader */}
-            <div className="relative flex items-center justify-center">
-              {/* Glow effect */}
+        {/* Loader animation keyframes */}
+        <style>{`
+          @keyframes loader-ring-fill {
+            0% { stroke-dashoffset: 245; }
+            40%, 100% { stroke-dashoffset: 0; }
+          }
+          @keyframes loader-bloom {
+            0%, 40% { opacity: 0; transform: scale(0.8); }
+            60%, 80% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1.4); }
+          }
+          @keyframes loader-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+          @keyframes loader-fade {
+            0%, 10% { opacity: 0; filter: blur(8px); }
+            25%, 75% { opacity: 1; filter: blur(0); }
+            90%, 100% { opacity: 0; filter: blur(8px); }
+          }
+        `}</style>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className={`relative border ${borderClass} rounded-xl aspect-video`}>
+            <div key={loaderKey} className="absolute inset-0 flex items-center justify-center">
+              {/* Bloom glow */}
               <div
                 className="absolute rounded-full"
                 style={{
                   width: 120,
                   height: 120,
-                  background: `radial-gradient(circle, rgba(167, 139, 250, 0.3) 0%, rgba(167, 139, 250, 0.15) 50%, transparent 70%)`,
+                  background: 'radial-gradient(circle, rgba(167, 139, 250, 0.4) 0%, rgba(167, 139, 250, 0.2) 50%, transparent 70%)',
                   filter: 'blur(20px)',
+                  animation: 'loader-bloom 4s ease-in-out',
                 }}
               />
               {/* Progress ring */}
-              <svg width={80} height={80} className="absolute" style={{ transform: 'rotate(-90deg)' }}>
+              <svg
+                width={80}
+                height={80}
+                className="absolute"
+                style={{
+                  transform: 'rotate(-90deg)',
+                  filter: 'drop-shadow(0 0 8px rgba(167, 139, 250, 0.5)) drop-shadow(0 0 16px rgba(15, 118, 110, 0.3))',
+                  animation: 'loader-fade 4s ease-in-out',
+                }}
+              >
                 <defs>
-                  <linearGradient id="loaderGradient">
+                  <linearGradient id="loaderGradientAnim">
                     <stop offset="0%" stopColor="#BF92F0" />
                     <stop offset="50%" stopColor="#0B96A3" />
                     <stop offset="100%" stopColor="#BF92F0" />
+                    <animateTransform
+                      attributeName="gradientTransform"
+                      type="rotate"
+                      from="0 0.5 0.5"
+                      to="360 0.5 0.5"
+                      dur="2s"
+                      repeatCount="indefinite"
+                    />
                   </linearGradient>
                 </defs>
                 <circle
@@ -448,277 +246,431 @@ export default function ComponentsPage() {
                   cy={40}
                   r={39}
                   fill="none"
-                  stroke="url(#loaderGradient)"
+                  stroke="url(#loaderGradientAnim)"
                   strokeWidth={1.5}
                   strokeLinecap="round"
                   strokeDasharray={245}
-                  strokeDashoffset={60}
-                  style={{ filter: 'drop-shadow(0 0 8px rgba(167, 139, 250, 0.5))' }}
+                  style={{ animation: 'loader-ring-fill 4s ease-in-out' }}
                 />
               </svg>
               {/* Logo */}
               <img
                 src="/assets/branding/logo.svg"
                 alt="Logo"
-                className={`h-6 w-auto ${isDark ? 'invert' : ''}`}
+                className={`h-6 w-auto relative ${isDark ? 'invert' : ''}`}
+                style={{ animation: 'loader-breathe 2s ease-in-out infinite, loader-fade 4s ease-in-out' }}
               />
             </div>
-          </div>
-          <Caption className="text-center block mt-4">
-            Shows during initial page load with gradient ring animation
-          </Caption>
-        </div>
-
-        {/* Animation Phases */}
-        <H4 className="mb-6">Animation Phases</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
-            {[
-              ['Enter', '0-400ms', 'Logo fades in, slight scale up'],
-              ['Loading', '400-1800ms', 'Ring fills with gradient animation, logo breathes'],
-              ['Complete', '1800-2400ms', 'Bloom glow effect appears'],
-              ['Exit', '2400-3200ms', 'Everything fades and blurs out'],
-            ].map(([phase, timing, description], i) => (
-              <div key={i} className="py-3 first:pt-0 last:pb-0 grid grid-cols-3 gap-4">
-                <Body size="sm" className={`font-medium ${isDark ? 'text-white/80' : 'text-gray-700'}`}>{phase}</Body>
-                <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-gray-400'}`}>{timing}</span>
-                <Body size="sm" className={isDark ? 'text-white/60' : 'text-gray-600'}>{description}</Body>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Specs */}
-        <H4 className="mb-6">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Ring Size</Caption>
-              <Body size="sm">80px diameter, 1.5px stroke</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Gradient</Caption>
-              <Body size="sm">Lilac → Lagoon → Lilac (rotating)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Bloom Glow</Caption>
-              <Body size="sm">Radial gradient, 20px blur</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Easing</Caption>
-              <Body size="sm">cubic-bezier(0.22, 1, 0.36, 1)</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Total Duration</Caption>
-              <Body size="sm">~3.2 seconds</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Logo Animation</Caption>
-              <Body size="sm">Breathing pulse during loading phase</Body>
-            </div>
+            <button
+              onClick={() => setLoaderKey(k => k + 1)}
+              className={`absolute bottom-4 right-4 font-mono text-xs px-3 py-1 rounded border transition-colors ${
+                isDark ? 'border-white/20 text-white/60 hover:border-white/40' : 'border-black/20 text-gray-500 hover:border-black/40'
+              }`}
+            >
+              Replay
+            </button>
           </div>
         </div>
       </DSSection>
 
-      {/* Charts */}
-      <DSSection id="charts" title="Charts">
-        <Paragraph size="sm" className="mb-8">
-          Charts follow a minimal, premium aesthetic with slim elements and subtle grid treatments.
+      {/* Data Visualization */}
+      <DSSection id="data-viz" title="Data Visualization">
+        <Paragraph className="mb-12 max-w-3xl">
+          Clarity over complexity. Use color with intention—every element should help the viewer understand the data, not distract from it.
         </Paragraph>
 
-        {/* Bars */}
-        <H4 className="mb-6">Bar Style</H4>
+        {/* Categorical Palette */}
+        <H4 className="mb-2">Categorical Palette</H4>
+        <Paragraph size="sm" className="mb-4">
+          For multi-color charts. Uses the <a href="/design-system/foundation#brand-palette" className={`inline-flex items-center gap-1 underline underline-offset-2 ${isDark ? 'text-white/70 hover:text-white' : 'text-black/70 hover:text-black'}`}>Brand Palette <ArrowUpRight size={12} weight="bold" /></a> in order.
+        </Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <Caption className="block mb-3">Standard Bar (4px height)</Caption>
-          <div className={`h-8 relative ${bgSubtle} rounded-lg`}>
-            <div
-              className="absolute top-1/2 -translate-y-1/2 left-4 h-1 rounded-full"
-              style={{ width: '60%', backgroundColor: isDark ? '#A78BFA' : '#8B5CF6' }}
-            />
-          </div>
-          <p className={`font-mono text-xs mt-2 ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
-            h-1 (4px) • rounded-full • scaleX animation
-          </p>
-        </div>
-
-        {/* Grid Lines */}
-        <H4 className="mb-6">Grid Lines</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <Caption className="block mb-3">Dashed Vertical Lines</Caption>
-          <div className={`h-24 relative ${bgSubtle} rounded-lg flex`}>
-            {[0, 1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="flex-1 border-l border-dashed"
-                style={{ borderColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)' }}
-              />
-            ))}
-          </div>
-          <p className={`font-mono text-xs mt-2 ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
-            border-dashed • 15% opacity dark / 15% light
-          </p>
-        </div>
-
-        {/* Colors */}
-        <H4 className="mb-6">Colors</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-lg"
-              style={{ backgroundColor: isDark ? '#A78BFA' : '#8B5CF6' }}
-            />
-            <div>
-              <Body className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Lavender (Primary Accent)</Body>
-              <p className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
-                Dark: #A78BFA • Light: #8B5CF6
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Guidelines */}
-        <H4 className="mb-6">Bar Chart Guidelines</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl mb-12`}>
-          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+          <div className="flex flex-wrap gap-3">
             {[
-              'Use 4px (h-1) height for all chart bars',
-              'Always use rounded-full for pill-shaped ends',
-              'Animate with transform: scaleX for entry',
-              'Use staggered delays for multiple bars',
-              'Keep grid lines subtle (15% opacity max)',
-            ].map((item, i) => (
-              <div key={i} className="py-3 first:pt-0 last:pb-0">
-                <Body size="sm">
-                  {item}
-                </Body>
+              { color: '#5835B0', name: 'Amethyst' },
+              { color: '#BF92F0', name: 'Lilac' },
+              { color: '#D78F8D', name: 'Rose' },
+              { color: '#DBA166', name: 'Gold' },
+              { color: '#36CBC6', name: 'Turquoise' },
+              { color: '#0B96A3', name: 'Lagoon' },
+              { color: '#87AA61', name: 'Peridot' },
+              { color: '#2F7255', name: 'Forest' },
+            ].map(({ color, name }) => (
+              <div key={name} className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded" style={{ backgroundColor: color }} />
+                <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>{name}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Flow Charts */}
-        <H4 className="mb-6">Flow Charts</H4>
-        <Paragraph size="sm" className="mb-6">
-          SVG-based flow diagrams with consistent node styles, path routing, and semantic color coding.
-        </Paragraph>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          {/* Semantic Palette */}
+          <div>
+            <H4 className="mb-2">Semantic Palette</H4>
+            <Paragraph size="sm" className="mb-4">For status indication.</Paragraph>
+            <div className={`p-6 border ${borderClass} rounded-xl`}>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: isDark ? '#5c9a6a' : '#6aaa78' }} />
+                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Success</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: isDark ? '#c45c5c' : '#d46a6a' }} />
+                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Problem</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: isDark ? '#4a4a4a' : '#d0d0d0' }} />
+                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Neutral</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        {/* Flow Chart Colors */}
-        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <Caption className="block mb-4">Color System</Caption>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-1 rounded-full" style={{ backgroundColor: isDark ? '#4a4a4a' : '#d0d0d0' }} />
-              <div>
-                <p className={`font-mono text-xs ${textMutedClass}`}>Neutral Path</p>
-                <p className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-black/30'}`}>{isDark ? '#4a4a4a' : '#d0d0d0'}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-1 rounded-full" style={{ backgroundColor: isDark ? '#5c9a6a' : '#6aaa78' }} />
-              <div>
-                <p className={`font-mono text-xs ${textMutedClass}`}>Success Path</p>
-                <p className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-black/30'}`}>{isDark ? '#5c9a6a' : '#6aaa78'}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-1 rounded-full" style={{ backgroundColor: isDark ? '#c45c5c' : '#d46a6a' }} />
-              <div>
-                <p className={`font-mono text-xs ${textMutedClass}`}>Problem Path</p>
-                <p className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-black/30'}`}>{isDark ? '#c45c5c' : '#d46a6a'}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-2 rounded" style={{ backgroundColor: isDark ? '#252525' : '#ffffff', border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'}` }} />
-              <div>
-                <p className={`font-mono text-xs ${textMutedClass}`}>Node Fill</p>
-                <p className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-black/30'}`}>{isDark ? '#252525' : '#ffffff'}</p>
+          {/* Single Accent */}
+          <div>
+            <H4 className="mb-2">Single Accent</H4>
+            <Paragraph size="sm" className="mb-4">Theme-aware.</Paragraph>
+            <div className={`p-6 border ${borderClass} rounded-xl`}>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center gap-2">
+                  <Moon size={14} weight="fill" className={isDark ? 'text-white/50' : 'text-black/50'} />
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: '#BF92F0' }} />
+                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Lilac</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Sun size={14} weight="fill" className={isDark ? 'text-white/50' : 'text-black/50'} />
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: '#5835B0' }} />
+                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Amethyst</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Flow Chart Category Colors */}
+        {/* Bar Chart Example */}
+        <H4 className="mb-2">Horizontal Bars</H4>
+        <Paragraph size="sm" className="mb-4">4px height, rounded ends, full-width track.</Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <Caption className="block mb-4">Category Colors (Brand Palette)</Caption>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="space-y-6">
             {[
-              { name: 'Order Education', color: '#5835B0', label: 'Amethyst' },
-              { name: 'Vehicle Appointments', color: '#DBA166', label: 'Gold' },
-              { name: 'Vehicle Education', color: '#36CBC6', label: 'Turquoise' },
-              { name: 'Energy Appointments', color: '#D78F8D', label: 'Rose' },
-              { name: 'Energy Education', color: '#0B96A3', label: 'Lagoon' },
-              { name: 'General', color: '#6B7280', label: 'Neutral' },
-            ].map(({ name, color, label }) => (
-              <div key={name} className="flex items-center gap-3">
+              { label: 'Research', value: 55, color: '#5835B0', icon: MagnifyingGlass },
+              { label: 'Design', value: 31, color: '#BF92F0', icon: PencilSimple },
+              { label: 'Development', value: 10, color: '#D78F8D', icon: Code },
+            ].map(({ label, value, color, icon: Icon }) => (
+              <div key={label} className="flex items-start gap-4">
+                {/* Icon */}
                 <div
-                  className="w-8 h-6 rounded"
-                  style={{
-                    backgroundColor: isDark ? `${color}40` : `${color}25`,
-                    border: `1px solid ${isDark ? `${color}70` : `${color}50`}`
-                  }}
-                />
-                <div>
-                  <p className={`font-mono text-xs ${textMutedClass}`}>{name}</p>
-                  <p className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-black/30'}`}>{label}</p>
+                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${color}20` }}
+                >
+                  <Icon size={20} weight="fill" style={{ color }} />
+                </div>
+
+                {/* Label, percentage, and bar */}
+                <div className="flex-1 pt-0.5">
+                  <div className="flex justify-between items-baseline mb-2">
+                    <span
+                      className="font-mono text-[11px] tracking-wide uppercase font-medium"
+                      style={{ color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }}
+                    >
+                      {label}
+                    </span>
+                    <span
+                      className="font-mono text-sm font-medium"
+                      style={{ color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }}
+                    >
+                      {value}%
+                    </span>
+                  </div>
+                  <div
+                    className="h-1 rounded-full w-full"
+                    style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' }}
+                  >
+                    <div
+                      className="h-full rounded-full"
+                      style={{ width: `${value}%`, backgroundColor: color }}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Flow Chart Specs */}
-        <H4 className="mb-6">Flow Chart Specifications</H4>
+        {/* Gantt Chart Example */}
+        <H4 className="mb-2">Gantt Chart</H4>
+        <Paragraph size="sm" className="mb-4">Timeline visualization with staggered phases.</Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Node Typography</Caption>
-              <Body size="sm">13px Satoshi, weight 600</Body>
+          <div className="flex">
+            {/* Phase labels */}
+            <div className="w-20 flex flex-col justify-around pr-3 h-32">
+              {['Planning', 'Design', 'Develop', 'Deliver'].map((phase) => (
+                <span
+                  key={phase}
+                  className="font-mono text-[11px] tracking-wide uppercase text-right"
+                  style={{ color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }}
+                >
+                  {phase}
+                </span>
+              ))}
             </div>
-            <div>
-              <Caption className="block mb-1">Label Typography</Caption>
-              <Body size="sm">11px monospace, uppercase, 0.05em tracking</Body>
+            {/* Chart area */}
+            <div className="flex-1 relative h-32">
+              {/* Grid lines */}
+              <div className="absolute inset-0 flex">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="flex-1 border-l border-dashed"
+                    style={{ borderColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)' }}
+                  />
+                ))}
+              </div>
+              {/* Bars */}
+              {[
+                { start: 0, width: 25, color: '#5835B0', row: 0 },
+                { start: 10, width: 35, color: '#BF92F0', row: 1 },
+                { start: 40, width: 35, color: '#D78F8D', row: 2 },
+                { start: 70, width: 25, color: '#DBA166', row: 3 },
+              ].map(({ start, width, color, row }) => (
+                <div
+                  key={row}
+                  className="absolute h-1 rounded-full"
+                  style={{
+                    top: `${row * 25 + 12.5}%`,
+                    left: `${start}%`,
+                    width: `${width}%`,
+                    backgroundColor: color,
+                  }}
+                />
+              ))}
             </div>
-            <div>
-              <Caption className="block mb-1">Line Width</Caption>
-              <Body size="sm">1.5px stroke</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Corner Radius</Caption>
-              <Body size="sm">8px for path turns, 6-8px for nodes</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Decision Nodes</Caption>
-              <Body size="sm">Diamond shape for yes/no decisions</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Arrows</Caption>
-              <Body size="sm">SVG markers, 8x6px, color matches path</Body>
-            </div>
+          </div>
+          {/* Month labels */}
+          <div className="flex mt-3 ml-20">
+            {['Week 1', 'Week 2', 'Week 3', 'Week 4'].map((week) => (
+              <span
+                key={week}
+                className="flex-1 font-mono text-[11px] tracking-wide"
+                style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}
+              >
+                {week}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Expandable Charts */}
-        <H4 className="mb-6">Expandable Chart Wrapper</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1">Mobile Interaction</Caption>
-              <Body size="sm">Tap expand button to view fullscreen with pan/zoom</Body>
+        {/* Single Accent Chart Example */}
+        <H4 className="mb-2">Single Accent Chart</H4>
+        <Paragraph size="sm" className="mb-4 flex items-center gap-1 flex-wrap">
+          <span>Highlight key data with theme-aware primary (Lilac</span>
+          <Moon size={14} weight="fill" className="opacity-70" />
+          <span>/ Amethyst</span>
+          <Sun size={14} weight="fill" className="opacity-70" />
+          <span>).</span>
+        </Paragraph>
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
+          {(() => {
+            const data = [
+              { percent: 5.1, label: 'Age 19-34' },
+              { percent: 7.6, label: 'Age 35-39' },
+              { percent: 48.7, label: 'Age 40-54' },
+              { percent: 38.4, label: 'Age 55-75' },
+            ]
+            const maxPercent = Math.max(...data.map(d => d.percent))
+            const accentColor = isDark ? '#BF92F0' : '#5835B0'
+            const grayColor = isDark ? '#ffffff' : '#6B7280'
+            const getOpacity = (percent) => 0.2 + ((percent / maxPercent) * 0.4)
+
+            return (
+              <div className="flex justify-around items-end gap-4">
+                {data.map((item) => (
+                  <div key={item.label} className="flex flex-col items-center">
+                    <Person
+                      size={48}
+                      weight="fill"
+                      style={{
+                        color: item.percent === maxPercent ? accentColor : grayColor,
+                        opacity: item.percent === maxPercent ? 1 : getOpacity(item.percent),
+                      }}
+                    />
+                    <span
+                      className="text-xl tracking-normal mt-4 font-semibold"
+                      style={{ fontFamily: 'Satoshi, sans-serif', color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)' }}
+                    >
+                      {item.percent}%
+                    </span>
+                    <span className={`font-mono text-[12px] mt-1 ${isDark ? 'text-white/50' : 'text-black/50'}`}>
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )
+          })()}
+        </div>
+
+        {/* Flow Chart Example */}
+        <H4 className="mb-2">Flow Chart</H4>
+        <Paragraph size="sm" className="mb-4">Nodes, decisions, and semantic path colors. Tap to expand on mobile.</Paragraph>
+        <div className={`p-6 border ${borderClass} rounded-xl relative`}>
+          <svg width="100%" height="140" viewBox="0 0 400 140" fill="none">
+            <defs>
+              <marker id="arrow-neutral" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#4a4a4a' : '#d0d0d0'} />
+              </marker>
+              <marker id="arrow-success" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#5c9a6a' : '#6aaa78'} />
+              </marker>
+              <marker id="arrow-problem" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#c45c5c' : '#d46a6a'} />
+              </marker>
+            </defs>
+
+            {/* Start node */}
+            <rect x="10" y="50" width="60" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+            <text x="40" y="70" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Start</text>
+
+            {/* Line to decision */}
+            <path d="M 70 65 L 120 65" stroke={isDark ? '#4a4a4a' : '#d0d0d0'} strokeWidth="1.5" />
+
+            {/* Decision diamond */}
+            <path d="M 160 30 L 200 65 L 160 100 L 120 65 Z" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+            <text x="160" y="69" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Valid?</text>
+
+            {/* Success path (Yes) */}
+            <path d="M 200 65 L 230 65 Q 240 65, 240 50 L 240 35 Q 240 25, 250 25 L 280 25" stroke={isDark ? '#5c9a6a' : '#6aaa78'} strokeWidth="1.5" fill="none" markerEnd="url(#arrow-success)" />
+            <text x="220" y="18" fill={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'} style={{ fontSize: '9px', fontFamily: 'ui-monospace, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
+            <rect x="290" y="10" width="70" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+            <text x="325" y="30" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Success</text>
+
+            {/* Problem path (No) */}
+            <path d="M 200 65 L 230 65 Q 240 65, 240 80 L 240 95 Q 240 105, 250 105 L 280 105" stroke={isDark ? '#c45c5c' : '#d46a6a'} strokeWidth="1.5" fill="none" markerEnd="url(#arrow-problem)" />
+            <text x="220" y="122" fill={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'} style={{ fontSize: '9px', fontFamily: 'ui-monospace, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
+            <rect x="290" y="90" width="70" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+            <text x="325" y="110" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Retry</text>
+          </svg>
+
+          {/* Legend */}
+          <div className={`flex gap-6 mt-4 pt-4 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+            <div className="flex items-center gap-1.5">
+              <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#4a4a4a' : '#d0d0d0' }} />
+              <span
+                className="font-mono text-[11px] tracking-wide uppercase"
+                style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}
+              >
+                Neutral
+              </span>
             </div>
-            <div>
-              <Caption className="block mb-1">Zoom Library</Caption>
-              <Body size="sm">react-zoom-pan-pinch, 0.4x-3x scale range</Body>
+            <div className="flex items-center gap-1.5">
+              <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#5c9a6a' : '#6aaa78' }} />
+              <span
+                className="font-mono text-[11px] tracking-wide uppercase"
+                style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}
+              >
+                Success
+              </span>
             </div>
-            <div>
-              <Caption className="block mb-1">Legend Position</Caption>
-              <Body size="sm">Horizontal scroll above chart, border-bottom separator</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1">Auto-Scale</Caption>
-              <Body size="sm">Calculates optimal scale to fit viewport height</Body>
+            <div className="flex items-center gap-1.5">
+              <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#c45c5c' : '#d46a6a' }} />
+              <span
+                className="font-mono text-[11px] tracking-wide uppercase"
+                style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}
+              >
+                Problem
+              </span>
             </div>
           </div>
+
+          {/* Mobile expand button */}
+          <button
+            onClick={() => setFlowChartExpanded(true)}
+            className={`absolute bottom-4 right-4 p-2 rounded-lg md:hidden ${
+              isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-black'
+            }`}
+          >
+            <ArrowsOut size={20} />
+          </button>
         </div>
+
+        {/* Flow Chart Modal */}
+        {flowChartExpanded && (
+          <div className={`fixed inset-0 z-[9999] ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+            {/* Chart with pinch/zoom */}
+            <TransformWrapper
+              initialScale={1}
+              minScale={0.5}
+              maxScale={3}
+              centerOnInit={true}
+              wheel={{ step: 0.1 }}
+              panning={{ velocityDisabled: true }}
+            >
+              <TransformComponent
+                wrapperStyle={{ width: '100%', height: '100%' }}
+                contentStyle={{ width: 'fit-content', height: 'fit-content' }}
+              >
+                <svg width="400" height="140" viewBox="0 0 400 140" fill="none">
+                  <defs>
+                    <marker id="modal-arrow-neutral" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                      <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#4a4a4a' : '#d0d0d0'} />
+                    </marker>
+                    <marker id="modal-arrow-success" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                      <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#5c9a6a' : '#6aaa78'} />
+                    </marker>
+                    <marker id="modal-arrow-problem" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                      <polygon points="0 0, 8 3, 0 6" fill={isDark ? '#c45c5c' : '#d46a6a'} />
+                    </marker>
+                  </defs>
+                  <rect x="10" y="50" width="60" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+                  <text x="40" y="70" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Start</text>
+                  <path d="M 70 65 L 120 65" stroke={isDark ? '#4a4a4a' : '#d0d0d0'} strokeWidth="1.5" />
+                  <path d="M 160 30 L 200 65 L 160 100 L 120 65 Z" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+                  <text x="160" y="69" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Valid?</text>
+                  <path d="M 200 65 L 230 65 Q 240 65, 240 50 L 240 35 Q 240 25, 250 25 L 280 25" stroke={isDark ? '#5c9a6a' : '#6aaa78'} strokeWidth="1.5" fill="none" markerEnd="url(#modal-arrow-success)" />
+                  <text x="220" y="18" fill={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'} style={{ fontSize: '9px', fontFamily: 'ui-monospace, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
+                  <rect x="290" y="10" width="70" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+                  <text x="325" y="30" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Success</text>
+                  <path d="M 200 65 L 230 65 Q 240 65, 240 80 L 240 95 Q 240 105, 250 105 L 280 105" stroke={isDark ? '#c45c5c' : '#d46a6a'} strokeWidth="1.5" fill="none" markerEnd="url(#modal-arrow-problem)" />
+                  <text x="220" y="122" fill={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'} style={{ fontSize: '9px', fontFamily: 'ui-monospace, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
+                  <rect x="290" y="90" width="70" height="30" rx="6" fill={isDark ? '#252525' : '#ffffff'} stroke={isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} strokeWidth="1.5" />
+                  <text x="325" y="110" textAnchor="middle" fill={isDark ? '#ffffff' : '#1f2937'} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>Retry</text>
+                </svg>
+              </TransformComponent>
+            </TransformWrapper>
+
+            {/* Fixed Header */}
+            <div className={`fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-4 ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+              <h2 className={`font-satoshi text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Flow Chart
+              </h2>
+              <button
+                onClick={() => setFlowChartExpanded(false)}
+                className={`p-2 rounded-lg ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-black'}`}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Fixed Legend */}
+            <div className={`fixed bottom-0 left-0 right-0 z-10 px-4 py-4 border-t ${isDark ? 'bg-[#0a0a0a] border-white/10' : 'bg-[#FAF8F4] border-black/10'}`}>
+              <div className="flex gap-6">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#4a4a4a' : '#d0d0d0' }} />
+                  <span className="font-mono text-[11px] tracking-wide uppercase" style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}>Neutral</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#5c9a6a' : '#6aaa78' }} />
+                  <span className="font-mono text-[11px] tracking-wide uppercase" style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}>Success</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-4 h-0.5 rounded" style={{ backgroundColor: isDark ? '#c45c5c' : '#d46a6a' }} />
+                  <span className="font-mono text-[11px] tracking-wide uppercase" style={{ color: isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)' }}>Problem</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </DSSection>
     </DSLayout>
   )

@@ -357,9 +357,9 @@ export default function CataliaHealth() {
             We split into two groups to explore different site map approaches, which helped us understand potential IA structures and prioritize features. For scope, we focused on online community and resource features, saving Mabu integration and in-person interactions for future development.
           </ProjectText>
           <MiroBoard variant={1} />
-          <ChartCaption>This board focuses on person-to-person interactions and connecting others with in-person resources</ChartCaption>
+          <ChartCaption>Person-to-person interactions & in-person resources</ChartCaption>
           <MiroBoard variant={2} />
-          <ChartCaption>This board focuses on patient-to-education interactions and integration with the existing Mabu product</ChartCaption>
+          <ChartCaption>Patient education & Mabu integration</ChartCaption>
         </ProjectSubsection>
 
         <ProjectSubsection title="Concept Sketching">

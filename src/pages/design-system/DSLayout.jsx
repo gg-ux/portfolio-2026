@@ -51,6 +51,18 @@ export default function DSLayout({ title, sections, children }) {
     setMobileNavOpen(false)
   }, [location.pathname])
 
+  // Lock body scroll when mobile nav is open
+  useEffect(() => {
+    if (mobileNavOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileNavOpen])
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -183,22 +195,41 @@ export default function DSLayout({ title, sections, children }) {
       </button>
 
       {/* Mobile Navigation Overlay */}
-      {mobileNavOpen && (
-        <div
-          className="lg:hidden fixed inset-0 z-40"
+      <div
+        className={`lg:hidden fixed inset-0 z-40 transition-all duration-300 ${
+          mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{
+          backgroundColor: isDark ? 'rgba(0,0,0,0.5)' : 'rgba(250,248,244,0.3)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+        }}
+        onClick={() => setMobileNavOpen(false)}
+      />
+      <aside
+        className={`lg:hidden fixed left-0 top-0 bottom-0 w-72 pt-24 pb-6 px-6 border-r flex flex-col z-50 transition-transform duration-300 ease-out ${
+          mobileNavOpen ? 'translate-x-0' : '-translate-x-full'
+        } ${
+          isDark
+            ? 'bg-[#0a0a0a] border-white/[0.06] shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+            : 'bg-[#FAF8F4] border-black/[0.06] shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
           onClick={() => setMobileNavOpen(false)}
+          className={`absolute top-6 right-6 p-2 rounded-lg transition-colors ${
+            isDark
+              ? 'text-white/50 hover:text-white hover:bg-white/[0.06]'
+              : 'text-black/50 hover:text-black hover:bg-black/[0.04]'
+          }`}
+          aria-label="Close navigation"
         >
-          <div className={`absolute inset-0 ${isDark ? 'bg-black/60' : 'bg-white/60'} backdrop-blur-sm`} />
-          <aside
-            className={`absolute left-0 top-0 bottom-0 w-72 pt-24 pb-6 px-6 border-r flex flex-col ${
-              isDark ? 'bg-[#0a0a0a] border-white/[0.06]' : 'bg-[#FAF8F4] border-black/[0.06]'
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <SidebarContent />
-          </aside>
-        </div>
-      )}
+          <X size={20} weight="light" />
+        </button>
+        <SidebarContent />
+      </aside>
     </div>
   )
 }

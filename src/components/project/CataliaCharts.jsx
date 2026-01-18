@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { ArrowsOut, X } from '@phosphor-icons/react'
 import {
   VideoCamera,
   ClipboardText,
@@ -441,14 +445,14 @@ export function TopCommunityAttributes() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
-      <div className="grid grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         {attributes.map((attr, index) => {
           const Icon = attr.icon
           const color = colors[index]
           return (
             <div
               key={attr.title}
-              className={`rounded-2xl p-5 md:p-6 text-center ${
+              className={`rounded-2xl p-5 md:p-6 flex flex-row md:flex-col items-center md:items-center gap-4 md:gap-0 text-left md:text-center ${
                 isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
               }`}
               style={{
@@ -458,7 +462,7 @@ export function TopCommunityAttributes() {
               }}
             >
               {/* Icon in circular fill with glass border */}
-              <div className="flex justify-center mb-3 md:mb-4">
+              <div className="flex-shrink-0 md:mb-4">
                 <div className="relative">
                   {/* Icon circle */}
                   <div
@@ -479,20 +483,23 @@ export function TopCommunityAttributes() {
                 </div>
               </div>
 
-              {/* Title - Satoshi, body copy size */}
-              <h4
-                className="font-satoshi text-base md:text-lg mb-2 theme-heading"
-                style={{ fontWeight: 600 }}
-              >
-                {attr.title}
-              </h4>
+              {/* Text content */}
+              <div>
+                {/* Title - Satoshi, body copy size */}
+                <h4
+                  className="font-satoshi text-base md:text-lg mb-1 md:mb-2 theme-heading"
+                  style={{ fontWeight: 600 }}
+                >
+                  {attr.title}
+                </h4>
 
-              {/* Description - Caption style */}
-              <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
-                isDark ? 'text-white/60' : 'text-gray-600'
-              }`}>
-                {attr.description}
-              </p>
+                {/* Description - Caption style */}
+                <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
+                  isDark ? 'text-white/60' : 'text-gray-600'
+                }`}>
+                  {attr.description}
+                </p>
+              </div>
             </div>
           )
         })}
@@ -540,14 +547,14 @@ export function ResearchRequirements() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
-      <div className="grid grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         {requirements.map((req, index) => {
           const Icon = req.icon
           const color = colors[index]
           return (
             <div
               key={req.title}
-              className={`rounded-2xl p-5 md:p-6 text-center ${
+              className={`rounded-2xl p-5 md:p-6 flex flex-row md:flex-col items-center md:items-center gap-4 md:gap-0 text-left md:text-center ${
                 isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
               }`}
               style={{
@@ -557,7 +564,7 @@ export function ResearchRequirements() {
               }}
             >
               {/* Icon in circular fill with glass border */}
-              <div className="flex justify-center mb-3 md:mb-4">
+              <div className="flex-shrink-0 md:mb-4">
                 <div className="relative">
                   {/* Icon circle */}
                   <div
@@ -578,20 +585,23 @@ export function ResearchRequirements() {
                 </div>
               </div>
 
-              {/* Title - Satoshi, body copy size */}
-              <h4
-                className="font-satoshi text-base md:text-lg mb-2 theme-heading"
-                style={{ fontWeight: 600 }}
-              >
-                {req.title}
-              </h4>
+              {/* Text content */}
+              <div>
+                {/* Title - Satoshi, body copy size */}
+                <h4
+                  className="font-satoshi text-base md:text-lg mb-1 md:mb-2 theme-heading"
+                  style={{ fontWeight: 600 }}
+                >
+                  {req.title}
+                </h4>
 
-              {/* Description - Caption style */}
-              <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
-                isDark ? 'text-white/60' : 'text-gray-600'
-              }`}>
-                {req.description}
-              </p>
+                {/* Description - Caption style */}
+                <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
+                  isDark ? 'text-white/60' : 'text-gray-600'
+                }`}>
+                  {req.description}
+                </p>
+              </div>
             </div>
           )
         })}
@@ -1043,14 +1053,14 @@ export function UserArchetypes() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
-      <div className="grid grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         {archetypes.map((archetype, index) => {
           const Icon = archetype.icon
           const color = colors[index]
           return (
             <div
               key={archetype.name}
-              className={`rounded-2xl p-5 md:p-6 text-center ${
+              className={`rounded-2xl p-5 md:p-6 flex flex-row md:flex-col items-center md:items-center gap-4 md:gap-0 text-left md:text-center ${
                 isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
               }`}
               style={{
@@ -1060,7 +1070,7 @@ export function UserArchetypes() {
               }}
             >
               {/* Icon in circular fill with glass border */}
-              <div className="flex justify-center mb-3 md:mb-4">
+              <div className="flex-shrink-0 md:mb-4">
                 <div className="relative">
                   {/* Icon circle */}
                   <div
@@ -1081,20 +1091,23 @@ export function UserArchetypes() {
                 </div>
               </div>
 
-              {/* Title - Satoshi, body copy size */}
-              <h4
-                className="font-satoshi text-base md:text-lg mb-2 theme-heading"
-                style={{ fontWeight: 600 }}
-              >
-                {archetype.name}
-              </h4>
+              {/* Text content */}
+              <div>
+                {/* Title - Satoshi, body copy size */}
+                <h4
+                  className="font-satoshi text-base md:text-lg mb-1 md:mb-2 theme-heading"
+                  style={{ fontWeight: 600 }}
+                >
+                  {archetype.name}
+                </h4>
 
-              {/* Description */}
-              <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
-                isDark ? 'text-white/60' : 'text-gray-600'
-              }`}>
-                {archetype.description}
-              </p>
+                {/* Description */}
+                <p className={`font-satoshi text-[13px] md:text-[15px] leading-snug ${
+                  isDark ? 'text-white/60' : 'text-gray-600'
+                }`}>
+                  {archetype.description}
+                </p>
+              </div>
             </div>
           )
         })}
@@ -1397,187 +1410,165 @@ export function CoreUserStory() {
 }
 
 // =============================================================================
-// 10. COMMUNITY USER FLOW (Actual Flowchart - Tesla style)
+// 10. COMMUNITY USER FLOW (Actual Flowchart - Tesla style with expandable modal)
 // =============================================================================
 export function CommunityUserFlow() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const [isExpanded, setIsExpanded] = useState(false)
 
-  // Tesla flowchart color scheme - matching FlowChart.jsx
+  // Lock body scroll when expanded
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = '' }
+    }
+  }, [isExpanded])
+
+  // Tesla flowchart color scheme
   const lineColor = isDark ? '#4a4a4a' : '#d0d0d0'
-  const boxBg = isDark ? '#252525' : '#ffffff'
-  const boxBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'
   const textColor = isDark ? '#ffffff' : '#1f2937'
   const textMuted = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'
 
-  // Node type colors - using brand palette (softer, more pastel)
-  const startBg = isDark ? 'rgba(167, 139, 250, 0.18)' : 'rgba(167, 139, 250, 0.15)' // Lavender
+  // Node type colors
+  const startBg = isDark ? 'rgba(167, 139, 250, 0.18)' : 'rgba(167, 139, 250, 0.15)'
   const startBorder = isDark ? 'rgba(167, 139, 250, 0.35)' : 'rgba(167, 139, 250, 0.3)'
-  const actionBg = isDark ? 'rgba(54, 203, 198, 0.18)' : 'rgba(54, 203, 198, 0.12)' // Turquoise
+  const actionBg = isDark ? 'rgba(54, 203, 198, 0.18)' : 'rgba(54, 203, 198, 0.12)'
   const actionBorder = isDark ? 'rgba(54, 203, 198, 0.35)' : 'rgba(54, 203, 198, 0.3)'
-  const decisionBg = isDark ? 'rgba(215, 143, 141, 0.18)' : 'rgba(215, 143, 141, 0.12)' // Rose
+  const decisionBg = isDark ? 'rgba(215, 143, 141, 0.18)' : 'rgba(215, 143, 141, 0.12)'
   const decisionBorder = isDark ? 'rgba(215, 143, 141, 0.35)' : 'rgba(215, 143, 141, 0.3)'
-  const endBg = isDark ? 'rgba(135, 170, 97, 0.18)' : 'rgba(135, 170, 97, 0.12)' // Peridot
+  const endBg = isDark ? 'rgba(135, 170, 97, 0.18)' : 'rgba(135, 170, 97, 0.12)'
   const endBorder = isDark ? 'rgba(135, 170, 97, 0.35)' : 'rgba(135, 170, 97, 0.3)'
 
   const markerId = `community-arrow-${isDark ? 'dark' : 'light'}`
-  const r = 8 // Corner radius for lines
+  const r = 8
+
+  // Reusable SVG content
+  const FlowchartSVG = ({ className = "w-full h-auto" }) => (
+    <svg viewBox="0 0 900 400" className={className}>
+      <defs>
+        <marker id={markerId} markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 8 3, 0 6" fill={lineColor} />
+        </marker>
+      </defs>
+
+      <rect x="20" y="55" width="130" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
+      <text x="85" y="82" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="85" dy="0">User wants to</tspan>
+        <tspan x="85" dy="14">connect with others</tspan>
+        <tspan x="85" dy="14">on a specific topic</tspan>
+      </text>
+
+      <path d={`M 150 90 L 168 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      <rect x="180" y="55" width="140" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="250" y="82" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="250" dy="0">Clicks on</tspan>
+        <tspan x="250" dy="14">"community" and</tspan>
+        <tspan x="250" dy="14">chooses a category</tspan>
+      </text>
+
+      <path d={`M 320 90 L 350 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      <path d="M 420 35 L 480 90 L 420 145 L 360 90 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
+      <text x="420" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="420" dy="0">Do I want to</tspan>
+        <tspan x="420" dy="14">contribute?</tspan>
+      </text>
+
+      <path d={`M 480 90 L 518 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="500" y="78" textAnchor="middle" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>NO</text>
+
+      <rect x="530" y="55" width="130" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="595" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="595" dy="0">Browses and</tspan>
+        <tspan x="595" dy="14">clicks on post</tspan>
+      </text>
+
+      <path d={`M 660 90 L 690 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      <path d="M 760 35 L 820 90 L 760 145 L 700 90 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
+      <text x="760" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="760" dy="0">Do I want to</tspan>
+        <tspan x="760" dy="14">contribute?</tspan>
+      </text>
+
+      <path d={`M 760 35 L 760 ${20 + r} Q 760 20, ${760 - r} 20 L ${595 + r} 20 Q 595 20, 595 ${20 + r} L 595 45`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="770" y="18" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>NO</text>
+
+      <path d={`M 420 145 L 420 ${195 - r} Q 420 195, ${420 + r} 195 L 438 195`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="430" y="160" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>YES</text>
+
+      <rect x="450" y="170" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="520" y="192" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="520" dy="0">Makes a post with</tspan>
+        <tspan x="520" dy="14">video or text/photo</tspan>
+      </text>
+
+      <path d={`M 760 145 L 760 ${195 - r} Q 760 195, ${760 - r} 195 L 660 195 L 660 240`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="770" y="160" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>YES</text>
+
+      <rect x="590" y="250" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="660" y="280" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>Posts comment</text>
+
+      <path d={`M 520 220 L 520 ${250 - r} Q 520 250, ${520 + r} 250 L 578 250`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      <path d={`M 660 300 L 660 330`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      <rect x="560" y="340" width="200" height="50" rx="10" fill={endBg} stroke={endBorder} strokeWidth="1" />
+      <text x="660" y="362" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
+        <tspan x="660" dy="0">Feels more connected to the</tspan>
+        <tspan x="660" dy="14">community by sharing experiences</tspan>
+      </text>
+    </svg>
+  )
 
   return (
-    <div
-      ref={ref}
-      className={`my-8 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
-    >
-      <div className={`rounded-2xl p-6 md:p-8 ${
-        isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
-      }`}>
-        {/* Chart Title */}
-        <ChartTitle>Community</ChartTitle>
-
-        {/* Desktop SVG Flowchart */}
-        <svg
-          viewBox="0 0 900 400"
-          className="hidden md:block w-full h-auto"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.8s ease-out 0.2s',
-          }}
-        >
-          <defs>
-            <marker id={markerId} markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
-              <polygon points="0 0, 8 3, 0 6" fill={lineColor} />
-            </marker>
-          </defs>
-
-          {/* Start node - pill shape */}
-          <rect x="20" y="55" width="130" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
-          <text x="85" y="82" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="85" dy="0">User wants to</tspan>
-            <tspan x="85" dy="14">connect with others</tspan>
-            <tspan x="85" dy="14">on a specific topic</tspan>
-          </text>
-
-          {/* Line: Start → Action 1 */}
-          <path d={`M 150 90 L 168 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Action 1 */}
-          <rect x="180" y="55" width="140" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="250" y="82" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="250" dy="0">Clicks on</tspan>
-            <tspan x="250" dy="14">"community" and</tspan>
-            <tspan x="250" dy="14">chooses a category</tspan>
-          </text>
-
-          {/* Line: Action 1 → Decision 1 */}
-          <path d={`M 320 90 L 350 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Decision 1 diamond */}
-          <path d="M 420 35 L 480 90 L 420 145 L 360 90 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
-          <text x="420" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="420" dy="0">Do I want to</tspan>
-            <tspan x="420" dy="14">contribute?</tspan>
-          </text>
-
-          {/* Line: Decision 1 → Action 2 (No - horizontal) */}
-          <path d={`M 480 90 L 518 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="500" y="78" textAnchor="middle" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>NO</text>
-
-          {/* Action 2 - Browses */}
-          <rect x="530" y="55" width="130" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="595" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="595" dy="0">Browses and</tspan>
-            <tspan x="595" dy="14">clicks on post</tspan>
-          </text>
-
-          {/* Line: Action 2 → Decision 2 */}
-          <path d={`M 660 90 L 690 90`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Decision 2 diamond */}
-          <path d="M 760 35 L 820 90 L 760 145 L 700 90 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
-          <text x="760" y="85" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="760" dy="0">Do I want to</tspan>
-            <tspan x="760" dy="14">contribute?</tspan>
-          </text>
-
-          {/* Loop back: Decision 2 (No) → Action 2 (curved path from top of diamond) */}
-          <path
-            d={`M 760 35 L 760 ${20 + r} Q 760 20, ${760 - r} 20 L ${595 + r} 20 Q 595 20, 595 ${20 + r} L 595 45`}
-            stroke={lineColor}
-            strokeWidth="1.5"
-            fill="none"
-            markerEnd={`url(#${markerId})`}
-          />
-          <text x="770" y="18" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>NO</text>
-
-          {/* Line: Decision 1 → Action 3 (Yes - down) */}
-          <path d={`M 420 145 L 420 ${195 - r} Q 420 195, ${420 + r} 195 L 438 195`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="430" y="160" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>YES</text>
-
-          {/* Action 3 - Makes a post */}
-          <rect x="450" y="170" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="520" y="192" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="520" dy="0">Makes a post with</tspan>
-            <tspan x="520" dy="14">video or text/photo</tspan>
-          </text>
-
-          {/* Line: Decision 2 → merge point (Yes - down from bottom of diamond) */}
-          <path d={`M 760 145 L 760 ${195 - r} Q 760 195, ${760 - r} 195 L 660 195 L 660 240`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="770" y="160" textAnchor="start" fill={textMuted} style={{ fontSize: '11px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>YES</text>
-
-          {/* Action 4 - Posts comment */}
-          <rect x="590" y="250" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="660" y="280" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>Posts comment</text>
-
-          {/* Line from Action 3 to Action 4 (with arrow) */}
-          <path d={`M 520 220 L 520 ${250 - r} Q 520 250, ${520 + r} 250 L 578 250`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Line: Action 4 → End node */}
-          <path d={`M 660 300 L 660 330`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* End node - rounded rectangle */}
-          <rect x="560" y="340" width="200" height="50" rx="10" fill={endBg} stroke={endBorder} strokeWidth="1" />
-          <text x="660" y="362" textAnchor="middle" fill={textColor} style={{ fontSize: '12px', fontFamily: 'Satoshi, sans-serif', fontWeight: 500 }}>
-            <tspan x="660" dy="0">Feels more connected to the</tspan>
-            <tspan x="660" dy="14">community by sharing experiences</tspan>
-          </text>
-        </svg>
-
-        {/* Mobile: Simplified vertical flow */}
-        <div className="md:hidden space-y-3">
-          <div className="p-4 rounded-full text-center text-[13px] font-medium" style={{ backgroundColor: startBg, border: `1px solid ${startBorder}`, color: textColor }}>
-            User wants to connect with others on a specific topic
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-lg text-center text-[13px] font-medium" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-            Clicks on "community" and chooses a category
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-lg text-center text-[13px] font-medium" style={{ backgroundColor: decisionBg, border: `1px solid ${decisionBorder}`, color: textColor }}>
-            Do I want to contribute?
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <p className="text-center text-[11px] uppercase tracking-wider mb-1 font-mono" style={{ color: textMuted }}>Yes</p>
-              <div className="p-3 rounded-lg text-center text-[12px] font-medium" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-                Makes a post
-              </div>
-            </div>
-            <div>
-              <p className="text-center text-[11px] uppercase tracking-wider mb-1 font-mono" style={{ color: textMuted }}>No</p>
-              <div className="p-3 rounded-lg text-center text-[12px] font-medium" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-                Browses posts
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-xl text-center text-[13px] font-medium" style={{ backgroundColor: endBg, border: `1px solid ${endBorder}`, color: textColor }}>
-            Feels more connected to the community
-          </div>
+    <>
+      <div
+        ref={ref}
+        className={`my-8 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <div className={`relative rounded-2xl p-6 md:p-8 ${
+          isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
+        }`}>
+          <ChartTitle>Community</ChartTitle>
+          <FlowchartSVG />
+          {/* Expand button - mobile only */}
+          <button
+            className={`absolute bottom-4 right-4 p-2 rounded-lg transition-colors md:hidden ${
+              isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'
+            }`}
+            onClick={() => setIsExpanded(true)}
+          >
+            <ArrowsOut size={20} />
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Fullscreen modal */}
+      {isExpanded && createPortal(
+        <div className={`fixed inset-0 z-[9998] ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+          <TransformWrapper initialScale={1} minScale={0.4} maxScale={3} centerOnInit={false} initialPositionX={16} initialPositionY={80}>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }} contentStyle={{ width: 'fit-content', height: 'fit-content' }}>
+              <FlowchartSVG className="w-[900px] h-[400px]" />
+            </TransformComponent>
+          </TransformWrapper>
+          <div className={`fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-4 ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+            <h2 className={`font-satoshi text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Community User Flow</h2>
+            <button
+              className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'}`}
+              onClick={() => setIsExpanded(false)}
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   )
 }
 
@@ -1741,11 +1732,18 @@ export function UsabilityScenario() {
 export function ExploreUserFlow() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  // Lock body scroll when expanded
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = '' }
+    }
+  }, [isExpanded])
 
   // Tesla flowchart color scheme
   const lineColor = isDark ? '#4a4a4a' : '#d0d0d0'
-  const boxBg = isDark ? '#252525' : '#ffffff'
-  const boxBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'
   const textColor = isDark ? '#ffffff' : '#1f2937'
   const textMuted = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)'
 
@@ -1762,170 +1760,164 @@ export function ExploreUserFlow() {
   const markerId = `explore-arrow-${isDark ? 'dark' : 'light'}`
   const r = 8 // Corner radius
 
+  // Reusable SVG content
+  const FlowchartSVG = ({ className = "w-full h-auto" }) => (
+    <svg viewBox="0 0 1000 480" className={className}>
+      <defs>
+        <marker id={markerId} markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 8 3, 0 6" fill={lineColor} />
+        </marker>
+      </defs>
+
+      {/* Start node 1 - top */}
+      <rect x="20" y="30" width="160" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
+      <text x="100" y="50" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="100" dy="0">User wants to see</tspan>
+        <tspan x="100" dy="12">what's new with the</tspan>
+        <tspan x="100" dy="12">community, but doesn't</tspan>
+        <tspan x="100" dy="12">have a topic</tspan>
+      </text>
+
+      {/* Start node 2 - bottom */}
+      <rect x="20" y="130" width="160" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
+      <text x="100" y="155" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="100" dy="0">User wants to explore</tspan>
+        <tspan x="100" dy="12">and learn more about</tspan>
+        <tspan x="100" dy="12">their condition</tspan>
+      </text>
+
+      {/* Lines from both starts to Action 1 */}
+      <path d={`M 180 65 L ${200 - r} 65 Q 200 65, 200 ${65 + r} L 200 ${115 - r} Q 200 115, ${200 + r} 115 L 238 115`} stroke={lineColor} strokeWidth="1.5" fill="none" />
+      <path d={`M 180 165 L ${200 - r} 165 Q 200 165, 200 ${165 - r} L 200 ${115 + r} Q 200 115, ${200 + r} 115 L 238 115`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      {/* Action 1 - Click explore */}
+      <rect x="250" y="80" width="160" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="330" y="107" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="330" dy="0">Click on "explore" to</tspan>
+        <tspan x="330" dy="14">see recommended</tspan>
+        <tspan x="330" dy="14">articles & posts</tspan>
+      </text>
+
+      {/* Line: Action 1 → Decision 1 */}
+      <path d={`M 410 115 L 450 115`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      {/* Decision 1 - Read now? */}
+      <path d="M 530 50 L 600 115 L 530 180 L 460 115 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
+      <text x="530" y="100" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="530" dy="0">Do I want to</tspan>
+        <tspan x="530" dy="12">read this article</tspan>
+        <tspan x="530" dy="12">or post right</tspan>
+        <tspan x="530" dy="12">now?</tspan>
+      </text>
+
+      {/* Line: Decision 1 → Action 2 (Yes - right) */}
+      <path d={`M 600 115 L ${620 - r} 115 Q 620 115, 620 ${115 - r} L 620 ${80 + r} Q 620 80, ${620 + r} 80 L 698 80`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="640" y="95" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
+
+      {/* Action 2 - Click into article */}
+      <rect x="710" y="55" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="780" y="77" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="780" dy="0">Click into the</tspan>
+        <tspan x="780" dy="14">article or post</tspan>
+      </text>
+
+      {/* Line: Action 2 → End node */}
+      <path d={`M 850 80 L ${870 - r} 80 Q 870 80, 870 ${80 + r} L 870 ${185 - r} Q 870 185, ${870 + r} 185 L 880 185`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      {/* Line: Decision 1 → Decision 2 (No - down) */}
+      <path d={`M 530 180 L 530 238`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="540" y="210" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
+
+      {/* Decision 2 - Read later? */}
+      <path d="M 530 250 L 600 315 L 530 380 L 460 315 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
+      <text x="530" y="305" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="530" dy="0">Do I want to</tspan>
+        <tspan x="530" dy="12">read this article</tspan>
+        <tspan x="530" dy="12">or post later?</tspan>
+      </text>
+
+      {/* Line: Decision 2 → Action 3 (No - right) */}
+      <path d={`M 600 315 L 698 315`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="640" y="305" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
+
+      {/* Action 3 - Swipe to see more */}
+      <rect x="710" y="280" width="150" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="785" y="307" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="785" dy="0">Swipe to right to</tspan>
+        <tspan x="785" dy="14">see other</tspan>
+        <tspan x="785" dy="14">recommended articles</tspan>
+      </text>
+
+      {/* Line: Action 3 → End node (curved) */}
+      <path d={`M 860 315 L ${895 - r} 315 Q 895 315, 895 ${315 - r} L 895 225`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+
+      {/* Line: Decision 2 → Action 4 (Yes - down) */}
+      <path d={`M 530 380 L 530 408`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
+      <text x="540" y="400" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
+
+      {/* Action 4 - Bookmark */}
+      <rect x="455" y="420" width="150" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
+      <text x="530" y="442" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="530" dy="0">Bookmark to come</tspan>
+        <tspan x="530" dy="14">back to it later</tspan>
+      </text>
+
+      {/* End node */}
+      <rect x="890" y="155" width="100" height="60" rx="10" fill={endBg} stroke={endBorder} strokeWidth="1" />
+      <text x="940" y="180" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
+        <tspan x="940" dy="0">Full view of</tspan>
+        <tspan x="940" dy="12">relevant</tspan>
+        <tspan x="940" dy="12">article/post</tspan>
+      </text>
+    </svg>
+  )
+
   return (
-    <div
-      ref={ref}
-      className={`my-8 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
-    >
-      <div className={`rounded-2xl p-6 md:p-8 ${
-        isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
-      }`}>
-        {/* Chart Title */}
-        <ChartTitle>Explore</ChartTitle>
-
-        {/* Desktop SVG Flowchart */}
-        <svg
-          viewBox="0 0 1000 480"
-          className="hidden md:block w-full h-auto"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.8s ease-out 0.2s',
-          }}
-        >
-          <defs>
-            <marker id={markerId} markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
-              <polygon points="0 0, 8 3, 0 6" fill={lineColor} />
-            </marker>
-          </defs>
-
-          {/* Start node 1 - top */}
-          <rect x="20" y="30" width="160" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
-          <text x="100" y="47" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="100" dy="0">User wants to see</tspan>
-            <tspan x="100" dy="12">what's new with the</tspan>
-            <tspan x="100" dy="12">community, but doesn't</tspan>
-            <tspan x="100" dy="12">have a topic</tspan>
-          </text>
-
-          {/* Start node 2 - bottom */}
-          <rect x="20" y="130" width="160" height="70" rx="35" fill={startBg} stroke={startBorder} strokeWidth="1" />
-          <text x="100" y="152" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="100" dy="0">User wants to explore</tspan>
-            <tspan x="100" dy="12">and learn more about</tspan>
-            <tspan x="100" dy="12">their condition</tspan>
-          </text>
-
-          {/* Lines from both starts to Action 1 */}
-          <path d={`M 180 65 L ${200 - r} 65 Q 200 65, 200 ${65 + r} L 200 ${115 - r} Q 200 115, ${200 + r} 115 L 238 115`} stroke={lineColor} strokeWidth="1.5" fill="none" />
-          <path d={`M 180 165 L ${200 - r} 165 Q 200 165, 200 ${165 - r} L 200 ${115 + r} Q 200 115, ${200 + r} 115 L 238 115`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Action 1 - Click explore */}
-          <rect x="250" y="80" width="160" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="330" y="107" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="330" dy="0">Click on "explore" to</tspan>
-            <tspan x="330" dy="14">see recommended</tspan>
-            <tspan x="330" dy="14">articles & posts</tspan>
-          </text>
-
-          {/* Line: Action 1 → Decision 1 */}
-          <path d={`M 410 115 L 450 115`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Decision 1 - Read now? */}
-          <path d="M 530 50 L 600 115 L 530 180 L 460 115 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
-          <text x="530" y="100" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="530" dy="0">Do I want to</tspan>
-            <tspan x="530" dy="12">read this article</tspan>
-            <tspan x="530" dy="12">or post right</tspan>
-            <tspan x="530" dy="12">now?</tspan>
-          </text>
-
-          {/* Line: Decision 1 → Action 2 (Yes - right) */}
-          <path d={`M 600 115 L ${620 - r} 115 Q 620 115, 620 ${115 - r} L 620 ${80 + r} Q 620 80, ${620 + r} 80 L 698 80`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="640" y="95" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
-
-          {/* Action 2 - Click into article */}
-          <rect x="710" y="55" width="140" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="780" y="77" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="780" dy="0">Click into the</tspan>
-            <tspan x="780" dy="14">article or post</tspan>
-          </text>
-
-          {/* Line: Action 2 → End node */}
-          <path d={`M 850 80 L ${870 - r} 80 Q 870 80, 870 ${80 + r} L 870 ${185 - r} Q 870 185, ${870 + r} 185 L 880 185`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Line: Decision 1 → Decision 2 (No - down) */}
-          <path d={`M 530 180 L 530 238`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="540" y="210" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
-
-          {/* Decision 2 - Read later? */}
-          <path d="M 530 250 L 600 315 L 530 380 L 460 315 Z" fill={decisionBg} stroke={decisionBorder} strokeWidth="1" strokeLinejoin="round" />
-          <text x="530" y="300" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="530" dy="0">Do I want to</tspan>
-            <tspan x="530" dy="12">read this article</tspan>
-            <tspan x="530" dy="12">or post later?</tspan>
-          </text>
-
-          {/* Line: Decision 2 → Action 3 (No - right) */}
-          <path d={`M 600 315 L 698 315`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="640" y="305" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>No</text>
-
-          {/* Action 3 - Swipe to see more */}
-          <rect x="710" y="280" width="150" height="70" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="785" y="307" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="785" dy="0">Swipe to right to</tspan>
-            <tspan x="785" dy="14">see other</tspan>
-            <tspan x="785" dy="14">recommended articles</tspan>
-          </text>
-
-          {/* Line: Action 3 → End node (curved) */}
-          <path d={`M 860 315 L ${895 - r} 315 Q 895 315, 895 ${315 - r} L 895 225`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-
-          {/* Line: Decision 2 → Action 4 (Yes - down) */}
-          <path d={`M 530 380 L 530 408`} stroke={lineColor} strokeWidth="1.5" fill="none" markerEnd={`url(#${markerId})`} />
-          <text x="540" y="400" textAnchor="start" fill={textMuted} style={{ fontSize: '10px', fontFamily: 'ui-monospace, SFMono-Regular, monospace', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Yes</text>
-
-          {/* Action 4 - Bookmark */}
-          <rect x="455" y="420" width="150" height="50" rx="6" fill={actionBg} stroke={actionBorder} strokeWidth="1" />
-          <text x="530" y="442" textAnchor="middle" fill={textColor} style={{ fontSize: '11px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="530" dy="0">Bookmark to come</tspan>
-            <tspan x="530" dy="14">back to it later</tspan>
-          </text>
-
-          {/* End node */}
-          <rect x="890" y="155" width="100" height="60" rx="10" fill={endBg} stroke={endBorder} strokeWidth="1" />
-          <text x="940" y="180" textAnchor="middle" fill={textColor} style={{ fontSize: '10px', fontFamily: 'Satoshi, sans-serif', fontWeight: 600 }}>
-            <tspan x="940" dy="0">Full view of</tspan>
-            <tspan x="940" dy="12">relevant</tspan>
-            <tspan x="940" dy="12">article/post</tspan>
-          </text>
-        </svg>
-
-        {/* Mobile: Simplified */}
-        <div className="md:hidden space-y-3">
-          <div className="p-4 rounded-full text-center text-[12px]" style={{ backgroundColor: startBg, border: `1px solid ${startBorder}`, color: textColor }}>
-            User wants to explore and see what's new
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-lg text-center text-[12px]" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-            Click on "explore" to see recommended articles
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-lg text-center text-[12px]" style={{ backgroundColor: decisionBg, border: `1px solid ${decisionBorder}`, color: textColor }}>
-            Read now or later?
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <p className="text-center text-[10px] uppercase tracking-wider mb-1" style={{ color: textMuted }}>Now</p>
-              <div className="p-3 rounded-lg text-center text-[11px]" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-                Click into article
-              </div>
-            </div>
-            <div>
-              <p className="text-center text-[10px] uppercase tracking-wider mb-1" style={{ color: textMuted }}>Later</p>
-              <div className="p-3 rounded-lg text-center text-[11px]" style={{ backgroundColor: actionBg, border: `1px solid ${actionBorder}`, color: textColor }}>
-                Bookmark it
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center"><div className="w-0.5 h-4" style={{ backgroundColor: lineColor }} /></div>
-          <div className="p-4 rounded-xl text-center text-[12px]" style={{ backgroundColor: endBg, border: `1px solid ${endBorder}`, color: textColor }}>
-            Full view of article/post
-          </div>
+    <>
+      <div
+        ref={ref}
+        className={`my-8 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <div className={`relative rounded-2xl p-6 md:p-8 ${
+          isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
+        }`}>
+          <ChartTitle>Explore</ChartTitle>
+          <FlowchartSVG />
+          {/* Expand button - mobile only */}
+          <button
+            className={`absolute bottom-4 right-4 p-2 rounded-lg transition-colors md:hidden ${
+              isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'
+            }`}
+            onClick={() => setIsExpanded(true)}
+          >
+            <ArrowsOut size={20} />
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Fullscreen modal */}
+      {isExpanded && createPortal(
+        <div className={`fixed inset-0 z-[9998] ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+          <TransformWrapper initialScale={1} minScale={0.4} maxScale={3} centerOnInit={false} initialPositionX={16} initialPositionY={80}>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }} contentStyle={{ width: 'fit-content', height: 'fit-content' }}>
+              <FlowchartSVG className="w-[1000px] h-[480px]" />
+            </TransformComponent>
+          </TransformWrapper>
+          <div className={`fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-4 ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+            <h2 className={`font-satoshi text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Explore User Flow</h2>
+            <button
+              className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'}`}
+              onClick={() => setIsExpanded(false)}
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   )
 }
 
@@ -1964,6 +1956,15 @@ function MiroPostIt({ children, color, rotation = 0, delay = 0, isVisible }) {
 export function MiroBoard({ variant = 1 }) {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  // Lock body scroll when expanded
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = '' }
+    }
+  }, [isExpanded])
 
   // Colors from brand palette
   const colors = {
@@ -1980,135 +1981,199 @@ export function MiroBoard({ variant = 1 }) {
   // Grid styling
   const gridColor = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.05)'
 
-  return (
+  // Reusable board content
+  const BoardContent = ({ scale = false }) => (
     <div
-      ref={ref}
-      className={`my-8 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+      className={`p-6 md:p-10 ${scale ? 'origin-top-left' : ''}`}
+      style={scale ? {
+        transform: 'scale(0.55)',
+        transformOrigin: 'top left',
+        width: '182%',
+      } : {}}
     >
-      <div
-        className={`rounded-2xl p-6 md:p-10 overflow-hidden ${
-          isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
-        }`}
-        style={{
-          backgroundImage: `
-            linear-gradient(${gridColor} 1px, transparent 1px),
-            linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
-          `,
-          backgroundSize: '20px 20px',
-        }}
-      >
-        {variant === 1 ? (
-          <>
-            {/* Header: Universal Features + Onboarding */}
-            <div className="flex justify-between items-start mb-8">
-              <div className="flex flex-col items-center">
-                <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-3">Universal features</span>
-                <div className="flex gap-2">
-                  <MiroPostIt isVisible={isVisible} color={colors.gold} rotation={-1.5} delay={0.1}>Search</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.gold} rotation={2} delay={0.15}>Chat</MiroPostIt>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-3">Onboarding</span>
-                <div className="flex gap-2">
-                  <MiroPostIt isVisible={isVisible} color={colors.rose} rotation={-1} delay={0.1}>Welcome screen with topics</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.rose} rotation={1.5} delay={0.15}>Suggestions to similar users</MiroPostIt>
-                </div>
-              </div>
-            </div>
-
-            {/* Pages Grid - Column based layout */}
+      {variant === 1 ? (
+        <>
+          {/* Header: Universal Features + Onboarding */}
+          <div className="flex justify-between items-start mb-8">
             <div className="flex flex-col items-center">
-              {/* Pages Section Label */}
-              <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-4">Pages</span>
-
-              <div className="flex justify-center gap-2 md:gap-3">
-              {/* Messages column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={0.5} delay={0.2}>Messages (inbox)</MiroPostIt>
-              </div>
-
-              {/* Community column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-1} delay={0.22}>Community</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.3}>Meet-up / Interest groups</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.38}>Forum</MiroPostIt>
-              </div>
-
-              {/* Resources column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1} delay={0.24}>Resources</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.32}>Articles</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1.5} delay={0.4}>Recipes</MiroPostIt>
-              </div>
-
-              {/* Home column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-0.5} delay={0.26}>Home</MiroPostIt>
-              </div>
-
-              {/* Account column - Settings aligned under Account, User info to right */}
-              <div className="flex flex-col items-start gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1.5} delay={0.28}>Account</MiroPostIt>
-                <div className="flex gap-2">
-                  <div className="flex flex-col gap-2">
-                    <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.34}>Settings</MiroPostIt>
-                    <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.42}>Profile</MiroPostIt>
-                  </div>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.36}>User info</MiroPostIt>
-                </div>
-              </div>
+              <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-3">Universal features</span>
+              <div className="flex gap-2">
+                <MiroPostIt isVisible={isVisible} color={colors.gold} rotation={-1.5} delay={0.1}>Search</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.gold} rotation={2} delay={0.15}>Chat</MiroPostIt>
               </div>
             </div>
-          </>
-        ) : (
-          <>
-            {/* Board 2: Patient-to-education focus with Mabu integration */}
-            <span className="block font-mono text-[11px] tracking-wide uppercase theme-caption text-center mb-4">Main Pages</span>
+            <div className="flex flex-col items-center">
+              <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-3">Onboarding</span>
+              <div className="flex gap-2">
+                <MiroPostIt isVisible={isVisible} color={colors.rose} rotation={-1} delay={0.1}>Welcome screen with topics</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.rose} rotation={1.5} delay={0.15}>Suggestions to similar users</MiroPostIt>
+              </div>
+            </div>
+          </div>
+
+          {/* Pages Grid - Column based layout */}
+          <div className="flex flex-col items-center">
+            {/* Pages Section Label */}
+            <span className="font-mono text-[11px] tracking-wide uppercase theme-caption mb-4">Pages</span>
 
             <div className="flex justify-center gap-2 md:gap-3">
-              {/* News feed column - 2x3 grid for sub-items */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-1} delay={0.1}>News feed</MiroPostIt>
-                <div className="grid grid-cols-2 gap-2">
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.18}>Convos from Mabu</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.22}>Posts from other patients</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.26}>System generated content</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.3}>Recipes</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.34}>Discussion prompts</MiroPostIt>
-                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.38}>Treatment education</MiroPostIt>
+            {/* Messages column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={0.5} delay={0.2}>Messages (inbox)</MiroPostIt>
+            </div>
+
+            {/* Community column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-1} delay={0.22}>Community</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.3}>Meet-up / Interest groups</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.38}>Forum</MiroPostIt>
+            </div>
+
+            {/* Resources column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1} delay={0.24}>Resources</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.32}>Articles</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1.5} delay={0.4}>Recipes</MiroPostIt>
+            </div>
+
+            {/* Home column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-0.5} delay={0.26}>Home</MiroPostIt>
+            </div>
+
+            {/* Account column - Settings aligned under Account, User info to right */}
+            <div className="flex flex-col items-start gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1.5} delay={0.28}>Account</MiroPostIt>
+              <div className="flex gap-2">
+                <div className="flex flex-col gap-2">
+                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.34}>Settings</MiroPostIt>
+                  <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.42}>Profile</MiroPostIt>
                 </div>
-              </div>
-
-              {/* Inbox column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1.5} delay={0.12}>Inbox</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.2}>Messages from other patients</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.28}>Initiate face to face video chat</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.36}>Schedule a video chat</MiroPostIt>
-              </div>
-
-              {/* Profile column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-0.5} delay={0.14}>Profile</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.22}>Brief info about patient</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.3}>Posts by/from patients</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.38}>Initiate DM or video chat</MiroPostIt>
-              </div>
-
-              {/* Mabu Hub column */}
-              <div className="flex flex-col items-center gap-2">
-                <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1} delay={0.16}>Mabu Hub</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.24}>Initiate convos with Mabu</MiroPostIt>
-                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.32}>Education from Mabu</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.36}>User info</MiroPostIt>
               </div>
             </div>
-          </>
-        )}
-      </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Board 2: Patient-to-education focus with Mabu integration */}
+          <span className="block font-mono text-[11px] tracking-wide uppercase theme-caption text-center mb-4">Main Pages</span>
+
+          <div className="flex justify-center gap-2 md:gap-3">
+            {/* News feed column - 2x3 grid for sub-items */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-1} delay={0.1}>News feed</MiroPostIt>
+              <div className="grid grid-cols-2 gap-2">
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.18}>Convos from Mabu</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.22}>Posts from other patients</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.26}>System generated content</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.3}>Recipes</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.34}>Discussion prompts</MiroPostIt>
+                <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.38}>Treatment education</MiroPostIt>
+              </div>
+            </div>
+
+            {/* Inbox column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1.5} delay={0.12}>Inbox</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.2}>Messages from other patients</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.28}>Initiate face to face video chat</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.36}>Schedule a video chat</MiroPostIt>
+            </div>
+
+            {/* Profile column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={-0.5} delay={0.14}>Profile</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.22}>Brief info about patient</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-1} delay={0.3}>Posts by/from patients</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={0.5} delay={0.38}>Initiate DM or video chat</MiroPostIt>
+            </div>
+
+            {/* Mabu Hub column */}
+            <div className="flex flex-col items-center gap-2">
+              <MiroPostIt isVisible={isVisible} color={colors.turquoise} rotation={1} delay={0.16}>Mabu Hub</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={-0.5} delay={0.24}>Initiate convos with Mabu</MiroPostIt>
+              <MiroPostIt isVisible={isVisible} color={colors.lagoon} rotation={1} delay={0.32}>Education from Mabu</MiroPostIt>
+            </div>
+          </div>
+        </>
+      )}
     </div>
+  )
+
+  return (
+    <>
+      <div
+        ref={ref}
+        className={`my-8 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <div
+          className={`relative rounded-2xl overflow-hidden ${
+            isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
+          }`}
+          style={{
+            backgroundImage: `
+              linear-gradient(${gridColor} 1px, transparent 1px),
+              linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
+            `,
+            backgroundSize: '20px 20px',
+          }}
+        >
+          {/* Mobile: scaled version - height set to match scaled content */}
+          <div className="md:hidden overflow-hidden" style={{ height: variant === 1 ? '280px' : '250px' }}>
+            <BoardContent scale={true} />
+          </div>
+          {/* Desktop: full size */}
+          <div className="hidden md:block">
+            <BoardContent scale={false} />
+          </div>
+          {/* Expand button - mobile only */}
+          <button
+            className={`absolute bottom-4 right-4 p-2 rounded-lg transition-colors md:hidden ${
+              isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'
+            }`}
+            onClick={() => setIsExpanded(true)}
+          >
+            <ArrowsOut size={20} />
+          </button>
+        </div>
+      </div>
+
+      {/* Fullscreen modal */}
+      {isExpanded && createPortal(
+        <div className={`fixed inset-0 z-[9998] ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+          <TransformWrapper initialScale={1} minScale={0.4} maxScale={3} centerOnInit={false} initialPositionX={16} initialPositionY={80}>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }} contentStyle={{ width: 'fit-content', height: 'fit-content' }}>
+              <div
+                className="p-6"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(${gridColor} 1px, transparent 1px),
+                    linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
+                  `,
+                  backgroundSize: '20px 20px',
+                }}
+              >
+                <BoardContent scale={false} />
+              </div>
+            </TransformComponent>
+          </TransformWrapper>
+          <div className={`fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-4 ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
+            <h2 className={`font-satoshi text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Site Map</h2>
+            <button
+              className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/5 hover:bg-black/10 text-black'}`}
+              onClick={() => setIsExpanded(false)}
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   )
 }
 

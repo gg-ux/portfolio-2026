@@ -1,8 +1,8 @@
-import { H4, Body, Caption, ChartContainer, Text, Display, Heading, Paragraph, Label, Mono } from '../../components/Typography'
+import { H4, Body, Caption, SubtleContainer, Text, Display, Heading, Paragraph, Label, Mono } from '../../components/Typography'
 import { useTheme } from '../../context/ThemeContext'
 import DSLayout, { DSSection } from './DSLayout'
 import { Divider, SectionDivider } from '../../components/ui/Divider'
-import { FrostedCard } from '../../components/ui'
+import { FrostedContainer } from '../../components/ui'
 import {
   Sun, Moon, ArrowRight, ArrowUp, ArrowUpRight, ArrowDown,
   X, ListBullets, ChatCircle, EnvelopeSimple, CheckCircle,
@@ -56,8 +56,8 @@ export default function FoundationPage() {
     { name: 'Background', hex: isDark ? '#0A0A0A' : '#FAF8F4', displayHex: isDark ? '#0A0A0A' : '#FAF8F4', textColor: isDark ? 'text-white' : 'text-black' },
     { name: 'Border', hex: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)', displayHex: isDark ? 'white/6%' : 'black/8%', textColor: isDark ? 'text-white' : 'text-black', isTransparent: true },
     { name: 'Card Surface', hex: isDark ? 'rgba(255,255,255,0.015)' : 'rgba(255,255,255,0.2)', displayHex: isDark ? 'white/1.5%' : 'white/20%', textColor: isDark ? 'text-white' : 'text-black', isTransparent: true },
-    { name: 'Error', hex: isDark ? '#EF4444' : '#DC2626', displayHex: isDark ? '#EF4444' : '#DC2626', textColor: 'text-white' },
-    { name: 'Success', hex: isDark ? '#22C55E' : '#16A34A', displayHex: isDark ? '#22C55E' : '#16A34A', textColor: 'text-white' },
+    { name: 'Error', hex: isDark ? '#c45c5c' : '#d46a6a', displayHex: isDark ? '#c45c5c' : '#d46a6a', textColor: 'text-white' },
+    { name: 'Success', hex: isDark ? '#5c9a6a' : '#6aaa78', displayHex: isDark ? '#5c9a6a' : '#6aaa78', textColor: 'text-white' },
     { name: 'Warning', hex: isDark ? '#F59E0B' : '#D97706', displayHex: isDark ? '#F59E0B' : '#D97706', textColor: 'text-black' },
     { name: 'Dark Mode', hex: '#A78BFA', displayHex: '#A78BFA', textColor: 'text-black', icon: Moon },
     { name: 'Light Mode', hex: '#F59E0B', displayHex: '#F59E0B', textColor: 'text-black', icon: Sun },
@@ -385,7 +385,7 @@ export default function FoundationPage() {
       {/* Colors */}
       <DSSection id="colors" title="Colors">
         {/* Brand Palette */}
-        <div className="mb-12">
+        <div id="brand-palette" className="mb-12">
           <H4 className="mb-2">Brand Palette</H4>
           <Paragraph size="sm" className="mb-4">Soulful — emotional, warm, unconventional</Paragraph>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -561,32 +561,13 @@ export default function FoundationPage() {
           </div>
         </div>
 
-        {/* Sizing */}
-        <H4 className="mb-6">Sizing</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {[
-              { size: 10, use: 'Tight inline arrows', weight: 'bold' },
-              { size: 14, use: 'Compact UI, tags', weight: 'regular' },
-              { size: 20, use: 'Default size', weight: 'regular' },
-              { size: 24, use: 'Buttons, feature cards', weight: 'light' },
-              { size: 40, use: 'Data viz decorative', weight: 'thin' },
-            ].map(({ size, use, weight }) => (
-              <div key={size} className="text-center">
-                <div className={`h-14 flex items-center justify-center mb-3`}>
-                  <ArrowRight size={size} weight={weight} className="theme-heading" />
-                </div>
-                <Label className="block">{size}px</Label>
-                <Label className="block">{use}</Label>
-                <Text size="caption" color="muted" className="block capitalize">{weight}</Text>
-              </div>
-            ))}
-          </div>
-        </div>
       </DSSection>
 
       {/* Spacing */}
       <DSSection id="spacing" title="Spacing">
+        <Paragraph className="mb-12 max-w-3xl">
+          Built on a 4px base unit with a geometric scale. Smaller values for tight component internals, larger values for section separation and breathing room.
+        </Paragraph>
         <div className={`p-8 border ${borderClass} rounded-xl`}>
           <div className="space-y-6">
             {spacing.map((space) => (
@@ -614,84 +595,56 @@ export default function FoundationPage() {
         </Paragraph>
 
         {/* Container Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* ChartContainer */}
-          <div className={`p-6 border ${borderClass} rounded-xl`}>
-            <Label className="block mb-4">ChartContainer</Label>
-            <ChartContainer className="h-[140px] flex items-center justify-center mb-4">
-              <Mono size="xs" color="muted">Subtle 2% fill</Mono>
-            </ChartContainer>
-            <Mono size="xs" color="muted" className="block mb-4">2% fill · no blur · no border</Mono>
-            <Label className="block mb-2">Use for</Label>
-            <Paragraph size="sm" muted>
-              Data visualizations, charts, research findings, tables, article body content
-            </Paragraph>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* SubtleContainer */}
+          <div>
+            <H4 className="mb-2">Subtle</H4>
+            <Paragraph size="sm" className="mb-6">Charts, data visualizations, research findings, article content</Paragraph>
+            <SubtleContainer className="h-[160px] flex items-center justify-center">
+              <Mono size="xs" color="muted">2% fill</Mono>
+            </SubtleContainer>
           </div>
 
-          {/* FrostedCard */}
-          <div className={`p-6 border ${borderClass} rounded-xl`}>
-            <Label className="block mb-4">FrostedCard</Label>
-            <FrostedCard className="h-[140px] flex items-center justify-center mb-4">
-              <Mono size="xs" color="muted">Frosted glass + grain</Mono>
-            </FrostedCard>
-            <Mono size="xs" color="muted" className="block mb-4">1.5% fill · 12px blur · 8% border</Mono>
-            <Label className="block mb-2">Use for</Label>
-            <Paragraph size="sm" muted>
-              Category cards, navigation, key stats, callouts, feature showcases
-            </Paragraph>
+          {/* FrostedContainer */}
+          <div>
+            <H4 className="mb-2">Frosted</H4>
+            <Paragraph size="sm" className="mb-6">Category cards, navigation, key stats, feature showcases</Paragraph>
+            <FrostedContainer className="h-[160px] flex items-center justify-center">
+              <Mono size="xs" color="muted">Glass + blur</Mono>
+            </FrostedContainer>
           </div>
 
           {/* Transparent */}
-          <div className={`p-6 border ${borderClass} rounded-xl`}>
-            <Label className="block mb-4">Transparent</Label>
-            <div className="h-[140px] flex items-center justify-center mb-4 rounded-2xl">
-              <Mono size="xs" color="muted">No background</Mono>
+          <div>
+            <H4 className="mb-2">Transparent</H4>
+            <Paragraph size="sm" className="mb-6">Flows, floating elements, content on hero backgrounds</Paragraph>
+            <div className={`h-[160px] flex items-center justify-center rounded-2xl border border-dashed ${borderClass}`}>
+              <Mono size="xs" color="muted">Transparent</Mono>
             </div>
-            <Mono size="xs" color="muted" className="block mb-4">no fill · no blur · no border</Mono>
-            <Label className="block mb-2">Use for</Label>
-            <Paragraph size="sm" muted>
-              Kanban boards, flows, floating elements, content on hero backgrounds
-            </Paragraph>
           </div>
         </div>
       </DSSection>
 
       {/* Dividers */}
       <DSSection id="dividers" title="Dividers">
-        <H4 className="mb-6">Horizontal</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="space-y-8">
-            <div>
-              <Caption className="mb-4 block">Full Width</Caption>
-              <SectionDivider />
-            </div>
-            <div>
-              <Caption className="mb-4 block">Standard</Caption>
-              <Divider />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Horizontal */}
+          <div>
+            <H4 className="mb-4">Horizontal</H4>
+            <div className={`p-6 border ${borderClass} rounded-xl flex flex-col items-center gap-4`}>
+              <Text color="body">Top</Text>
+              <Divider className="w-full" />
+              <Text color="body">Bottom</Text>
             </div>
           </div>
-        </div>
 
-        <H4 className="mb-6">Vertical</H4>
-        <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
-          <div className="flex items-center justify-center gap-8 h-24">
-            <Text color="body">Left</Text>
-            <Divider orientation="vertical" />
-            <Text color="body">Right</Text>
-          </div>
-        </div>
-
-        {/* Specs */}
-        <H4 className="mb-6">Specifications</H4>
-        <div className={`p-6 border ${borderClass} rounded-xl`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Caption className="block mb-1" size="xs">Height/Width</Caption>
-              <Body size="sm">1px</Body>
-            </div>
-            <div>
-              <Caption className="block mb-1" size="xs">Color</Caption>
-              <Body size="sm">Theme-aware via divider-color class</Body>
+          {/* Vertical */}
+          <div>
+            <H4 className="mb-4">Vertical</H4>
+            <div className={`p-6 border ${borderClass} rounded-xl flex items-center justify-center gap-8`}>
+              <Text color="body">Left</Text>
+              <Divider orientation="vertical" className="h-12" />
+              <Text color="body">Right</Text>
             </div>
           </div>
         </div>
