@@ -70,7 +70,7 @@ export default function DesignSystemPage() {
 
       {/* Category Cards */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {categories.map((category) => {
             const Icon = category.icon
             return (
