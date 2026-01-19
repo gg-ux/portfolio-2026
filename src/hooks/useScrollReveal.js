@@ -5,30 +5,37 @@ export function useScrollReveal(options = {}) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    const element = ref.current
+    if (!element) return
+
+    // Check if already in viewport on mount (handles React Router navigation)
+    const rect = element.getBoundingClientRect()
+    const threshold = options.threshold || 0.1
+    const isInViewport = rect.top < window.innerHeight * (1 - threshold) && rect.bottom > 0
+
+    if (isInViewport) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
           // Once visible, stop observing
-          if (ref.current) {
-            observer.unobserve(ref.current)
-          }
+          observer.unobserve(element)
         }
       },
       {
-        threshold: options.threshold || 0.1,
+        threshold: threshold,
         rootMargin: options.rootMargin || '0px 0px -50px 0px',
       }
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
+    observer.observe(element)
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
+      observer.unobserve(element)
     }
   }, [options.threshold, options.rootMargin])
 
