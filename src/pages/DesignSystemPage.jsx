@@ -92,7 +92,9 @@ export default function DesignSystemPage() {
                   </div>
                   {/* Arrow - always visible on mobile/tablet, morphs in on desktop hover */}
                   <div
-                    className="lg:absolute lg:inset-0 transition-all duration-[400ms] ease-out lg:opacity-0 lg:scale-50 lg:-rotate-45 lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:rotate-0"
+                    className={`lg:absolute lg:inset-0 transition-all duration-[400ms] ease-out lg:opacity-0 lg:scale-50 lg:-rotate-45 lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:rotate-0 ${
+                      isDark ? 'text-white/40 lg:text-inherit' : 'text-black/30 lg:text-inherit'
+                    }`}
                   >
                     <ArrowRight size={24} weight="light" />
                   </div>
