@@ -102,11 +102,13 @@ export default function DesignSystemPage() {
                       >
                         <Icon size={22} weight="regular" />
                       </div>
+                      {/* Glass border frame */}
                       <div
-                        className={`absolute -inset-0.5 rounded-full backdrop-blur-sm border ${
-                          isDark ? 'border-white/[0.08]' : 'border-black/[0.06]'
+                        className={`absolute -inset-1 rounded-full backdrop-blur-sm border ${
+                          isDark
+                            ? 'border-white/[0.08] bg-white/[0.02]'
+                            : 'border-black/[0.06] bg-black/[0.01]'
                         }`}
-                        style={{ backgroundColor: `${category.color}15` }}
                       />
                     </div>
                     <H4 className="mb-3">{category.title}</H4>
