@@ -8,34 +8,43 @@ export function useScrollReveal(options = {}) {
     const element = ref.current
     if (!element) return
 
-    // Check if already in viewport on mount (handles React Router navigation)
-    const rect = element.getBoundingClientRect()
     const threshold = options.threshold || 0.1
-    const isInViewport = rect.top < window.innerHeight * (1 - threshold) && rect.bottom > 0
+    let observer = null
+    let rafId = null
 
-    if (isInViewport) {
-      setIsVisible(true)
-      return
-    }
+    // Use requestAnimationFrame to wait for layout to complete after navigation
+    rafId = requestAnimationFrame(() => {
+      if (!element) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          // Once visible, stop observing
-          observer.unobserve(element)
-        }
-      },
-      {
-        threshold: threshold,
-        rootMargin: options.rootMargin || '0px 0px -50px 0px',
+      // Check if already in viewport on mount
+      const rect = element.getBoundingClientRect()
+      const isInViewport = rect.top < window.innerHeight * (1 - threshold) && rect.bottom > 0
+
+      if (isInViewport) {
+        setIsVisible(true)
+        return
       }
-    )
 
-    observer.observe(element)
+      // Set up observer for elements below the fold
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+            observer.unobserve(element)
+          }
+        },
+        {
+          threshold: threshold,
+          rootMargin: options.rootMargin || '0px 0px -50px 0px',
+        }
+      )
+
+      observer.observe(element)
+    })
 
     return () => {
-      observer.unobserve(element)
+      if (rafId) cancelAnimationFrame(rafId)
+      if (observer) observer.disconnect()
     }
   }, [options.threshold, options.rootMargin])
 
