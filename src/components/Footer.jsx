@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { Caption } from './Typography'
 import { useTheme } from '../context/ThemeContext'
+import { LinkedinLogo, DribbbleLogo, EnvelopeSimple } from '@phosphor-icons/react'
 
 export default function Footer() {
   const [footerRef, footerVisible] = useScrollReveal()
@@ -23,25 +24,45 @@ export default function Footer() {
               &copy; Grace Guo {new Date().getFullYear()}
             </Caption>
 
-            {/* Links */}
-            <div className="flex items-center gap-4">
+            {/* Social Icons */}
+            <div className="flex items-center gap-3">
               <a
                 href="https://www.linkedin.com/in/grace-guo-ux/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-colors duration-300 ${
-                  isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                className={`p-2 rounded-full transition-colors duration-300 ${
+                  isDark
+                    ? 'text-gray-500 hover:text-white hover:bg-white/10'
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-black/5'
                 }`}
+                aria-label="LinkedIn"
               >
-                <Caption>LinkedIn</Caption>
+                <LinkedinLogo size={20} weight="regular" />
               </a>
-              <span className={isDark ? 'text-gray-700' : 'text-gray-400'}>·</span>
-              <Link
-                to="/playground"
-                className={`transition-colors duration-300 ${isDark ? 'text-gray-600 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
+              <a
+                href="https://dribbble.com/graceeful"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-full transition-colors duration-300 ${
+                  isDark
+                    ? 'text-gray-500 hover:text-white hover:bg-white/10'
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-black/5'
+                }`}
+                aria-label="Dribbble"
               >
-                <Caption>Playground</Caption>
-              </Link>
+                <DribbbleLogo size={20} weight="regular" />
+              </a>
+              <a
+                href="mailto:graceguo.design@gmail.com"
+                className={`p-2 rounded-full transition-colors duration-300 ${
+                  isDark
+                    ? 'text-gray-500 hover:text-white hover:bg-white/10'
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-black/5'
+                }`}
+                aria-label="Email"
+              >
+                <EnvelopeSimple size={20} weight="regular" />
+              </a>
             </div>
 
             {/* Back to top */}
