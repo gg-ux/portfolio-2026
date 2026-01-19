@@ -1,5 +1,9 @@
 # Project Notes
 
+## Design System Reference
+
+Full design system docs in private repo: github.com/gg-ux/gracebot
+
 ## Resume Updates
 When Grace asks to update her resume, edit the shared data file:
 `src/data/resumeData.js`
