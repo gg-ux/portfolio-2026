@@ -603,29 +603,29 @@ export default function FoundationPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* SubtleContainer */}
           <div>
-            <H4 className="mb-2">Subtle</H4>
-            <Paragraph size="sm" className="mb-6">Charts, data visualizations, research findings, article content</Paragraph>
-            <SubtleContainer className="h-[160px] flex items-center justify-center">
+            <SubtleContainer className="h-[160px] flex items-center justify-center mb-4">
               <Mono size="xs" color="muted">2% fill</Mono>
             </SubtleContainer>
+            <H4 className="mb-2">Subtle</H4>
+            <Paragraph size="sm">Charts, data visualizations, research findings, article content</Paragraph>
           </div>
 
           {/* FrostedContainer */}
           <div>
-            <H4 className="mb-2">Frosted</H4>
-            <Paragraph size="sm" className="mb-6">Category cards, navigation, key stats, feature showcases</Paragraph>
-            <FrostedContainer className="h-[160px] flex items-center justify-center">
+            <FrostedContainer className="h-[160px] flex items-center justify-center mb-4">
               <Mono size="xs" color="muted">Glass + blur</Mono>
             </FrostedContainer>
+            <H4 className="mb-2">Frosted</H4>
+            <Paragraph size="sm">Category cards, navigation, key stats, feature showcases</Paragraph>
           </div>
 
           {/* Transparent */}
           <div>
-            <H4 className="mb-2">Transparent</H4>
-            <Paragraph size="sm" className="mb-6">Flows, floating elements, content on hero backgrounds</Paragraph>
-            <div className={`h-[160px] flex items-center justify-center rounded-2xl border border-dashed ${borderClass}`}>
+            <div className={`h-[160px] flex items-center justify-center rounded-2xl border border-dashed ${borderClass} mb-4`}>
               <Mono size="xs" color="muted">Transparent</Mono>
             </div>
+            <H4 className="mb-2">Transparent</H4>
+            <Paragraph size="sm">Flows, floating elements, content on hero backgrounds</Paragraph>
           </div>
         </div>
       </DSSection>
