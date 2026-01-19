@@ -80,30 +80,20 @@ export default function DesignSystemPage() {
                 to={category.href}
                 className="h-auto sm:h-[280px]"
               >
-                {/* Icon - top right, morphs to arrow on hover (desktop) or always shows arrow (touch) */}
-                <div className={`absolute top-6 right-6 ${
-                  isDark ? 'text-white/20 group-hover:text-white/40' : 'text-black/15 group-hover:text-black/30'
-                }`} style={{ transition: 'color 500ms' }}>
-                  {/* Category icon - hidden on mobile, morphs out on desktop hover */}
-                  <div
-                    className="hidden lg:block transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]"
-                  >
-                    <Icon size={24} weight="light" />
-                  </div>
-                  {/* Arrow - always visible on mobile/tablet, morphs in on desktop hover */}
-                  <div
-                    className={`lg:absolute lg:inset-0 transition-all duration-[400ms] ease-out lg:opacity-0 lg:scale-50 lg:-rotate-45 lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:rotate-0 ${
-                      isDark ? 'text-white/40' : 'text-black/30'
-                    }`}
-                  >
-                    <ArrowRight size={24} weight="light" />
-                  </div>
+                {/* Arrow - top right, always visible */}
+                <div className={`absolute top-6 right-6 transition-colors duration-300 ${
+                  isDark ? 'text-white/30 group-hover:text-white/50' : 'text-black/20 group-hover:text-black/40'
+                }`}>
+                  <ArrowRight size={24} weight="light" />
                 </div>
 
                 {/* Content wrapper */}
                 <div className="relative z-10 flex flex-col h-full p-6">
-                  {/* Title & Description */}
+                  {/* Category icon + Title */}
                   <div className="flex-1 pt-2">
+                    <div className={`mb-4 ${isDark ? 'text-white/25' : 'text-black/20'}`}>
+                      <Icon size={28} weight="light" />
+                    </div>
                     <H4 className="mb-3 pr-10">{category.title}</H4>
                     <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
                       {category.description}
