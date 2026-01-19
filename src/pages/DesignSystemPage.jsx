@@ -11,7 +11,7 @@ import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/r
 const categories = [
   {
     title: 'Foundation',
-    description: 'The building blocks of Gooey. Typography, colors, and spacing scales.',
+    description: 'Typography, colors, icons, and spacing.',
     icon: Palette,
     href: '/design-system/foundation',
     items: ['Typography', 'Colors', 'Icons', 'Spacing'],
@@ -19,7 +19,7 @@ const categories = [
   },
   {
     title: 'Components',
-    description: 'Reusable UI elements with specs, variants, and usage guidelines.',
+    description: 'Reusable UI elements and variants.',
     icon: Stack,
     href: '/design-system/components',
     items: ['Buttons', 'Inputs', 'Tags', 'Data Viz'],
@@ -27,7 +27,7 @@ const categories = [
   },
   {
     title: 'Motion',
-    description: 'Animations and background effects that bring the experience to life.',
+    description: 'Animations and background effects.',
     icon: Lightning,
     href: '/design-system/motion',
     items: ['Scroll', 'Animations', 'Cursor Effects'],
@@ -35,7 +35,7 @@ const categories = [
   },
   {
     title: 'Patterns',
-    description: 'Layout structures and page templates for consistent experiences.',
+    description: 'Layouts and page templates.',
     icon: Layout,
     href: '/design-system/patterns',
     items: ['Navigation', 'Layouts', 'Projects', 'Footer'],
@@ -84,17 +84,10 @@ export default function DesignSystemPage() {
                 to={category.href}
                 className="h-auto sm:h-[280px]"
               >
-                {/* Arrow - bottom right, always visible */}
-                <div className={`absolute bottom-6 right-6 transition-colors duration-300 ${
-                  isDark ? 'text-white/30 group-hover:text-white/50' : 'text-black/20 group-hover:text-black/40'
-                }`}>
-                  <ArrowRight size={20} weight="light" />
-                </div>
-
                 {/* Content wrapper */}
                 <div className="relative z-10 flex flex-col h-full p-6">
-                  {/* Category icon + Title */}
-                  <div className="flex-1 pt-2">
+                  {/* Category icon + Title + Description */}
+                  <div className="flex-1">
                     <div className="relative w-11 h-11 mb-4">
                       <div
                         className="relative z-10 w-full h-full rounded-full flex items-center justify-center"
@@ -111,19 +104,26 @@ export default function DesignSystemPage() {
                         }`}
                       />
                     </div>
-                    <H4 className="mb-3">{category.title}</H4>
+                    <H4 className="mb-2">{category.title}</H4>
                     <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
                       {category.description}
                     </Body>
                   </div>
 
-                  {/* Items list */}
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {category.items.map((item) => (
-                      <Tag key={item} muted>
-                        <ScrambleText trigger="hover">{item}</ScrambleText>
-                      </Tag>
-                    ))}
+                  {/* Tags + Arrow row */}
+                  <div className="flex items-end justify-between gap-3 mt-4">
+                    <div className="flex flex-wrap gap-2">
+                      {category.items.map((item) => (
+                        <Tag key={item} muted>
+                          <ScrambleText trigger="hover">{item}</ScrambleText>
+                        </Tag>
+                      ))}
+                    </div>
+                    <div className={`flex-shrink-0 transition-colors duration-300 ${
+                      isDark ? 'text-white/30 group-hover:text-white/50' : 'text-black/20 group-hover:text-black/40'
+                    }`}>
+                      <ArrowRight size={20} weight="light" />
+                    </div>
                   </div>
                 </div>
               </FrostedContainer>
