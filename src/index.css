@@ -23,6 +23,9 @@
 @import "tailwindcss";
 
 @theme {
+  /* Custom breakpoints */
+  --breakpoint-ds-desktop: 1077px;
+
   --font-silk: 'Silk Serif', serif;
   --font-satoshi: 'Satoshi', sans-serif;
   --font-mono: 'Azeret Mono', monospace;
