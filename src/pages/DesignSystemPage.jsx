@@ -15,6 +15,7 @@ const categories = [
     icon: Palette,
     href: '/design-system/foundation',
     items: ['Typography', 'Colors', 'Icons', 'Spacing'],
+    color: '#5835B0', // Amethyst
   },
   {
     title: 'Components',
@@ -22,6 +23,7 @@ const categories = [
     icon: Stack,
     href: '/design-system/components',
     items: ['Buttons', 'Inputs', 'Tags', 'Data Viz'],
+    color: '#BF92F0', // Lilac
   },
   {
     title: 'Motion',
@@ -29,6 +31,7 @@ const categories = [
     icon: Lightning,
     href: '/design-system/motion',
     items: ['Scroll', 'Animations', 'Cursor Effects'],
+    color: '#D78F8D', // Rose
   },
   {
     title: 'Patterns',
@@ -36,6 +39,7 @@ const categories = [
     icon: Layout,
     href: '/design-system/patterns',
     items: ['Navigation', 'Layouts', 'Projects', 'Footer'],
+    color: '#DBA166', // Gold
   },
 ]
 
@@ -80,11 +84,11 @@ export default function DesignSystemPage() {
                 to={category.href}
                 className="h-auto sm:h-[280px]"
               >
-                {/* Arrow - top right, always visible */}
-                <div className={`absolute top-6 right-6 transition-colors duration-300 ${
+                {/* Arrow - bottom right, always visible */}
+                <div className={`absolute bottom-6 right-6 transition-colors duration-300 ${
                   isDark ? 'text-white/30 group-hover:text-white/50' : 'text-black/20 group-hover:text-black/40'
                 }`}>
-                  <ArrowRight size={24} weight="light" />
+                  <ArrowRight size={20} weight="light" />
                 </div>
 
                 {/* Content wrapper */}
@@ -92,16 +96,20 @@ export default function DesignSystemPage() {
                   {/* Category icon + Title */}
                   <div className="flex-1 pt-2">
                     <div className="relative w-11 h-11 mb-4">
-                      <div className={`relative z-10 w-full h-full rounded-full flex items-center justify-center ${
-                        isDark ? 'text-white/50' : 'text-black/40'
-                      }`}>
-                        <Icon size={22} weight="light" />
+                      <div
+                        className="relative z-10 w-full h-full rounded-full flex items-center justify-center"
+                        style={{ color: category.color }}
+                      >
+                        <Icon size={22} weight="regular" />
                       </div>
-                      <div className={`absolute -inset-0.5 rounded-full backdrop-blur-sm border ${
-                        isDark ? 'border-white/[0.08] bg-white/[0.03]' : 'border-black/[0.06] bg-black/[0.02]'
-                      }`} />
+                      <div
+                        className={`absolute -inset-0.5 rounded-full backdrop-blur-sm border ${
+                          isDark ? 'border-white/[0.08]' : 'border-black/[0.06]'
+                        }`}
+                        style={{ backgroundColor: `${category.color}15` }}
+                      />
                     </div>
-                    <H4 className="mb-3 pr-10">{category.title}</H4>
+                    <H4 className="mb-3">{category.title}</H4>
                     <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
                       {category.description}
                     </Body>
