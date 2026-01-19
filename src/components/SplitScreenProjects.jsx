@@ -979,7 +979,7 @@ export default function SplitScreenProjects() {
               {/* Counter - slot roll */}
               <div
                 key={`counter-${activeIndex}`}
-                className="mb-8 animate-slot-roll opacity-0"
+                className="mb-8 animate-slot-roll"
                 style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}
               >
                 <Caption trigger="mount">
@@ -992,7 +992,7 @@ export default function SplitScreenProjects() {
               <div className="overflow-hidden">
                 <H2
                   key={`title-${activeIndex}`}
-                  className="mb-4 animate-slot-roll opacity-0"
+                  className="mb-4 animate-slot-roll"
                   style={{ animationDelay: '50ms' }}
                 >
                   {projects[activeIndex].name}
@@ -1001,7 +1001,7 @@ export default function SplitScreenProjects() {
               <div className="overflow-hidden">
                 <Body
                   key={`desc-${activeIndex}`}
-                  className="text-xl leading-relaxed mb-6 animate-slot-roll opacity-0"
+                  className="text-xl leading-relaxed mb-6 animate-slot-roll"
                   style={{ animationDelay: '100ms' }}
                 >
                   {projects[activeIndex].contribution}
@@ -1009,7 +1009,7 @@ export default function SplitScreenProjects() {
               </div>
               <div
                 key={`btn-${activeIndex}`}
-                className="animate-slot-roll opacity-0"
+                className="animate-slot-roll"
                 style={{ animationDelay: '150ms' }}
               >
                 <ButtonWithArrow

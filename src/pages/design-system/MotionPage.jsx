@@ -134,10 +134,10 @@ export default function MotionPage() {
             <H4 className="mb-4">Directional</H4>
             <div className={`relative border ${borderClass} rounded-xl aspect-video`}>
               <div className="absolute inset-0 flex items-center justify-center gap-8" key={entranceKey}>
-                <span className={`font-satoshi text-2xl animate-slide-in-left opacity-0 ${isDark ? 'text-white/90' : 'text-gray-800'}`} style={{ animationDelay: '100ms' }}>
+                <span className={`font-satoshi text-2xl animate-slide-in-left ${isDark ? 'text-white/90' : 'text-gray-800'}`} style={{ animationDelay: '100ms' }}>
                   Left
                 </span>
-                <span className={`font-satoshi text-2xl animate-slide-in-right opacity-0 ${isDark ? 'text-white/90' : 'text-gray-800'}`} style={{ animationDelay: '200ms' }}>
+                <span className={`font-satoshi text-2xl animate-slide-in-right ${isDark ? 'text-white/90' : 'text-gray-800'}`} style={{ animationDelay: '200ms' }}>
                   Right
                 </span>
               </div>

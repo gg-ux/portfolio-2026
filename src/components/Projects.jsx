@@ -475,12 +475,12 @@ export default function Projects() {
       {/* Section Header */}
       <div ref={headerRef} className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 mb-12">
         <div className="flex items-end justify-between">
-          <H2 className={`opacity-0 ${headerVisible ? 'animate-fluid-in' : ''}`}>
+          <H2 className={headerVisible ? 'animate-fluid-in' : 'opacity-0'}>
             Featured Projects
           </H2>
 
           {/* Arrow buttons */}
-          <div className={`flex gap-3 opacity-0 ${headerVisible ? 'animate-fade-up' : ''}`} style={{ animationDelay: '0.3s' }}>
+          <div className={`flex gap-3 ${headerVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
             <ArrowButton
               direction="left"
               onClick={() => scroll('left')}
