@@ -11,13 +11,12 @@ export default function GridBackground() {
 
   const isHomePage = location.pathname === '/'
   const isDesignSystem = location.pathname.startsWith('/design-system')
-
-  // Only render on home page or design system pages
-  if (!isHomePage && !isDesignSystem) {
-    return null
-  }
+  const shouldRender = isHomePage || isDesignSystem
 
   useEffect(() => {
+    // Only set up scroll listener on pages that render this component
+    if (!shouldRender) return
+
     const updateScrollEffects = () => {
       const scrollY = window.scrollY
       const vh = window.innerHeight
@@ -75,7 +74,12 @@ export default function GridBackground() {
       window.removeEventListener('scroll', handleScroll)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [isDesignSystem])
+  }, [shouldRender, isDesignSystem])
+
+  // Only render on home page or design system pages
+  if (!shouldRender) {
+    return null
+  }
 
   return (
     <div
