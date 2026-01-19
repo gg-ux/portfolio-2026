@@ -78,7 +78,7 @@ export default function DesignSystemPage() {
                 key={category.title}
                 as={Link}
                 to={category.href}
-                className="h-[280px]"
+                className="h-auto sm:h-[280px]"
               >
                 {/* Icon - top right, morphs to arrow on hover (desktop) or always shows arrow (touch) */}
                 <div className={`absolute top-6 right-6 ${
