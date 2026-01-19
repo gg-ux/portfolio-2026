@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { ArrowsOut, X } from '@phosphor-icons/react'
 import {
   VideoCamera,
@@ -68,9 +69,9 @@ export function ResearchMethodologies() {
 
   // Colors from brand palette in order: Amethyst, Lilac, Rose
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
-    '#D78F8D', // Rose
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   return (
@@ -246,9 +247,9 @@ export function SurveyFindingsChart() {
 
   // Colors from brand palette in order: Amethyst, Lilac, Rose
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
-    '#D78F8D', // Rose
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   return (
@@ -342,7 +343,7 @@ export function SurveyFindingsDots() {
   ]
 
   // Theme-aware primary accent: Lilac (dark) / Amethyst (light)
-  const dotColor = isDark ? '#BF92F0' : '#5835B0'
+  const dotColor = getColor('amethyst', isDark)
   const dotInactive = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)'
   const totalDots = 29
 
@@ -433,9 +434,9 @@ export function TopCommunityAttributes() {
 
   // Colors from brand palette in order: Amethyst, Lilac, Rose
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
-    '#D78F8D', // Rose
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   return (
@@ -535,9 +536,9 @@ export function ResearchRequirements() {
 
   // Colors from brand palette in order: Amethyst, Lilac, Rose
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
-    '#D78F8D', // Rose
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   return (
@@ -633,7 +634,7 @@ export function CardSortResults() {
   }
 
   // Theme-aware primary: Lilac (dark) / Amethyst (light)
-  const highColor = isDark ? '#BF92F0' : '#5835B0'
+  const highColor = getColor('amethyst', isDark)
   const lowColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)'
 
   return (
@@ -738,7 +739,7 @@ export function CardSortMatrix() {
 
   // Highlight for VERY IMPORTANT column (index 0): Amethyst
   const highlightBg = isDark ? 'rgba(88, 53, 176, 0.35)' : 'rgba(88, 53, 176, 0.12)'
-  const highlightText = isDark ? '#D1D5DB' : '#5835B0'
+  const highlightText = isDark ? '#D1D5DB' : getColor('amethyst', false)
 
   // Highlight for IMPORTANT column (index 1): Lilac
   const importantBg = isDark ? 'rgba(191, 146, 240, 0.3)' : 'rgba(191, 146, 240, 0.15)'
@@ -854,8 +855,8 @@ export function CardSortMatrix() {
             // Amethyst for Very Important, Lilac for Important
             const isImportantColumn = maxIdx === 1
             const barColor = isImportantColumn
-              ? '#BF92F0' // Lilac
-              : '#5835B0' // Amethyst
+              ? getColor('lilac', isDark)
+              : getColor('amethyst', isDark)
             return (
               <div
                 key={row.topic}
@@ -895,7 +896,7 @@ export function CardSortMatrix() {
           {/* Legend */}
           <div className="flex justify-center gap-6 pt-4">
             <div className="flex items-center gap-1.5">
-              <div className="w-4 h-0.5 rounded" style={{ backgroundColor: '#5835B0' }} />
+              <div className="w-4 h-0.5 rounded" style={{ backgroundColor: getColor('amethyst', isDark) }} />
               <span className={`font-mono text-[10px] tracking-wide uppercase ${
                 isDark ? 'text-white/60' : 'text-black/60'
               }`}>
@@ -926,8 +927,8 @@ export function InteractionComparison() {
 
   // Colors from brand palette: Amethyst, Lilac
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
   ]
 
   const comparisons = [
@@ -1023,9 +1024,9 @@ export function UserArchetypes() {
 
   // Colors from brand palette: Amethyst, Lilac, Rose
   const colors = [
-    '#5835B0', // Amethyst
-    '#BF92F0', // Lilac
-    '#D78F8D', // Rose
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   const archetypes = [
@@ -1269,13 +1270,13 @@ export function CoreUserStory() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 })
 
   // Theme-aware accent color: Lilac (dark) / Amethyst (light)
-  const accentColor = isDark ? '#BF92F0' : '#5835B0'
+  const accentColor = getColor('amethyst', isDark)
 
   // Colors for the three pillars from brand palette
   const pillarColors = [
-    '#5835B0', // Amethyst - Community
-    '#BF92F0', // Lilac - Education
-    '#D78F8D', // Rose - Resources
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('rose', isDark),
   ]
 
   const pillars = [
@@ -1968,10 +1969,10 @@ export function MiroBoard({ variant = 1 }) {
 
   // Colors from brand palette
   const colors = {
-    amethyst: '#5835B0',     // Amethyst
-    lilac: '#BF92F0',        // Lilac
-    rose: '#D78F8D',         // Rose
-    gold: '#DBA166',         // Gold
+    amethyst: getColor('amethyst', isDark),
+    lilac: getColor('lilac', isDark),
+    rose: getColor('rose', isDark),
+    gold: getColor('gold', isDark),
     turquoise: '#36CBC6',    // Turquoise
     lagoon: '#0B96A3',       // Lagoon
     peridot: '#87AA61',      // Peridot

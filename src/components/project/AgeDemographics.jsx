@@ -1,13 +1,14 @@
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { Person } from '@phosphor-icons/react'
 
 export default function AgeDemographics() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 })
 
-  // Theme-aware primary accent: Lilac (dark) / Amethyst (light)
-  const accentColor = isDark ? '#BF92F0' : '#5835B0'
+  // Theme-aware primary accent
+  const accentColor = getColor('amethyst', isDark)
   const grayColor = isDark ? '#ffffff' : '#6B7280'
 
   const iconSize = 48

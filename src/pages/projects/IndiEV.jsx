@@ -16,6 +16,7 @@ import {
   StyleComparisonToggle,
 } from '../../components/project'
 import { useTheme } from '../../context/ThemeContext'
+import { getColor } from '../../constants/colors'
 import {
   ClipboardText,
   Palette,
@@ -81,12 +82,13 @@ export default function IndiEV() {
         <div className="relative mt-6 mb-12">
           <div className="space-y-5">
             {[
-              { title: 'Gather requirements', description: 'Refer to wireframes and flows, asking questions where needed', icon: ClipboardText, color: '#5835B0' },
-              { title: 'Define look & feel', description: 'Create options for final look & feel and present to design team and stakeholders', icon: Palette, color: '#BF92F0' },
-              { title: 'Create high-fidelity mockups', description: 'Create mockups for 15+ pages/flows for the demo reel on Figma', icon: Layout, color: '#D78F8D' },
-              { title: 'Review & iterate', description: 'Present mockups & proposed user flows to team and stakeholders, working quickly and iteratively', icon: ArrowsClockwise, color: '#5835B0' },
+              { title: 'Gather requirements', description: 'Refer to wireframes and flows, asking questions where needed', icon: ClipboardText, colorKey: 'amethyst' },
+              { title: 'Define look & feel', description: 'Create options for final look & feel and present to design team and stakeholders', icon: Palette, colorKey: 'lilac' },
+              { title: 'Create high-fidelity mockups', description: 'Create mockups for 15+ pages/flows for the demo reel on Figma', icon: Layout, colorKey: 'rose' },
+              { title: 'Review & iterate', description: 'Present mockups & proposed user flows to team and stakeholders, working quickly and iteratively', icon: ArrowsClockwise, colorKey: 'amethyst' },
             ].map((item, index, arr) => {
               const Icon = item.icon
+              const color = getColor(item.colorKey, isDark)
               const isLast = index === arr.length - 1
               return (
                 <div key={index} className="relative flex gap-4">
@@ -94,9 +96,9 @@ export default function IndiEV() {
                   <div className="relative flex-shrink-0">
                     <div
                       className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: `${item.color}15` }}
+                      style={{ backgroundColor: `${color}15` }}
                     >
-                      <Icon size={20} weight="regular" style={{ color: item.color }} />
+                      <Icon size={20} weight="regular" style={{ color }} />
                     </div>
                     {/* Connecting line to next item */}
                     {!isLast && (

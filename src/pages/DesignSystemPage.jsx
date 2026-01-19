@@ -1,45 +1,41 @@
 import { Link } from 'react-router-dom'
 import { H1, H4, Body, Caption } from '../components/Typography'
-import ScrambleText from '../components/ScrambleText'
 import FluidBlob from '../components/FluidBlob'
 import AuraBeams from '../components/AuraBeams'
-import { FrostedContainer, Tag } from '../components/ui'
+import { FrostedContainer } from '../components/ui'
 import { useTheme } from '../context/ThemeContext'
+import { getColor } from '../constants/colors'
 import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/react'
 
 // Category cards for design system landing
 const categories = [
   {
     title: 'Foundation',
-    description: 'Typography, colors, icons, and spacing.',
+    description: 'Typography, color palette, icons, and spacing.',
     icon: Palette,
     href: '/design-system/foundation',
-    items: ['Typography', 'Colors', 'Icons', 'Spacing'],
-    color: '#5835B0', // Amethyst
+    colorKey: 'amethyst',
   },
   {
     title: 'Components',
-    description: 'Reusable UI elements and variants.',
+    description: 'Buttons, inputs, tags, and data visualization.',
     icon: Stack,
     href: '/design-system/components',
-    items: ['Buttons', 'Inputs', 'Tags', 'Data Viz'],
-    color: '#BF92F0', // Lilac
+    colorKey: 'lilac',
   },
   {
     title: 'Motion',
-    description: 'Animations and background effects.',
+    description: 'Animations, transitions, and cursor effects.',
     icon: Lightning,
     href: '/design-system/motion',
-    items: ['Scroll', 'Animations', 'Cursor Effects'],
-    color: '#D78F8D', // Rose
+    colorKey: 'rose',
   },
   {
     title: 'Patterns',
-    description: 'Layouts and page templates.',
+    description: 'Navigation, layouts, project cards, and footer.',
     icon: Layout,
     href: '/design-system/patterns',
-    items: ['Navigation', 'Layouts', 'Projects', 'Footer'],
-    color: '#DBA166', // Gold
+    colorKey: 'gold',
   },
 ]
 
@@ -74,26 +70,32 @@ export default function DesignSystemPage() {
 
       {/* Category Cards */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 min-[1000px]:grid-cols-4 gap-3 sm:gap-5">
           {categories.map((category) => {
             const Icon = category.icon
+            const color = getColor(category.colorKey, isDark)
             return (
               <FrostedContainer
                 key={category.title}
                 as={Link}
                 to={category.href}
-                className="h-auto sm:h-[280px]"
+                className=""
               >
                 {/* Content wrapper */}
-                <div className="relative z-10 flex flex-col h-full p-6">
+                <div className="relative z-10 flex flex-col h-full p-5 sm:p-6">
                   {/* Category icon + Title + Description */}
-                  <div className="flex-1">
-                    <div className="relative w-11 h-11 mb-4">
+                  <div>
+                    <div className="relative w-10 h-10 sm:w-11 sm:h-11 mb-3">
+                      {/* Icon with subtle color tint background */}
                       <div
                         className="relative z-10 w-full h-full rounded-full flex items-center justify-center"
-                        style={{ color: category.color }}
+                        style={{
+                          color: color,
+                          backgroundColor: `${color}12`
+                        }}
                       >
-                        <Icon size={22} weight="regular" />
+                        <Icon size={20} className="sm:hidden" weight="regular" />
+                        <Icon size={22} className="hidden sm:block" weight="regular" />
                       </div>
                       {/* Glass border frame */}
                       <div
@@ -104,25 +106,18 @@ export default function DesignSystemPage() {
                         }`}
                       />
                     </div>
-                    <H4 className="mb-2">{category.title}</H4>
+                    <H4 className="mb-1 sm:mb-2 text-base sm:text-lg">{category.title}</H4>
                     <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
                       {category.description}
                     </Body>
                   </div>
 
-                  {/* Tags + Arrow row */}
-                  <div className="flex items-end justify-between gap-3 mt-4">
-                    <div className="flex flex-wrap gap-2">
-                      {category.items.map((item) => (
-                        <Tag key={item} muted>
-                          <ScrambleText trigger="hover">{item}</ScrambleText>
-                        </Tag>
-                      ))}
-                    </div>
-                    <div className={`flex-shrink-0 transition-colors duration-300 ${
+                  {/* Arrow */}
+                  <div className="flex justify-end mt-auto pt-3 sm:pt-4">
+                    <div className={`transition-colors duration-300 ${
                       isDark ? 'text-white/30 group-hover:text-white/50' : 'text-black/20 group-hover:text-black/40'
                     }`}>
-                      <ArrowRight size={20} weight="light" />
+                      <ArrowRight size={20} weight="light" className="transition-transform duration-300 group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 </div>

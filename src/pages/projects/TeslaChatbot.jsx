@@ -19,6 +19,7 @@ import { TrendUp, Target, ChatCircle, LinkSimple } from '@phosphor-icons/react'
 import { Body, Caption } from '../../components/Typography'
 import { Tag } from '../../components/ui'
 import { useTheme } from '../../context/ThemeContext'
+import { getColor } from '../../constants/colors'
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -174,15 +175,15 @@ export default function TeslaChatbot() {
       <ProjectSection id="new-flow" title="New Chatbot Automation Flow">
         <div className="flex flex-wrap gap-2 mb-6">
           {[
-            { label: 'Order Education', color: '#5835B0' },      // Amethyst
-            { label: 'Vehicle Appointments', color: '#DBA166' }, // Gold
+            { label: 'Order Education', colorKey: 'amethyst' },
+            { label: 'Vehicle Appointments', colorKey: 'gold' },
             { label: 'Vehicle Education', color: '#36CBC6' },    // Turquoise
-            { label: 'Energy Appointments', color: '#D78F8D' },  // Rose
+            { label: 'Energy Appointments', colorKey: 'rose' },
             { label: 'Energy Education', color: '#0B96A3' },     // Lagoon
-            { label: 'General Purchase', color: '#BF92F0' },     // Lilac
+            { label: 'General Purchase', colorKey: 'lilac' },
             { label: 'Undetermined', color: '#6B7280' },         // Neutral
           ].map((category) => (
-            <Tag key={category.label} color={category.color}>{category.label}</Tag>
+            <Tag key={category.label} color={category.colorKey ? getColor(category.colorKey, isDark) : category.color}>{category.label}</Tag>
           ))}
         </div>
         <ProjectText>

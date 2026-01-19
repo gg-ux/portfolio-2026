@@ -1,14 +1,8 @@
 import { useState } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { Caption } from '../Typography'
-
-// Brand colors in order: Amethyst, Lilac, Rose
-const colors = {
-  amethyst: '#5835B0',
-  lilac: '#BF92F0',
-  rose: '#D78F8D',
-}
 
 /**
  * IndiEVDeliverables - Icon-based deliverables display
@@ -18,9 +12,9 @@ export function IndiEVDeliverables() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
   // Brand colors
-  const amethyst = '#5835B0'
-  const lilac = '#BF92F0'
-  const rose = '#D78F8D'
+  const amethyst = getColor('amethyst', isDark)
+  const lilac = getColor('lilac', isDark)
+  const rose = getColor('rose', isDark)
 
   const deliverables = [
     {

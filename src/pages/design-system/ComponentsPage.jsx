@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { useTheme } from '../../context/ThemeContext'
+import { getColor } from '../../constants/colors'
 import DSLayout, { DSSection } from './DSLayout'
 import { Button, ButtonWithArrow } from '../../components/ui/Button'
 import { Tag } from '../../components/ui'
 import { Input, Textarea, Select } from '../../components/ui/Input'
 import { Caption, H4, Paragraph } from '../../components/Typography'
-import { MagnifyingGlass, PencilSimple, Code, Person, Moon, Sun, ArrowsOut, X, ArrowUpRight } from '@phosphor-icons/react'
+import { MagnifyingGlass, PencilSimple, Code, Person, ArrowsOut, X, ArrowUpRight } from '@phosphor-icons/react'
 
 const sections = [
   { id: 'buttons', label: 'Buttons' },
@@ -150,10 +151,10 @@ export default function ComponentsPage() {
         <H4 className="mb-6">Colored</H4>
         <div className={`p-8 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex flex-wrap gap-2">
-            <Tag color="#5835B0">Amethyst</Tag>
-            <Tag color="#BF92F0">Lilac</Tag>
-            <Tag color="#D78F8D">Rose</Tag>
-            <Tag color="#DBA166">Gold</Tag>
+            <Tag color={getColor('amethyst', isDark)}>Amethyst</Tag>
+            <Tag color={getColor('lilac', isDark)}>Lilac</Tag>
+            <Tag color={getColor('rose', isDark)}>Rose</Tag>
+            <Tag color={getColor('gold', isDark)}>Gold</Tag>
             <Tag color="#36CBC6">Turquoise</Tag>
             <Tag color="#0B96A3">Lagoon</Tag>
             <Tag color="#87AA61">Peridot</Tag>
@@ -287,17 +288,17 @@ export default function ComponentsPage() {
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           <div className="flex flex-wrap gap-3">
             {[
-              { color: '#5835B0', name: 'Amethyst' },
-              { color: '#BF92F0', name: 'Lilac' },
-              { color: '#D78F8D', name: 'Rose' },
-              { color: '#DBA166', name: 'Gold' },
+              { colorKey: 'amethyst', name: 'Amethyst' },
+              { colorKey: 'lilac', name: 'Lilac' },
+              { colorKey: 'rose', name: 'Rose' },
+              { colorKey: 'gold', name: 'Gold' },
               { color: '#36CBC6', name: 'Turquoise' },
               { color: '#0B96A3', name: 'Lagoon' },
               { color: '#87AA61', name: 'Peridot' },
               { color: '#2F7255', name: 'Forest' },
-            ].map(({ color, name }) => (
+            ].map(({ colorKey, color, name }) => (
               <div key={name} className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded" style={{ backgroundColor: color }} />
+                <div className="w-3 h-3 rounded" style={{ backgroundColor: colorKey ? getColor(colorKey, isDark) : color }} />
                 <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>{name}</span>
               </div>
             ))}
@@ -330,18 +331,15 @@ export default function ComponentsPage() {
           {/* Single Accent */}
           <div>
             <H4 className="mb-2">Single Accent</H4>
-            <Paragraph size="sm" className="mb-4">Theme-aware.</Paragraph>
+            <Paragraph size="sm" className="mb-4">Amethyst is optimized for both light and dark modes.</Paragraph>
             <div className={`p-6 border ${borderClass} rounded-xl`}>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
-                  <Moon size={14} weight="fill" className={isDark ? 'text-white/50' : 'text-black/50'} />
-                  <div className="w-3 h-3 rounded" style={{ backgroundColor: '#BF92F0' }} />
-                  <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Lilac</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Sun size={14} weight="fill" className={isDark ? 'text-white/50' : 'text-black/50'} />
-                  <div className="w-3 h-3 rounded" style={{ backgroundColor: '#5835B0' }} />
+                  <div className="w-3 h-3 rounded" style={{ backgroundColor: getColor('amethyst', isDark) }} />
                   <span className={`font-mono text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Amethyst</span>
+                  <span className={`font-mono text-[10px] ${isDark ? 'text-white/30' : 'text-gray-400'}`}>
+                    {isDark ? '#8B6AFF' : '#5835B0'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -354,10 +352,12 @@ export default function ComponentsPage() {
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           <div className="space-y-6">
             {[
-              { label: 'Research', value: 55, color: '#5835B0', icon: MagnifyingGlass },
-              { label: 'Design', value: 31, color: '#BF92F0', icon: PencilSimple },
-              { label: 'Development', value: 10, color: '#D78F8D', icon: Code },
-            ].map(({ label, value, color, icon: Icon }) => (
+              { label: 'Research', value: 55, colorKey: 'amethyst', icon: MagnifyingGlass },
+              { label: 'Design', value: 31, colorKey: 'lilac', icon: PencilSimple },
+              { label: 'Development', value: 10, colorKey: 'rose', icon: Code },
+            ].map(({ label, value, colorKey, icon: Icon }) => {
+              const color = getColor(colorKey, isDark)
+              return (
               <div key={label} className="flex items-start gap-4">
                 {/* Icon */}
                 <div
@@ -394,7 +394,8 @@ export default function ComponentsPage() {
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
+
           </div>
         </div>
 
@@ -429,11 +430,13 @@ export default function ComponentsPage() {
               </div>
               {/* Bars */}
               {[
-                { start: 0, width: 25, color: '#5835B0', row: 0 },
-                { start: 10, width: 35, color: '#BF92F0', row: 1 },
-                { start: 40, width: 35, color: '#D78F8D', row: 2 },
-                { start: 70, width: 25, color: '#DBA166', row: 3 },
-              ].map(({ start, width, color, row }) => (
+                { start: 0, width: 25, colorKey: 'amethyst', row: 0 },
+                { start: 10, width: 35, colorKey: 'lilac', row: 1 },
+                { start: 40, width: 35, colorKey: 'rose', row: 2 },
+                { start: 70, width: 25, colorKey: 'gold', row: 3 },
+              ].map(({ start, width, colorKey, row }) => {
+                const color = getColor(colorKey, isDark)
+                return (
                 <div
                   key={row}
                   className="absolute h-1 rounded-full"
@@ -444,7 +447,8 @@ export default function ComponentsPage() {
                     backgroundColor: color,
                   }}
                 />
-              ))}
+              )})}
+
             </div>
           </div>
           {/* Month labels */}
@@ -463,12 +467,8 @@ export default function ComponentsPage() {
 
         {/* Single Accent Chart Example */}
         <H4 className="mb-2">Single Accent Chart</H4>
-        <Paragraph size="sm" className="mb-4 flex items-center gap-1 flex-wrap">
-          <span>Highlight key data with theme-aware primary (Lilac</span>
-          <Moon size={14} weight="fill" className="opacity-70" />
-          <span>/ Amethyst</span>
-          <Sun size={14} weight="fill" className="opacity-70" />
-          <span>).</span>
+        <Paragraph size="sm" className="mb-4">
+          Highlight key data with Amethyst as the primary accent.
         </Paragraph>
         <div className={`p-6 border ${borderClass} rounded-xl mb-8`}>
           {(() => {
@@ -479,7 +479,7 @@ export default function ComponentsPage() {
               { percent: 38.4, label: 'Age 55-75' },
             ]
             const maxPercent = Math.max(...data.map(d => d.percent))
-            const accentColor = isDark ? '#BF92F0' : '#5835B0'
+            const accentColor = getColor('amethyst', isDark)
             const grayColor = isDark ? '#ffffff' : '#6B7280'
             const getOpacity = (percent) => 0.2 + ((percent / maxPercent) * 0.4)
 

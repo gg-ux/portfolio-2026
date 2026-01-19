@@ -1,5 +1,6 @@
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { ChartTitle } from '../Typography'
 
 export default function DoubleDiamond() {
@@ -12,10 +13,10 @@ export default function DoubleDiamond() {
   const fontMono = "'Azeret Mono', monospace"
 
   // Phase colors from brand palette: Amethyst, Lilac, Rose, Gold
-  const discoverColor = '#5835B0'  // Amethyst
-  const defineColor = '#BF92F0'    // Lilac
-  const developColor = '#D78F8D'   // Rose
-  const deliverColor = '#DBA166'   // Gold
+  const discoverColor = getColor('amethyst', isDark)
+  const defineColor = getColor('lilac', isDark)
+  const developColor = getColor('rose', isDark)
+  const deliverColor = getColor('gold', isDark)
 
   // Path lengths for draw animation (must be >= actual path length)
   const diamondHalfPath = 400

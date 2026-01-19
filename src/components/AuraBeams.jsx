@@ -1,24 +1,33 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
 
-// Color palettes for AuraBeams
+// Color palettes for AuraBeams (with dark mode variants)
 const PALETTES = {
   original: [
     { r: 167, g: 139, b: 250 }, // Lavender #A78BFA
     { r: 15, g: 118, b: 110 },  // Teal #0F766E
     { r: 234, g: 88, b: 12 },   // Orange #EA580C
   ],
-  soulful: [
-    { r: 88, g: 53, b: 176 },   // Amethyst #5835B0
-    { r: 191, g: 146, b: 240 }, // Lilac #BF92F0
-    { r: 215, g: 143, b: 141 }, // Rose #D78F8D
-  ],
+  soulful: {
+    light: [
+      { r: 88, g: 53, b: 176 },   // Amethyst #5835B0
+      { r: 191, g: 146, b: 240 }, // Lilac #BF92F0
+      { r: 215, g: 143, b: 141 }, // Rose #D78F8D
+    ],
+    dark: [
+      { r: 139, g: 106, b: 255 }, // Amethyst dark #8B6AFF
+      { r: 191, g: 146, b: 240 }, // Lilac #BF92F0
+      { r: 215, g: 143, b: 141 }, // Rose #D78F8D
+    ],
+  },
 }
 
 export default function AuraBeams({ contained = false, palette = 'original' }) {
   const canvasRef = useRef(null)
   const animationRef = useRef(null)
   const location = useLocation()
+  const { isDark } = useTheme()
   const [scrollEffects, setScrollEffects] = useState({ opacity: 1, translateY: 0 })
   const [isVisible, setIsVisible] = useState(!contained) // Start visible for non-contained
   const [containerEl, setContainerEl] = useState(null)
@@ -160,7 +169,11 @@ export default function AuraBeams({ contained = false, palette = 'original' }) {
     window.addEventListener('resize', resize)
 
     const gridSize = 60
-    const colors = PALETTES[palette] || PALETTES.original
+    // Get palette colors - handle soulful's light/dark structure
+    const paletteData = PALETTES[palette] || PALETTES.original
+    const colors = paletteData.light
+      ? (isDark ? paletteData.dark : paletteData.light)
+      : paletteData
 
     const animate = (timestamp) => {
       // Stop animation loop when not visible (for contained mode performance)

@@ -35,9 +35,9 @@
   --color-burnt-orange: #EA580C;
   --color-deep-teal: #0F766E;
 
-  /* Brand accent colors */
-  --color-accent-bright: #BF92F0;   /* Lilac - dark mode */
-  --color-accent-deep: #5835B0;     /* Amethyst - light mode */
+  /* Brand accent colors - Amethyst is primary for both modes */
+  --color-accent-dark: #8B6AFF;     /* Amethyst - dark mode (optimized) */
+  --color-accent-light: #5835B0;    /* Amethyst - light mode */
 
   /* Light mode colors */
   --color-light-bg: #FAF8F4;
@@ -509,18 +509,18 @@ html.light .divider-color {
   background-color: rgba(0, 0, 0, 0.08);
 }
 
-/* Theme-aware accent color */
+/* Theme-aware accent color - Amethyst (optimized for both modes) */
 .theme-accent {
-  color: #BF92F0; /* Lilac */
+  color: #8B6AFF; /* Amethyst dark mode */
   transition: color 0.5s ease;
 }
 
 html.light .theme-accent {
-  color: #5835B0; /* Amethyst */
+  color: #5835B0; /* Amethyst light mode */
 }
 
 .theme-accent-bg {
-  background-color: #BF92F0;
+  background-color: #8B6AFF;
   transition: background-color 0.5s ease;
 }
 
@@ -529,7 +529,7 @@ html.light .theme-accent-bg {
 }
 
 .theme-accent-border {
-  border-color: #BF92F0;
+  border-color: #8B6AFF;
   transition: border-color 0.5s ease;
 }
 

@@ -27,9 +27,10 @@ export default function FoundationPage() {
   const borderClass = isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'
 
   // Soulful palette - Brand colors with primary/secondary roles (theme-aware)
+  // Amethyst is optimized for both modes: #5835B0 (light) → #8B6AFF (dark)
   const soulfulPalette = [
-    { name: 'Amethyst', hex: '#5835B0', textColor: 'text-white', role: 'primary', icon: Sun },
-    { name: 'Lilac', hex: '#BF92F0', textColor: 'text-black', role: 'primary', icon: Moon },
+    { name: 'Amethyst', hex: isDark ? '#8B6AFF' : '#5835B0', textColor: isDark ? 'text-black' : 'text-white', role: 'primary' },
+    { name: 'Lilac', hex: '#BF92F0', textColor: 'text-black', role: 'secondary' },
     { name: 'Rose', hex: '#D78F8D', textColor: 'text-black', role: 'secondary' },
     { name: 'Gold', hex: '#DBA166', textColor: 'text-black', role: 'secondary' },
     { name: 'Turquoise', hex: '#36CBC6', textColor: 'text-black', role: 'secondary' },

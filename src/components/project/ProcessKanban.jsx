@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTheme } from '../../context/ThemeContext'
+import { getColor } from '../../constants/colors'
 import { Info } from '@phosphor-icons/react'
 
 /**
@@ -13,9 +14,9 @@ export default function ProcessKanban({ columns }) {
 
   // Column colors from brand palette
   const columnColors = [
-    '#5835B0', // Amethyst - Research
-    '#BF92F0', // Lilac - Design
-    '#DBA166', // Gold - Scoping
+    getColor('amethyst', isDark),
+    getColor('lilac', isDark),
+    getColor('gold', isDark),
     '#36CBC6', // Turquoise - Implementation
   ]
 

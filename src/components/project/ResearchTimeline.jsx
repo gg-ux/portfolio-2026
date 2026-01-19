@@ -1,13 +1,14 @@
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { Caption, Body, ChartTitle } from '../Typography'
 
 // 5 colors from design system palette
 const getPhaseColors = (isDark) => ({
-  amethyst: '#5835B0',
-  lilac: '#BF92F0',
-  rose: '#D78F8D',
-  gold: '#DBA166',
+  amethyst: getColor('amethyst', isDark),
+  lilac: getColor('lilac', isDark),
+  rose: getColor('rose', isDark),
+  gold: getColor('gold', isDark),
   turquoise: '#36CBC6',
 })
 

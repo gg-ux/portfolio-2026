@@ -1,14 +1,15 @@
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { getColor } from '../../constants/colors'
 import { ChartTitle } from '../Typography'
 import { FacebookLogo, RedditLogo, UsersThree, Heartbeat } from '@phosphor-icons/react'
 
 // Colors from design system palette
 const getStatColors = (isDark) => ({
-  amethyst: '#5835B0',
-  lilac: '#BF92F0',
-  rose: '#D78F8D',
-  gold: '#DBA166',
+  amethyst: getColor('amethyst', isDark),
+  lilac: getColor('lilac', isDark),
+  rose: getColor('rose', isDark),
+  gold: getColor('gold', isDark),
 })
 
 const stats = [
