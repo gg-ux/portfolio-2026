@@ -91,8 +91,15 @@ export default function DesignSystemPage() {
                 <div className="relative z-10 flex flex-col h-full p-6">
                   {/* Category icon + Title */}
                   <div className="flex-1 pt-2">
-                    <div className={`mb-4 ${isDark ? 'text-white/25' : 'text-black/20'}`}>
-                      <Icon size={28} weight="light" />
+                    <div className="relative w-11 h-11 mb-4">
+                      <div className={`relative z-10 w-full h-full rounded-full flex items-center justify-center ${
+                        isDark ? 'text-white/50' : 'text-black/40'
+                      }`}>
+                        <Icon size={22} weight="light" />
+                      </div>
+                      <div className={`absolute -inset-0.5 rounded-full backdrop-blur-sm border ${
+                        isDark ? 'border-white/[0.08] bg-white/[0.03]' : 'border-black/[0.06] bg-black/[0.02]'
+                      }`} />
                     </div>
                     <H4 className="mb-3 pr-10">{category.title}</H4>
                     <Body size="sm" className={isDark ? 'text-white/50' : 'text-black/50'}>
