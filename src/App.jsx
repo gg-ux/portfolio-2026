@@ -104,7 +104,7 @@ function AppContent() {
         <CustomCursor />
         {!(isHomePage && isLoading) && <Navigation />}
         <ContactDrawer />
-        <main key={location.pathname}>
+        <main key={location.pathname} className="relative z-10">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/resume" element={<ResumePage />} />
