@@ -80,19 +80,19 @@ export default function DesignSystemPage() {
                 to={category.href}
                 className="h-[280px]"
               >
-                {/* Icon - top right, morphs to arrow on hover */}
+                {/* Icon - top right, morphs to arrow on hover (desktop) or always shows arrow (touch) */}
                 <div className={`absolute top-6 right-6 ${
                   isDark ? 'text-white/20 group-hover:text-white/40' : 'text-black/15 group-hover:text-black/30'
                 }`} style={{ transition: 'color 500ms' }}>
-                  {/* Category icon - morphs out */}
+                  {/* Category icon - hidden on mobile, morphs out on desktop hover */}
                   <div
-                    className="transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]"
+                    className="hidden lg:block transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]"
                   >
                     <Icon size={24} weight="light" />
                   </div>
-                  {/* Arrow - morphs in */}
+                  {/* Arrow - always visible on mobile/tablet, morphs in on desktop hover */}
                   <div
-                    className="absolute inset-0 transition-all duration-[400ms] ease-out opacity-0 scale-50 -rotate-45 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-0"
+                    className="lg:absolute lg:inset-0 transition-all duration-[400ms] ease-out lg:opacity-0 lg:scale-50 lg:-rotate-45 lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:rotate-0"
                   >
                     <ArrowRight size={24} weight="light" />
                   </div>
