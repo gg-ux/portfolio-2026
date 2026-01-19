@@ -70,7 +70,7 @@ export default function DesignSystemPage() {
 
       {/* Category Cards */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 min-[1077px]:grid-cols-4 gap-5">
           {categories.map((category) => {
             const Icon = category.icon
             return (
@@ -86,14 +86,14 @@ export default function DesignSystemPage() {
                 }`} style={{ transition: 'color 500ms' }}>
                   {/* Category icon - hidden on mobile, morphs out on desktop hover */}
                   <div
-                    className="hidden lg:block transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]"
+                    className="hidden min-[1077px]:block transition-all duration-[400ms] ease-out group-hover:opacity-0 group-hover:scale-50 group-hover:rotate-45 group-hover:blur-[2px]"
                   >
                     <Icon size={24} weight="light" />
                   </div>
                   {/* Arrow - always visible on mobile/tablet, morphs in on desktop hover */}
                   <div
-                    className={`lg:absolute lg:inset-0 transition-all duration-[400ms] ease-out lg:opacity-0 lg:scale-50 lg:-rotate-45 lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:rotate-0 ${
-                      isDark ? 'text-white/40 lg:text-inherit' : 'text-black/30 lg:text-inherit'
+                    className={`min-[1077px]:absolute min-[1077px]:inset-0 transition-all duration-[400ms] ease-out min-[1077px]:opacity-0 min-[1077px]:scale-50 min-[1077px]:-rotate-45 min-[1077px]:group-hover:opacity-100 min-[1077px]:group-hover:scale-100 min-[1077px]:group-hover:rotate-0 ${
+                      isDark ? 'text-white/40 min-[1077px]:text-inherit' : 'text-black/30 min-[1077px]:text-inherit'
                     }`}
                   >
                     <ArrowRight size={24} weight="light" />
