@@ -78,8 +78,8 @@ export default function ContactDrawer() {
             {/* Content */}
             <div className="flex flex-col h-[calc(100%-72px)] px-8">
               <div>
-                <div className="mb-10">
-                  <div className="flex items-center gap-3 mb-2">
+                <div className="mb-16">
+                  <div className="flex items-center gap-3 mb-4">
                     <H2>Say hello</H2>
                     <Sparkle
                       size={28}
