@@ -169,8 +169,8 @@ export function CompetitiveAnalysis() {
             'Minimal mega panels with clear hierarchy reduce cognitive load',
             'Consistent CTAs (Shop, Configure, Learn) across product categories',
           ].map((takeaway, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span style={{ color: amethyst }} className="mt-0.5">•</span>
+            <li key={i} className="flex items-center gap-2">
+              <span style={{ color: amethyst }}>•</span>
               <span className={`text-sm font-satoshi ${
                 isDark ? 'text-white/70' : 'text-black/60'
               }`}>
@@ -192,6 +192,7 @@ export function MegaMenuCardSort() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
 
   // Card sort results - what participants grouped together and preferred names
+  // These are the 5 mega menu categories (excluding direct links like Support, Account, Language)
   const sortResults = [
     {
       category: 'Vehicles',
@@ -215,18 +216,18 @@ export function MegaMenuCardSort() {
       items: ['Supercharger Network', 'Home Charging', 'Charging Calculator'],
     },
     {
+      category: 'Discover',
+      participantName: 'Discover',
+      alternateNames: ['Explore', 'Learn', 'About'],
+      agreement: 72,
+      items: ['About Tesla', 'Careers', 'News', 'Events', 'Find Us'],
+    },
+    {
       category: 'Shop',
       participantName: 'Shop',
       alternateNames: ['Store', 'Buy', 'Accessories'],
       agreement: 91,
       items: ['Vehicle Accessories', 'Apparel', 'Lifestyle'],
-    },
-    {
-      category: 'Support',
-      participantName: 'Support',
-      alternateNames: ['Help', 'Service', 'Owners'],
-      agreement: 72,
-      items: ['Service', 'Manuals', 'Warranty', 'Contact Us'],
     },
   ]
 
@@ -353,7 +354,7 @@ export function MegaMenuCardSort() {
           <p className={`text-sm font-satoshi ${
             isDark ? 'text-white/70' : 'text-black/60'
           }`}>
-            <strong className="theme-heading">Key insight:</strong> "Vehicles" had 94% agreement vs. "Cars" at only 23% — participants felt "Vehicles" better represented the full lineup including Semi and Cybertruck. "Support" had the lowest agreement, with participants split between "Help," "Service," and "Owners."
+            <strong className="theme-heading">Key insight:</strong> "Vehicles" had 94% agreement vs. "Cars" at only 23% — participants felt "Vehicles" better represented the full lineup including Semi and Cybertruck. "Discover" had the lowest agreement, with participants split between "Explore," "Learn," and "About."
           </p>
         </div>
       </div>
