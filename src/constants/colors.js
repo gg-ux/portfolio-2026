@@ -6,6 +6,8 @@ export const brandColors = {
   lilac: { light: '#BF92F0', dark: '#BF92F0' },
   rose: { light: '#D78F8D', dark: '#D78F8D' },
   gold: { light: '#DBA166', dark: '#DBA166' },
+  // Semantic/extended palette
+  peridot: { light: '#87AA61', dark: '#87AA61' },
 }
 
 // Helper to get the appropriate color based on theme
