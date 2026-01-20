@@ -48,7 +48,6 @@ export function CompetitiveAnalysis() {
   ]
 
   const amethyst = getColor('amethyst', isDark)
-  const lilac = getColor('lilac', isDark)
 
   return (
     <div
@@ -232,7 +231,6 @@ export function MegaMenuCardSort() {
   ]
 
   const amethyst = getColor('amethyst', isDark)
-  const lilac = getColor('lilac', isDark)
 
   return (
     <div
@@ -287,7 +285,7 @@ export function MegaMenuCardSort() {
                     </span>
                     <span
                       className="font-mono text-[11px] font-medium"
-                      style={{ color: lilac }}
+                      style={{ color: amethyst }}
                     >
                       {result.agreement}%
                     </span>
@@ -300,7 +298,7 @@ export function MegaMenuCardSort() {
                       className="h-full rounded-full transition-all duration-700"
                       style={{
                         width: isVisible ? `${result.agreement}%` : '0%',
-                        backgroundColor: lilac,
+                        backgroundColor: amethyst,
                         transitionDelay: `${index * 80 + 200}ms`,
                       }}
                     />
