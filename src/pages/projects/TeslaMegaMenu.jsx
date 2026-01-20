@@ -9,6 +9,8 @@ import {
   ProjectImageFullWidth,
   ProjectYouTube,
   ProcessKanban,
+  CompetitiveAnalysis,
+  MegaMenuCardSort,
 } from '../../components/project'
 import { Body } from '../../components/Typography'
 import { MagnifyingGlass, ArrowsOut, Globe } from '@phosphor-icons/react'
@@ -198,10 +200,18 @@ export default function TeslaMegaMenu() {
 
       {/* Process Highlights */}
       <ProjectSection id="highlights" title="Process Highlights">
+        <ProjectSubsection title="Competitive Analysis">
+          <ProjectText>
+            Before defining our new information architecture, I researched navigation patterns across automotive and tech brands. This analysis helped identify best practices and potential pitfalls in mega menu design.
+          </ProjectText>
+          <CompetitiveAnalysis />
+        </ProjectSubsection>
+
         <ProjectSubsection title="Card Sort">
           <ProjectText>
             To effectively determine the most intuitive categorization and naming structure, we conducted an internal card sort. We engaged 32 participants from various departments, ensuring a diverse range of perspectives. Each participant received virtual cards representing all the pages and was tasked with grouping them into logical categories.
           </ProjectText>
+          <MegaMenuCardSort />
         </ProjectSubsection>
 
         <ProjectSubsection title="Redundancies">
