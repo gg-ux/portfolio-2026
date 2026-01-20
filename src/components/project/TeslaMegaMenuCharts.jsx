@@ -287,20 +287,20 @@ export function MegaMenuCardSort() {
                     </span>
                     <span
                       className="font-mono text-[11px] font-medium"
-                      style={{ color: result.agreement >= 85 ? getColor('peridot', isDark) : lilac }}
+                      style={{ color: lilac }}
                     >
                       {result.agreement}%
                     </span>
                   </div>
                   {/* Agreement bar */}
-                  <div className={`h-1.5 rounded-full overflow-hidden ${
+                  <div className={`h-1 rounded-full overflow-hidden ${
                     isDark ? 'bg-white/[0.06]' : 'bg-black/[0.06]'
                   }`}>
                     <div
                       className="h-full rounded-full transition-all duration-700"
                       style={{
                         width: isVisible ? `${result.agreement}%` : '0%',
-                        backgroundColor: result.agreement >= 85 ? getColor('peridot', isDark) : lilac,
+                        backgroundColor: lilac,
                         transitionDelay: `${index * 80 + 200}ms`,
                       }}
                     />
