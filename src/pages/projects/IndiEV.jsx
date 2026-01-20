@@ -85,7 +85,7 @@ export default function IndiEV() {
               { title: 'Gather requirements', description: 'Refer to wireframes and flows, asking questions where needed', icon: ClipboardText, colorKey: 'amethyst' },
               { title: 'Define look & feel', description: 'Create options for final look & feel and present to design team and stakeholders', icon: Palette, colorKey: 'lilac' },
               { title: 'Create high-fidelity mockups', description: 'Create mockups for 15+ pages/flows for the demo reel on Figma', icon: Layout, colorKey: 'rose' },
-              { title: 'Review & iterate', description: 'Present mockups & proposed user flows to team and stakeholders, working quickly and iteratively', icon: ArrowsClockwise, colorKey: 'amethyst' },
+              { title: 'Review & iterate', description: 'Present mockups & proposed user flows to team and stakeholders, working quickly and iteratively', icon: ArrowsClockwise, colorKey: 'gold' },
             ].map((item, index, arr) => {
               const Icon = item.icon
               const color = getColor(item.colorKey, isDark)

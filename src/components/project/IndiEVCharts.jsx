@@ -132,6 +132,7 @@ export function InteractiveClimateDemo() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
   const [isFanOpen, setIsFanOpen] = useState(false)
+  const lilac = getColor('lilac', isDark)
 
   return (
     <figure
@@ -184,12 +185,12 @@ export function InteractiveClimateDemo() {
             <>
               <span
                 className="absolute inset-0 rounded-lg animate-ping opacity-30"
-                style={{ backgroundColor: colors.lilac }}
+                style={{ backgroundColor: lilac }}
               />
               <span
                 className="absolute inset-0 rounded-lg animate-pulse opacity-20"
                 style={{
-                  backgroundColor: colors.lilac,
+                  backgroundColor: lilac,
                   animationDelay: '0.5s'
                 }}
               />
@@ -219,6 +220,9 @@ export function InteractiveClimateDemo() {
 export function UsabilityResults() {
   const { isDark } = useTheme()
   const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const amethyst = getColor('amethyst', isDark)
+  const lilac = getColor('lilac', isDark)
+  const rose = getColor('rose', isDark)
 
   const taskSuccessData = [
     { task: 'T1', value: 100, label: '100%' },
@@ -311,21 +315,21 @@ export function UsabilityResults() {
           <MetricSection
             title="Task Success Rate"
             data={taskSuccessData}
-            color={colors.amethyst}
+            color={amethyst}
             maxValue={100}
             delayOffset={0}
           />
           <MetricSection
             title="Time on Task"
             data={timeOnTaskData}
-            color={colors.lilac}
+            color={lilac}
             maxValue={maxTime}
             delayOffset={4}
           />
           <MetricSection
             title="System Ease (out of 7)"
             data={systemEaseData}
-            color={colors.rose}
+            color={rose}
             maxValue={maxEase}
             delayOffset={8}
           />
@@ -899,7 +903,7 @@ export function StyleComparisonToggle() {
                 {concept.label}
               </Caption>
               {concept.winner && (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill={colors.lilac}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill={getColor('lilac', isDark)}>
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
               )}
