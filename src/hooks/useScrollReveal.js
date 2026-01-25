@@ -54,21 +54,38 @@ export function useScrollReveal(options = {}) {
 export function useParallax(speed = 0.5) {
   const [offset, setOffset] = useState(0)
   const ref = useRef(null)
+  const rafRef = useRef(null)
+  const lastOffsetRef = useRef(0)
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateOffset = () => {
       if (!ref.current) return
       const rect = ref.current.getBoundingClientRect()
       const scrolled = window.scrollY
       const elementTop = rect.top + scrolled
       const relativeScroll = scrolled - elementTop + window.innerHeight
-      setOffset(relativeScroll * speed)
+      const newOffset = relativeScroll * speed
+
+      // Only update state if change is significant (> 0.5px)
+      if (Math.abs(newOffset - lastOffsetRef.current) > 0.5) {
+        setOffset(newOffset)
+        lastOffsetRef.current = newOffset
+      }
+      rafRef.current = null
     }
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
+    const handleScroll = () => {
+      if (rafRef.current) return
+      rafRef.current = requestAnimationFrame(updateOffset)
+    }
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    updateOffset()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [speed])
 
   return [ref, offset]

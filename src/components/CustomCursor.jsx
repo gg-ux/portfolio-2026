@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { ArrowRight } from '@phosphor-icons/react'
 import { useTheme } from '../context/ThemeContext'
 
@@ -22,6 +23,13 @@ export default function CustomCursor() {
   const isHoveringRef = useRef(false) // Use ref to avoid re-running effect
   const isProjectCardRef = useRef(false)
   const { isDark } = useTheme()
+  const location = useLocation()
+
+  // Reset cursor state on route change
+  useEffect(() => {
+    setIsHovering(false)
+    setIsProjectCard(false)
+  }, [location.pathname])
 
   // Keep refs in sync with state
   useEffect(() => {
@@ -70,26 +78,24 @@ export default function CustomCursor() {
       cursor.style.opacity = '1'
     }
 
-    // Check if element is interactive
+    // Check if element is interactive - optimized with early returns
     const isInteractive = (el) => {
       if (!el) return false
-      const tag = el.tagName.toLowerCase()
-      const role = el.getAttribute('role')
-      return (
-        tag === 'a' ||
-        tag === 'button' ||
-        role === 'button' ||
-        role === 'link' ||
-        el.classList.contains('cursor-pointer') ||
-        el.closest('a') ||
-        el.closest('button')
-      )
+      const tag = el.tagName?.toLowerCase()
+      // Fast checks first - avoid closest() calls when possible
+      if (tag === 'a' || tag === 'button') return true
+      const role = el.getAttribute?.('role')
+      if (role === 'button' || role === 'link') return true
+      if (el.classList?.contains('cursor-pointer')) return true
+      // Only use closest() as last resort
+      return !!(el.closest?.('a') || el.closest?.('button'))
     }
 
     // Check if element is a project card
     const isProjectCardElement = (el) => {
       if (!el) return false
-      return el.hasAttribute('data-project-card') || el.closest('[data-project-card]')
+      if (el.hasAttribute?.('data-project-card')) return true
+      return !!el.closest?.('[data-project-card]')
     }
 
     // Handle hover state for interactive elements
@@ -104,13 +110,13 @@ export default function CustomCursor() {
     }
 
     const handleMouseOut = (e) => {
-      // Check if we're moving to another element still inside the project card
-      const stillInProjectCard = e.relatedTarget && isProjectCardElement(e.relatedTarget)
+      const targetIsProjectCard = isProjectCardElement(e.target)
+      const relatedIsProjectCard = e.relatedTarget && isProjectCardElement(e.relatedTarget)
 
-      if (isProjectCardElement(e.target) && !stillInProjectCard) {
+      if (targetIsProjectCard && !relatedIsProjectCard) {
         setIsProjectCard(false)
         setIsHovering(false)
-      } else if (isInteractive(e.target) && !isProjectCardElement(e.relatedTarget)) {
+      } else if (isInteractive(e.target) && !relatedIsProjectCard) {
         setIsHovering(false)
       }
     }
