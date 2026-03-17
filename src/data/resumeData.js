@@ -77,7 +77,7 @@ export const experience = [
       'Designed key website flows for Pricing, Account Settings, and Project Dashboard',
       'Created marketing materials for social media ads and flyers',
     ],
-    showInPrint: true, // Show in print version
+    showInPrint: false, // Hide from print version
   },
   {
     company: 'INDI EV',
@@ -95,6 +95,25 @@ export const experience = [
       'Worked with animator to create demo reel shown within vehicle during LA Auto Show',
       'Delivered high-fidelity prototype with key driver flows and vehicle control features',
     ],
+  },
+  {
+    company: 'Catalia Health',
+    location: 'Remote',
+    logo: '/assets/resume/catalia-logo.png',
+    title: 'UX/UI Designer & Researcher',
+    dates: 'Apr 2019 – Sep 2019',
+    bullets: [
+      'Led team of 4 in the design of a HIPAA-compliant community app for heart failure patients',
+      'Assisted in user research (interviews, card sorts, surveys) of 42 participants',
+      'Led design brainstorming sessions and development of wireframes',
+      'Delivered high-fidelity prototype tested with chronically ill patients, demonstrating 2-3 key community feature flows',
+    ],
+    printBullets: [
+      'Led team of 4 in designing a HIPAA-compliant community app for heart failure patients',
+      'Conducted user research (interviews, card sorts, surveys) with 42 participants',
+      'Delivered high-fidelity prototype tested with chronically ill patients',
+    ],
+    showInPrint: true,
   },
 ]
 

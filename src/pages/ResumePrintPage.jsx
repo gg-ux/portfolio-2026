@@ -4,8 +4,8 @@
  * Access at /resume-print, click Download PDF button
  */
 
-import { useRef } from 'react'
-import html2pdf from 'html2pdf.js'
+import { useRef, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { QRCodeSVG } from 'qrcode.react'
 import {
   personalInfo,
@@ -20,23 +20,23 @@ const experience = getPrintExperience()
 
 export default function ResumePrintPage() {
   const resumeRef = useRef(null)
+  const [searchParams] = useSearchParams()
+  const autoDownload = searchParams.get('download') === 'true'
 
   const handleDownloadPDF = () => {
-    const element = resumeRef.current
-    const opt = {
-      margin: 0,
-      filename: 'GraceGuo_Resume.pdf',
-      image: { type: 'png', quality: 1 },
-      html2canvas: {
-        scale: 3,
-        useCORS: true,
-        letterRendering: true,
-        logging: false,
-      },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    }
-    html2pdf().set(opt).from(element).save()
+    window.print()
   }
+
+  // Auto-print if ?download=true is in URL
+  useEffect(() => {
+    if (autoDownload) {
+      // Small delay to ensure fonts are loaded
+      const timer = setTimeout(() => {
+        window.print()
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [autoDownload])
 
   return (
     <div>
@@ -96,7 +96,7 @@ export default function ResumePrintPage() {
           background: white;
           max-width: 8.5in;
           margin: 0 auto;
-          padding: 0.64in 0.5in 0.4in 0.5in;
+          padding: 0.4in 0.5in 0.4in 0.5in;
         }
 
         .print-resume * {
@@ -144,7 +144,7 @@ export default function ResumePrintPage() {
           font-size: 7.5pt;
           font-weight: 500;
           color: #5B21B6 !important;
-          margin: 14px 0 0 0;
+          margin: 8px 0 0 0;
           letter-spacing: 1px;
           text-transform: uppercase;
         }
@@ -478,7 +478,7 @@ export default function ResumePrintPage() {
 
         @media screen {
           .print-resume {
-            padding: 0.75in;
+            padding: 0.4in 0.5in;
             box-shadow: 0 4px 40px rgba(0,0,0,0.08);
             margin: 40px auto;
             border-radius: 4px;

@@ -31,7 +31,6 @@ import {
 import HeroTestPage from './pages/HeroTestPage'
 import PlaygroundPage from './pages/PlaygroundPage'
 import ResumePrintPage from './pages/ResumePrintPage'
-import ResumePDFPage from './pages/ResumePDFPage'
 import ResumePDFMakePage from './pages/ResumePDFMakePage'
 
 function AppContent() {
@@ -44,7 +43,6 @@ function AppContent() {
   const isHeroTest = location.pathname === '/hero-test'
   const isPlayground = location.pathname === '/playground'
   const isResumePrint = location.pathname === '/resume-print'
-  const isResumePDF = location.pathname === '/resume-pdf'
   const isDesignSystemSubpage = location.pathname.startsWith('/design-system/')
 
   const handleLoaderComplete = () => {
@@ -73,14 +71,6 @@ function AppContent() {
     return (
       <Routes>
         <Route path="/resume-print" element={<ResumePrintPage />} />
-      </Routes>
-    )
-  }
-
-  if (isResumePDF) {
-    return (
-      <Routes>
-        <Route path="/resume-pdf" element={<ResumePDFPage />} />
       </Routes>
     )
   }
