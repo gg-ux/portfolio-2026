@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { BannerProvider } from './context/BannerContext'
 import { ContactDrawerProvider } from './context/ContactDrawerContext'
@@ -30,7 +30,7 @@ import {
 } from './pages/projects'
 import HeroTestPage from './pages/HeroTestPage'
 import PlaygroundPage from './pages/PlaygroundPage'
-import ResumePrintPage from './pages/ResumePrintPage'
+import PrintPage from './pages/PrintPage'
 import ResumePDFMakePage from './pages/ResumePDFMakePage'
 
 function AppContent() {
@@ -42,6 +42,7 @@ function AppContent() {
   const isHomePage = location.pathname === '/'
   const isHeroTest = location.pathname === '/hero-test'
   const isPlayground = location.pathname === '/playground'
+  const isPrintPage = location.pathname === '/print'
   const isResumePrint = location.pathname === '/resume-print'
   const isDesignSystemSubpage = location.pathname.startsWith('/design-system/')
 
@@ -67,10 +68,20 @@ function AppContent() {
     )
   }
 
+  // Combined print page (resume + cover letter)
+  if (isPrintPage) {
+    return (
+      <Routes>
+        <Route path="/print" element={<PrintPage />} />
+      </Routes>
+    )
+  }
+
+  // Redirect old /resume-print to /print?tab=resume
   if (isResumePrint) {
     return (
       <Routes>
-        <Route path="/resume-print" element={<ResumePrintPage />} />
+        <Route path="/resume-print" element={<Navigate to="/print?tab=resume" replace />} />
       </Routes>
     )
   }
