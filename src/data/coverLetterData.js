@@ -102,9 +102,9 @@ With 7+ years of experience, an MHCI+D from UC Irvine, and a passion for remote-
     content: {
       greeting: 'Dear Calendly Hiring Team,',
 
-      body: `I've spent my career designing simple, intuitive experiences that drive user activation, and the Senior Product Designer, Growth role at Calendly is exactly the kind of hypothesis-driven challenge I'm drawn to. Helping solopreneurs and small teams discover and engage with products like AI Notetaker requires the data-informed, user-centered approach I bring to every project.
+      body: `I've spent my career designing simple, intuitive experiences that drive user activation, and the Senior Product Designer, Growth role at Calendly is exactly the kind of data-informed challenge I'm drawn to. Helping solopreneurs and small teams discover and engage with products like AI Notetaker requires the iterative, user-centered approach I bring to every project.
 
-At Avala AI, an early-stage startup, I'm the sole designer driving activation and engagement across platform, native mobile app, and learning systems, serving five distinct user types. I leverage quantitative and qualitative data to understand user behavior, design hypothesis-driven experiences, and communicate my approach with strong storytelling to align cross-functional stakeholders. At Tesla, I designed an AI chatbot that boosted sales lead conversion rates by 120%, led product pages that improved discovery across key activation funnels, and partnered cross-functionally with Product, Engineering, and Analytics. With experience across fast-paced startups and Fortune 500 corporations, I know how to balance business goals, user needs, and team processes.
+At Avala AI, an early-stage startup, I'm the sole designer driving activation and engagement across platform, native mobile app, and learning systems, serving five distinct user types. I leverage quantitative and qualitative data to understand user behavior, design data-informed experiences, and communicate my approach with strong storytelling to align cross-functional stakeholders. At Tesla, I designed an AI chatbot that boosted sales lead conversion rates by 120%, led product pages that improved discovery across key activation funnels, and partnered cross-functionally with Product, Engineering, and Analytics. With experience across fast-paced startups and Fortune 500 corporations, I know how to balance business goals, user needs, and team processes.
 
 With 7+ years of experience in product design, a data-driven approach to growth, and an MHCI+D from UC Irvine, I'm excited to bring my expertise in activation funnels and design storytelling to the Growth team.`,
 
@@ -141,6 +141,57 @@ With 7+ years of experience in consumer product design, a strong visual design f
 At Avala AI, an early-stage startup, I own end-to-end product design while architecting a scalable component library with design tokens for color, typography, and spacing, all while maintaining WCAG-compliant accessibility. I ship production UI using AI-assisted workflows and drive cross-functional alignment with Engineering and Data Science leadership. At Tesla, I contributed to the Tesla Design System with component guidelines and documentation, and led the mega menu redesign improving content discoverability at scale. At INDI EV, I led design of the in-vehicle interface for the company's debut electric car, establishing the UI and design system from scratch. With experience across fast-paced startups and Fortune 500 corporations, I know when to push for polish versus when to ship fast.
 
 With 7+ years of experience in product design, advanced Figma expertise, and an MHCI+D from UC Irvine, I'm excited to bring my expertise in design systems architecture and HMI design to the Waymo team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  vercel: {
+    recipient: {
+      company: 'Vercel',
+    },
+    content: {
+      greeting: 'Dear Vercel Hiring Team,',
+
+      body: `I've spent my career designing system-based solutions for complex technical products, and the Senior Product Designer role at Vercel is exactly where I want to be. I already ship production UI using Claude Code daily, and the opportunity to design financial infrastructure for a platform I admire is a perfect fit.
+
+At Avala AI, an early-stage startup, I'm the sole designer shipping production React code using Claude Code and deploying via Vercel, while architecting a scalable component library with design tokens. I know when to use the design system, when to break it, and when to evolve it based on product needs. I collaborate closely with Engineering to ship quickly while maintaining quality. At Tesla, I contributed to the Tesla Design System with component guidelines and design tokens, led the AI chatbot that boosted conversion by 120%, and guided implementation with Engineering across responsive web and native iOS/Android apps. With experience across fast-paced startups and Fortune 500 corporations, I'm comfortable in environments where engineering ships quickly.
+
+With 7+ years designing in technical industries, fluency in modern design tooling from Figma to Claude Code, and an MHCI+D from UC Irvine, I'm excited to help ship remarkable software interfaces on the Product Design team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  classpass: {
+    recipient: {
+      company: 'ClassPass',
+    },
+    content: {
+      greeting: 'Dear ClassPass Hiring Team,',
+
+      body: `As a ClassPass member, I've experienced firsthand how the platform turns the friction of "I should work out" into the joy of discovering new studios. The Sr. Designer role on the Consumer team is exactly the kind of craft-driven, end-to-end challenge I'm drawn to. Designing personalized moments that convert curiosity into commitment requires both systems thinking and attention to the details that build trust.
+
+At Avala AI, an early-stage startup, I'm the sole designer owning end-to-end product design across platform, native mobile app, and learning systems, serving five distinct user types. I shape vision, define flows, and ship quality while collaborating cross-functionally with Engineering and Operations leadership. At Tesla, I designed an AI chatbot that boosted sales lead conversion rates by 120% by removing friction and surfacing value at key moments, led the redesign of the native iOS/Android in-store advisor app, and contributed to the Tesla Design System. At Catalia Health, I led a team designing an accessible app for chronically ill patients, prioritizing trust and engagement. With experience across fast-paced startups and Fortune 500 corporations, I know when to push for craft versus when to ship fast.
+
+With 7+ years of consumer product design experience, native mobile expertise, and an MHCI+D from UC Irvine, I'm excited to bring my end-to-end product thinking and design craft to the ClassPass team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  webflow: {
+    recipient: {
+      company: 'Webflow',
+    },
+    content: {
+      greeting: 'Dear Webflow Hiring Team,',
+
+      body: `I've spent my career making complex data feel obvious, and the Senior Product Designer role on Analyze is exactly the kind of systems-driven challenge I'm drawn to. Designing interfaces where data moves people to act requires rigorous systems thinking and the ability to ship quickly without sacrificing quality.
+
+At Avala AI, an early-stage startup, I'm the sole designer owning end-to-end product design for a data annotation platform, designing complex workflows for LiDAR, 3D spatial data, and multi-frame sequences. I design in Figma and develop production UI using Claude Code, including data visualization and annotation tools, internal dashboards, and the marketing website. I build and maintain a component library with design tokens, and partner with Engineering and Operations leadership to align on requirements before design begins. At Tesla, I designed an AI chatbot with recommendation flows that boosted conversion by 120%, contributed to the Tesla Design System with component documentation, and partnered with Analytics to measure design impact. With experience across fast-paced startups and Fortune 500 corporations, I balance fast experiments with long-term systems thinking.
+
+With 7+ years of experience designing data-heavy products, fluency in Figma and AI tools, and an MHCI+D from UC Irvine, I'm excited to bring my systems design expertise to the Analyze team.`,
 
       signoff: 'Looking forward to connecting,',
     },

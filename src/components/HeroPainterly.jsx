@@ -101,7 +101,7 @@ export default function HeroPainterly() {
           >
             <span className="font-mono text-[14px] font-light tracking-normal uppercase">
               <ScrambleText trigger="mount" iterations={3} speed={25}>
-                UX/UI Designer, MHCI+D
+                Product Designer, MHCI+D
               </ScrambleText>
             </span>
             <span className={`text-[10px] ${isDark ? 'text-white/40' : 'text-black/40'}`}>✦</span>

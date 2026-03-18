@@ -81,7 +81,7 @@ export default function Hero() {
                 textShadow: isDark ? '0 2px 20px rgba(0,0,0,0.5)' : 'none'
               }}
             >
-              UX/UI Designer (MHCID) crafting human-first digital experiences. 7+ years of experience across automotive, healthcare, and emerging tech. Based in LA.
+              Product Designer (MHCID) crafting human-first digital experiences. 7+ years of experience across automotive, healthcare, and emerging tech. Based in LA.
             </Body>
 
             {/* CTA Buttons */}

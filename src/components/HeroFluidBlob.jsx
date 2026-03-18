@@ -121,7 +121,7 @@ export default function HeroFluidBlob() {
                 isDark ? 'text-white/80 drop-shadow' : 'text-gray-900'
               }`}>
                 <ScrambleText trigger="mount" iterations={2} speed={8}>
-                  UX/UI Designer, MHCI+D
+                  Product Designer, MHCI+D
                 </ScrambleText>
               </span>
               <span className={`text-[10px] ${isDark ? 'text-white/40' : 'text-gray-900/80'}`}>✦</span>

@@ -5,9 +5,9 @@
 
 export const personalInfo = {
   name: 'Grace Guo',
-  title: 'Senior UX/UI Designer',
+  title: 'Senior Product Designer',
   credentials: 'MHCI+D',
-  tagline: 'Senior UX/UI designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about 0-1 product design, consumer experiences, and building systems at scale.',
+  tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about 0-1 product design, consumer experiences, and building systems at scale.',
   email: 'graceguo.design@gmail.com',
   linkedin: 'linkedin.com/in/grace-guo-ux',
   linkedinUrl: 'https://www.linkedin.com/in/grace-guo-ux/',
@@ -168,6 +168,7 @@ export const skills = {
   tools: [
     'Figma',
     'GitHub',
+    'Vercel',
     'Claude Code',
     'Warp',
     'Midjourney',
@@ -182,7 +183,7 @@ export const printSkills = {
   design: ['Product Design', 'Design Systems', 'Native Mobile (iOS/Android)', 'Interaction Design', 'Visual Design', 'Accessibility (WCAG)'],
   development: ['React/HTML/CSS/JS', 'Agentic AI Workflows', 'AI-Assisted Development', 'Front-End Development'],
   strategy: ['0-1 Product Design', 'PRD Writing', 'Stakeholder Storytelling', 'Cross-Functional Collaboration'],
-  tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
+  tools: ['Figma', 'GitHub', 'Vercel', 'Claude Code', 'Warp', 'Midjourney'],
 }
 
 export const languages = [
@@ -283,11 +284,11 @@ export const resumeTemplateOverrides = {
       'Avala AI': [
         'Lead end-to-end product design as sole designer, driving activation and engagement across data annotation platform, native mobile app, and learning systems',
         'Leverage quantitative and qualitative data to understand user behavior and improve onboarding funnels across five distinct user types',
-        'Design hypothesis-driven experiences and iterate based on user feedback and engagement metrics',
+        'Design iterative, data-informed experiences based on user feedback and engagement metrics',
         'Communicate design approach with strong storytelling to align cross-functional stakeholders on product direction',
       ],
       'Tesla': [
-        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through hypothesis-driven UX improvements',
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through iterative UX improvements',
         'Led global launch of responsive product pages for Tesla.com, improving product discovery and activation across Energy, Support, and Investor Relations',
         'Led design of mega menu, improving content discoverability and driving user engagement across hundreds of touchpoints',
         'Contributed to Tesla Design System; partnered cross-functionally with Product, Engineering, and Analytics',
@@ -356,6 +357,97 @@ export const resumeTemplateOverrides = {
       'INDI EV': [
         'Led design of the in-vehicle interface for INDI EV\'s debut electric car, establishing UI and design system from scratch',
         'Delivered high-fidelity prototype with key driver flows and vehicle control features for LA Auto Show debut',
+      ],
+    },
+  },
+
+  vercel: {
+    tagline: 'Senior UX/UI designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about developer tooling, design systems, and shipping remarkable software interfaces.',
+    skills: {
+      design: ['Product Design', 'Design Systems', 'Visual Design', 'UI Design', 'Interaction Design', 'System-Based Solutions'],
+      development: ['React/HTML/CSS/JS', 'Claude Code', 'Git/GitHub', 'AI-Assisted Development', 'Front-End Development'],
+      strategy: ['Developer Tooling', 'Technical Product Design', 'Cross-Functional Collaboration', 'Design Documentation'],
+      tools: ['Figma', 'Vercel', 'GitHub', 'Claude Code', 'Cursor', 'v0'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer for technical data annotation platform, shipping production UI in React using Claude Code',
+        'Know when to use the design system, when to break it, and when to evolve it based on product needs',
+        'Architect scalable component library with design tokens, maintaining consistency while shipping quickly',
+        'Drive design strategy: author PRDs, collaborate with Engineering on technical decisions, and guide implementation',
+      ],
+      'Tesla': [
+        'Contributed to Tesla Design System with component guidelines and design tokens; knew when to follow patterns vs. evolve them',
+        'Led global launch of responsive product pages for Tesla.com, collaborating closely with Engineering to ship quickly',
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% after launch',
+        'Led redesign of native iOS/Android in-store advisor app; guided implementation with Engineering team',
+      ],
+      'Accurate Background': [
+        'Designed system-based solutions for complex compliance workflows in technical B2B infrastructure',
+        'Enhanced background check experience with improved information architecture and streamlined verification flows',
+        'Collaborated cross-functionally with overseas engineering teams to align on requirements and ship platform improvements',
+      ],
+    },
+  },
+
+  classpass: {
+    tagline: 'Senior UX/UI designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about consumer product design, native mobile experiences, and turning complexity into joyful simplicity.',
+    skills: {
+      design: ['Consumer Product Design', 'Native Mobile (iOS/Android)', 'Design Craft', 'Systems Thinking', 'Interaction Design', 'End-to-End Product Design'],
+      development: ['React/HTML/CSS/JS', 'AI-Assisted Development', 'Rapid Prototyping', 'Front-End Development'],
+      strategy: ['Product Thinking', 'Cross-Functional Leadership', 'Lifecycle Design', 'User Research'],
+      tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead end-to-end product design as sole designer across platform, native mobile labeling app, and learning systems, serving five distinct user types with unique needs',
+        'Own design strategy and execution: shape vision, define flows, and ship quality across the full product lifecycle',
+        'Design and ship production UI using AI-assisted workflows, maintaining design craft and a scalable component library',
+        'Drive cross-functional alignment with Engineering and Operations leadership on roadmap and product direction',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% by removing friction and surfacing value at key moments',
+        'Led redesign of native iOS/Android in-store advisor app for lead generation, scheduling, and customer engagement',
+        'Led global launch of responsive product pages for Tesla.com, optimizing discovery and activation across the customer journey',
+        'Contributed to Tesla Design System with component guidelines; partnered cross-functionally with Product, Engineering, and Marketing',
+      ],
+      'Accurate Background': [
+        'Enhanced end-to-end background check experience with improved information architecture and streamlined verification flows',
+        'Created compliance-focused tool that streamlined QA review, improving operational efficiency',
+        'Collaborated cross-functionally with overseas engineering teams to align on requirements and ship platform improvements',
+      ],
+      'Catalia Health': [
+        'Led team of 4 designing an accessible, HIPAA-compliant community app for heart failure patients, prioritizing trust and engagement',
+        'Conducted user research with 42 participants; delivered high-fidelity prototype tested with real users',
+      ],
+    },
+  },
+
+  webflow: {
+    tagline: 'Senior UX/UI designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about data visualization, systems design, and turning complex information into interfaces that feel obvious.',
+    skills: {
+      design: ['Data Visualization', 'Design Systems', 'Systems Thinking', 'Interaction Design', 'Visual Design', 'End-to-End Product Design'],
+      development: ['React/HTML/CSS/JS', 'Figma (Variables, Auto-layout, Variants)', 'AI Tools', 'High-Fidelity Prototyping'],
+      strategy: ['Cross-Functional Partnership', 'Product Strategy', 'Design Documentation', 'Requirements Gathering'],
+      tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead end-to-end product design as sole designer for data annotation platform, designing complex data workflows for LiDAR, 3D spatial data, and multi-frame sequences',
+        'Design in Figma and develop production UI using Claude Code, including data management, visualization, and annotation tools, internal dashboards, and marketing website',
+        'Build and maintain component library with design tokens, scales, and responsive behavior across workspace- and project-level contexts',
+        'Partner with Engineering and Operations leadership to align on workflows and requirements before design begins',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot with recommendation flows, boosting sales lead conversion rates by 120% through clear signals and trust-building patterns',
+        'Contributed to Tesla Design System with component library, design tokens, and documentation for analytics and web platforms',
+        'Led global launch of responsive product pages for Tesla.com, translating complex product data into clear stories across Energy and Investor Relations',
+        'Partnered cross-functionally with Product, Engineering, and Analytics to define metrics and measure design impact',
+      ],
+      'Accurate Background': [
+        'Designed data-heavy compliance workflows, translating complex background check data into clear, actionable interfaces',
+        'Created error-detection tool that surfaced data inconsistencies, streamlining QA review and improving operational efficiency',
+        'Collaborated cross-functionally with overseas engineering teams to align on data requirements and ship platform improvements',
       ],
     },
   },

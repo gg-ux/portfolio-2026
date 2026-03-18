@@ -143,6 +143,66 @@ export const templates = {
       mono: "'Azeret Mono', monospace",
     },
   },
+
+  vercel: {
+    id: 'vercel',
+    name: 'Vercel',
+    colors: {
+      accent: '#000000',
+      accentGradient: 'linear-gradient(90deg, #000000, #333333)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  classpass: {
+    id: 'classpass',
+    name: 'ClassPass',
+    colors: {
+      accent: '#F05A28',
+      accentGradient: 'linear-gradient(90deg, #F05A28, #FF7A4D)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  webflow: {
+    id: 'webflow',
+    name: 'Webflow',
+    colors: {
+      accent: '#4353FF',
+      accentGradient: 'linear-gradient(90deg, #4353FF, #6366F1)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
 }
 
 /**
