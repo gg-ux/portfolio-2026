@@ -8,14 +8,21 @@ import { getTemplateList } from '../../styles/printTemplates'
 export default function PrintBottomBar({
   activeTemplate,
   onTemplateChange,
+  activeFormat,
+  onFormatChange,
   onDownload,
   onSave,
   onReset,
   hasEdits,
   lastSaved,
-  showSave
+  showSave,
+  showFormat
 }) {
   const templates = getTemplateList()
+  const formats = [
+    { id: 'visual', name: 'Visual' },
+    { id: 'ats', name: 'ATS-Friendly' },
+  ]
 
   return (
     <div className="print-bottom-bar no-print">
@@ -172,7 +179,7 @@ export default function PrintBottomBar({
         }
       `}</style>
 
-      {/* Left side - Template selector */}
+      {/* Left side - Template & Format selectors */}
       <div className="print-bottom-left">
         <span className="template-label">Template:</span>
         <select
@@ -186,6 +193,22 @@ export default function PrintBottomBar({
             </option>
           ))}
         </select>
+        {showFormat && (
+          <>
+            <span className="template-label">Format:</span>
+            <select
+              className="template-select"
+              value={activeFormat}
+              onChange={(e) => onFormatChange(e.target.value)}
+            >
+              {formats.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.name}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
         {showSave && (
           <button
             className="reset-button"

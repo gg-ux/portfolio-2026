@@ -1,6 +1,7 @@
 /**
  * Resume Content Component
  * Extracted from ResumePrintPage with template support
+ * Supports 'visual' and 'ats' formats
  */
 
 import { QRCodeSVG } from 'qrcode.react'
@@ -10,7 +11,332 @@ import {
   getResumeDataForTemplate,
 } from '../../data/resumeData'
 
-export default function ResumeContent({ template }) {
+// ATS-friendly single-column layout with styling
+function ATSResumeContent({ template }) {
+  const accent = template.colors.accent
+  const templateId = template.id
+  const resumeData = getResumeDataForTemplate(templateId)
+  const experience = getPrintExperience(templateId)
+  const { skills, education } = resumeData
+  const tagline = resumeData.personalInfo.tagline
+
+  return (
+    <div className="ats-resume">
+      <style>{`
+        .ats-resume {
+          font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          font-size: 9.5pt;
+          line-height: 1.5;
+          color: #1a1a1a;
+          background: white;
+          max-width: 8.5in;
+          margin: 0 auto;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+
+        .ats-resume * {
+          box-sizing: border-box;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+
+        /* Header */
+        .ats-header {
+          margin-bottom: 12px;
+          padding-bottom: 10px;
+        }
+
+        .ats-header h1 {
+          font-family: 'Silk Serif', Georgia, serif;
+          font-size: 32pt;
+          font-weight: 400;
+          margin: 0 0 4px 0;
+          letter-spacing: -0.5px;
+          color: #111;
+        }
+
+        .ats-header .ats-title {
+          font-family: 'Azeret Mono', monospace;
+          font-size: 8pt;
+          font-weight: 500;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: ${accent} !important;
+          margin: 0 0 8px 0;
+        }
+
+        .ats-contact {
+          font-size: 9pt;
+          color: #555;
+        }
+
+        .ats-contact span {
+          margin-right: 16px;
+        }
+
+        .ats-contact-separator {
+          color: #ccc;
+          margin: 0 8px;
+        }
+
+        /* Section titles */
+        .ats-section-title {
+          font-family: 'Azeret Mono', monospace;
+          font-size: 8pt;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          margin: 12px 0 6px 0;
+          padding-bottom: 4px;
+          border-bottom: 1.5px solid #1a1a1a;
+          color: #1a1a1a;
+        }
+
+        /* About/Summary */
+        .ats-summary {
+          font-size: 9pt;
+          line-height: 1.5;
+          color: #333;
+          margin-bottom: 0;
+        }
+
+        /* Experience entries */
+        .ats-experience-entry {
+          margin-bottom: 10px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #eee;
+        }
+
+        .ats-experience-entry:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+
+        .ats-job-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          margin-bottom: 2px;
+        }
+
+        .ats-job-title {
+          font-size: 10.5pt;
+          font-weight: 700;
+          margin: 0;
+          color: #111;
+        }
+
+        .ats-job-dates {
+          font-family: 'Azeret Mono', monospace;
+          font-size: 7.5pt;
+          font-weight: 500;
+          color: #666;
+          letter-spacing: 0.3px;
+        }
+
+        .ats-job-company {
+          font-size: 9.5pt;
+          font-weight: 500;
+          color: ${accent} !important;
+          margin: 0 0 6px 0;
+        }
+
+        .ats-job-location {
+          font-weight: 400;
+          color: #666;
+        }
+
+        .ats-job-bullets {
+          margin: 0;
+          padding-left: 16px;
+          list-style: disc;
+        }
+
+        .ats-job-bullets li {
+          font-size: 8.5pt;
+          margin-bottom: 2px;
+          line-height: 1.4;
+          color: #2a2a2a;
+        }
+
+        .ats-job-bullets li::marker {
+          color: #999;
+        }
+
+        /* Skills */
+        .ats-skills-section {
+          margin-bottom: 0;
+        }
+
+        .ats-skills-row {
+          display: flex;
+          margin-bottom: 4px;
+          line-height: 1.4;
+        }
+
+        .ats-skills-label {
+          font-family: 'Azeret Mono', monospace;
+          font-size: 7pt;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: ${accent} !important;
+          min-width: 90px;
+          padding-top: 2px;
+        }
+
+        .ats-skills-list {
+          font-size: 9pt;
+          color: #333;
+          flex: 1;
+        }
+
+        /* Education */
+        .ats-education-entry {
+          margin-bottom: 10px;
+        }
+
+        .ats-education-entry:last-child {
+          margin-bottom: 0;
+        }
+
+        .ats-edu-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 12px;
+        }
+
+        .ats-edu-degree {
+          font-size: 9.5pt;
+          font-weight: 600;
+          margin: 0;
+          color: #111;
+          flex: 1;
+        }
+
+        .ats-edu-dates {
+          font-family: 'Azeret Mono', monospace;
+          font-size: 7pt;
+          font-weight: 500;
+          color: #666;
+          letter-spacing: 0.3px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .ats-edu-school {
+          font-size: 9pt;
+          color: #555;
+          margin: 2px 0 0 0;
+        }
+
+        .ats-edu-award {
+          font-size: 8.5pt;
+          font-weight: 500;
+          color: ${accent} !important;
+          margin: 4px 0 0 0;
+        }
+
+        /* Two-column footer for skills/education */
+        .ats-footer-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: 24px;
+          margin-top: 0;
+        }
+      `}</style>
+
+      {/* Header */}
+      <header className="ats-header">
+        <h1>{personalInfo.name}</h1>
+        <p className="ats-title">{resumeData.personalInfo.title} | {personalInfo.credentials}</p>
+        <div className="ats-contact">
+          <span>{personalInfo.email}</span>
+          <span className="ats-contact-separator">|</span>
+          <span>{personalInfo.linkedin}</span>
+          <span className="ats-contact-separator">|</span>
+          <span>graceguo.io</span>
+        </div>
+      </header>
+
+      {/* Summary */}
+      <section>
+        <h2 className="ats-section-title">About</h2>
+        <p className="ats-summary">{tagline}</p>
+      </section>
+
+      {/* Experience - FIRST for ATS */}
+      <section>
+        <h2 className="ats-section-title">Experience</h2>
+        {experience.map((job, i) => (
+          <div key={i} className="ats-experience-entry">
+            <div className="ats-job-header">
+              <h3 className="ats-job-title">{job.title}</h3>
+              <span className="ats-job-dates">{job.dates}</span>
+            </div>
+            <p className="ats-job-company">{job.company} <span className="ats-job-location">- {job.location}</span></p>
+            <ul className="ats-job-bullets">
+              {job.bullets.map((bullet, j) => (
+                <li key={j}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      {/* Skills & Education side by side */}
+      <div className="ats-footer-grid">
+        {/* Skills */}
+        <section className="ats-skills-section">
+          <h2 className="ats-section-title">Skills</h2>
+          <div className="ats-skills-row">
+            <span className="ats-skills-label">Design</span>
+            <span className="ats-skills-list">{skills.design.join(', ')}</span>
+          </div>
+          <div className="ats-skills-row">
+            <span className="ats-skills-label">Development</span>
+            <span className="ats-skills-list">{skills.development.join(', ')}</span>
+          </div>
+          <div className="ats-skills-row">
+            <span className="ats-skills-label">Strategy</span>
+            <span className="ats-skills-list">{skills.strategy.join(', ')}</span>
+          </div>
+          <div className="ats-skills-row">
+            <span className="ats-skills-label">Tools</span>
+            <span className="ats-skills-list">{skills.tools.join(', ')}</span>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section>
+          <h2 className="ats-section-title">Education</h2>
+          {education.map((edu, i) => (
+            <div key={i} className="ats-education-entry">
+              <div className="ats-edu-header">
+                <h3 className="ats-edu-degree">{edu.degree}</h3>
+                <span className="ats-edu-dates">{edu.dates}</span>
+              </div>
+              <p className="ats-edu-school">{edu.school}</p>
+              {edu.award && <p className="ats-edu-award">{edu.award}</p>}
+            </div>
+          ))}
+        </section>
+      </div>
+    </div>
+  )
+}
+
+export default function ResumeContent({ template, format = 'visual' }) {
+  // Render ATS version if format is 'ats'
+  if (format === 'ats') {
+    return <ATSResumeContent template={template} />
+  }
+
   const accent = template.colors.accent
   const templateId = template.id
 
@@ -38,11 +364,20 @@ export default function ResumeContent({ template }) {
           box-sizing: border-box;
         }
 
-        /* Two column layout */
+        /* Two column layout - CSS order keeps sidebar visually left */
         .resume-grid {
           display: grid;
           grid-template-columns: 170px 1fr;
           gap: 0.25in;
+        }
+
+        /* Sidebar visually first (left), but main content first in HTML for ATS */
+        .sidebar {
+          order: 1;
+        }
+
+        .main-content {
+          order: 2;
         }
 
         /* Header - full width */
@@ -218,8 +553,8 @@ export default function ResumeContent({ template }) {
 
         .job-bullets {
           margin: 0;
-          padding-left: 0;
-          list-style: none;
+          padding-left: 14px;
+          list-style: disc;
         }
 
         .job-bullets li {
@@ -227,20 +562,12 @@ export default function ResumeContent({ template }) {
           font-weight: 450;
           margin-bottom: 3px;
           line-height: 1.4;
-          padding-left: 12px;
-          position: relative;
           color: #2a2a2a;
         }
 
-        .job-bullets li::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 7px;
-          width: 4px;
-          height: 4px;
-          background: #999;
-          border-radius: 50%;
+        .job-bullets li::marker {
+          color: #999;
+          font-size: 8pt;
         }
 
         /* Education entries */
@@ -418,7 +745,7 @@ export default function ResumeContent({ template }) {
         <header className="resume-header">
           <div className="header-left">
             <h1>{personalInfo.name}</h1>
-            <p className="tagline">{personalInfo.title} ✦ {personalInfo.credentials}</p>
+            <p className="tagline">{resumeData.personalInfo.title} | {personalInfo.credentials}</p>
           </div>
           <div className="header-right">
             <div className="header-qr">
@@ -441,14 +768,41 @@ export default function ResumeContent({ template }) {
           </div>
         </header>
 
-        {/* Left Sidebar */}
+        {/* Main Content - FIRST in HTML for ATS parsing, CSS order displays sidebar visually left */}
+        <main className="main-content">
+          {/* About */}
+          <section className="about-section">
+            <h2 className="section-title">About</h2>
+            <p className="about-text">{tagline}</p>
+          </section>
+
+          <section>
+            <h2 className="section-title">Experience</h2>
+            {experience.map((job, i) => (
+              <div key={i} className="experience-entry">
+                <div className="job-header">
+                  <h3 className="job-title">{job.title}</h3>
+                  <span className="job-dates">{job.dates}</span>
+                </div>
+                <p className="job-company">{job.company} <span className="location">- {job.location}</span></p>
+                <ul className="job-bullets">
+                  {job.bullets.map((bullet, j) => (
+                    <li key={j}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        </main>
+
+        {/* Sidebar - second in HTML but visually left via CSS order */}
         <aside className="sidebar">
           {/* Contact */}
           <section>
             <h2 className="section-title">Contact</h2>
             <div className="contact-list">
               <span className="contact-item-text">
-                <span className="contact-icon">✉</span>
+                <span className="contact-icon">@</span>
                 {personalInfo.email}
               </span>
               <span className="contact-item-text">
@@ -532,33 +886,6 @@ export default function ResumeContent({ template }) {
           </section>
 
         </aside>
-
-        {/* Right Main Content */}
-        <main className="main-content">
-          {/* About */}
-          <section className="about-section">
-            <h2 className="section-title">About</h2>
-            <p className="about-text">{tagline}</p>
-          </section>
-
-          <section>
-            <h2 className="section-title">Experience</h2>
-            {experience.map((job, i) => (
-              <div key={i} className="experience-entry">
-                <div className="job-header">
-                  <h3 className="job-title">{job.title}</h3>
-                  <span className="job-dates">{job.dates}</span>
-                </div>
-                <p className="job-company">{job.company} <span className="location">· {job.location}</span></p>
-                <ul className="job-bullets">
-                  {job.bullets.map((bullet, j) => (
-                    <li key={j}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </section>
-        </main>
       </div>
     </div>
   )

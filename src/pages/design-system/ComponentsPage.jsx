@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { useTheme } from '../../context/ThemeContext'
 import { getColor } from '../../constants/colors'
+import { colors } from '../../constants/tokens'
 import DSLayout, { DSSection } from './DSLayout'
 import { Button, ButtonWithArrow } from '../../components/ui/Button'
 import { Tag } from '../../components/ui'
@@ -36,10 +37,46 @@ export default function ComponentsPage() {
   const borderClass = isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'
   const bgSubtle = isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
 
+  // Semantic colors from design system
+  const successColor = colors.semantic.success[isDark ? 'dark' : 'light']
+  const errorColor = colors.semantic.error[isDark ? 'dark' : 'light']
+  const accentColor = colors.semantic.accent[isDark ? 'dark' : 'light']
+  const goldColor = getColor('gold', isDark)
+  const lilacColor = getColor('lilac', isDark)
+
   return (
     <DSLayout title="Components" sections={sections}>
       {/* Buttons */}
       <DSSection id="buttons" title="Buttons">
+        <Paragraph className="mb-8 max-w-3xl">
+          Buttons communicate actions users can take. Use them sparingly—too many buttons create decision fatigue.
+        </Paragraph>
+
+        {/* Usage Guidelines */}
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8 ${bgSubtle}`}>
+          <H4 className="mb-4">Usage Guidelines</H4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div>
+              <div className={`font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Primary</div>
+              <p className={isDark ? 'text-white/60' : 'text-black/60'}>
+                Main call-to-action. One per section max. Use for: Submit, Save, Confirm, Continue.
+              </p>
+            </div>
+            <div>
+              <div className={`font-medium mb-2 ${isDark ? 'text-white/70' : 'text-black/70'}`}>Secondary</div>
+              <p className={isDark ? 'text-white/60' : 'text-black/60'}>
+                Supporting actions. Use for: Cancel, Back, Edit, View Details.
+              </p>
+            </div>
+            <div>
+              <div className={`font-medium mb-2 ${isDark ? 'text-white/50' : 'text-black/50'}`}>Ghost</div>
+              <p className={isDark ? 'text-white/60' : 'text-black/60'}>
+                Minimal emphasis. Use for: tertiary actions, inline links, icon-only buttons.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Variants */}
           <div>
@@ -66,6 +103,59 @@ export default function ComponentsPage() {
           </div>
         </div>
 
+        {/* Props API */}
+        <H4 className="mb-4">Props API</H4>
+        <div className={`border ${borderClass} rounded-xl overflow-hidden mb-8`}>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className={isDark ? 'bg-white/[0.03]' : 'bg-black/[0.02]'}>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Prop</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Type</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Default</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal hidden md:table-cell ${isDark ? 'text-white/40' : 'text-black/40'}`}>Description</th>
+              </tr>
+            </thead>
+            <tbody className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">variant</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: goldColor }}>'primary' | 'secondary' | 'ghost'</td>
+                <td className="py-3 px-4 font-mono text-xs">'primary'</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Visual style of the button</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">size</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: goldColor }}>'sm' | 'md' | 'lg'</td>
+                <td className="py-3 px-4 font-mono text-xs">'md'</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Size of the button</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">disabled</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: accentColor }}>boolean</td>
+                <td className="py-3 px-4 font-mono text-xs">false</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Disables interaction</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">href</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: successColor }}>string</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Renders as anchor tag</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">icon</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: lilacColor }}>ReactNode</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Icon element</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">iconPosition</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: goldColor }}>'left' | 'right'</td>
+                <td className="py-3 px-4 font-mono text-xs">'right'</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Icon placement</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         {/* Hover Interactions */}
         <H4 className="mb-2">Hover Interactions</H4>
         <Paragraph size="sm" className="mb-4">Arrow nudges in its direction on hover.</Paragraph>
@@ -81,6 +171,82 @@ export default function ComponentsPage() {
 
       {/* Form Inputs */}
       <DSSection id="inputs" title="Form Inputs">
+        <Paragraph className="mb-8 max-w-3xl">
+          Form inputs collect user data. Clear labels, helpful error states, and appropriate input types reduce friction and errors.
+        </Paragraph>
+
+        {/* Usage Guidelines */}
+        <div className={`p-6 border ${borderClass} rounded-xl mb-8 ${bgSubtle}`}>
+          <H4 className="mb-4">Usage Guidelines</H4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+              <div className="font-medium mb-2" style={{ color: successColor }}>Do</div>
+              <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                <li>Always include visible labels (not just placeholders)</li>
+                <li>Show validation errors inline, next to the field</li>
+                <li>Use appropriate input types (email, tel, url)</li>
+                <li>Provide helper text for complex fields</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-medium mb-2" style={{ color: errorColor }}>Don't</div>
+              <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                <li>Rely on placeholder text as the only label</li>
+                <li>Use generic error messages like "Invalid input"</li>
+                <li>Disable submit without explaining why</li>
+                <li>Auto-focus inputs on page load (accessibility)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Props API */}
+        <H4 className="mb-4">Props API</H4>
+        <div className={`border ${borderClass} rounded-xl overflow-hidden mb-8`}>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className={isDark ? 'bg-white/[0.03]' : 'bg-black/[0.02]'}>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Prop</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Type</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal ${isDark ? 'text-white/40' : 'text-black/40'}`}>Default</th>
+                <th className={`text-left py-3 px-4 font-mono text-xs font-normal hidden md:table-cell ${isDark ? 'text-white/40' : 'text-black/40'}`}>Description</th>
+              </tr>
+            </thead>
+            <tbody className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">label</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: successColor }}>string</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Field label (required for a11y)</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">error</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: successColor }}>string</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Error message to display</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">helperText</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: successColor }}>string</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Helper text below input</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">icon</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: lilacColor }}>ReactNode</td>
+                <td className="py-3 px-4 font-mono text-xs">—</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Leading icon</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-mono text-xs">disabled</td>
+                <td className="py-3 px-4 font-mono text-xs" style={{ color: accentColor }}>boolean</td>
+                <td className="py-3 px-4 font-mono text-xs">false</td>
+                <td className="py-3 px-4 text-xs hidden md:table-cell">Disables the input</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         {/* Text Input */}
         <H4 className="mb-2">Text Input</H4>
         <Paragraph size="sm" className="mb-4">Default, filled, and error states.</Paragraph>

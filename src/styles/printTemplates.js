@@ -203,6 +203,126 @@ export const templates = {
       mono: "'Azeret Mono', monospace",
     },
   },
+
+  figma: {
+    id: 'figma',
+    name: 'Figma',
+    colors: {
+      accent: '#A259FF',
+      accentGradient: '#A259FF',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  netflix: {
+    id: 'netflix',
+    name: 'Netflix (Media Platform)',
+    colors: {
+      accent: '#E50914',
+      accentGradient: '#E50914',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  'netflix-commerce': {
+    id: 'netflix-commerce',
+    name: 'Netflix (Commerce)',
+    colors: {
+      accent: '#E50914',
+      accentGradient: '#E50914',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  'doordash-drive': {
+    id: 'doordash-drive',
+    name: 'DoorDash (Drive)',
+    colors: {
+      accent: '#FF3008',
+      accentGradient: '#FF3008',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  stubhub: {
+    id: 'stubhub',
+    name: 'StubHub',
+    colors: {
+      accent: '#3F1D74',
+      accentGradient: '#3F1D74',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  'apple-music': {
+    id: 'apple-music',
+    name: 'Apple (Music Creation)',
+    colors: {
+      accent: '#000000',
+      accentGradient: 'linear-gradient(90deg, #000000, #333333)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
 }
 
 /**

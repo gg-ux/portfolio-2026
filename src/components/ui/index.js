@@ -21,3 +21,6 @@ export { Divider, SectionDivider, GridDivider } from './Divider'
 export { Input, Textarea, Select } from './Input'
 export { default as FrostedContainer } from './FrostedContainer'
 export { Tag } from './Tag'
+
+// Molecules
+export { Table, TableRow, TableCell } from './Table'

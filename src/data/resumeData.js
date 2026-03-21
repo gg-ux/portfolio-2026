@@ -19,22 +19,22 @@ export const experience = [
     company: 'Avala AI',
     location: 'Remote',
     logo: '/assets/resume/avala-logo.png',
-    title: 'Senior UX/UI Designer',
+    title: 'Senior Product Designer',
     dates: 'Jun 2024 – Present',
     bullets: [
-      'Lead all design as sole designer across data annotation platform, native mobile labeling app, marketing site, internal tools, and learning systems, serving five distinct user types with unique workflows and mental models',
-      'Design and ship production websites and UI in React using Figma and Claude Code, maintaining WCAG-compliant accessibility, design tokens, and a scalable component library',
-      'Design complex annotation workflows for LiDAR, 3D spatial data, and multi-frame sequences, driving measurable gains in task efficiency and learnability',
-      'Author PRDs and shape product roadmap in collaboration with engineering and operations leadership',
-      'Own brand design and visual identity across investor decks, trade shows, merchandise, and collateral',
+      'Lead all design as sole designer across data annotation platform, native mobile labeling app, marketing site, internal tools, and learning systems',
+      'Build and maintain design system with component library in Figma; ship production React components and design tokens using Claude Code',
+      'Design for five distinct user types (annotators, customers, admins, investors, general public) each with unique workflows and mental models',
+      'Design complex annotation workflows for LiDAR, 3D spatial data, and multi-frame sequences, driving improvements to task efficiency, learnability, and UI clarity',
+      'Author PRDs and partner with engineering and operations leadership to prioritize features and shape product roadmap',
     ],
     // For print version - more concise
     printBullets: [
-      'Lead all design as sole designer across data annotation platform, native mobile labeling app, marketing site, internal tools, and learning systems, serving five distinct user types',
-      'Design and ship production websites and UI in React using AI-assisted development workflows, maintaining WCAG-compliant accessibility, design tokens, and a scalable component library',
-      'Design complex annotation workflows for LiDAR, 3D spatial data, and multi-frame sequences, driving measurable gains in efficiency',
-      'Author PRDs and shape product roadmap in collaboration with engineering and operations leadership',
-      'Own brand design and visual identity across investor decks, trade shows, merchandise, and collateral',
+      'Lead all design as sole designer across data annotation platform, native mobile labeling app, marketing site, internal tools, and learning systems',
+      'Build and maintain design system with component library in Figma; ship production React components and design tokens using Claude Code',
+      'Design for five distinct user types (annotators, customers, admins, investors, general public) each with unique workflows and mental models',
+      'Design complex annotation workflows for LiDAR, 3D spatial data, and multi-frame sequences, driving improvements to task efficiency, learnability, and UI clarity',
+      'Author PRDs and partner with engineering and operations leadership to prioritize features and shape product roadmap',
     ]
   },
   {
@@ -45,17 +45,17 @@ export const experience = [
     dates: 'Nov 2021 – Apr 2024',
     bullets: [
       'Led global launch of responsive product and feature pages for Tesla.com, driving product discovery across Energy, Support, and Investor Relations',
-      'Led design of mega menu across Tesla.com, improving content discoverability and scalability',
-      'Led design of AI chatbot, boosting sales lead conversion rates by 120% after launch',
-      'Led redesign of native iOS/Android in-store advisor app for lead generation and scheduling; contributed to enterprise and e-commerce apps for Energy Installers and Powerwall Parts Store',
-      'Contributed to Tesla Design System with component guidelines and design tokens; presented design rationale to cross-functional stakeholders',
+      'Contributed to Tesla Design System in Figma with component guidelines and documentation across web and native platforms',
+      'Led design of mega menu across Tesla.com, creating scalable navigation components for content discoverability',
+      'Led design of AI chatbot, consolidating chat components and boosting sales lead conversion rates by 120%',
+      'Led redesign of native iOS/Android in-store advisor app for scheduling test drives; designed Energy Installers app for tracking Powerwall installation arrivals',
     ],
     printBullets: [
       'Led global launch of responsive product and feature pages for Tesla.com, driving product discovery across Energy, Support, and Investor Relations',
-      'Led design of mega menu across Tesla.com, improving content discoverability and scalability',
-      'Led design of AI chatbot, boosting sales lead conversion rates by 120% after launch',
-      'Led redesign of native iOS/Android in-store advisor app; contributed to enterprise and e-commerce apps for Energy Installers and Powerwall Parts Store',
-      'Contributed to Tesla Design System with component guidelines and design tokens; presented design rationale to cross-functional stakeholders',
+      'Contributed to Tesla Design System in Figma with component guidelines and documentation across web and native platforms',
+      'Led design of mega menu across Tesla.com, creating scalable navigation components for content discoverability',
+      'Led design of AI chatbot, consolidating chat components and boosting sales lead conversion rates by 120%',
+      'Led redesign of native iOS/Android in-store advisor app for scheduling test drives; designed Energy Installers app for tracking Powerwall installation arrivals',
     ],
   },
   {
@@ -196,12 +196,21 @@ export const getPrintExperience = (templateId = 'default') => {
   const overrides = resumeTemplateOverrides[templateId]
 
   return experience
-    .filter(job => job.showInPrint !== false)
+    .filter(job => {
+      // If template explicitly hides this job, don't show it
+      if (overrides?.hideJobs?.includes(job.company)) return false
+      // If template has explicit experienceOverrides for this job, show it
+      if (overrides?.experienceOverrides?.[job.company]) return true
+      // Otherwise use the default showInPrint setting
+      return job.showInPrint !== false
+    })
     .map(job => {
-      // Check for template-specific bullet overrides
+      // Check for template-specific overrides
       const templateBullets = overrides?.experienceOverrides?.[job.company]
+      const templateTitle = overrides?.titleOverrides?.[job.company]
       return {
         ...job,
+        title: templateTitle || job.title,
         bullets: templateBullets || job.printBullets || job.bullets,
       }
     })
@@ -398,6 +407,9 @@ export const resumeTemplateOverrides = {
       strategy: ['Product Thinking', 'Cross-Functional Leadership', 'Lifecycle Design', 'User Research'],
       tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
     },
+    titleOverrides: {
+      'Avala AI': 'Senior UX/UI Designer',
+    },
     experienceOverrides: {
       'Avala AI': [
         'Lead end-to-end product design as sole designer across platform, native mobile labeling app, and learning systems, serving five distinct user types with unique needs',
@@ -431,6 +443,9 @@ export const resumeTemplateOverrides = {
       strategy: ['Cross-Functional Partnership', 'Product Strategy', 'Design Documentation', 'Requirements Gathering'],
       tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
     },
+    titleOverrides: {
+      'Avala AI': 'Senior Product Designer',
+    },
     experienceOverrides: {
       'Avala AI': [
         'Lead end-to-end product design as sole designer for data annotation platform, designing complex data workflows for LiDAR, 3D spatial data, and multi-frame sequences',
@@ -451,6 +466,253 @@ export const resumeTemplateOverrides = {
       ],
     },
   },
+
+  'webflow-staff': {
+    tagline: 'Staff Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. I distill complex, technical concepts into simple, intuitive experiences—and thrive in ambiguity, remote environments, and high-growth teams.',
+    skills: {
+      design: ['Product Design', 'Design Vision & Strategy', 'Design Systems', 'Content Management Platforms', 'Interaction Design', 'Accessibility (WCAG)'],
+      development: ['React/HTML/CSS/JS', 'Web Standards', 'AI-Assisted Development', 'High-Fidelity Prototyping'],
+      strategy: ['Cross-Functional Alignment', 'Customer Engagement', 'Design Leadership', 'Thought Leadership', 'Mentorship'],
+      tools: ['Figma', 'GitHub', 'Claude Code', 'Warp', 'Midjourney', 'Adobe Creative Suite'],
+    },
+    titleOverrides: {
+      'Avala AI': 'Staff Product Designer',
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Define, design, and launch new product capabilities as sole designer, seamlessly integrating features across platform, mobile app, and internal tools',
+        'Distill complex technical concepts—LiDAR, 3D spatial data, multi-frame sequences—into simple, intuitive annotation workflows that drive measurable efficiency gains',
+        'Drive alignment across Engineering and Operations leadership on design vision, product strategy, and technical dependencies',
+        'Elevate design craft by building scalable component library with design tokens, maintaining WCAG-compliant accessibility standards',
+        'Stay fluent in emerging AI technologies, shipping production UI using Claude Code and AI-assisted development workflows',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% by distilling complex product information into clear, actionable conversations',
+        'Contributed to Tesla Design System as thought leader for component guidelines, design tokens, and cross-platform documentation',
+        'Led global launch of responsive product pages for Tesla.com, untangling complex content dependencies across Energy, Support, and Investor Relations',
+        'Drove alignment across Product, Engineering, and Analytics stakeholders through clear written, verbal, and visual communication',
+      ],
+      'Accurate Background': [
+        'Designed data-heavy compliance workflows for professional users, translating complex background check data into clear, actionable interfaces',
+        'Created error-detection tool that surfaced data inconsistencies, demonstrating bias towards action and attention to detail',
+        'Collaborated cross-functionally with overseas engineering teams in a remote environment to align on requirements and ship platform improvements',
+      ],
+      'INDI EV': [
+        'Defined design vision and strategy for in-vehicle interface (HMI) of debut electric car, establishing UI and design system from scratch',
+        'Delivered high-fidelity prototype with key driver flows and vehicle control features for LA Auto Show debut',
+      ],
+    },
+  },
+
+  figma: {
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Systems thinker and prototyper passionate about design systems, AI tooling, and turning ambiguity into clarity for complex creative workflows.',
+    skills: {
+      design: ['Design Systems', 'Interaction Design', 'Visual Craft', 'Prototyping', 'Systems Thinking', 'Canvas-Based Interfaces'],
+      development: ['React/HTML/CSS/JS', 'AI-Assisted Development', 'High-Fidelity Prototyping', 'Front-End Development'],
+      strategy: ['Cross-Functional Collaboration', 'Discovery to Launch', 'Design Storytelling', 'Design Critiques'],
+      tools: ['Figma (Auto Layout, Variables, Components)', 'GitHub', 'Claude Code', 'Warp', 'Vercel'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer for canvas-based data annotation platform, turning ambiguity into clarity for five distinct user types with complex workflows',
+        'Design and ship production UI in React using AI-assisted development workflows, iterating rapidly from discovery through launch',
+        'Architect scalable design system with component library, design tokens, and advanced Figma patterns (Variables, Auto Layout, Variants)',
+        'Create and iterate on flows, prototypes, and high-fidelity visuals for complex annotation tools handling LiDAR and 3D spatial data',
+        'Collaborate cross-functionally with engineering and operations leadership to shape product strategy and decision-making',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through iterative prototyping and interaction design refinement',
+        'Contributed to Tesla Design System with component guidelines, design tokens, and systematic patterns across platforms',
+        'Led global launch of responsive product pages for Tesla.com, delivering clear storytelling around product needs and opportunities',
+        'Created high-fidelity flows and prototypes; provided thoughtful design critique feedback across cross-functional teams',
+        'Led redesign of native iOS/Android in-store advisor app, driving design process from discovery through launch',
+      ],
+      'INDI EV': [
+        'Led 0-1 design of in-vehicle interface for INDI EV\'s debut electric car, establishing UI and design system from scratch',
+        'Delivered high-fidelity prototype with key driver flows for LA Auto Show debut, balancing user needs and technical constraints',
+      ],
+      'Catalia Health': [
+        'Led team of 4 designing an accessible community app for heart failure patients, guiding decision-making with user-centered research',
+        'Conducted research with 42 participants; delivered high-fidelity prototype demonstrating key feature flows',
+      ],
+    },
+  },
+
+  netflix: {
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience designing enterprise software and horizontal solutions. Passionate about navigating ambiguity, crafting systematic solutions, and collaborating with technical teams.',
+    skills: {
+      design: ['Enterprise Product Design', 'Interaction Design', 'Visual Design', 'Prototyping', 'Systems Mapping', 'Workflow Design'],
+      development: ['React/HTML/CSS/JS', 'Technical Collaboration', 'AI-Assisted Development', 'Front-End Development'],
+      strategy: ['Cross-Functional Partnership', 'Human-Centered Design', 'Product Strategy', 'Stakeholder Communication'],
+      tools: ['Figma (Auto Layout, Variables, DevMode)', 'GitHub', 'Claude Code', 'Jira', 'Confluence'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead end-to-end design as sole designer for enterprise data management platform, designing horizontal solutions for five distinct user types',
+        'Navigate ambiguity and drive clarity by mapping systems, defining workflows, and crafting solutions that connect user needs and business goals',
+        'Partner with engineering leadership to ship production UI in React, demonstrating ability to think technically and collaborate with engineers',
+        'Facilitate collaborative work sessions with operations and engineering stakeholders to align on product strategy',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through iterative prototyping and human-centered design',
+        'Contributed to Tesla Design System with systematic solutions: component guidelines, design tokens, and cross-platform patterns',
+        'Designed enterprise apps for Energy Installers and Powerwall Parts Store, creating end-to-end experiences for B2B users',
+        'Led redesign of native iOS/Android in-store advisor app, working across all stages from research to implementation',
+      ],
+      'Accurate Background': [
+        'Designed horizontal, foundational solutions for enterprise platform serving thousands of global users across diverse business verticals',
+        'Created compliance-focused error-detection tool that simplified complexity underneath the UI layer, streamlining QA workflows',
+        'Collaborated cross-functionally with overseas engineering teams, demonstrating exceptional communication across time zones',
+      ],
+      'Catalia Health': [
+        'Led team of 4 designing accessible healthcare app, conducting generative user research with 42 participants',
+        'Delivered high-fidelity prototype demonstrating thoughtful interaction design and human-centered approach',
+      ],
+    },
+  },
+
+  'netflix-commerce': {
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Systems thinker passionate about design systems, consumer experiences across mobile and web, and driving meaningful business impact.',
+    skills: {
+      design: ['Design Systems', 'Interaction Design', 'Visual Design', 'Prototyping', 'Multi-Platform Design (Mobile/Web)', 'Pixel-Perfect Mockups'],
+      development: ['React/HTML/CSS/JS', 'AI-Assisted Development', 'Front-End Development', 'Implementation Support'],
+      strategy: ['Systems Thinking', 'Human-Centered Design', 'Storytelling', 'Cross-Functional Partnership'],
+      tools: ['Figma (Auto Layout, Variables, Components)', 'GitHub', 'Claude Code', 'Jira', 'Confluence'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead end-to-end design as sole designer, creating design system components and guidelines that scale across mobile and web platforms',
+        'Employ storytelling to present UX strategy and create shared understanding with engineering and operations stakeholders',
+        'Navigate ambiguity and drive clarity, breaking down opportunities into actionable roadmaps that connect user needs and business goals',
+        'Create pixel-perfect mockups and prototypes, driving human-centered design process from concept to launch',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot that boosted sales lead conversion rates by 120%, driving meaningful impact to the business',
+        'Contributed to Tesla Design System with design guidelines, component patterns, and tokens across multiple platforms',
+        'Led global launch of responsive product pages for Tesla.com, creating emotionally compelling end-to-end experiences for 220M+ visitors',
+        'Led redesign of native iOS/Android in-store advisor app, demonstrating ability to work across native and web platforms',
+      ],
+      'Accurate Background': [
+        'Designed consumer-facing experiences for background check platform, crafting systematic solutions across web and mobile',
+        'Created design guidelines and aligned multiple stakeholders on interaction patterns and visual design standards',
+        'Partnered with PMs and engineers to launch features that drove meaningful impact to the business',
+      ],
+      'Catalia Health': [
+        'Led team of 4 designing accessible healthcare app, driving human-centered design process with 42 research participants',
+        'Delivered pixel-perfect prototypes demonstrating extraordinary craft in interaction and visual design',
+      ],
+    },
+  },
+
+  'doordash-drive': {
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Craftsperson passionate about 0 to 1 product design, driving clarity in ambiguous spaces, and sweating the details.',
+    skills: {
+      design: ['0 to 1 Product Design', 'Visual Design', 'Interaction Design', 'Prototyping', 'High-Fidelity Visuals', 'Design Craft'],
+      development: ['React/HTML/CSS/JS', 'AI-Assisted Development', 'Front-End Development', 'Rapid Iteration'],
+      strategy: ['Product Strategy & Vision', 'Cross-Functional Collaboration', 'End-to-End Ownership', 'Design Sprints'],
+      tools: ['Figma', 'GitHub', 'Claude Code', 'Jira', 'Confluence', 'Warp'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Own product areas end to end as sole designer, defining vision and strategy for 0 to 1 product in fast-growing startup',
+        'Drive clarity in ambiguous spaces, contributing to product strategy and crafting visions that connect user needs and business goals',
+        'Create, collaborate, and iterate on flows, prototypes, and high-fidelity visuals for five distinct user types',
+        'Work cross-functionally with engineering and operations to build and ship designs that bridge physical and digital worlds',
+      ],
+      'Tesla': [
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through craft and attention to detail',
+        'Designed Energy Installers app for tracking Powerwall installation arrivals, serving both customers and installers with real-time logistics',
+        'Led 0 to 1 redesign of native iOS/Android in-store advisor app for scheduling test drives, lead generation, and customer follow-up',
+        'Led global launch of responsive product pages for Tesla.com, iterating on flows and prototypes with cross-functional partners',
+      ],
+      'INDI EV': [
+        'Led 0 to 1 design of in-vehicle interface for debut electric car, defining vision and strategy from scratch',
+        'Delivered high-fidelity prototype with key driver flows for LA Auto Show debut, sweating every detail',
+      ],
+      'Catalia Health': [
+        'Led team of 4 in 0 to 1 design of accessible healthcare app, driving clarity through user research with 42 participants',
+        'Created high-fidelity visuals and prototypes demonstrating passion for visual design and craft',
+      ],
+    },
+  },
+
+  stubhub: {
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Design systems specialist passionate about building scalable component libraries, documentation, and AI-powered design patterns.',
+    skills: {
+      design: ['Design Systems', 'Component Libraries', 'Interaction Design', 'Visual Design', 'Documentation', 'Multi-Platform Design (Web/Mobile)'],
+      development: ['Figma (Variables, Components, Auto Layout)', 'React/HTML/CSS/JS', 'AI-Assisted Development', 'Design Tokens'],
+      strategy: ['Design Ops', 'Cross-Functional Collaboration', 'Stakeholder Alignment', 'Design Guidelines'],
+      tools: ['Figma', 'GitHub', 'Claude Code', 'Jira', 'Confluence', 'Storybook'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Build and maintain scalable design system with component library, design tokens, and documentation spanning web platform, native mobile app, and internal tools',
+        'Ship production React components and design tokens using Claude Code, turning design patterns into reusable skills for design system automation',
+        'Design complex annotation workflows for LiDAR, 3D spatial data, and multi-frame sequences; author PRDs and shape product roadmap',
+        'Own brand design and visual identity across investor decks, trade shows, and marketing site',
+      ],
+      'Tesla': [
+        'Contributed to Tesla Design System in Figma with component guidelines and documentation across web and native platforms',
+        'Led design of mega menu across Tesla.com, creating scalable navigation components for content discoverability',
+        'Led design of AI chatbot, consolidating chat components and boosting sales lead conversion rates by 120%',
+        'Led responsive product pages for Tesla.com and native iOS/Android apps including in-store advisor, Energy Installers, and Powerwall Parts Store',
+      ],
+      'Accurate Background': [
+        'Established design patterns and guidelines for enterprise platform, improving consistency across product surface areas',
+        'Documented reusable components and interaction patterns for engineering implementation',
+        'Partnered with overseas engineering teams to ensure design system adoption and quality',
+      ],
+      'INDI EV': [
+        'Established UI and design system from scratch for in-vehicle interface, creating foundational component library',
+        'Delivered design documentation and specifications for LA Auto Show debut prototype',
+      ],
+    },
+  },
+
+  'apple-music': {
+    title: 'Senior UI Designer',
+    tagline: 'Senior UI Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Classically trained pianist (Certificate of Merit Level 10) and music producer (Ableton) passionate about elegant interfaces, workflow-driven experiences, and crafting nuanced visual solutions for creative professionals.',
+    skills: {
+      design: ['UI Design (iOS/macOS)', 'Interaction Design', 'Visual Design', 'Workflow Design', 'Prototyping', 'Design Systems'],
+      development: ['High-Fidelity Prototyping', 'Visual Specifications', 'Design Documentation', 'Front-End Development'],
+      strategy: ['Cross-Functional Collaboration', 'Design Presentations', 'Iterative Design Process', 'Design Critique'],
+      tools: ['Figma', 'Sketch', 'Adobe Creative Suite', 'Ableton Live', 'Keynote', 'Principle'],
+    },
+    titleOverrides: {
+      'Avala AI': 'Senior UX/UI Designer',
+      'Tesla': 'UX/UI Designer, Discovery',
+      'Notetracks': 'UX/UI Designer, Music Collaboration',
+      'INDI EV': 'UX/UI Designer, In-Vehicle Infotainment',
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead UI design as sole designer for workflow-driven data management, visualization, and annotation platform, distilling intricate design challenges into sophisticated, intuitive solutions',
+        'Ship production UI code using AI-assisted development workflows, creating detailed visual specifications and design documentation for engineering collaboration',
+        'Design complex, deep workflows for professional users handling LiDAR, 3D spatial data, and multi-frame sequences with attention to layout, typography, and behavior',
+        'Collaborate cross-functionally with engineering and product leadership to develop innovative features through thoughtful interaction design',
+        'Build and maintain design system with component library, ensuring consistency, quality, and attention to detail across all product surfaces',
+      ],
+      'Tesla': [
+        'Designed native iOS and Android applications including in-store advisor app for scheduling and customer engagement, demonstrating multi-platform UI expertise',
+        'Led design of AI chatbot with nuanced interaction design, boosting sales lead conversion rates by 120% through elegant conversational UI',
+        'Contributed to Tesla Design System with component guidelines and visual specifications across web and native platforms',
+        'Created presentations to communicate UI concepts to diverse cross-functional stakeholders including engineering, product, and executives',
+        'Led global launch of responsive product pages for Tesla.com, balancing visual design craft with tight deadlines',
+      ],
+      'Notetracks': [
+        'Designed UI for collaborative cloud-based audio arranging and note-taking web app used by music producers and audio professionals',
+        'Iteratively refined user experiences through BETA user feedback, balancing workflow complexity with intuitive interaction design',
+        'Designed waveform visualization, timeline scrubbing, track layering and mixing controls, and timestamped annotation features',
+      ],
+      'INDI EV': [
+        'Led UI design of in-vehicle interface for debut electric car, establishing visual language and interaction patterns from scratch',
+        'Delivered high-fidelity prototype with refined typography, layout, and motion behavior for LA Auto Show debut',
+        'Collaborated with engineering and animation teams to verify final implementation and ensure design quality',
+      ],
+    },
+    // Exclude Accurate Background and Catalia Health for this template - Notetracks is more relevant
+    hideJobs: ['Accurate Background', 'Catalia Health'],
+  },
 }
 
 // Get resume data for a specific template
@@ -460,6 +722,7 @@ export const getResumeDataForTemplate = (templateId = 'default') => {
   return {
     personalInfo: {
       ...personalInfo,
+      title: overrides?.title || personalInfo.title,
       tagline: overrides?.tagline || personalInfo.tagline,
     },
     skills: overrides?.skills || printSkills,

@@ -11,28 +11,28 @@ import { Palette, Stack, Lightning, Layout, ArrowRight } from '@phosphor-icons/r
 const categories = [
   {
     title: 'Foundation',
-    description: 'Typography, color palette, icons, and spacing.',
+    description: 'Single source of truth. Design tokens that power every decision.',
     icon: Palette,
     href: '/design-system/foundation',
     colorKey: 'amethyst',
   },
   {
     title: 'Components',
-    description: 'Buttons, inputs, tags, and data visualization.',
+    description: 'Composable building blocks with usage guidelines and props API.',
     icon: Stack,
     href: '/design-system/components',
     colorKey: 'lilac',
   },
   {
     title: 'Motion',
-    description: 'Animations, transitions, and cursor effects.',
+    description: 'Purposeful animation. Easing curves, timing, and interaction cues.',
     icon: Lightning,
     href: '/design-system/motion',
     colorKey: 'rose',
   },
   {
     title: 'Patterns',
-    description: 'Navigation, layouts, project cards, and footer.',
+    description: 'Proven solutions for navigation, layout, and content structure.',
     icon: Layout,
     href: '/design-system/patterns',
     colorKey: 'gold',
@@ -59,10 +59,15 @@ export default function DesignSystemPage() {
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           {/* Header Content - left aligned */}
           <div className="max-w-2xl">
-            <H1 className="mb-4">Gooey</H1>
+            <div className="flex items-center gap-3 mb-4">
+              <H1>Gooey</H1>
+              <span className={`font-mono text-xs px-2 py-1 rounded-full ${isDark ? 'bg-white/[0.06] text-white/50' : 'bg-black/[0.04] text-black/40'}`}>
+                v1.0
+              </span>
+            </div>
             <Caption trigger="mount" className="mb-6 block">Developed & Designed by Grace Guo</Caption>
             <Body className="text-xl leading-relaxed">
-              A design system built around feeling—where motion, color, and interaction work together to create an experience that feels alive, fluid, and human.
+              A design system built around feeling—where motion, color, and interaction work together to create an experience that feels alive and human. Inspired by GUI, fluidity, and how kids used to mispronounce my last name.
             </Body>
           </div>
         </div>

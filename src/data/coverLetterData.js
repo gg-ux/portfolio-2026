@@ -196,6 +196,108 @@ With 7+ years of experience designing data-heavy products, fluency in Figma and 
       signoff: 'Looking forward to connecting,',
     },
   },
+
+  figma: {
+    recipient: {
+      company: 'Figma',
+    },
+    content: {
+      greeting: 'Dear Figma Hiring Team,',
+
+      body: `As someone who designs in Figma and ships production code using AI, the Product Designer role on Design, Dev, & AI Tools feels like the place I should be. I spend my days turning ambiguity into clarity for complex creative workflows, and the opportunity to shape how teams build together at the company that made my work possible is deeply exciting.
+
+At Avala AI, an early-stage startup, I'm the sole designer for a canvas-based data annotation platform, serving five distinct user types with complex workflows. I architect scalable design systems using Variables, Auto Layout, and Components, then ship production React code using Claude Code. At Tesla, I designed an AI chatbot that boosted sales lead conversion by 120% through iterative prototyping and interaction refinement. I contributed to the Tesla Design System with component guidelines and design tokens, and led responsive product pages from discovery through launch while collaborating cross-functionally with PMs, engineers, and researchers. I've built 0-1 products repeatedly: INDI EV's in-vehicle interface, a HIPAA-compliant app for heart failure patients, and the entire design infrastructure at Avala. With experience across fast-paced startups and Fortune 500 corporations, I know when to push for craft versus when to ship fast.
+
+With 7+ years of systems thinking, deep fluency in Figma and AI tooling, and an MHCI+D from UC Irvine, I'm excited to help invent new ways for people to design and build products together.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  netflix: {
+    recipient: {
+      company: 'Netflix',
+    },
+    content: {
+      greeting: 'Dear Netflix Hiring Team,',
+
+      body: `I've spent my career designing horizontal solutions for deeply technical domains, and the Senior Product Designer role on Media Platforms is exactly the kind of challenge I thrive in. Building foundational infrastructure that powers diverse business products requires the systematic thinking and cross-functional collaboration I bring to every project.
+
+At Avala AI, an early-stage startup, I'm the sole designer for an enterprise data management platform serving five distinct user types with complex workflows. I navigate ambiguity daily, mapping systems, defining workflows, and crafting solutions that connect user needs, data, and business goals. I partner closely with engineering leadership and ship production React code myself, demonstrating my ability to think technically and collaborate with engineers. At Tesla, I designed an AI chatbot that boosted sales lead conversion by 120%, contributed systematic solutions to the Tesla Design System, and designed enterprise apps for Energy Installers and Powerwall Parts Store. At Accurate Background, I designed horizontal solutions for a background check platform serving thousands of global users across diverse business verticals. With experience across fast-paced startups and Fortune 500 corporations, I know how to drive clarity while balancing user needs, technology constraints, and business strategy.
+
+With 7+ years of enterprise product design experience, mastery of Figma's advanced features, and an MHCI+D from UC Irvine, I'm excited to bring my passion for foundational solutions to the Content Business Product team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  'netflix-commerce': {
+    recipient: {
+      company: 'Netflix',
+    },
+    content: {
+      greeting: 'Dear Netflix Hiring Team,',
+
+      body: `I'm a systems thinker who's spent my career building design systems and consumer experiences across mobile and web, and the Product Designer, Commerce (Platform) role is exactly where I want to be. The opportunity to extend Hawkins and create design patterns that power Netflix's Commerce organization combines my passion for systematic design with my love of consumer products that reach global audiences.
+
+At Avala AI, an early-stage startup, I'm the sole designer creating design system components and guidelines that scale across platforms. I employ storytelling to present UX strategy, navigate ambiguity to break down opportunities into actionable roadmaps, and deliver pixel-perfect mockups from concept to launch. At Tesla, I designed an AI chatbot that boosted sales lead conversion by 120%, contributed to the Tesla Design System with component guidelines and patterns, and led responsive product pages for Tesla.com reaching 220M+ visitors. I've shipped across mobile and web repeatedly: native iOS/Android apps at Tesla, INDI EV's in-vehicle interface, and a healthcare app for Catalia Health. With experience across startups and Fortune 500 corporations, I know how to partner humbly with PMs, engineers, and stakeholders to find the best solution together.
+
+With 7+ years of consumer product design, deep Figma expertise, and an MHCI+D from UC Irvine, I'm excited to bring my systems thinking and craft to the Commerce XD team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  'doordash-drive': {
+    recipient: {
+      company: 'DoorDash',
+    },
+    content: {
+      greeting: 'Dear DoorDash Hiring Team,',
+
+      body: `I'm a craftsperson who's spent my career building new products from scratch, and the Senior Product Designer role on Drive is exactly the kind of challenge I thrive in. Building logistics and delivery experiences that sit at the intersection of the physical and digital worlds requires the clarity-driving, detail-sweating approach I bring to every project.
+
+At Tesla, I designed the Energy Installers app for tracking Powerwall installation arrivals, serving both customers and installers with real-time logistics. I also owned the in-store advisor app for scheduling test drives and customer follow-up, and led responsive product pages for Tesla.com. At Avala AI, I own product areas end to end as sole designer, building a design system that spans our data platform, native mobile app, internal tools, and marketing site while driving clarity in ambiguous spaces. At INDI EV, I led 0 to 1 design of the in-vehicle interface, defining vision from scratch. With experience across fast-paced startups and Fortune 500 corporations, I know how to influence product development while partnering humbly with PMs, engineers, and stakeholders.
+
+With 7+ years building products from scratch and an MHCI+D from UC Irvine, I'm ready to own product areas end to end and help Drive redefine innovation in the delivery space.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  stubhub: {
+    recipient: {
+      company: 'StubHub',
+    },
+    content: {
+      greeting: 'Dear StubHub Hiring Team,',
+
+      body: `I've spent my career building and evolving design systems, and the Senior Design Systems Designer role is exactly the kind of foundational work I thrive in. Creating component and variable libraries that scale across web and mobile while exploring AI patterns for generative content requires the systematic thinking and documentation rigor I bring to every project.
+
+At Avala AI, I built our design system from scratch, maintaining component libraries, design tokens, and documentation that span our web platform, native mobile app, and internal tools. I use Claude Code to turn design patterns into reusable skills, giving me hands-on experience with AI patterns that could inform generative design features. At Tesla, I contributed to the Tesla Design System in Figma with component guidelines and documentation used across Tesla.com and native iOS/Android applications, collaborating with cross-functional stakeholders on system governance and adoption. At INDI EV, I established the foundational UI and component library for the in-vehicle interface from scratch. With experience across fast-paced startups and Fortune 500 corporations, I know how to balance systematic rigor with the speed of shipping.
+
+With 7+ years of design systems experience, deep Figma expertise including Variables and component libraries, the ability to ship production components using Claude Code, and an MHCI+D from UC Irvine, I'm excited to help build the foundational design infrastructure that powers StubHub's web and mobile experiences.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  'apple-music': {
+    recipient: {
+      company: 'Apple',
+    },
+    content: {
+      greeting: 'Dear Apple Creator Studio Team,',
+
+      body: `As someone who produces music in Ableton as a hobby and has designed UI for music collaboration software professionally, the UI Designer role on Music Creation Apps feels like a natural fit. The opportunity to shape how millions of creators interact with Logic Pro, GarageBand, and MainStage is exactly the kind of craft-driven, workflow-focused challenge I'm drawn to.
+
+At Notetracks, I designed UI for a collaborative cloud-based audio arranging app used by music producers and audio professionals, iteratively refining complex workflows through user feedback. At Avala AI, I'm the sole designer for a workflow-driven data management, visualization, and annotation platform, distilling intricate design challenges into elegant solutions for professional users handling deep, complex multi-step workflows. I create detailed visual specifications for engineering implementation and collaborate cross-functionally with product and engineering leadership. At Tesla, I designed native iOS and Android applications and an AI chatbot that boosted conversion by 120% through nuanced interaction design. I contributed to the Tesla Design System with component guidelines and presented UI concepts to cross-functional stakeholders and executives. At INDI EV, I led UI design for the in-vehicle interface from scratch, delivering a high-fidelity prototype with refined typography, layout, and motion behavior for LA Auto Show debut.
+
+With 7+ years of UI design experience across iOS, web, and native platforms, hands-on experience with music production software, and an MHCI+D from UC Irvine, I'm excited to bring my passion for elegant design and creative tools to the Music Creation Apps team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
 }
 
 /**
@@ -228,6 +330,20 @@ export const getCoverLetter = (templateId = 'default') => {
 export const getAvailableTemplates = () => {
   return [
     { id: 'default', name: 'Default' },
+    { id: 'apple-music', name: 'Apple (Music Creation)' },
     { id: 'doordash', name: 'DoorDash' },
+    { id: 'doordash-drive', name: 'DoorDash (Drive)' },
+    { id: 'dropbox', name: 'Dropbox' },
+    { id: 'hungryroot', name: 'Hungryroot' },
+    { id: 'calendly', name: 'Calendly' },
+    { id: 'spotify', name: 'Spotify' },
+    { id: 'waymo', name: 'Waymo' },
+    { id: 'vercel', name: 'Vercel' },
+    { id: 'classpass', name: 'ClassPass' },
+    { id: 'webflow', name: 'Webflow' },
+    { id: 'figma', name: 'Figma' },
+    { id: 'netflix', name: 'Netflix (Media Platform)' },
+    { id: 'netflix-commerce', name: 'Netflix (Commerce)' },
+    { id: 'stubhub', name: 'StubHub' },
   ]
 }

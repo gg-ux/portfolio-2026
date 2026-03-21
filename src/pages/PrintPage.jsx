@@ -1,7 +1,7 @@
 /**
  * Combined Print Page
  * Resume and Cover Letter with template support
- * Access at /print?tab=resume|cover-letter&template=default|doordash
+ * Access at /print?tab=resume|cover-letter&template=default|doordash&format=visual|ats
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
@@ -41,6 +41,7 @@ export default function PrintPage() {
   // Read state from URL
   const activeTab = searchParams.get('tab') || 'resume'
   const activeTemplate = searchParams.get('template') || 'default'
+  const activeFormat = searchParams.get('format') || 'visual'
 
   // Get template configuration
   const template = getTemplate(activeTemplate)
@@ -118,6 +119,15 @@ export default function PrintPage() {
       return newParams
     })
   }, [setSearchParams, hasEdits, activeTab])
+
+  // Handle format change
+  const handleFormatChange = useCallback((formatId) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev)
+      newParams.set('format', formatId)
+      return newParams
+    })
+  }, [setSearchParams])
 
   // Handle cover letter content changes
   const handleContentChange = useCallback((newContent) => {
@@ -327,7 +337,7 @@ export default function PrintPage() {
       {/* Content Area */}
       <div className="print-content">
         {activeTab === 'resume' ? (
-          <ResumeContent template={template} />
+          <ResumeContent template={template} format={activeFormat} />
         ) : (
           <CoverLetterContent
             template={template}
@@ -341,12 +351,15 @@ export default function PrintPage() {
       <PrintBottomBar
         activeTemplate={activeTemplate}
         onTemplateChange={handleTemplateChange}
+        activeFormat={activeFormat}
+        onFormatChange={handleFormatChange}
         onDownload={handleDownloadPDF}
         onSave={handleSave}
         onReset={handleReset}
         hasEdits={hasEdits}
         lastSaved={lastSaved}
         showSave={activeTab === 'cover-letter'}
+        showFormat={activeTab === 'resume'}
       />
     </div>
   )
