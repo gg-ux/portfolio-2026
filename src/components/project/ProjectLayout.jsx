@@ -293,6 +293,7 @@ export default function ProjectLayout({
                       src={project.image}
                       alt={project.name}
                       className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
                     />
                   </div>
                   <div className="mt-5 text-center">
@@ -355,6 +356,7 @@ export default function ProjectLayout({
                       src={project.image}
                       alt={project.name}
                       className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
                     />
                   </div>
                   <div className="mt-6 text-center">
