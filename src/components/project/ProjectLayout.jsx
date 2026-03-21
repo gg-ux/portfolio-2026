@@ -51,7 +51,7 @@ const projects = [
   {
     id: 5,
     name: 'Notetracks',
-    category: 'Audio Collaboration Platform',
+    category: 'DAW Collaboration Platform',
     image: notetracksImg,
     link: '/project/notetracks',
     bgDark: '#1a1a1a',

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { BannerProvider } from './context/BannerContext'
@@ -13,25 +13,23 @@ import GlobalGrain from './components/GlobalGrain'
 import ScrollToTop from './components/ScrollToTop'
 import Loader from './components/Loader'
 import HomePage from './pages/HomePage'
-import ResumePage from './pages/ResumePage'
-import DesignSystemPage from './pages/DesignSystemPage'
-import {
-  FoundationPage,
-  ComponentsPage,
-  MotionPage,
-  PatternsPage,
-} from './pages/design-system'
-import {
-  TeslaChatbot,
-  TeslaMegaMenu,
-  IndiEV,
-  CataliaHealth,
-  Notetracks,
-} from './pages/projects'
-import HeroTestPage from './pages/HeroTestPage'
-import PlaygroundPage from './pages/PlaygroundPage'
-import PrintPage from './pages/PrintPage'
-import ResumePDFMakePage from './pages/ResumePDFMakePage'
+
+// Lazy load heavy pages for better initial load performance
+const ResumePage = lazy(() => import('./pages/ResumePage'))
+const DesignSystemPage = lazy(() => import('./pages/DesignSystemPage'))
+const FoundationPage = lazy(() => import('./pages/design-system/FoundationPage'))
+const ComponentsPage = lazy(() => import('./pages/design-system/ComponentsPage'))
+const MotionPage = lazy(() => import('./pages/design-system/MotionPage'))
+const PatternsPage = lazy(() => import('./pages/design-system/PatternsPage'))
+const TeslaChatbot = lazy(() => import('./pages/projects/TeslaChatbot'))
+const TeslaMegaMenu = lazy(() => import('./pages/projects/TeslaMegaMenu'))
+const IndiEV = lazy(() => import('./pages/projects/IndiEV'))
+const CataliaHealth = lazy(() => import('./pages/projects/CataliaHealth'))
+const Notetracks = lazy(() => import('./pages/projects/Notetracks'))
+const HeroTestPage = lazy(() => import('./pages/HeroTestPage'))
+const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'))
+const PrintPage = lazy(() => import('./pages/PrintPage'))
+const ResumePDFMakePage = lazy(() => import('./pages/ResumePDFMakePage'))
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(() => {
@@ -106,20 +104,22 @@ function AppContent() {
         {!(isHomePage && isLoading) && <Navigation />}
         <ContactDrawer />
         <main key={location.pathname} className="relative z-10">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/resume" element={<ResumePage />} />
-            <Route path="/design-system" element={<DesignSystemPage />} />
-            <Route path="/design-system/foundation" element={<FoundationPage />} />
-            <Route path="/design-system/components" element={<ComponentsPage />} />
-            <Route path="/design-system/motion" element={<MotionPage />} />
-            <Route path="/design-system/patterns" element={<PatternsPage />} />
-            <Route path="/project/tesla-chatbot" element={<TeslaChatbot />} />
-            <Route path="/project/tesla-mega-menu" element={<TeslaMegaMenu />} />
-            <Route path="/project/indi-ev" element={<IndiEV />} />
-            <Route path="/project/catalia-health" element={<CataliaHealth />} />
-            <Route path="/project/notetracks" element={<Notetracks />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/resume" element={<ResumePage />} />
+              <Route path="/design-system" element={<DesignSystemPage />} />
+              <Route path="/design-system/foundation" element={<FoundationPage />} />
+              <Route path="/design-system/components" element={<ComponentsPage />} />
+              <Route path="/design-system/motion" element={<MotionPage />} />
+              <Route path="/design-system/patterns" element={<PatternsPage />} />
+              <Route path="/project/tesla-chatbot" element={<TeslaChatbot />} />
+              <Route path="/project/tesla-mega-menu" element={<TeslaMegaMenu />} />
+              <Route path="/project/indi-ev" element={<IndiEV />} />
+              <Route path="/project/catalia-health" element={<CataliaHealth />} />
+              <Route path="/project/notetracks" element={<Notetracks />} />
+            </Routes>
+          </Suspense>
         </main>
         {!isDesignSystemSubpage && <Footer />}
       </div>

@@ -53,7 +53,7 @@ export default function IndiEV() {
     <ProjectLayout sections={sections}>
       <ProjectHero
         company="INDI EV"
-        title="Electric Car IVI"
+        title="In-Vehicle Infotainment"
         description="INDI EV was a Los Angeles-based electric car startup whose key differentiator was the VIC (Vehicle Integrated Computer) — an onboard supercomputer enabling gaming, content creation, and streaming. I designed the infotainment system across three displays: cluster, driver, and passenger."
         role="UX/UI Designer"
         timeline="Aug 2020 – Sep 2021"
