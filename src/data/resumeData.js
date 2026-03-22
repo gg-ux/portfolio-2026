@@ -7,7 +7,7 @@ export const personalInfo = {
   name: 'Grace Guo',
   title: 'Senior Product Designer',
   credentials: 'MHCI+D',
-  tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about 0-1 product design, consumer experiences, and building systems at scale.',
+  tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. I move between visual craft, system architecture, and production code—from automotive interfaces to AI products.',
   email: 'graceguo.design@gmail.com',
   linkedin: 'linkedin.com/in/grace-guo-ux',
   linkedinUrl: 'https://www.linkedin.com/in/grace-guo-ux/',
