@@ -123,7 +123,7 @@ export default function BioContactTransition() {
                   </H2>
                 </blockquote>
                 <Body className="mb-10 max-w-2xl">
-                  I want people to feel understood, not processed. This belief has driven 7+ years of work: core experiences at Tesla, a healthcare app for real patients, an in-vehicle interface that can't afford confusion. Now I'm at a mission-driven AI startup, shipping product and code.
+                  I want people to feel understood, not processed. I move between visual details, system architecture, and production code without friction. That's led me from Tesla to in-vehicle interfaces to audio collaboration tools to an AI startup.
                 </Body>
                 <div className="flex flex-wrap gap-4">
                   <ButtonWithArrow
