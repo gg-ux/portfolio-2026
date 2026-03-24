@@ -86,7 +86,7 @@ function ATSResumeContent({ template }) {
         .ats-section-title {
           font-family: 'Azeret Mono', monospace;
           font-size: 8pt;
-          font-weight: 500;
+          font-weight: 550;
           text-transform: uppercase;
           letter-spacing: 1.5px;
           margin: 12px 0 6px 0;
@@ -181,7 +181,7 @@ function ATSResumeContent({ template }) {
         .ats-skills-label {
           font-family: 'Azeret Mono', monospace;
           font-size: 7pt;
-          font-weight: 500;
+          font-weight: 550;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           color: ${accent} !important;
@@ -493,7 +493,7 @@ export default function ResumeContent({ template, format = 'visual' }) {
         .section-title {
           font-family: 'Azeret Mono', monospace;
           font-size: 8pt;
-          font-weight: 500;
+          font-weight: 550;
           text-transform: uppercase;
           letter-spacing: 1.5px;
           margin: 0 0 10px 0;
@@ -660,7 +660,7 @@ export default function ResumeContent({ template, format = 'visual' }) {
         .skills-label {
           font-family: 'Azeret Mono', monospace;
           font-size: 6.5pt;
-          font-weight: 500;
+          font-weight: 550;
           text-transform: uppercase;
           letter-spacing: 1px;
           color: ${accent};

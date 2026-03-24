@@ -696,18 +696,15 @@ export const resumeTemplateOverrides = {
         'Designed native iOS and Android applications including in-store advisor app for scheduling and customer engagement, demonstrating multi-platform UI expertise',
         'Led design of AI chatbot with nuanced interaction design, boosting sales lead conversion rates by 120% through elegant conversational UI',
         'Contributed to Tesla Design System with component guidelines and visual specifications across web and native platforms',
-        'Created presentations to communicate UI concepts to diverse cross-functional stakeholders including engineering, product, and executives',
         'Led global launch of responsive product pages for Tesla.com, balancing visual design craft with tight deadlines',
       ],
       'Notetracks': [
         'Designed UI for collaborative cloud-based audio arranging and note-taking web app used by music producers and audio professionals',
-        'Iteratively refined user experiences through BETA user feedback, balancing workflow complexity with intuitive interaction design',
         'Designed waveform visualization, timeline scrubbing, track layering and mixing controls, and timestamped annotation features',
       ],
       'INDI EV': [
         'Led UI design of in-vehicle interface for debut electric car, establishing visual language and interaction patterns from scratch',
         'Delivered high-fidelity prototype with refined typography, layout, and motion behavior for LA Auto Show debut',
-        'Collaborated with engineering and animation teams to verify final implementation and ensure design quality',
       ],
     },
     // Exclude Accurate Background and Catalia Health for this template - Notetracks is more relevant
