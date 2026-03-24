@@ -181,7 +181,7 @@ function ATSResumeContent({ template }) {
         .ats-skills-label {
           font-family: 'Azeret Mono', monospace;
           font-size: 7pt;
-          font-weight: 600;
+          font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           color: ${accent} !important;
@@ -660,7 +660,7 @@ export default function ResumeContent({ template, format = 'visual' }) {
         .skills-label {
           font-family: 'Azeret Mono', monospace;
           font-size: 6.5pt;
-          font-weight: 600;
+          font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 1px;
           color: ${accent};
