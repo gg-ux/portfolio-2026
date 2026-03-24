@@ -86,7 +86,7 @@ function ATSResumeContent({ template }) {
         .ats-section-title {
           font-family: 'Azeret Mono', monospace;
           font-size: 8pt;
-          font-weight: 600;
+          font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 1.5px;
           margin: 12px 0 6px 0;
