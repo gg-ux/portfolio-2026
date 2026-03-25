@@ -282,6 +282,40 @@ With 7+ years of design systems experience, deep Figma expertise including Varia
     },
   },
 
+  'disney-ai': {
+    recipient: {
+      company: 'Disney',
+    },
+    content: {
+      greeting: 'Dear Disney Hiring Team,',
+
+      body: `I've spent my career translating complex technical capabilities into intuitive, trusted experiences, and the Senior UX Designer role shaping AI-enabled enterprise workflows at Disney is exactly where I want to be. The opportunity to design systems that augment human decision-making for teams creating the world's most beloved content is incredibly exciting.
+
+At Avala AI, I'm the sole designer at an engineer-led startup, shipping end-to-end enterprise workflows using agentic AI development (Claude Code), including internal tools with AI-powered features like automated ticketing and operations dashboards. I own UX from problem framing through delivery for five distinct user types across ambiguous problem spaces, partnering deeply with Engineering and Operations leadership to ensure designs are technically feasible and implementation-ready. At Tesla, I designed AI chatbot automation flows that boosted sales lead conversion by 120% by intelligently routing users and freeing advisors to focus on high-intent customers. I also contributed to complex enterprise workflows for internal tools like Energy Installers and Powerwall Parts Store. At Accurate Background, I designed data-rich compliance workflows for a B2B platform serving thousands of global users, translating complex operational processes into clear, usable interactions.
+
+With 7+ years designing AI-enabled and enterprise applications, strong systems thinking, and an MHCI+D from UC Irvine, I'm excited to help shape the next generation of AI-augmented experiences at Disney.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  'apple-appstore': {
+    recipient: {
+      company: 'Apple',
+    },
+    content: {
+      greeting: 'Dear App Store Product Design Team,',
+
+      body: `I've spent my career tackling complex problems and crafting sophisticated, simple solutions that surprise and delight users. The Product Designer role on the App Store team is exactly the kind of multi-platform, consumer-facing challenge I'm drawn to. Designing experiences that billions of people interact with every month requires the extraordinary visual craft and user-centered thinking I bring to every project.
+
+At Avala AI, I'm the sole designer creating experiences across web and iOS for five distinct user types, each with unique workflows. I create design mockups, prototypes, and production visual assets with keen attention to typography, color use, and subtle details. I collaborate cross-functionally with Engineering and Operations leadership, presenting design ideas and documentation for proper implementation. At Tesla, I designed across multiple platforms including responsive web and native iOS/Android applications reaching millions of users worldwide. I led the AI chatbot that boosted sales lead conversion by 120% through intuitive, delightful interactions, and contributed to the Tesla Design System with component guidelines and visual specifications. I've consistently delivered in dynamic, deadline-driven environments: INDI EV's in-vehicle interface for LA Auto Show debut, and collaborative audio software at Notetracks.
+
+With 7+ years of multi-platform design experience, a passion for the Apple design aesthetic, and an MHCI+D from UC Irvine, I'm excited to bring my visual craft and user-centered approach to the App Store Product Design team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
   'apple-music': {
     recipient: {
       company: 'Apple',
@@ -330,6 +364,8 @@ export const getCoverLetter = (templateId = 'default') => {
 export const getAvailableTemplates = () => {
   return [
     { id: 'default', name: 'Default' },
+    { id: 'disney-ai', name: 'Disney (AI Enterprise)' },
+    { id: 'apple-appstore', name: 'Apple (App Store)' },
     { id: 'apple-music', name: 'Apple (Music Creation)' },
     { id: 'doordash', name: 'DoorDash' },
     { id: 'doordash-drive', name: 'DoorDash (Drive)' },

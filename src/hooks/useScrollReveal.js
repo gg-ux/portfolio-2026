@@ -11,6 +11,7 @@ export function useScrollReveal(options = {}) {
     const threshold = options.threshold || 0.1
     let observer = null
     let rafId = null
+    let scrollHandler = null
 
     // Use requestAnimationFrame to wait for layout to complete after navigation
     rafId = requestAnimationFrame(() => {
@@ -31,20 +32,41 @@ export function useScrollReveal(options = {}) {
           if (entry.isIntersecting) {
             setIsVisible(true)
             observer.unobserve(element)
+            // Clean up scroll fallback if observer worked
+            if (scrollHandler) {
+              window.removeEventListener('scroll', scrollHandler)
+            }
           }
         },
         {
-          threshold: threshold,
-          rootMargin: options.rootMargin || '0px 0px -50px 0px',
+          threshold: 0, // Use 0 for better mobile compatibility
+          rootMargin: options.rootMargin || '0px 0px 0px 0px', // Remove negative margin for mobile
         }
       )
 
       observer.observe(element)
+
+      // Fallback: scroll listener for mobile browsers where IntersectionObserver may not fire
+      scrollHandler = () => {
+        if (!element) return
+        const rect = element.getBoundingClientRect()
+        // Element is visible if any part of it is in the viewport
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          setIsVisible(true)
+          window.removeEventListener('scroll', scrollHandler)
+          if (observer) observer.disconnect()
+        }
+      }
+      window.addEventListener('scroll', scrollHandler, { passive: true })
+
+      // Check once immediately in case already scrolled into view
+      scrollHandler()
     })
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId)
       if (observer) observer.disconnect()
+      if (scrollHandler) window.removeEventListener('scroll', scrollHandler)
     }
   }, [options.threshold, options.rootMargin])
 

@@ -669,6 +669,81 @@ export const resumeTemplateOverrides = {
     },
   },
 
+  'disney-ai': {
+    title: 'Senior UX Designer',
+    tagline: 'Senior UX Designer, MHCI+D, based in Los Angeles with 7+ years of experience designing AI-enabled enterprise workflows and complex, data-rich applications. Systems thinker passionate about translating AI capabilities into intuitive, trusted, scalable experiences.',
+    skills: {
+      design: ['AI-Augmented UX', 'Systems Thinking', 'Interaction Design', 'Information Architecture', 'Design Systems', 'End-to-End Product Design'],
+      development: ['High-Fidelity Prototyping', 'AI-Assisted Development', 'Design Documentation', 'Wireframes'],
+      strategy: ['Cross-Functional Collaboration', 'User Research', 'Workshop Facilitation', 'Stakeholder Communication'],
+      tools: ['Figma', 'Claude Code', 'Jira', 'Confluence', 'GitHub', 'Miro'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Sole designer at engineer-led AI startup, owning UX from problem framing through delivery for five distinct user types across ambiguous problem spaces',
+        'Ship production code using agentic AI workflows (Claude Code); built internal tools with AI-powered features including automated ticketing and operations dashboards',
+        'Build and maintain design system with component library and documentation across platform, internal tools, and marketing site',
+        'Design for enterprise constraints including scale, role-based access, compliance, and integration with existing operational workflows',
+      ],
+      'Tesla': [
+        'Led global launch of responsive product and feature pages for Tesla.com, driving product discovery across Energy, Support, and Investor Relations',
+        'Designed AI chatbot automation flows handling 8 intent categories, boosting sales lead conversion by 120% by freeing advisors to focus on sales-ready customers',
+        'Contributed to Tesla Design System with scalable patterns and documentation; partnered cross-functionally with Engineering, Product, and Analytics',
+        'Designed enterprise apps for Energy Installers and Powerwall Parts Store, balancing business goals with user needs and technical realities',
+      ],
+      'Accurate Background': [
+        'Designed complex, data-rich compliance workflows for enterprise B2B platform serving thousands of global users',
+        'Translated complex operational processes into intuitive experiences; created error-detection tools that streamlined decision-making',
+        'Collaborated with cross-functional teams including overseas engineering to align on requirements and deliver scalable solutions',
+      ],
+      'Catalia Health': [
+        'Led UX across complex healthcare system, conducting user research with 42 participants and synthesizing insights into actionable design recommendations',
+        'Designed HIPAA-compliant workflows balancing regulatory constraints, user needs, and technical feasibility',
+      ],
+    },
+    hideJobs: ['Notetracks', 'INDI EV'],
+  },
+
+  'apple-appstore': {
+    title: 'Senior Product Designer',
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience designing across iOS, web, and native platforms. Passionate about tackling complex problems and crafting sophisticated, simple solutions with extraordinary attention to typography, color, and subtle details.',
+    skills: {
+      design: ['UX/UI Design (iOS/macOS/Web)', 'Visual Design', 'Interaction Design', 'User-Centered Design', 'Prototyping', 'Design Systems'],
+      development: ['HTML/CSS/JavaScript Prototyping', 'AI-Assisted Development', 'Visual Asset Production', 'Design Documentation'],
+      strategy: ['Cross-Functional Collaboration', 'Iterative Design Process', 'Design Presentations', 'Design Critique'],
+      tools: ['Figma', 'Sketch', 'Claude Code', 'Vercel', 'Keynote', 'Adobe Creative Suite'],
+    },
+    titleOverrides: {
+      'Avala AI': 'Senior Product Designer',
+      'Tesla': 'Product Designer',
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer across multi-platform product (web, iOS), distilling complex problems into sophisticated, simple solutions for five distinct user types',
+        'Create design mockups, prototypes, and production visual assets with keen attention to typography, color use, and subtle details',
+        'Build and maintain design system with component library, ensuring consistency across all product surfaces and platforms',
+        'Collaborate cross-functionally with Engineering and Operations leadership; present design ideas and documentation for proper implementation',
+        'Design complex annotation workflows with user-centered design principles, iterating based on user feedback and group critique',
+      ],
+      'Tesla': [
+        'Designed across multiple platforms including responsive web (Tesla.com) and native iOS/Android applications, reaching millions of users worldwide',
+        'Led design of AI chatbot with sophisticated conversational UI, boosting sales lead conversion rates by 120% through intuitive, delightful interactions',
+        'Contributed to Tesla Design System with component guidelines, visual specifications, and documentation across web and native platforms',
+        'Led global launch of responsive product pages, translating complex product information into clean, focused, understandable solutions',
+        'Presented design concepts to cross-functional teams including Engineering, Product Marketing, and Senior Management',
+      ],
+      'INDI EV': [
+        'Led design of in-vehicle interface for debut electric car, establishing visual design language with attention to typography, color, and consistency',
+        'Delivered high-fidelity prototypes and production visual assets for LA Auto Show debut, working in deadline-driven environment',
+      ],
+      'Notetracks': [
+        'Designed UI for collaborative cloud-based audio platform, iterating through user feedback in dynamic, fast-paced environment',
+        'Created visual assets and marketing materials; collaborated with founder to refine user experiences',
+      ],
+    },
+    hideJobs: ['Accurate Background', 'Catalia Health'],
+  },
+
   'apple-music': {
     title: 'Senior UI Designer',
     tagline: 'Senior UI Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Classically trained pianist (Certificate of Merit Level 10) and music producer (Ableton) passionate about elegant interfaces, workflow-driven experiences, and crafting nuanced visual solutions for creative professionals.',

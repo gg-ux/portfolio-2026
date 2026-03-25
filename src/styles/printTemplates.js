@@ -304,6 +304,46 @@ export const templates = {
     },
   },
 
+  'disney-ai': {
+    id: 'disney-ai',
+    name: 'Disney (AI Enterprise)',
+    colors: {
+      accent: '#2563EB',
+      accentGradient: 'linear-gradient(90deg, #2563EB, #3B82F6)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  'apple-appstore': {
+    id: 'apple-appstore',
+    name: 'Apple (App Store)',
+    colors: {
+      accent: '#000000',
+      accentGradient: 'linear-gradient(90deg, #000000, #333333)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
   'apple-music': {
     id: 'apple-music',
     name: 'Apple (Music Creation)',

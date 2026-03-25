@@ -101,10 +101,10 @@ export default function CataliaHealth() {
         {/* Team Grid */}
         <div ref={teamRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8">
           {[
-            { name: 'Grace Guo', role: 'Lead UX/UI Designer\nUser Researcher', image: 'Catalia-Grace.png' },
-            { name: 'Renee Reid', role: 'Lead User Researcher', image: 'Catalia-Renee.png' },
-            { name: 'Alex Rosales', role: 'Product Manager', image: 'Catalia-Alex.png' },
-            { name: 'Alexa Steinhauser', role: 'UX/UI Designer\nUser Researcher', image: 'Catalia-Alexa.png' },
+            { name: 'Grace Guo', role: 'Lead UX/UI Designer\nUser Researcher', image: 'Catalia-Grace.webp' },
+            { name: 'Renee Reid', role: 'Lead User Researcher', image: 'Catalia-Renee.webp' },
+            { name: 'Alex Rosales', role: 'Product Manager', image: 'Catalia-Alex.webp' },
+            { name: 'Alexa Steinhauser', role: 'UX/UI Designer\nUser Researcher', image: 'Catalia-Alexa.webp' },
           ].map((member, index) => (
             <div
               key={member.name}

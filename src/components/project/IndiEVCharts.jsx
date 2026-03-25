@@ -148,7 +148,7 @@ export function InteractiveClimateDemo() {
       >
         {/* Base image (iteration 3) */}
         <img
-          src="/assets/projects/indi-ev/content/climate-iteration3.png"
+          src="/assets/projects/indi-ev/content/climate-iteration3.webp"
           alt="Climate control interface - click fan button to interact"
           className={`w-full h-auto transition-opacity duration-300 ${
             isFanOpen ? 'opacity-0' : 'opacity-100'
@@ -158,7 +158,7 @@ export function InteractiveClimateDemo() {
 
         {/* Fan open image (overlaid) */}
         <img
-          src="/assets/projects/indi-ev/content/climate-iteration3-fan.png"
+          src="/assets/projects/indi-ev/content/climate-iteration3-fan.webp"
           alt="Climate control with fan layer expanded"
           className={`absolute inset-0 w-full h-auto transition-opacity duration-300 ${
             isFanOpen ? 'opacity-100' : 'opacity-0'
