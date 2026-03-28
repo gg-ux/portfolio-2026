@@ -332,6 +332,7 @@ export default function PrintPage() {
       <PrintNavigation
         activeTab={activeTab}
         onTabChange={handleTabChange}
+        activeTemplate={activeTemplate}
       />
 
       {/* Content Area */}

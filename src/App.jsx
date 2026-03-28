@@ -26,6 +26,7 @@ const TeslaMegaMenu = lazy(() => import('./pages/projects/TeslaMegaMenu'))
 const IndiEV = lazy(() => import('./pages/projects/IndiEV'))
 const CataliaHealth = lazy(() => import('./pages/projects/CataliaHealth'))
 const Notetracks = lazy(() => import('./pages/projects/Notetracks'))
+const CuboidAnnotator = lazy(() => import('./pages/projects/CuboidAnnotator'))
 const HeroTestPage = lazy(() => import('./pages/HeroTestPage'))
 const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'))
 const PrintPage = lazy(() => import('./pages/PrintPage'))
@@ -93,6 +94,7 @@ function AppContent() {
     )
   }
 
+  
   return (
     <>
       {isHomePage && isLoading && <Loader onComplete={handleLoaderComplete} />}
@@ -118,6 +120,7 @@ function AppContent() {
               <Route path="/project/indi-ev" element={<IndiEV />} />
               <Route path="/project/catalia-health" element={<CataliaHealth />} />
               <Route path="/project/notetracks" element={<Notetracks />} />
+              <Route path="/project/cuboid-annotator" element={<CuboidAnnotator />} />
             </Routes>
           </Suspense>
         </main>

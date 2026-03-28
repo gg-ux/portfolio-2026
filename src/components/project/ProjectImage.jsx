@@ -141,6 +141,8 @@ export function ProjectImageFullWidth({
   alt,
   caption,
   noBg = false,
+  darkBg = false,
+  glassBorder = false,
   className = ''
 }) {
   const { isDark } = useTheme()
@@ -149,6 +151,13 @@ export function ProjectImageFullWidth({
   // Tighter spacing when no caption
   const spacing = caption ? 'my-8 md:my-12' : 'my-6'
 
+  // Background logic: noBg > darkBg > theme-based
+  const getBgClass = () => {
+    if (noBg) return ''
+    if (darkBg) return 'bg-[#111111]'
+    return isDark ? 'bg-[#111111]' : 'bg-gray-100'
+  }
+
   return (
     <figure
       ref={ref}
@@ -156,17 +165,26 @@ export function ProjectImageFullWidth({
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
-      <div
-        className={`overflow-hidden rounded-xl md:rounded-2xl ${
-          noBg ? '' : isDark ? 'bg-[#111111]' : 'bg-gray-100'
-        }`}
-      >
-        <img
-          src={src}
-          alt={alt}
-          className="w-full h-auto"
-          loading="lazy"
-        />
+      <div className={`relative ${glassBorder ? 'p-3' : ''}`}>
+        <div
+          className={`overflow-hidden rounded-xl md:rounded-2xl ${getBgClass()}`}
+        >
+          <img
+            src={src}
+            alt={alt}
+            className="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+        {glassBorder && (
+          <div
+            className={`absolute inset-0 rounded-2xl pointer-events-none border ${
+              isDark
+                ? 'border-white/[0.08] bg-white/[0.015] shadow-[0_4px_24px_rgba(0,0,0,0.25)]'
+                : 'border-black/[0.08] bg-black/[0.02] shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
+            }`}
+          />
+        )}
       </div>
       {caption && (
         <figcaption className="mt-4 text-center">

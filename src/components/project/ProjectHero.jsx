@@ -21,6 +21,7 @@ export default function ProjectHero({
   coverPosition = 'center 30%',
   lightBanner = false,
   darkBanner = false,
+  darkBg = false,
   noLightFilter = false,
   darkOverlay = false,
 }) {
@@ -85,9 +86,12 @@ export default function ProjectHero({
       {coverImage && (
         <div
           ref={bannerRef}
-          className={`relative w-full aspect-[4/3] md:aspect-[2/1] mb-12 md:mb-16 overflow-hidden ${
-            isDark ? 'bg-[#1a1a1a]' : 'bg-[#f5f5f5]'
-          }`}
+          className="relative w-full aspect-[4/3] md:aspect-[2/1] mb-12 md:mb-16 overflow-hidden"
+          style={{
+            background: darkBg
+              ? (isDark ? 'linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%)' : '#0a0a0a')
+              : (isDark ? '#0a0a0a' : '#FAF8F4')
+          }}
         >
           <img
             src={coverImage}
@@ -97,7 +101,7 @@ export default function ProjectHero({
               transform: `translateY(${parallaxY}px) scale(${scale})`,
               transformOrigin: 'center top',
               objectPosition: coverPosition,
-              filter: isDark || noLightFilter ? 'none' : 'sepia(0.05) saturate(1.05)',
+              filter: isDark || darkBg || noLightFilter ? 'none' : 'sepia(0.05) saturate(1.05)',
             }}
           />
           {/* Dark gradient overlay for nav visibility */}
