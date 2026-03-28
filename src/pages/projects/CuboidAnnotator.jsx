@@ -333,7 +333,11 @@ export default function CuboidAnnotator() {
             })}
           </div>
 
-          <VideoPlaceholder label="Video: Resizable panels + show/hide side panel" />
+          <ProjectVideo
+            src="/assets/projects/cuboid-annotator/adaptive-workspace.webm"
+            caption="Resizable panels and collapsible sidebar"
+            autoPlay
+          />
 
           <ProjectImageFullWidth
             src="/assets/projects/cuboid-annotator/move-patterns.webp"
@@ -372,7 +376,11 @@ export default function CuboidAnnotator() {
             })}
           </div>
 
-          <VideoPlaceholder label="Video: Selection + transform tools + keyboard shortcuts" />
+          <ProjectVideo
+            src="/assets/projects/cuboid-annotator/selection-transform.webm"
+            caption="Selection and transform tools with keyboard shortcuts"
+            autoPlay
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Ground Alignment">
@@ -404,7 +412,11 @@ export default function CuboidAnnotator() {
             })}
           </div>
 
-          <VideoPlaceholder label="Video: Ground alignment / snap to plane feature" />
+          <ProjectVideo
+            src="/assets/projects/cuboid-annotator/ground-alignment.webm"
+            caption="Ground alignment: set road plane, then batch snap"
+            autoPlay
+          />
 
           <ProjectCallout>
             This is human-in-the-loop AI design. We can't fully automate ground detection, but we can give humans the right tools to do it efficiently.
@@ -441,7 +453,11 @@ export default function CuboidAnnotator() {
             })}
           </div>
 
-          <VideoPlaceholder label="Video: Expandable transform data (LRL_T) + bug reporting icons" />
+          <ProjectVideo
+            src="/assets/projects/cuboid-annotator/cross-functional.webm"
+            caption="Progressive disclosure for different user roles"
+            autoPlay
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Focus Tools">
@@ -474,7 +490,11 @@ export default function CuboidAnnotator() {
             })}
           </div>
 
-          <VideoPlaceholder label="Video: Isolate cuboid, show paths, show centers" />
+          <ProjectVideo
+            src="/assets/projects/cuboid-annotator/focus-tools.webm"
+            caption="Focus tools: isolate, show paths, show centers"
+            autoPlay
+          />
         </ProjectSubsection>
       </ProjectSection>
 
@@ -518,21 +538,3 @@ export default function CuboidAnnotator() {
   )
 }
 
-// Temporary video placeholder component
-function VideoPlaceholder({ label }) {
-  const { isDark } = useTheme()
-
-  return (
-    <div
-      className={`aspect-video rounded-xl flex items-center justify-center my-8 ${
-        isDark
-          ? 'bg-white/[0.02] border border-white/[0.06]'
-          : 'bg-black/[0.02] border border-black/[0.06]'
-      }`}
-    >
-      <span className="font-mono text-xs uppercase tracking-wider theme-muted text-center px-4">
-        {label}
-      </span>
-    </div>
-  )
-}

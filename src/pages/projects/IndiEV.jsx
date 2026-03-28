@@ -8,6 +8,7 @@ import {
   ProjectCallout,
   ProjectImageFullWidth,
   ProjectImageGrid,
+  ProjectVideo,
   ProjectYouTube,
   UsabilityResultsTaskCentric,
   UsabilityResultsValidation,
@@ -67,9 +68,10 @@ export default function IndiEV() {
         <ProjectText>
           As the UX/UI Designer on this project, I was responsible for designing the entire in-vehicle infotainment (IVI) system interface. This included creating 40+ high-fidelity mockups across 15+ features, establishing a comprehensive design system for both light and dark modes, and collaborating with an animator to produce a demo reel showcased at Automobility LA 2021.
         </ProjectText>
-        <ProjectYouTube
-          url="https://youtu.be/2y1L2txpWsM"
+        <ProjectVideo
+          src="/assets/projects/indi-ev/content/demoreel.webm"
           caption="INDI EV Demo Reel - Auto Show Presentation"
+          autoPlay
         />
 
         <ProjectSubsection title="Deliverables">
