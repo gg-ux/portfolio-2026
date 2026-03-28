@@ -1,3 +1,5 @@
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { Play, Pause, CornersOut } from '@phosphor-icons/react'
 import { useTheme } from '../../context/ThemeContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { Caption } from '../Typography'
@@ -198,7 +200,10 @@ export function ProjectImageFullWidth({
 }
 
 /**
- * ProjectVideo - Embedded video player
+ * ProjectVideo - Embedded video player with custom controls
+ *
+ * Desktop: Paused shows play button. Playing shows scrubber on hover. Click anywhere to pause.
+ * Mobile: Paused shows play button. Tap while playing shows controls. Auto-hides after 3s.
  */
 export function ProjectVideo({
   src,
@@ -210,32 +215,213 @@ export function ProjectVideo({
   className = ''
 }) {
   const { isDark } = useTheme()
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const [containerRef, isVisible] = useScrollReveal({ threshold: 0.1 })
+  const videoRef = useRef(null)
+  const hideTimeoutRef = useRef(null)
 
-  // Tighter spacing when no caption
+  const [isPaused, setIsPaused] = useState(!autoPlay)
+  const [showControls, setShowControls] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+
+  // Detect touch device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(hover: none) and (pointer: coarse)').matches)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Format time as M:SS
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60)
+    const s = Math.floor(seconds % 60)
+    return `${m}:${s.toString().padStart(2, '0')}`
+  }
+
+  // Auto-hide controls after 3 seconds (mobile only)
+  const resetHideTimer = useCallback(() => {
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
+    if (!isPaused && isMobile) {
+      hideTimeoutRef.current = setTimeout(() => setShowControls(false), 3000)
+    }
+  }, [isPaused, isMobile])
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
+    }
+  }, [])
+
+  const handlePlay = () => videoRef.current?.play()
+  const handlePause = () => videoRef.current?.pause()
+
+  const handleContainerClick = (e) => {
+    // Don't handle if clicking on scrubber
+    if (e.target.closest('.video-scrubber')) return
+
+    if (isMobile) {
+      // Mobile: tap to play when paused, tap to toggle controls when playing
+      if (isPaused) {
+        handlePlay()
+      } else {
+        setShowControls(prev => !prev)
+        resetHideTimer()
+      }
+    } else {
+      // Desktop: click to play/pause
+      isPaused ? handlePlay() : handlePause()
+    }
+  }
+
+  const handleSeek = (e) => {
+    e.stopPropagation()
+    const rect = e.currentTarget.getBoundingClientRect()
+    const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+    if (videoRef.current) {
+      videoRef.current.currentTime = percent * duration
+    }
+    resetHideTimer()
+  }
+
+  const handleFullscreen = (e) => {
+    e.stopPropagation()
+    const video = videoRef.current
+    if (video?.webkitEnterFullscreen) video.webkitEnterFullscreen() // iOS
+    else if (video?.requestFullscreen) video.requestFullscreen()
+  }
+
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0
   const spacing = caption ? 'my-8 md:my-12' : 'my-6'
+
+  // Show scrubber: desktop on hover while playing, mobile on tap while playing
+  const showScrubber = !isPaused && (isMobile ? showControls : isHovering)
+
+  // Glassmorphic button style
+  const buttonStyle = {
+    background: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+    border: isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(255, 255, 255, 0.5)',
+    boxShadow: isDark ? '0 8px 32px rgba(0, 0, 0, 0.3)' : '0 8px 32px rgba(0, 0, 0, 0.1)'
+  }
+  const iconColor = isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.7)'
 
   return (
     <figure
-      ref={ref}
+      ref={containerRef}
       className={`${spacing} transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
       <div
-        className={`overflow-hidden rounded-xl ${
+        className={`relative overflow-hidden rounded-xl cursor-pointer ${
           isDark ? 'bg-[#111111]' : 'bg-gray-100'
         }`}
+        onClick={handleContainerClick}
+        onMouseEnter={() => !isMobile && setIsHovering(true)}
+        onMouseLeave={() => !isMobile && setIsHovering(false)}
       >
         <video
+          ref={videoRef}
           src={src}
           poster={poster}
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
           playsInline
+          controlsList="nodownload noplaybackrate"
+          disablePictureInPicture
           className="w-full h-auto"
+          onPlay={() => setIsPaused(false)}
+          onPause={() => setIsPaused(true)}
+          onTimeUpdate={() => setCurrentTime(videoRef.current?.currentTime || 0)}
+          onLoadedMetadata={() => setDuration(videoRef.current?.duration || 0)}
         />
+
+        {/* Play button overlay (when paused) */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center bg-black/[0.13] transition-opacity duration-300 ${
+            isPaused ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg backdrop-blur-md"
+            style={buttonStyle}
+          >
+            <Play size={28} weight="fill" style={{ color: iconColor, marginLeft: '3px' }} />
+          </div>
+        </div>
+
+        {/* Mobile only: Centered pause button when controls visible */}
+        {isMobile && (
+          <div
+            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+              showControls && !isPaused ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg backdrop-blur-md cursor-pointer"
+              style={buttonStyle}
+              onClick={(e) => { e.stopPropagation(); handlePause() }}
+            >
+              <Pause size={28} weight="fill" style={{ color: iconColor }} />
+            </div>
+          </div>
+        )}
+
+        {/* Scrubber bar (desktop: hover, mobile: tap) */}
+        <div
+          className={`video-scrubber absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-300 ${
+            showScrubber ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.4))' }}
+        >
+          <div className="flex items-center gap-3">
+            {/* Pause button (desktop only - mobile has centered button) */}
+            {!isMobile && (
+              <button
+                className="p-2 rounded-full backdrop-blur-sm"
+                style={{ background: 'rgba(255, 255, 255, 0.15)' }}
+                onClick={(e) => { e.stopPropagation(); handlePause() }}
+              >
+                <Pause size={18} weight="fill" style={{ color: 'rgba(255, 255, 255, 0.9)' }} />
+              </button>
+            )}
+
+            {/* Progress bar */}
+            <div
+              className="flex-1 h-1 rounded-full cursor-pointer relative"
+              style={{ background: 'rgba(255, 255, 255, 0.3)' }}
+              onClick={handleSeek}
+            >
+              <div
+                className="absolute inset-y-0 left-0 rounded-full bg-white"
+                style={{ width: `${progress}%` }}
+              />
+              <div
+                className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white shadow-md"
+                style={{ left: `calc(${progress}% - 6px)` }}
+              />
+            </div>
+
+            {/* Time */}
+            <span className="text-xs font-medium tabular-nums text-white/90">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
+
+            {/* Fullscreen */}
+            <button
+              className="p-2 rounded-full backdrop-blur-sm"
+              style={{ background: 'rgba(255, 255, 255, 0.15)' }}
+              onClick={handleFullscreen}
+            >
+              <CornersOut size={18} weight="bold" style={{ color: 'rgba(255, 255, 255, 0.9)' }} />
+            </button>
+          </div>
+        </div>
       </div>
       {caption && (
         <figcaption className="mt-4 text-center">

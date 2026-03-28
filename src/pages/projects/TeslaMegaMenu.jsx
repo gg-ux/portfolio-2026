@@ -7,7 +7,7 @@ import {
   ProjectList,
   ProjectCallout,
   ProjectImageFullWidth,
-  ProjectYouTube,
+  ProjectVideo,
   ProcessKanban,
   CompetitiveAnalysis,
   MegaMenuCardSort,
@@ -47,8 +47,8 @@ export default function TeslaMegaMenu() {
         <ProjectText>
           This pivotal project not only enhanced content discoverability but also ensured robust scalability and flexibility to meet the dynamic needs of Tesla's expanding product line and diverse global markets.
         </ProjectText>
-        <ProjectYouTube
-          url="https://youtu.be/Vu6b4nfHG80"
+        <ProjectVideo
+          src="/assets/projects/tesla/mega-menu/mega-menu-demo.webm"
           caption="Tesla Mega Menu Demo"
         />
       </ProjectSection>
@@ -191,8 +191,8 @@ export default function TeslaMegaMenu() {
           <ProjectText>
             I provided designs and guidelines for 12 breakpoints to ensure the menu would remain accessible and not break, regardless of the viewport.
           </ProjectText>
-          <ProjectYouTube
-            url="https://youtu.be/Y2Al0Cs-frk"
+          <ProjectVideo
+            src="/assets/projects/tesla/mega-menu/responsive-demo.webm"
             caption="Mega Menu Responsive Behavior Across Breakpoints"
           />
         </ProjectSubsection>

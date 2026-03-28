@@ -9,7 +9,6 @@ import {
   ProjectImageFullWidth,
   ProjectImageGrid,
   ProjectVideo,
-  ProjectYouTube,
   UsabilityResultsTaskCentric,
   UsabilityResultsValidation,
   IndiEVDeliverables,
@@ -368,8 +367,8 @@ export default function IndiEV() {
           <ProjectText>
             The infotainment interface also makes a brief appearance in the official promo video.
           </ProjectText>
-          <ProjectYouTube
-            url="https://youtu.be/h7AWyPa55Xc"
+          <ProjectVideo
+            src="/assets/projects/indi-ev/content/promo.webm"
           />
         </ProjectSubsection>
       </ProjectSection>

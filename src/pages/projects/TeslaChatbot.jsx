@@ -7,7 +7,7 @@ import {
   ProjectList,
   ProjectCallout,
   ProjectImageFullWidth,
-  ProjectYouTube,
+  ProjectVideo,
   ProcessKanban,
   ExpandableChart,
   OldFlowChart,
@@ -52,8 +52,8 @@ export default function TeslaChatbot() {
         <ProjectText>
           The demo below shows the Chatbot making suggestions upon initiation, providing education on a suggested topic, and answering a free-form non-sales question. Only when purchase intent is indicated does the user get prompted to fill out a short contact form, which then redirects them to an advisor.
         </ProjectText>
-        <ProjectYouTube
-          url="https://youtu.be/4iX2oKrVoV4"
+        <ProjectVideo
+          src="/assets/projects/tesla/chatbot/chatbot-demo.webm"
           caption="Tesla Assist AI Chatbot Demo"
         />
         <ProjectCallout>
@@ -164,8 +164,8 @@ export default function TeslaChatbot() {
           <ProjectText>
             In this demo, I am given a very limited number of support topics. It does not take long before I am redirected to an advisor or a callback form. The lack of more resources makes it so more users will likely try to speak to an advisor for help, reducing the proportion of sales leads who get through to advisors.
           </ProjectText>
-          <ProjectYouTube
-            url="https://youtu.be/eXQJDCdpSRE"
+          <ProjectVideo
+            src="/assets/projects/tesla/chatbot/old-chat-demo.webm"
             caption="Old Chat Experience Demo"
           />
         </ProjectSubsection>
@@ -207,8 +207,8 @@ export default function TeslaChatbot() {
           <ProjectText>
             The new chatbot provides more comprehensive support, handling a wider range of topics before redirecting to an advisor. This allows users to get answers faster while freeing advisors to focus on sales-related inquiries.
           </ProjectText>
-          <ProjectYouTube
-            url="https://youtu.be/eN_wgNI72IE"
+          <ProjectVideo
+            src="/assets/projects/tesla/chatbot/new-chat-demo.webm"
             caption="New AI Chatbot Experience Demo"
           />
         </ProjectSubsection>
