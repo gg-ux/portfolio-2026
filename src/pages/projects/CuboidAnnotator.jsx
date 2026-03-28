@@ -47,6 +47,8 @@ import {
   ArrowsOutCardinal,
   FilmStrip,
   CheckCircle,
+  Check,
+  X,
   SquaresFour,
   Play,
   VideoCamera,
@@ -157,7 +159,58 @@ export default function CuboidAnnotator() {
         </ProjectCallout>
 
         <ProjectSubsection title="The Core Workflow">
-          <div className="space-y-3">
+          {/* Desktop: Horizontal layout (6 columns) */}
+          <div className="hidden xl:grid grid-cols-6 gap-6 mb-8">
+            {[
+              { icon: CloudArrowDown, label: 'Load a scene', desc: 'A 360° point cloud captured by roof-mounted LiDAR sensors', colorKey: 'amethyst' },
+              { icon: MagnifyingGlass, label: 'Identify objects', desc: 'Vehicles, pedestrians, cyclists, signs, and other objects', colorKey: 'lilac' },
+              { icon: Cube, label: 'Draw cuboids', desc: '3D bounding boxes that tightly fit each object', colorKey: 'rose' },
+              { icon: ArrowsOutCardinal, label: 'Adjust precisely', desc: 'Position, rotate, and scale to sub-meter accuracy', colorKey: 'gold' },
+              { icon: FilmStrip, label: 'Track across frames', desc: 'Link the same object as it moves through sequential frames', colorKey: 'peridot' },
+              { icon: CheckCircle, label: 'Submit for QA', desc: 'Work is reviewed for accuracy before training', colorKey: 'turquoise' },
+            ].map((item) => {
+              const Icon = item.icon
+              const color = getColor(item.colorKey, isDark)
+              return (
+                <div key={item.label} className="text-center">
+                  {/* Icon with colored background */}
+                  <div className="relative w-12 h-12 mx-auto mb-4">
+                    <div
+                      className="relative z-10 w-full h-full rounded-full flex items-center justify-center"
+                      style={{ color, backgroundColor: `${color}18` }}
+                    >
+                      <Icon size={24} weight="regular" />
+                    </div>
+                    {/* Glass border frame */}
+                    <div
+                      className={`absolute -inset-1 rounded-full border ${
+                        isDark
+                          ? 'border-white/[0.08] bg-white/[0.02]'
+                          : 'border-black/[0.05] bg-black/[0.01]'
+                      }`}
+                    />
+                  </div>
+                  {/* Title */}
+                  <h4
+                    className="font-satoshi font-semibold text-base mb-2"
+                    style={{ color: isDark ? '#F3F4F6' : '#111827' }}
+                  >
+                    {item.label}
+                  </h4>
+                  {/* Description */}
+                  <p
+                    className="font-satoshi text-sm leading-relaxed"
+                    style={{ color: isDark ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,0.6)' }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Mobile/Tablet: Vertical list */}
+          <div className="xl:hidden space-y-3 mb-8">
             {[
               { icon: CloudArrowDown, label: 'Load a scene', desc: 'A 360° point cloud captured by roof-mounted LiDAR sensors' },
               { icon: MagnifyingGlass, label: 'Identify objects', desc: 'Vehicles, pedestrians, cyclists, signs, and other objects' },
@@ -215,86 +268,56 @@ export default function CuboidAnnotator() {
         </ProjectText>
 
         {/* Comparison table */}
-        <div className="overflow-hidden mt-12">
+        <div className="overflow-hidden mt-16">
           {/* Header with thumbnails */}
-          <div className="grid grid-cols-3">
-            <div className="p-4" />
-            <div className="p-4 text-center">
+          <div className="grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_120px_120px] gap-4">
+            <div />
+            <div className="text-center">
               <img
                 src="/assets/projects/cuboid-annotator/old-design.png"
                 alt="Original interface"
-                className="w-full rounded-lg mb-2 opacity-60"
+                className="w-full rounded-lg mb-3 opacity-70"
               />
-              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                 Original
               </span>
             </div>
-            <div className="p-4 text-center">
+            <div className="text-center">
               <img
                 src="/assets/projects/cuboid-annotator/new-design.png"
                 alt="Redesigned interface"
-                className="w-full rounded-lg mb-2"
+                className="w-full rounded-lg mb-3"
               />
-              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/50' : 'text-black/50'}`}>
                 Redesign
               </span>
             </div>
           </div>
 
           {/* Comparison rows */}
-          <div className={`divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
+          <div className={`mt-6 divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
             {[
-              {
-                feature: 'Visual hierarchy',
-                icon: SquaresFour,
-                old: 'Low contrast, ambiguous icons with redundant functions, no clear grouping',
-                new: 'Clear groupings, labeled icons, focus on 3D workspace',
-              },
-              {
-                feature: 'Keyboard shortcuts',
-                icon: Keyboard,
-                old: 'Hidden, no tooltips or documentation',
-                new: 'Visible in tooltips and UI elements',
-              },
-              {
-                feature: 'Ground alignment',
-                icon: Crosshair,
-                old: 'Manual adjustment of every cuboid',
-                new: 'Set road plane once, batch snap others',
-              },
-              {
-                feature: 'Undo/redo',
-                icon: ArrowCounterClockwise,
-                old: 'Not available',
-                new: 'Full support with keyboard shortcuts',
-              },
-              {
-                feature: 'Camera views',
-                icon: VideoCamera,
-                old: 'Fixed windows with low-contrast borders, hard to distinguish views',
-                new: 'Resizable panels with clear labels and visual separation',
-              },
-              {
-                feature: 'Frame navigation',
-                icon: Play,
-                old: 'Manual scrubbing through timeline only',
-                new: 'Play button for easier seeking between frames',
-              },
+              { feature: 'Clear visual hierarchy', icon: SquaresFour },
+              { feature: 'Visible keyboard shortcuts', icon: Keyboard },
+              { feature: 'Batch ground alignment', icon: Crosshair },
+              { feature: 'Undo/redo support', icon: ArrowCounterClockwise },
+              { feature: 'Resizable camera views', icon: VideoCamera },
+              { feature: 'Playback for frame navigation', icon: Play },
             ].map((row) => {
               const Icon = row.icon
               return (
-              <div key={row.feature} className="grid grid-cols-3 items-start">
-                <div className={`p-4 font-satoshi text-sm font-medium flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  <Icon size={16} weight="regular" style={{ opacity: 0.5 }} />
-                  {row.feature}
+                <div key={row.feature} className="grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_120px_120px] gap-4 items-center py-4">
+                  <div className={`font-satoshi text-base md:text-lg flex items-center gap-3 ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
+                    <Icon size={20} weight="regular" className={isDark ? 'text-white/40' : 'text-black/40'} />
+                    {row.feature}
+                  </div>
+                  <div className="flex justify-center">
+                    <X size={20} weight="bold" style={{ color: isDark ? '#EF4444' : '#DC2626' }} />
+                  </div>
+                  <div className="flex justify-center">
+                    <Check size={20} weight="bold" style={{ color: isDark ? '#22C55E' : '#16A34A' }} />
+                  </div>
                 </div>
-                <div className={`p-4 font-satoshi text-sm ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
-                  {row.old}
-                </div>
-                <div className={`p-4 font-satoshi text-sm ${isDark ? 'text-white/80' : 'text-gray-700'}`}>
-                  {row.new}
-                </div>
-              </div>
               )
             })}
           </div>

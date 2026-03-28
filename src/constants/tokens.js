@@ -18,6 +18,7 @@ export const colors = {
     rose: { light: '#D78F8D', dark: '#D78F8D' },
     gold: { light: '#DBA166', dark: '#DBA166' },
     peridot: { light: '#87AA61', dark: '#87AA61' },
+    turquoise: { light: '#36CBC6', dark: '#36CBC6' },
   },
 
   // Semantic colors
