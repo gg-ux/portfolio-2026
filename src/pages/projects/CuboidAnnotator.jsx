@@ -62,7 +62,7 @@ import {
 import { getColor } from '../../constants/colors'
 
 // Password protection
-const PROJECT_PASSWORD = '321action'
+const PROJECT_PASSWORD = 'deepdive888'
 
 const sections = [
   { id: 'overview', label: 'Overview' },

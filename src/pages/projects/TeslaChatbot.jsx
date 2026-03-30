@@ -38,7 +38,7 @@ export default function TeslaChatbot() {
   return (
     <ScrollPasswordGate
       sectionId="goals"
-      password="321action"
+      password="deepdive888"
       storageKey="portfolioAuth"
       subtitle="The rest of this case study is confidential"
     >
