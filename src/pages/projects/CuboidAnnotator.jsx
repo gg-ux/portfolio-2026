@@ -908,7 +908,7 @@ export default function CuboidAnnotator() {
             { metric: '33%', title: 'Productivity increase', description: 'Annotators went from ~150 to ~200 cuboids per hour on average', colorKey: 'amethyst' },
             { metric: '6x', title: 'Faster ground alignment', description: 'Reduced alignment time from ~3 minutes to ~30 seconds per scene', colorKey: 'lilac' },
             { metric: '52→78', title: 'SUS score improvement', description: 'Based on surveys, system usability jumped from below average to above average', colorKey: 'rose' },
-            { metric: 'target', title: 'Higher accuracy', description: 'Clearer UI reduced labeling mistakes, requiring less reviewer intervention', colorKey: 'gold' },
+            { metric: '28%', title: 'Higher accuracy', description: 'QA rejections dropped from ~2.5 to ~1.8 per scene', colorKey: 'gold' },
           ].map((item, i) => {
             const accentColor = getColor(item.colorKey, isDark)
             const isIcon = item.metric === 'target'

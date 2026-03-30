@@ -267,7 +267,7 @@ const slides = [
       { value: '33%', title: 'Productivity increase', desc: 'Annotators went from ~150 to ~200 cuboids per hour', colorKey: 'amethyst' },
       { value: '6x', title: 'Faster ground alignment', desc: 'Reduced alignment time from ~3 min to ~30 sec per scene', colorKey: 'lilac' },
       { value: '52→78', title: 'SUS score improvement', desc: 'System usability jumped from below average to above average', colorKey: 'rose' },
-      { icon: Target, title: 'Higher accuracy', desc: 'Clearer UI reduced labeling mistakes, requiring less reviewer intervention', colorKey: 'gold' },
+      { value: '28%', title: 'Higher accuracy', desc: 'QA rejections dropped from ~2.5 to ~1.8 per scene', colorKey: 'gold' },
     ],
   },
   // End
