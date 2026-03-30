@@ -6,7 +6,7 @@ import { useContactDrawer } from '../context/ContactDrawerContext'
 import ThemeToggle from './ThemeToggle'
 import ScrambleText from './ScrambleText'
 import { Caption } from './Typography'
-import { List, X } from '@phosphor-icons/react'
+import { List, X, LockSimple } from '@phosphor-icons/react'
 
 // Import project thumbnails (same as Explore More section)
 import teslaChatbotImg from '../assets/projects/tesla/chatbot/chatbot-card-filled.webp'
@@ -22,6 +22,7 @@ const workProjects = [
   { name: 'INDI EV', link: '/project/indi-ev', image: indiEvImg, bg: '#000000' },
   { name: 'Catalia Health', link: '/project/catalia-health', image: cataliaImg, bg: '#31ECF6' },
   { name: 'Notetracks', link: '/project/notetracks', image: notetracksImg, bg: '#1a1a1a' },
+  { name: 'AI Tool', link: '/project/ai-tool', image: null, bg: '#0a0a0a', isSecret: true },
 ]
 
 export default function Navigation() {
@@ -403,7 +404,7 @@ export default function Navigation() {
         }}
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-6">
-          <div className="hidden md:grid grid-cols-5 gap-4">
+          <div className="hidden md:grid grid-cols-6 gap-4">
             {workProjects.map((project, index) => (
               <Link
                 key={project.link}
@@ -416,7 +417,7 @@ export default function Navigation() {
                 }}
               >
                 <div
-                  className="aspect-square rounded-xl overflow-hidden mb-2 transition-all duration-300 group-hover:scale-[1.02]"
+                  className="aspect-square rounded-xl overflow-hidden mb-2 transition-all duration-300 group-hover:scale-[1.02] relative"
                   style={{
                     backgroundColor: project.bg,
                     boxShadow: ((isDark && !useDarkNav) || useLightNav)
@@ -424,11 +425,20 @@ export default function Navigation() {
                       : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.08)',
                   }}
                 >
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {project.isSecret ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a]">
+                      <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(139,106,255,0.3) 0%, transparent 60%)',
+                      }} />
+                      <LockSimple size={32} weight="regular" className="text-white/30 group-hover:text-white/50 transition-colors" />
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
                 </div>
                 <span className={`font-mono text-[11px] tracking-wide uppercase transition-colors duration-200 ${
                   ((isDark && !useDarkNav) || useLightNav)
@@ -675,11 +685,20 @@ export default function Navigation() {
                       : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.08)',
                   }}
                 >
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover"
-                  />
+                  {project.isSecret ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a]">
+                      <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(139,106,255,0.3) 0%, transparent 60%)',
+                      }} />
+                      <LockSimple size={32} weight="regular" className="text-white/30" />
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                   {/* Gradient overlay with name */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
                     <span className="font-mono text-[11px] text-white tracking-wide uppercase">

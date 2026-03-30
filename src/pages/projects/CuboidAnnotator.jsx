@@ -152,7 +152,7 @@ export default function CuboidAnnotator() {
         darkBg
       >
         <a
-          href="/project/cuboid-annotator/presentation"
+          href="/project/ai-tool/presentation"
           className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-[11px] uppercase tracking-wide transition-all duration-300 ${
             isDark
               ? 'bg-white/[0.04] border border-white/[0.08] text-white/60 hover:bg-white/[0.06] hover:text-white/80 hover:border-white/[0.12]'

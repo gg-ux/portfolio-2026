@@ -306,7 +306,7 @@ export default function CuboidPresentation() {
         setCurrentSlide(totalSlides - 1)
         break
       case 'Escape':
-        navigate('/project/cuboid-annotator')
+        navigate('/project/ai-tool')
         break
     }
   }, [totalSlides, navigate])
@@ -365,7 +365,7 @@ export default function CuboidPresentation() {
 
       {/* Back button */}
       <button
-        onClick={() => navigate('/project/cuboid-annotator')}
+        onClick={() => navigate('/project/ai-tool')}
         className="fixed top-6 left-8 p-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] transition-colors z-50"
       >
         <ArrowLeft size={20} className="text-white/60" />

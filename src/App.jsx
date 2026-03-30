@@ -45,7 +45,7 @@ function AppContent() {
   const isPlayground = location.pathname === '/playground'
   const isPrintPage = location.pathname === '/print'
   const isResumePrint = location.pathname === '/resume-print'
-  const isCuboidPresentation = location.pathname === '/project/cuboid-annotator/presentation'
+  const isCuboidPresentation = location.pathname === '/project/ai-tool/presentation'
   const isDesignSystemSubpage = location.pathname.startsWith('/design-system/')
 
   const handleLoaderComplete = () => {
@@ -102,7 +102,7 @@ function AppContent() {
     return (
       <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
         <Routes>
-          <Route path="/project/cuboid-annotator/presentation" element={<CuboidPresentation />} />
+          <Route path="/project/ai-tool/presentation" element={<CuboidPresentation />} />
         </Routes>
       </Suspense>
     )
@@ -133,7 +133,7 @@ function AppContent() {
               <Route path="/project/indi-ev" element={<IndiEV />} />
               <Route path="/project/catalia-health" element={<CataliaHealth />} />
               <Route path="/project/notetracks" element={<Notetracks />} />
-              <Route path="/project/cuboid-annotator" element={<CuboidAnnotator />} />
+              <Route path="/project/ai-tool" element={<CuboidAnnotator />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
