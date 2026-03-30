@@ -142,10 +142,10 @@ export default function CuboidAnnotator() {
       <ProjectHero
         company="AI Data Startup"
         title="3D Cuboid Annotation Tool"
-        description="I redesigned precision workflows for autonomous vehicle data labeling. As the sole product designer, I transformed an engineer-built tool into an interface optimized for annotators, reducing task time by 6x and dramatically improving usability."
+        description="I redesigned precision workflows for autonomous vehicle data labeling. As the sole product designer, I transformed an engineer-built tool into an interface optimized for annotators, improving productivity by 33% and dramatically improving usability and accessibility."
         role="Lead Product Designer"
-        timeline="2024 – Present"
-        impact="6x faster ground alignment"
+        timeline="2025"
+        impact="33% increase in productivity"
         tools="Figma Make, Claude Code"
         coverImage="/assets/projects/cuboid-annotator/cover.webp"
         darkBanner
