@@ -11,6 +11,7 @@ export default function ScrollPasswordGate({
   sectionId,
   password,
   storageKey,
+  subtitle = 'Full case study is confidential',
   children,
 }) {
   const { isDark } = useTheme()
@@ -55,13 +56,6 @@ export default function ScrollPasswordGate({
         sessionStorage.setItem(storageKey, 'true')
         setIsAuthenticated(true)
         setShowGate(false)
-                document.body.style.overflow = ''
-                // Scroll up slightly to avoid re-triggering
-                window.scrollBy({ top: -300, behavior: 'smooth' })
-                // Delay resetting trigger flag until scroll completes
-                setTimeout(() => {
-                  gateTriggered.current = false
-                }, 600)
         document.body.style.overflow = ''
       }, 400)
       setPasswordError(false)
@@ -85,6 +79,9 @@ export default function ScrollPasswordGate({
           className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-500 ${
             isAnimatingOut ? 'opacity-0' : 'opacity-100'
           }`}
+          style={{ overscrollBehavior: 'contain', touchAction: 'none' }}
+          onWheel={(e) => e.preventDefault()}
+          onTouchMove={(e) => e.preventDefault()}
         >
           {/* Gradient overlay - stronger at bottom */}
           <div
@@ -116,12 +113,24 @@ export default function ScrollPasswordGate({
               onClick={() => {
                 setShowGate(false)
                 document.body.style.overflow = ''
-                // Scroll up slightly to avoid re-triggering
+                // Scroll up to get out of trigger zone
                 window.scrollBy({ top: -300, behavior: 'smooth' })
-                // Delay resetting trigger flag until scroll completes
-                setTimeout(() => {
-                  gateTriggered.current = false
-                }, 600)
+                // Wait for scroll to complete, then check if we're out of trigger zone
+                const checkAndReset = () => {
+                  const section = document.getElementById(sectionId)
+                  if (section) {
+                    const sectionTop = section.getBoundingClientRect().top
+                    const triggerPoint = window.innerHeight * 0.6
+                    // Only reset if we're safely out of the trigger zone
+                    if (sectionTop >= triggerPoint) {
+                      gateTriggered.current = false
+                    } else {
+                      // Still in trigger zone, try again
+                      setTimeout(checkAndReset, 100)
+                    }
+                  }
+                }
+                setTimeout(checkAndReset, 500)
               }}
               className={`absolute top-4 right-4 p-1 rounded-full transition-colors ${
                 isDark
@@ -136,7 +145,7 @@ export default function ScrollPasswordGate({
               Enter password to continue
             </h2>
             <p className="font-satoshi text-base theme-muted mb-6">
-              Full case study is confidential
+              {subtitle}
             </p>
             <input
               type="password"

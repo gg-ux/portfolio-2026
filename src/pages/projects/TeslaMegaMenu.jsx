@@ -33,6 +33,7 @@ export default function TeslaMegaMenu() {
       sectionId="goals"
       password="321action"
       storageKey="portfolioAuth"
+      subtitle="The rest of this case study is confidential"
     >
     <ProjectLayout sections={sections}>
       <ProjectHero
