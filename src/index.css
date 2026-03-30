@@ -126,6 +126,29 @@ html.light ::-webkit-scrollbar-thumb:hover {
   display: none;
 }
 
+/* Carousel padding that matches max-w-[1440px] container with responsive padding */
+.carousel-align-container {
+  padding-left: 24px; /* px-6 */
+  padding-right: 24px;
+  scroll-padding-left: 24px;
+}
+
+@media (min-width: 768px) {
+  .carousel-align-container {
+    padding-left: 48px; /* md:px-12 */
+    padding-right: 48px;
+    scroll-padding-left: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-align-container {
+    padding-left: max(80px, calc((100vw - 1440px) / 2 + 80px)); /* lg:px-20 + centering */
+    padding-right: max(80px, calc((100vw - 1440px) / 2 + 80px));
+    scroll-padding-left: max(80px, calc((100vw - 1440px) / 2 + 80px));
+  }
+}
+
 /* Animation keyframes */
 @keyframes fade-in-up {
   from {

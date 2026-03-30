@@ -3,17 +3,13 @@
  * Top bar with logo and tab switcher
  */
 
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NotePencil } from '@phosphor-icons/react'
-import InterviewNotesModal from './InterviewNotesModal'
+import { Notepad } from '@phosphor-icons/react'
 
-export default function PrintNavigation({ activeTab, onTabChange, activeTemplate }) {
-  const [showInterviewNotes, setShowInterviewNotes] = useState(false)
+export default function PrintNavigation({ activeTab, onTabChange, activeTemplate, isNotesOpen, onToggleNotes }) {
   const showNotesButton = activeTemplate === 'disney-ai'
 
   return (
-    <>
       <nav className="print-navigation no-print">
         <style>{`
           .print-navigation {
@@ -111,6 +107,55 @@ export default function PrintNavigation({ activeTab, onTabChange, activeTemplate
             background: rgba(255,255,255,0.15);
             color: white;
           }
+
+          .print-nav-notes-btn.active {
+            background: rgba(37, 99, 235, 0.3);
+            color: white;
+          }
+
+          .print-nav-notes-btn .btn-text {
+            display: inline;
+          }
+
+          .print-nav-tab .mobile-text {
+            display: none;
+          }
+
+          .print-nav-tab .desktop-text {
+            display: inline;
+          }
+
+          @media (max-width: 768px) {
+            .print-navigation {
+              padding: 0 16px;
+            }
+
+            .print-nav-tab {
+              padding: 8px 12px;
+              font-size: 10px;
+            }
+
+            .print-nav-tab .mobile-text {
+              display: inline;
+            }
+
+            .print-nav-tab .desktop-text {
+              display: none;
+            }
+
+            .print-nav-notes-btn {
+              padding: 8px;
+              gap: 0;
+            }
+
+            .print-nav-notes-btn .btn-text {
+              display: none;
+            }
+
+            .print-nav-right {
+              min-width: auto;
+            }
+          }
         `}</style>
 
         {/* Logo - links to home */}
@@ -130,7 +175,8 @@ export default function PrintNavigation({ activeTab, onTabChange, activeTemplate
             className={`print-nav-tab ${activeTab === 'cover-letter' ? 'active' : ''}`}
             onClick={() => onTabChange('cover-letter')}
           >
-            Cover Letter
+            <span className="desktop-text">Cover Letter</span>
+            <span className="mobile-text">Cover</span>
           </button>
         </div>
 
@@ -138,21 +184,14 @@ export default function PrintNavigation({ activeTab, onTabChange, activeTemplate
         <div className="print-nav-right">
           {showNotesButton && (
             <button
-              className="print-nav-notes-btn"
-              onClick={() => setShowInterviewNotes(true)}
+              className={`print-nav-notes-btn ${isNotesOpen ? 'active' : ''}`}
+              onClick={onToggleNotes}
             >
-              <NotePencil size={16} />
-              Interview Notes
+              <Notepad size={18} />
+              <span className="btn-text">Interview Notes</span>
             </button>
           )}
         </div>
       </nav>
-
-      {/* Interview Notes Modal */}
-      <InterviewNotesModal
-        isOpen={showInterviewNotes}
-        onClose={() => setShowInterviewNotes(false)}
-      />
-    </>
   )
 }

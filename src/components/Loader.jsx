@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
 export default function Loader({ onComplete }) {
@@ -6,12 +6,46 @@ export default function Loader({ onComplete }) {
   const [gradientRotation, setGradientRotation] = useState(0)
   const { isDark } = useTheme()
 
+  // Track both conditions: animation complete AND assets loaded
+  const animationReady = useRef(false)
+  const assetsReady = useRef(false)
+  const hasExited = useRef(false)
+
   // Circle properties
   const size = 80
   const strokeWidth = 1.5
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
 
+  // Function to trigger exit when both conditions are met
+  const tryExit = () => {
+    if (animationReady.current && assetsReady.current && !hasExited.current) {
+      hasExited.current = true
+      setPhase('exit')
+      setTimeout(() => {
+        onComplete?.()
+      }, 800)
+    }
+  }
+
+  // Track asset loading
+  useEffect(() => {
+    const handleLoad = () => {
+      assetsReady.current = true
+      tryExit()
+    }
+
+    // Check if already loaded
+    if (document.readyState === 'complete') {
+      assetsReady.current = true
+    } else {
+      window.addEventListener('load', handleLoad)
+    }
+
+    return () => window.removeEventListener('load', handleLoad)
+  }, [])
+
+  // Animation timeline
   useEffect(() => {
     // Logo fades in
     const loadingTimer = setTimeout(() => {
@@ -23,23 +57,18 @@ export default function Loader({ onComplete }) {
       setPhase('complete')
     }, 1800)
 
-    // Begin exit
-    const exitTimer = setTimeout(() => {
-      setPhase('exit')
+    // Animation cycle complete - ready to exit if assets loaded
+    const readyTimer = setTimeout(() => {
+      animationReady.current = true
+      tryExit()
     }, 2400)
-
-    // Unmount
-    const unmountTimer = setTimeout(() => {
-      onComplete?.()
-    }, 3200)
 
     return () => {
       clearTimeout(loadingTimer)
       clearTimeout(completeTimer)
-      clearTimeout(exitTimer)
-      clearTimeout(unmountTimer)
+      clearTimeout(readyTimer)
     }
-  }, [onComplete])
+  }, [])
 
   // Rotate gradient while loading
   useEffect(() => {

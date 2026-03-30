@@ -348,7 +348,7 @@ function ProjectCard({ project, isDark, index, isVisible }) {
 
       {/* Text - below image */}
       <div className="mt-5">
-        <H4 className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
+        <H4 as="p" className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
           {project.name}
         </H4>
         <Caption trigger="hover" className={`transition-colors duration-300 ${isDark ? 'text-gray-500 group-hover:text-gray-400' : 'text-gray-500 group-hover:text-gray-600'}`}>

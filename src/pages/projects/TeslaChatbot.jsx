@@ -14,6 +14,7 @@ import {
   OldFlowChartLegend,
   NewFlowChart,
   NewFlowChartLegend,
+  ScrollPasswordGate,
 } from '../../components/project'
 import { TrendUp, Target, ChatCircle, LinkSimple } from '@phosphor-icons/react'
 import { Body, Caption } from '../../components/Typography'
@@ -27,6 +28,7 @@ const sections = [
   { id: 'process', label: 'Process' },
   { id: 'old-flow', label: 'Old Flow' },
   { id: 'new-flow', label: 'New Flow' },
+  { id: 'impact', label: 'Impact' },
   { id: 'future', label: 'Future' },
 ]
 
@@ -34,6 +36,11 @@ export default function TeslaChatbot() {
   const { isDark } = useTheme()
 
   return (
+    <ScrollPasswordGate
+      sectionId="goals"
+      password="321action"
+      storageKey="portfolioAuth"
+    >
     <ProjectLayout sections={sections}>
       <ProjectHero
         company="Tesla"
@@ -220,6 +227,78 @@ export default function TeslaChatbot() {
         </ProjectSubsection>
       </ProjectSection>
 
+      {/* Impact */}
+      <ProjectSection id="impact" title="Measuring Impact">
+        <ProjectText>
+          To validate the chatbot's effectiveness, we ran a controlled A/B test over 4 weeks with statistically significant traffic volume.
+        </ProjectText>
+
+        <ProjectSubsection title="Test Design">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className={`rounded-2xl p-6 flex gap-5 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+              <div className="font-silk text-5xl leading-none" style={{ color: getColor('amethyst', isDark) }}>
+                A
+              </div>
+              <div className="flex-1">
+                <Caption className="theme-caption mb-2">Control Group</Caption>
+                <Body size="sm" className="mb-0">
+                  Old chat with limited intents, quickly routing most users to human advisors
+                </Body>
+              </div>
+            </div>
+            <div className={`rounded-2xl p-6 flex gap-5 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+              <div className="font-silk text-5xl leading-none" style={{ color: getColor('lilac', isDark) }}>
+                B
+              </div>
+              <div className="flex-1">
+                <Caption className="theme-caption mb-2">Treatment Group</Caption>
+                <Body size="sm" className="mb-0">
+                  AI chatbot as first touchpoint, routing to advisors only for purchase-intent users
+                </Body>
+              </div>
+            </div>
+          </div>
+        </ProjectSubsection>
+
+        <ProjectSubsection title="What We Measured">
+          <ProjectText>
+            We defined "sales lead conversion" as any user who expressed purchase intent for a vehicle or energy product. The new chatbot improved this in two ways: it nurtured users toward purchase decisions by educating them on products, and it automatically resolved non-sales inquiries before they reached advisors—increasing the proportion of actual sales leads in the funnel.
+          </ProjectText>
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Results">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            {[
+              { metric: '12%', title: 'Control conversion', description: 'Existing support flow', colorKey: 'amethyst' },
+              { metric: '26%', title: 'Treatment conversion', description: 'AI chatbot flow', colorKey: 'lilac' },
+              { metric: '120%', title: 'Relative increase', description: 'Statistically significant', colorKey: 'rose' },
+            ].map((item, index) => {
+              const accentColor = getColor(item.colorKey, isDark)
+              return (
+                <div
+                  key={index}
+                  className={`rounded-2xl p-6 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}
+                >
+                  <div className="font-silk text-3xl mb-2" style={{ color: accentColor }}>
+                    {item.metric}
+                  </div>
+                  <h4 className="text-lg mb-2 theme-heading" style={{ fontWeight: 600 }}>
+                    {item.title}
+                  </h4>
+                  <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                    {item.description}
+                  </Body>
+                </div>
+              )
+            })}
+          </div>
+        </ProjectSubsection>
+
+        <ProjectCallout>
+          The key driver was confidence-based routing: high-confidence answers were served instantly, while low-confidence queries were routed to humans. Faster resolution meant less user drop-off, which directly translated to higher conversions.
+        </ProjectCallout>
+      </ProjectSection>
+
       {/* Future */}
       <ProjectSection id="future" title="Future Enhancements">
         <ProjectText>
@@ -266,5 +345,6 @@ export default function TeslaChatbot() {
       </ProjectSection>
 
     </ProjectLayout>
+    </ScrollPasswordGate>
   )
 }

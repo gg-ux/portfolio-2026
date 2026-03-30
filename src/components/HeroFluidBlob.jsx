@@ -13,9 +13,26 @@ import FluidBlob from './FluidBlob'
 
 export default function HeroFluidBlob() {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
   const { isDark } = useTheme()
   const rafRef = useRef(null)
   const lastProgressRef = useRef(0)
+  const sectionRef = useRef(null)
+
+  // Pause animation when hero is off-screen
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0, rootMargin: '100px' }
+    )
+
+    observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const updateProgress = () => {
@@ -83,7 +100,7 @@ export default function HeroFluidBlob() {
   const blobTranslateY = -scrollProgress * window.innerHeight * 0.3
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section ref={sectionRef} className="relative h-screen overflow-hidden">
       {/* Content container with blob and text */}
       <div className="relative z-10 h-full flex items-center justify-center max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Centered blob */}
@@ -94,7 +111,7 @@ export default function HeroFluidBlob() {
             transform: `translateY(${blobTranslateY}px)`,
           }}
         >
-          <FluidBlob size={700} isDark={isDark} />
+          <FluidBlob size={700} isDark={isDark} isVisible={isVisible} />
         </div>
 
         {/* Text overlay */}

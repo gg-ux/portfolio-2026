@@ -27,10 +27,12 @@ const IndiEV = lazy(() => import('./pages/projects/IndiEV'))
 const CataliaHealth = lazy(() => import('./pages/projects/CataliaHealth'))
 const Notetracks = lazy(() => import('./pages/projects/Notetracks'))
 const CuboidAnnotator = lazy(() => import('./pages/projects/CuboidAnnotator'))
+const CuboidPresentation = lazy(() => import('./pages/projects/CuboidPresentation'))
 const HeroTestPage = lazy(() => import('./pages/HeroTestPage'))
 const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'))
 const PrintPage = lazy(() => import('./pages/PrintPage'))
 const ResumePDFMakePage = lazy(() => import('./pages/ResumePDFMakePage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(() => {
@@ -43,6 +45,7 @@ function AppContent() {
   const isPlayground = location.pathname === '/playground'
   const isPrintPage = location.pathname === '/print'
   const isResumePrint = location.pathname === '/resume-print'
+  const isCuboidPresentation = location.pathname === '/project/cuboid-annotator/presentation'
   const isDesignSystemSubpage = location.pathname.startsWith('/design-system/')
 
   const handleLoaderComplete = () => {
@@ -94,7 +97,17 @@ function AppContent() {
     )
   }
 
-  
+  // Cuboid presentation - fullscreen standalone
+  if (isCuboidPresentation) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
+        <Routes>
+          <Route path="/project/cuboid-annotator/presentation" element={<CuboidPresentation />} />
+        </Routes>
+      </Suspense>
+    )
+  }
+
   return (
     <>
       {isHomePage && isLoading && <Loader onComplete={handleLoaderComplete} />}
@@ -121,6 +134,7 @@ function AppContent() {
               <Route path="/project/catalia-health" element={<CataliaHealth />} />
               <Route path="/project/notetracks" element={<Notetracks />} />
               <Route path="/project/cuboid-annotator" element={<CuboidAnnotator />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </main>

@@ -241,8 +241,8 @@ export default function ProjectLayout({
           <div className="flex items-center justify-between">
             <H2>Explore More</H2>
 
-            {/* Carousel indicators - mobile/tablet only */}
-            <div className="flex items-center gap-1 lg:hidden">
+            {/* Carousel indicators - hidden when grid is shown (4 or fewer items on lg+) */}
+            <div className={`flex items-center gap-1 ${otherProjects.length <= 4 ? 'lg:hidden' : ''}`}>
               {otherProjects.map((_, index) => (
                 <button
                   key={index}
@@ -272,52 +272,52 @@ export default function ProjectLayout({
           </div>
         </div>
 
-        {/* Desktop: 4-column grid */}
-        <div className="hidden lg:block max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-4 gap-6">
-            {otherProjects.map((project) => {
-              const cardShadow = isDark
-                ? '0 0 0 1px rgba(255,255,255,0.06), 0 8px 16px rgba(0,0,0,0.4), 0 24px 48px rgba(0,0,0,0.4)'
-                : '0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.1)'
+        {/* Desktop: 4-column grid (only shown when 4 or fewer items) */}
+        {otherProjects.length <= 4 && (
+          <div className="hidden lg:block max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+            <div className="grid grid-cols-4 gap-6">
+              {otherProjects.map((project) => {
+                const cardShadow = isDark
+                  ? '0 0 0 1px rgba(255,255,255,0.06), 0 8px 16px rgba(0,0,0,0.4), 0 24px 48px rgba(0,0,0,0.4)'
+                  : '0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.1)'
 
-              return (
-                <Link key={project.id} to={project.link} className="group block">
-                  <div
-                    className="relative aspect-square overflow-hidden rounded-2xl"
-                    style={{
-                      background: isDark ? project.bgDark : project.bgLight,
-                      boxShadow: cardShadow,
-                    }}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="mt-5 text-center">
-                    <H4 className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
-                      {project.name}
-                    </H4>
-                    <Caption className={isDark ? 'text-gray-500' : 'text-gray-500'}>
-                      {project.category}
-                    </Caption>
-                  </div>
-                </Link>
-              )
-            })}
+                return (
+                  <Link key={project.id} to={project.link} className="group block">
+                    <div
+                      className="relative aspect-square overflow-hidden rounded-2xl"
+                      style={{
+                        background: isDark ? project.bgDark : project.bgLight,
+                        boxShadow: cardShadow,
+                      }}
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="mt-5 text-center">
+                      <H4 as="p" className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
+                        {project.name}
+                      </H4>
+                      <Caption className={isDark ? 'text-gray-500' : 'text-gray-500'}>
+                        {project.category}
+                      </Caption>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Mobile/Tablet: Horizontal scrolling carousel */}
+        {/* Horizontal scrolling carousel */}
         <div
           ref={carouselRef}
-          className="lg:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+          className={`flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide carousel-align-container ${otherProjects.length <= 4 ? 'lg:hidden' : ''}`}
           style={{
             WebkitOverflowScrolling: 'touch',
-            paddingLeft: 'max(24px, calc((100vw - 1440px) / 2 + 24px))',
-            scrollPaddingLeft: 'max(24px, calc((100vw - 1440px) / 2 + 24px))',
           }}
           onScroll={(e) => {
             const { scrollLeft, scrollWidth, clientWidth } = e.target
@@ -360,7 +360,7 @@ export default function ProjectLayout({
                     />
                   </div>
                   <div className="mt-6 text-center">
-                    <H4 className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
+                    <H4 as="p" className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
                       {project.name}
                     </H4>
                     <Caption className={isDark ? 'text-gray-500' : 'text-gray-500'}>
@@ -371,7 +371,6 @@ export default function ProjectLayout({
               </div>
             )
           })}
-          <div className="flex-shrink-0" style={{ width: '24px' }} />
         </div>
       </footer>
     </div>

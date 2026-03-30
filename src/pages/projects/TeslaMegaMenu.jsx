@@ -9,8 +9,7 @@ import {
   ProjectImageFullWidth,
   ProjectVideo,
   ProcessKanban,
-  CompetitiveAnalysis,
-  MegaMenuCardSort,
+  ScrollPasswordGate,
 } from '../../components/project'
 import { Body } from '../../components/Typography'
 import { MagnifyingGlass, ArrowsOut, Globe } from '@phosphor-icons/react'
@@ -30,6 +29,11 @@ export default function TeslaMegaMenu() {
   const { isDark } = useTheme()
 
   return (
+    <ScrollPasswordGate
+      sectionId="goals"
+      password="321action"
+      storageKey="portfolioAuth"
+    >
     <ProjectLayout sections={sections}>
       <ProjectHero
         company="Tesla"
@@ -202,16 +206,29 @@ export default function TeslaMegaMenu() {
       <ProjectSection id="highlights" title="Process Highlights">
         <ProjectSubsection title="Competitive Analysis">
           <ProjectText>
-            Before defining our new information architecture, I researched navigation patterns across automotive and tech brands. This analysis helped identify best practices and potential pitfalls in mega menu design.
+            Before defining our new information architecture, I researched navigation patterns across automotive and tech brands. Key takeaways included:
           </ProjectText>
-          <CompetitiveAnalysis />
+          <ProjectList
+            items={[
+              'Product-centric top level navigation scales better than action-centric approaches',
+              'Dedicated sections for different product categories aids discoverability',
+              'Minimal mega panels with clear hierarchy reduce cognitive load',
+              'Consistent CTAs across product categories create predictable patterns',
+            ]}
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Card Sort">
           <ProjectText>
-            To effectively determine the most intuitive categorization and naming structure, we conducted an internal card sort. We engaged 32 participants from various departments, ensuring a diverse range of perspectives. Each participant received virtual cards representing all the pages and was tasked with grouping them into logical categories.
+            To determine the most intuitive categorization and naming structure, we conducted an internal card sort with 32 participants from various departments. Each participant grouped virtual cards representing site pages into logical categories. Key insights included:
           </ProjectText>
-          <MegaMenuCardSort />
+          <ProjectList
+            items={[
+              'Participants strongly preferred "Vehicles" over "Cars," feeling it better represented the full product lineup including Semi and Cybertruck',
+              'Categories like "Discover" had lower consensus, with participants split between "Explore," "Learn," and "About"',
+              'Energy products were consistently grouped separately from vehicles, validating a dedicated category',
+            ]}
+          />
         </ProjectSubsection>
 
         <ProjectSubsection title="Redundancies">
@@ -251,5 +268,6 @@ export default function TeslaMegaMenu() {
         />
       </ProjectSection>
     </ProjectLayout>
+    </ScrollPasswordGate>
   )
 }

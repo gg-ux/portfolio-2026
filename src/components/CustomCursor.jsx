@@ -154,6 +154,7 @@ export default function CustomCursor() {
         borderRadius: '50%',
         opacity: 0, // Start hidden until mouse moves
         transition: 'width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease',
+        willChange: 'transform',
       }}
       aria-hidden="true"
     >

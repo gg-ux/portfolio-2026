@@ -16,6 +16,7 @@ export default function ProjectHero({
   team,
   impact,
   output,
+  tools,
   coverImage,
   coverImageAlt = 'Project cover',
   coverPosition = 'center 30%',
@@ -24,6 +25,7 @@ export default function ProjectHero({
   darkBg = false,
   noLightFilter = false,
   darkOverlay = false,
+  children,
 }) {
   const { isDark } = useTheme()
   const { setLightBanner, setDarkBanner, setBannerHeight: setContextBannerHeight } = useBanner()
@@ -78,6 +80,7 @@ export default function ProjectHero({
     team && { label: 'Team', value: team },
     impact && { label: 'Impact', value: impact },
     output && { label: 'Output', value: output },
+    tools && { label: 'Tools', value: tools },
   ].filter(Boolean)
 
   return (
@@ -130,6 +133,9 @@ export default function ProjectHero({
         <Body>
           {description}
         </Body>
+
+        {/* Optional content after description */}
+        {children && <div className="mt-6">{children}</div>}
 
         {/* Metadata Grid */}
         <div className={`mt-10 pt-8 border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.08]'}`}>

@@ -77,7 +77,8 @@ export default function GridBackground() {
   }, [shouldRender, isDesignSystem])
 
   // Only render on home page or design system pages
-  if (!shouldRender) {
+  // Also skip rendering entirely when faded out
+  if (!shouldRender || scrollEffects.opacity === 0) {
     return null
   }
 
@@ -92,6 +93,7 @@ export default function GridBackground() {
              linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)`,
         backgroundSize: '60px 60px',
         opacity: scrollEffects.opacity,
+        willChange: 'opacity',
       }}
     />
   )

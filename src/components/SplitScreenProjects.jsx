@@ -341,7 +341,7 @@ function ProjectSlide({ project, isDark, isActive, showText = true, showChip = t
       {/* Text - only show for active card */}
       {showText && (
         <div className="mt-6 text-center">
-          <H4 className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
+          <H4 as="p" className={`mb-1 transition-colors duration-300 ${isDark ? 'group-hover:text-gray-300' : 'group-hover:text-gray-600'}`}>
             {project.name}
           </H4>
           <Caption trigger="hover" className={isDark ? 'text-gray-500' : 'text-gray-500'}>
@@ -982,7 +982,7 @@ export default function SplitScreenProjects() {
                 className="mb-8 animate-slot-roll"
                 style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}
               >
-                <Caption trigger="mount">
+                <Caption scramble={false}>
                   {String(activeIndex + 1).padStart(2, '0')}
                 </Caption>
                 <Caption scramble={false}> / {String(projects.length).padStart(2, '0')}</Caption>

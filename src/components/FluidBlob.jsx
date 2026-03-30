@@ -312,7 +312,7 @@ function Scene({ seed, isVisible, isDark }) {
   )
 }
 
-function FluidBlob({ size = 300, className = '', seed = 0, isDark = true }) {
+function FluidBlob({ size = 300, className = '', seed = 0, isDark = true, isVisible = true }) {
   return (
     <div
       className={className}
@@ -331,8 +331,9 @@ function FluidBlob({ size = 300, className = '', seed = 0, isDark = true }) {
           preserveDrawingBuffer: true,
         }}
         style={{ background: 'transparent' }}
+        frameloop={isVisible ? 'always' : 'never'}
       >
-        <Scene seed={seed} isVisible={true} isDark={isDark} />
+        <Scene seed={seed} isVisible={isVisible} isDark={isDark} />
       </Canvas>
     </div>
   )

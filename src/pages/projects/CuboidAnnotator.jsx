@@ -15,7 +15,7 @@ import {
   ProjectVideo,
   ProjectImageFullWidth,
 } from '../../components/project'
-import { Body } from '../../components/Typography'
+import { Body, ChartTitle } from '../../components/Typography'
 import { Button } from '../../components/ui/Button'
 import { useTheme } from '../../context/ThemeContext'
 import {
@@ -52,15 +52,22 @@ import {
   SquaresFour,
   Play,
   VideoCamera,
+  Users,
+  ChartBar,
+  Eyeglasses,
+  GridFour,
+  SlidersHorizontal,
+  Presentation,
 } from '@phosphor-icons/react'
 import { getColor } from '../../constants/colors'
 
 // Password protection
-const PROJECT_PASSWORD = 'behappy333'
+const PROJECT_PASSWORD = '321action'
 
 const sections = [
   { id: 'overview', label: 'Overview' },
-  { id: 'problem', label: 'The Problem' },
+  { id: 'discovery', label: 'Understanding the Problem' },
+  { id: 'principles', label: 'Design Principles' },
   { id: 'solution', label: 'The Solution' },
   { id: 'features', label: 'Key Flows & Features' },
   { id: 'impact', label: 'Impact' },
@@ -69,7 +76,7 @@ const sections = [
 export default function CuboidAnnotator() {
   const { isDark } = useTheme()
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem('cuboidAnnotatorAuth') === 'true'
+    return sessionStorage.getItem('portfolioAuth') === 'true'
   })
   const [passwordInput, setPasswordInput] = useState('')
   const [passwordError, setPasswordError] = useState(false)
@@ -77,7 +84,7 @@ export default function CuboidAnnotator() {
   const handlePasswordSubmit = (e) => {
     e.preventDefault()
     if (passwordInput === PROJECT_PASSWORD) {
-      sessionStorage.setItem('cuboidAnnotatorAuth', 'true')
+      sessionStorage.setItem('portfolioAuth', 'true')
       setIsAuthenticated(true)
       setPasswordError(false)
     } else {
@@ -95,21 +102,21 @@ export default function CuboidAnnotator() {
       >
         <form
           onSubmit={handlePasswordSubmit}
-          className={`p-10 rounded-2xl text-center max-w-[360px] w-full mx-4 ${
+          className={`p-10 rounded-2xl text-center max-w-[400px] w-full mx-4 ${
             isDark
-              ? 'bg-white/[0.02] border border-white/[0.06]'
-              : 'bg-white shadow-lg'
+              ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/[0.08]'
+              : 'bg-white/90 backdrop-blur-xl shadow-2xl'
           }`}
         >
-          <h2 className="font-silk text-2xl theme-heading mb-2">
-            Protected Project
+          <h2 className="font-satoshi text-xl font-semibold theme-heading mb-2">
+            Enter password to continue
           </h2>
-          <p className="font-satoshi text-sm theme-muted mb-6">
-            This case study contains confidential work
+          <p className="font-satoshi text-base theme-muted mb-6">
+            Full case study is confidential
           </p>
           <input
             type="password"
-            className={`w-full px-4 py-3 rounded-lg font-satoshi text-base mb-3 outline-none transition-colors ${
+            className={`w-full h-12 px-4 rounded-lg font-satoshi text-base mb-3 outline-none transition-colors ${
               isDark
                 ? 'bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-white/40 focus:border-white/20'
                 : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-gray-400'
@@ -119,8 +126,8 @@ export default function CuboidAnnotator() {
             onChange={(e) => setPasswordInput(e.target.value)}
             autoFocus
           />
-          <Button type="submit" variant="primary" className="w-full">
-            View Project
+          <Button type="submit" variant="primary" className="w-full h-12">
+            Continue
           </Button>
           {passwordError && (
             <p className="text-red-500 text-sm mt-3">Incorrect password</p>
@@ -139,10 +146,23 @@ export default function CuboidAnnotator() {
         role="Lead Product Designer"
         timeline="2024 – Present"
         impact="6x faster ground alignment"
+        tools="Figma Make, Claude Code"
         coverImage="/assets/projects/cuboid-annotator/cover.webp"
         darkBanner
         darkBg
-      />
+      >
+        <a
+          href="/project/cuboid-annotator/presentation"
+          className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-[11px] uppercase tracking-wide transition-all duration-300 ${
+            isDark
+              ? 'bg-white/[0.04] border border-white/[0.08] text-white/60 hover:bg-white/[0.06] hover:text-white/80 hover:border-white/[0.12]'
+              : 'bg-black/[0.03] border border-black/[0.06] text-black/50 hover:bg-black/[0.05] hover:text-black/70 hover:border-black/[0.10]'
+          }`}
+        >
+          <Presentation size={16} weight="regular" />
+          <span>View as Presentation</span>
+        </a>
+      </ProjectHero>
 
       {/* Overview */}
       <ProjectSection id="overview" title="Overview">
@@ -151,7 +171,7 @@ export default function CuboidAnnotator() {
         </ProjectText>
 
         <ProjectText>
-          The workflow is demanding: 200+ objects per hour across thousands of frames. Every UI inefficiency costs the business more. Every labeling error degrades model training and impacts vehicle safety.
+          The workflow is demanding: hundreds of objects per hour across thousands of frames. Every UI inefficiency costs the business more. Every labeling error degrades model training and impacts vehicle safety.
         </ProjectText>
 
         <ProjectCallout>
@@ -238,8 +258,8 @@ export default function CuboidAnnotator() {
         </ProjectSubsection>
       </ProjectSection>
 
-      {/* The Problem */}
-      <ProjectSection id="problem" title="The Problem">
+      {/* Discovery */}
+      <ProjectSection id="discovery" title="Understanding the Problem">
         <ProjectImageFullWidth
           src="/assets/projects/cuboid-annotator/old-design.png"
           alt="The original cuboid annotation interface"
@@ -249,8 +269,354 @@ export default function CuboidAnnotator() {
         />
 
         <ProjectText>
-          When I joined, the existing tool had grown organically over years of engineering-driven development. It worked, but it wasn't designed for the humans using it 40+ hours per week. I sent surveys to annotators and conducted shadowing sessions to identify the biggest pain points.
+          When I joined, the existing tool had grown organically over years of engineering-driven development. It worked, but it wasn't designed for the humans using it 40+ hours per week. I conducted a three-part audit to understand the problem space.
         </ProjectText>
+
+        {/* Research Methods Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 my-10">
+          {[
+            {
+              method: 'Heuristic Analysis',
+              duration: '2 days',
+              description: 'Evaluated the interface against Nielsen\'s 10 usability heuristics to identify systemic UX issues',
+              icon: MagnifyingGlass,
+              colorKey: 'amethyst'
+            },
+            {
+              method: 'Shadowing Sessions',
+              duration: '5 sessions',
+              description: 'Observed annotators in their natural workflow to understand pain points and workarounds',
+              icon: Users,
+              colorKey: 'lilac'
+            },
+            {
+              method: 'Annotator Surveys',
+              duration: '95 responses',
+              description: 'Distributed System Usability Scale (SUS) questionnaire to measure baseline satisfaction',
+              icon: ChartBar,
+              colorKey: 'rose'
+            },
+          ].map((item) => {
+            const Icon = item.icon
+            const color = getColor(item.colorKey, isDark)
+            return (
+              <div
+                key={item.method}
+                className={`text-center p-6 rounded-2xl ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}
+              >
+                {/* Icon with glass border treatment */}
+                <div className="relative w-12 h-12 mx-auto mb-4">
+                  <div
+                    className="relative z-10 w-full h-full rounded-full flex items-center justify-center"
+                    style={{ color, backgroundColor: `${color}18` }}
+                  >
+                    <Icon size={22} weight="regular" />
+                  </div>
+                  {/* Glass border frame */}
+                  <div
+                    className={`absolute -inset-1 rounded-full border ${
+                      isDark
+                        ? 'border-white/[0.08] bg-white/[0.02]'
+                        : 'border-black/[0.05] bg-black/[0.01]'
+                    }`}
+                  />
+                </div>
+                <h4 className="font-satoshi text-base md:text-lg mb-1 md:mb-2 theme-heading" style={{ fontWeight: 600 }}>
+                  {item.method}
+                </h4>
+                <p className={`font-mono text-xs uppercase tracking-wide mb-3 ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                  {item.duration}
+                </p>
+                <p className={`font-satoshi text-sm leading-relaxed ${isDark ? 'text-white/70' : 'text-black/60'}`}>
+                  {item.description}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+
+        <ProjectSubsection title="Usability Findings">
+          <ProjectText>
+            The baseline SUS score was 52 (below average), indicating significant room for improvement. I mapped specific issues to Nielsen's usability heuristics:
+          </ProjectText>
+
+          {(() => {
+            const usabilityData = [
+              {
+                heuristic: 'Aesthetic & minimalist design',
+                score: 2,
+                violations: ['No visual hierarchy', 'Rigid layout made it hard to prioritize sections'],
+              },
+              {
+                heuristic: 'Recognition over recall',
+                score: 2,
+                violations: ['Hidden shortcuts', 'Steep learning curve for new hires'],
+              },
+              {
+                heuristic: 'Flexibility & efficiency',
+                score: 1,
+                violations: ['No batch operations', '8+ clicks per object for ground alignment'],
+              },
+              {
+                heuristic: 'User control & freedom',
+                score: 1,
+                violations: ['No undo support (85% cited as most critical)', 'Errors meant starting over'],
+              },
+            ]
+
+            return (
+              <div className={`mt-6 rounded-2xl p-5 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+                {/* Mobile: Stacked layout */}
+                <div className="md:hidden space-y-0">
+                  {usabilityData.map((row, idx) => {
+                    const scoreColor = row.score <= 1
+                      ? (isDark ? '#EF4444' : '#DC2626')
+                      : (isDark ? '#F59E0B' : '#D97706')
+                    return (
+                      <div
+                        key={row.heuristic}
+                        className={`py-4 ${idx > 0 ? `border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}` : ''}`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className={`font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-black/80'}`}>
+                            {row.heuristic}
+                          </span>
+                          <span
+                            className="font-mono text-sm font-medium flex-shrink-0 ml-3"
+                            style={{ color: scoreColor }}
+                          >
+                            {row.score}/5
+                          </span>
+                        </div>
+                        <ul className={`space-y-1 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                          {row.violations.map((v, i) => (
+                            <li key={i} className="flex gap-2 text-[14px]">
+                              <span className={`flex-shrink-0 w-1 h-1 rounded-full mt-2 ${isDark ? 'bg-white/30' : 'bg-black/20'}`} />
+                              {v}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Desktop: Full table */}
+                <table className="hidden md:table w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th
+                        className={`text-left pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '40%' }}
+                      >
+                        Heuristic
+                      </th>
+                      <th
+                        className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '15%' }}
+                      >
+                        Score
+                      </th>
+                      <th
+                        className={`text-left pb-3 pl-6 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '45%' }}
+                      >
+                        Violations
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {usabilityData.map((row) => {
+                      const scoreColor = row.score <= 1
+                        ? (isDark ? '#EF4444' : '#DC2626')
+                        : (isDark ? '#F59E0B' : '#D97706')
+                      return (
+                        <tr
+                          key={row.heuristic}
+                          className={`border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
+                        >
+                          <td className={`py-4 pr-4 font-satoshi text-[15px] align-top ${isDark ? 'text-white/90' : 'text-black/80'}`}>
+                            {row.heuristic}
+                          </td>
+                          <td className="py-4 text-center align-top">
+                            <span
+                              className="font-mono text-sm font-medium"
+                              style={{ color: scoreColor }}
+                            >
+                              {row.score}/5
+                            </span>
+                          </td>
+                          <td className={`py-4 pl-6 font-satoshi text-[15px] align-top ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                            <ul className="space-y-1">
+                              {row.violations.map((v, i) => (
+                                <li key={i} className="flex gap-2">
+                                  <span className={`flex-shrink-0 w-1 h-1 rounded-full mt-2 ${isDark ? 'bg-white/30' : 'bg-black/20'}`} />
+                                  {v}
+                                </li>
+                              ))}
+                            </ul>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )
+          })()}
+        </ProjectSubsection>
+
+        <ProjectSubsection title="Accessibility Findings">
+          <ProjectText>
+            Beyond usability, the interface failed to meet WCAG accessibility standards:
+          </ProjectText>
+
+          {(() => {
+            const accessibilityData = [
+              {
+                issue: 'Low color contrast',
+                measured: '2.1:1',
+                required: '4.5:1',
+                impact: 'Eye strain and reduced readability in varying lighting',
+              },
+              {
+                issue: 'Typography too small',
+                measured: '11px',
+                required: '14px+',
+                impact: 'Compounded fatigue during 8-hour shifts',
+              },
+            ]
+
+            return (
+              <div className={`mt-6 rounded-2xl p-5 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+                {/* Mobile: Stacked layout */}
+                <div className="md:hidden space-y-0">
+                  {accessibilityData.map((row, idx) => (
+                    <div
+                      key={row.issue}
+                      className={`py-4 ${idx > 0 ? `border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}` : ''}`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={`font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-black/80'}`}>
+                          {row.issue}
+                        </span>
+                        <span
+                          className="font-mono text-sm font-medium flex-shrink-0 ml-3"
+                          style={{ color: isDark ? '#EF4444' : '#DC2626' }}
+                        >
+                          {row.measured}
+                        </span>
+                      </div>
+                      <p className={`text-[14px] ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                        <span className={`font-mono text-[12px] ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                          Required: {row.required}
+                        </span>
+                        <span className="mx-2">·</span>
+                        {row.impact}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop: Full table */}
+                <table className="hidden md:table w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th
+                        className={`text-left pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '35%' }}
+                      >
+                        Issue
+                      </th>
+                      <th
+                        className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '15%' }}
+                      >
+                        Measured
+                      </th>
+                      <th
+                        className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '15%' }}
+                      >
+                        Required
+                      </th>
+                      <th
+                        className={`text-left pb-3 pl-6 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                        style={{ width: '35%' }}
+                      >
+                        Impact
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {accessibilityData.map((row) => (
+                      <tr
+                        key={row.issue}
+                        className={`border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
+                      >
+                        <td className={`py-4 pr-4 font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-black/80'}`}>
+                          {row.issue}
+                        </td>
+                        <td className="py-4 text-center">
+                          <span
+                            className="font-mono text-sm font-medium"
+                            style={{ color: isDark ? '#EF4444' : '#DC2626' }}
+                          >
+                            {row.measured}
+                          </span>
+                        </td>
+                        <td className={`py-4 text-center font-mono text-sm ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                          {row.required}
+                        </td>
+                        <td className={`py-4 pl-6 font-satoshi text-[15px] ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                          {row.impact}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          })()}
+        </ProjectSubsection>
+      </ProjectSection>
+
+      {/* Design Principles */}
+      <ProjectSection id="principles" title="Design Principles">
+        <ProjectText>
+          Based on my research findings, I developed these principles to guide the redesign:
+        </ProjectText>
+
+        {/* Bento Grid Layout - stays bento until mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+          {[
+            { title: 'Reduce Cognitive Load', description: 'Use clear hierarchy with intentional spacing, color, and discoverable keyboard shortcuts', icon: SquaresFour, span: 'md:col-span-2' },
+            { title: 'Customizable Layout', description: 'Offer a modular panel system that different user types can customize for their workflow', icon: SlidersHorizontal, span: 'md:col-span-2' },
+            { title: 'Enable Batch Operations', description: 'Allow annotators to apply changes to multiple objects at once to reduce clicks', icon: Stack, span: 'md:col-span-2' },
+            { title: 'Support User Agency', description: 'Provide undo/redo so annotators can try approaches without fear of mistakes', icon: ArrowCounterClockwise, span: 'md:col-span-3' },
+            { title: 'WCAG Accessibility', description: 'Meet color contrast ratios and typography standards for extended use sessions', icon: Eyeglasses, span: 'md:col-span-3' },
+          ].map((principle, index) => {
+            const Icon = principle.icon
+            return (
+              <div
+                key={index}
+                className={`relative rounded-2xl p-6 ${principle.span} ${
+                  isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
+                }`}
+              >
+                <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
+                  <Icon size={24} weight="light" />
+                </div>
+                <h4 className={`text-xl mb-3 theme-heading pr-10`} style={{ fontWeight: 600 }}>
+                  {principle.title}
+                </h4>
+                <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                  {principle.description}
+                </Body>
+              </div>
+            )
+          })}
+        </div>
       </ProjectSection>
 
       {/* The Solution */}
@@ -264,63 +630,73 @@ export default function CuboidAnnotator() {
         />
 
         <ProjectText>
-          I aimed to reduce cognitive load and help annotators work faster with less fatigue. The redesign focused on cleaner hierarchy, visible shortcuts, easier transforms, and progressive disclosure.
+          Guided by the design principles I established, I used Figma to redesign the interface to reduce cognitive load and help annotators work faster with less fatigue. Once approved by the founder, I used Claude Code to ship the UI updates, while engineers handled the backend complexity.
         </ProjectText>
 
         {/* Comparison table */}
-        <div className="overflow-hidden mt-16">
-          {/* Header with thumbnails */}
-          <div className="grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_120px_120px] gap-4">
-            <div />
-            <div className="text-center">
-              <img
-                src="/assets/projects/cuboid-annotator/old-design.png"
-                alt="Original interface"
-                className="w-full rounded-lg mb-3 opacity-70"
-              />
-              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/50' : 'text-black/50'}`}>
-                Original
-              </span>
-            </div>
-            <div className="text-center">
-              <img
-                src="/assets/projects/cuboid-annotator/new-design.png"
-                alt="Redesigned interface"
-                className="w-full rounded-lg mb-3"
-              />
-              <span className={`font-mono text-xs uppercase tracking-wider ${isDark ? 'text-white/50' : 'text-black/50'}`}>
-                Redesign
-              </span>
-            </div>
-          </div>
+        <div className={`mt-16 rounded-2xl p-6 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+          <ChartTitle>Shipped Improvements</ChartTitle>
 
-          {/* Comparison rows */}
-          <div className={`mt-6 divide-y ${isDark ? 'divide-white/[0.06]' : 'divide-black/[0.06]'}`}>
-            {[
-              { feature: 'Clear visual hierarchy', icon: SquaresFour },
-              { feature: 'Visible keyboard shortcuts', icon: Keyboard },
-              { feature: 'Batch ground alignment', icon: Crosshair },
-              { feature: 'Undo/redo support', icon: ArrowCounterClockwise },
-              { feature: 'Resizable camera views', icon: VideoCamera },
-              { feature: 'Playback for frame navigation', icon: Play },
-            ].map((row) => {
-              const Icon = row.icon
-              return (
-                <div key={row.feature} className="grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_120px_120px] gap-4 items-center py-4">
-                  <div className={`font-satoshi text-base md:text-lg flex items-center gap-3 ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
-                    <Icon size={20} weight="regular" className={isDark ? 'text-white/40' : 'text-black/40'} />
-                    {row.feature}
-                  </div>
-                  <div className="flex justify-center">
-                    <X size={20} weight="bold" style={{ color: isDark ? '#EF4444' : '#DC2626' }} />
-                  </div>
-                  <div className="flex justify-center">
-                    <Check size={20} weight="bold" style={{ color: isDark ? '#22C55E' : '#16A34A' }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          {/* Table */}
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th
+                  className={`text-left pb-3 ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                >
+                </th>
+                <th
+                  className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                  style={{ width: '100px' }}
+                >
+                  Original
+                </th>
+                <th
+                  className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                  style={{ width: '100px' }}
+                >
+                  Redesign
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { feature: 'Clear visual hierarchy', icon: SquaresFour },
+                { feature: 'Discoverable keyboard shortcuts', icon: Keyboard },
+                { feature: 'Modular panel system', icon: GridFour },
+                { feature: 'Batch ground alignment', icon: Crosshair },
+                { feature: 'Undo/redo support', icon: ArrowCounterClockwise },
+                { feature: 'Resizable camera views', icon: VideoCamera },
+                { feature: 'Playback for frame navigation', icon: Play },
+                { feature: 'WCAG-compliant contrast & typography', icon: Eyeglasses },
+              ].map((row) => {
+                const Icon = row.icon
+                return (
+                  <tr
+                    key={row.feature}
+                    className={`border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
+                  >
+                    <td className={`py-3 font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
+                      <div className="flex items-center gap-3">
+                        <Icon size={18} weight="regular" className={isDark ? 'text-white/30' : 'text-black/30'} />
+                        {row.feature}
+                      </div>
+                    </td>
+                    <td className="py-3" style={{ width: '100px' }}>
+                      <div className="flex justify-center">
+                        <X size={18} weight="bold" style={{ color: isDark ? '#EF4444' : '#DC2626' }} />
+                      </div>
+                    </td>
+                    <td className="py-3" style={{ width: '100px' }}>
+                      <div className="flex justify-center">
+                        <Check size={18} weight="bold" style={{ color: isDark ? '#22C55E' : '#16A34A' }} />
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </div>
       </ProjectSection>
 
@@ -328,7 +704,7 @@ export default function CuboidAnnotator() {
       <ProjectSection id="features" title="Key Flows & Features">
         <ProjectSubsection title="Adaptive Workspace">
           <ProjectText>
-            Many annotators work on 13" MacBook Airs with limited screen space. I designed a flexible panel system where users can resize, collapse, or expand views based on their task.
+            The same interface serves annotators, QA reviewers, and external engineers—each with role-based permissions but a shared foundation. A modular panel system lets users resize, collapse, expand, and rearrange views to focus on their specific workflow.
           </ProjectText>
 
           <div className="flex flex-wrap gap-2 my-6">

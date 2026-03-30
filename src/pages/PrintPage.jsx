@@ -4,7 +4,8 @@
  * Access at /print?tab=resume|cover-letter&template=default|doordash&format=visual|ats
  */
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useTheme } from '../context/ThemeContext'
 import { useSearchParams } from 'react-router-dom'
 import {
   PrintNavigation,
@@ -12,6 +13,7 @@ import {
   ResumeContent,
   CoverLetterContent,
 } from '../components/print'
+import InterviewNotesPanel from '../components/print/InterviewNotesPanel'
 import { getTemplate } from '../styles/printTemplates'
 import { getCoverLetter } from '../data/coverLetterData'
 import { Button } from '../components/ui/Button'
@@ -20,12 +22,33 @@ import { Button } from '../components/ui/Button'
 const PRINT_PASSWORD = 'behappy333'
 
 export default function PrintPage() {
+  const { isDark } = useTheme()
   const [searchParams, setSearchParams] = useSearchParams()
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem('printPageAuth') === 'true'
   })
   const [passwordInput, setPasswordInput] = useState('')
   const [passwordError, setPasswordError] = useState(false)
+  const [isNotesOpen, setIsNotesOpen] = useState(false)
+  const [mobileScale, setMobileScale] = useState(1)
+
+  // Calculate scale for mobile to fit content in viewport
+  useEffect(() => {
+    const calculateScale = () => {
+      if (window.innerWidth <= 768) {
+        const contentWidth = 816 // 8.5in in pixels at 96dpi
+        const availableWidth = window.innerWidth - 24 // viewport minus padding
+        const scale = Math.min(availableWidth / contentWidth, 1)
+        setMobileScale(scale)
+      } else {
+        setMobileScale(1)
+      }
+    }
+
+    calculateScale()
+    window.addEventListener('resize', calculateScale)
+    return () => window.removeEventListener('resize', calculateScale)
+  }, [])
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault()
@@ -155,110 +178,62 @@ export default function PrintPage() {
   // Password screen
   if (!isAuthenticated) {
     return (
-      <div className="password-screen">
+      <div className={`min-h-screen flex flex-col ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#FAF8F4]'}`}>
         <style>{`
-          .password-screen {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f5f5f5;
-            font-family: 'Satoshi', -apple-system, sans-serif;
-            cursor: default !important;
-            isolation: isolate;
-            position: relative;
-            z-index: 10000;
-          }
-          .password-screen * {
-            cursor: auto !important;
-            pointer-events: auto !important;
-          }
-          .password-screen input {
-            cursor: text !important;
-            pointer-events: auto !important;
-            -webkit-user-select: text !important;
-            user-select: text !important;
-          }
-          .password-screen button {
-            cursor: pointer !important;
-            pointer-events: auto !important;
-          }
-          .password-box {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 320px;
-            width: 100%;
-            position: relative;
-            z-index: 9999;
-          }
-          .password-box h2 {
-            font-family: 'Silk Serif', serif;
-            font-size: 24px;
-            font-weight: 400;
-            margin: 0 0 8px 0;
-            color: #111;
-          }
-          .password-box p {
-            font-size: 14px;
-            color: #666;
-            margin: 0 0 24px 0;
-          }
-          .password-input {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-            font-family: inherit;
-            background: white;
-            color: #1a1a1a;
-            -webkit-appearance: none;
-            appearance: none;
-          }
-          .password-input:focus {
-            outline: none;
-            border-color: #5B21B6;
-          }
-          .password-input::placeholder {
-            color: #999;
-          }
-          .password-input.error {
-            border-color: #e53e3e;
-          }
-          .password-submit {
-            width: 100%;
-          }
-          .password-error {
-            color: #e53e3e;
-            font-size: 13px;
-            margin-top: 12px;
-          }
+          * { cursor: auto !important; }
+          input, textarea { cursor: text !important; }
+          button, a, [role="button"] { cursor: pointer !important; }
         `}</style>
-        <form className="password-box" onSubmit={handlePasswordSubmit}>
-          <h2>Print Tools</h2>
-          <p>Enter password to access</p>
-          <input
-            type="password"
-            className={`password-input ${passwordError ? 'error' : ''}`}
-            placeholder="Password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            autoFocus
-          />
-          <div className="password-submit">
-            <Button type="submit" variant="primary" className="w-full !bg-gray-900 !text-white hover:!bg-gray-800">
-              Enter
+        {/* Top Navigation */}
+        <PrintNavigation
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          activeTemplate={activeTemplate}
+          isNotesOpen={false}
+          onToggleNotes={() => {}}
+        />
+
+        {/* Password Form */}
+        <div className="flex-1 flex items-center justify-center pt-[60px]">
+          <form
+            onSubmit={handlePasswordSubmit}
+            className={`p-10 rounded-2xl text-center max-w-[400px] w-full mx-4 ${
+              isDark
+                ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/[0.08]'
+                : 'bg-white/90 backdrop-blur-xl shadow-2xl'
+            }`}
+          >
+            <h2 className={`font-satoshi text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Password Required
+            </h2>
+            <p className={`font-satoshi text-base mb-6 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+              This content is private
+            </p>
+            <input
+              type="password"
+              className={`w-full h-12 px-4 rounded-lg font-satoshi text-base outline-none transition-colors ${
+                isDark
+                  ? 'bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-white/40 focus:border-white/20 caret-white'
+                  : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-gray-400 caret-gray-900'
+              } ${passwordError ? (isDark ? '!border-[#c45c5c]' : '!border-[#d46a6a]') : ''}`}
+              placeholder="Password"
+              value={passwordInput}
+              onChange={(e) => {
+                setPasswordInput(e.target.value)
+                if (passwordError) setPasswordError(false)
+              }}
+              autoFocus
+            />
+            {passwordError && (
+              <p className={`mt-1.5 mb-3 font-mono text-[10px] tracking-wide ${isDark ? 'text-[#c45c5c]' : 'text-[#d46a6a]'}`}>
+                Incorrect password
+              </p>
+            )}
+            <Button type="submit" variant="primary" className={`w-full h-12 ${!passwordError ? 'mt-3' : ''}`}>
+              Continue
             </Button>
-          </div>
-          {passwordError && (
-            <p className="password-error">Incorrect password</p>
-          )}
-        </form>
+          </form>
+        </div>
       </div>
     )
   }
@@ -302,24 +277,74 @@ export default function PrintPage() {
           cursor: auto !important;
         }
 
+        input, textarea {
+          cursor: text !important;
+        }
+
+        button, a, [role="button"] {
+          cursor: pointer !important;
+        }
+
         .print-page {
-          min-height: 100vh;
+          height: 100vh;
           background: #f5f5f5;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+
+        .print-layout {
+          display: flex;
+          flex: 1;
+          margin-top: 60px;
+          margin-bottom: 60px;
+          overflow: hidden;
+        }
+
+        .print-content-wrapper {
+          flex: 1;
+          overflow-y: auto;
+          overflow-x: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 40px 20px;
         }
 
         .print-content {
           width: 8.5in;
-          margin: 0 auto;
+          min-width: 8.5in;
           padding: 0.4in 0.5in;
           background: white;
+          flex-shrink: 0;
         }
 
         @media screen {
           .print-content {
             min-height: 11in;
-            margin: 100px auto;
             box-shadow: 0 4px 40px rgba(0,0,0,0.1);
             border-radius: 4px;
+            margin-bottom: 40px;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          .print-content-wrapper {
+            padding: 12px;
+            overflow: auto;
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
+            justify-content: flex-start;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+
+          .print-content-wrapper::-webkit-scrollbar {
+            display: none;
+          }
+
+          .print-content {
+            transform-origin: top left;
           }
         }
 
@@ -333,19 +358,38 @@ export default function PrintPage() {
         activeTab={activeTab}
         onTabChange={handleTabChange}
         activeTemplate={activeTemplate}
+        isNotesOpen={isNotesOpen}
+        onToggleNotes={() => setIsNotesOpen(!isNotesOpen)}
       />
 
-      {/* Content Area */}
-      <div className="print-content">
-        {activeTab === 'resume' ? (
-          <ResumeContent template={template} format={activeFormat} />
-        ) : (
-          <CoverLetterContent
-            template={template}
-            content={coverLetterContent}
-            onContentChange={handleContentChange}
-          />
-        )}
+      {/* Main Content Area with optional Notes Panel */}
+      <div className="print-layout">
+        {/* Content Area */}
+        <div className="print-content-wrapper">
+          <div
+            className="print-content"
+            style={mobileScale < 1 ? {
+              transform: `scale(${mobileScale})`,
+              marginBottom: `calc(-11in * (1 - ${mobileScale}))`
+            } : undefined}
+          >
+            {activeTab === 'resume' ? (
+              <ResumeContent template={template} format={activeFormat} />
+            ) : (
+              <CoverLetterContent
+                template={template}
+                content={coverLetterContent}
+                onContentChange={handleContentChange}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Interview Notes Panel */}
+        <InterviewNotesPanel
+          isOpen={isNotesOpen}
+          onClose={() => setIsNotesOpen(false)}
+        />
       </div>
 
       {/* Bottom Bar */}
