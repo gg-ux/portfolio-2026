@@ -69,12 +69,12 @@ export default function ResumePrintPage() {
       <style>{`
         @page {
           size: letter;
-          margin: 0.4in 0.5in;
+          margin: 0.15in 0.35in 0.3in 0.35in;
         }
 
         @media print {
           @page {
-            margin: 0.4in 0.5in;
+            margin: 0.15in 0.35in 0.3in 0.35in;
           }
           html, body, * {
             -webkit-print-color-adjust: exact !important;
@@ -96,7 +96,7 @@ export default function ResumePrintPage() {
           background: white;
           max-width: 8.5in;
           margin: 0 auto;
-          padding: 0.4in 0.5in 0.4in 0.5in;
+          padding: 0.15in 0.35in 0.3in 0.35in;
         }
 
         .print-resume * {
@@ -113,8 +113,8 @@ export default function ResumePrintPage() {
         /* Header - full width */
         .resume-header {
           grid-column: 1 / -1;
-          margin-bottom: 0.08in;
-          padding-bottom: 0.06in;
+          margin-bottom: 0.1in;
+          padding-bottom: 0.03in;
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
@@ -478,7 +478,7 @@ export default function ResumePrintPage() {
 
         @media screen {
           .print-resume {
-            padding: 0.4in 0.5in;
+            padding: 0.15in 0.35in 0.3in 0.35in;
             box-shadow: 0 4px 40px rgba(0,0,0,0.08);
             margin: 40px auto;
             border-radius: 4px;

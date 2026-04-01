@@ -243,33 +243,101 @@ export default function PrintPage() {
       <style>{`
         @page {
           size: letter;
-          margin: 0.4in 0.5in;
+          margin: 0.25in 0.35in 0.3in 0.35in;
         }
 
         @media print {
           @page {
-            margin: 0.4in 0.5in;
+            size: letter;
+            margin: 0.25in 0.35in 0.3in 0.35in;
           }
-          html, body, * {
+
+          /* Reset everything */
+          *, *::before, *::after {
+            box-sizing: border-box !important;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
             color-adjust: exact !important;
           }
-          .no-print {
+
+          html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+          }
+
+          /* Hide EVERYTHING first */
+          body > * {
             display: none !important;
           }
-          .print-page {
-            padding: 0 !important;
-            margin: 0 !important;
-            background: white !important;
+
+          /* Then show only the print page */
+          body > #root,
+          body > div:first-child {
+            display: block !important;
           }
-          .print-content {
+
+          .no-print,
+          .print-navigation,
+          .print-bottom-bar,
+          .interview-panel,
+          nav,
+          [class*="Navigation"],
+          [class*="BottomBar"],
+          [class*="NotesPanel"] {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            visibility: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+          }
+
+          .print-page,
+          .print-layout,
+          .print-content-wrapper {
+            display: block !important;
+            position: static !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
             margin: 0 !important;
             padding: 0 !important;
+            background: white !important;
+            overflow: visible !important;
+            flex: none !important;
+          }
+
+          .print-content {
+            display: block !important;
+            position: static !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
+            overflow: visible !important;
             box-shadow: none !important;
             border-radius: 0 !important;
-            min-height: auto !important;
-            aspect-ratio: auto !important;
+            flex: none !important;
+            transform: none !important;
+          }
+
+          .print-resume,
+          .ats-resume {
+            width: 100% !important;
+            max-width: none !important;
           }
         }
 
@@ -314,7 +382,7 @@ export default function PrintPage() {
         .print-content {
           width: 8.5in;
           min-width: 8.5in;
-          padding: 0.4in 0.5in;
+          padding: 0.25in 0.35in 0.3in 0.35in;
           background: white;
           flex-shrink: 0;
         }

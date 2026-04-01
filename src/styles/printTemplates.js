@@ -363,6 +363,46 @@ export const templates = {
       mono: "'Azeret Mono', monospace",
     },
   },
+
+  'apple-video': {
+    id: 'apple-video',
+    name: 'Apple (Video Apps)',
+    colors: {
+      accent: '#000000',
+      accentGradient: 'linear-gradient(90deg, #000000, #333333)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
+
+  'meta-research': {
+    id: 'meta-research',
+    name: 'Meta (Research Platform)',
+    colors: {
+      accent: '#0668E1',
+      accentGradient: 'linear-gradient(90deg, #0668E1, #1877F2)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
 }
 
 /**

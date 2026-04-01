@@ -71,6 +71,7 @@ const sections = [
   { id: 'solution', label: 'The Solution' },
   { id: 'features', label: 'Key Flows & Features' },
   { id: 'impact', label: 'Impact' },
+  { id: 'design-system', label: 'Design System' },
 ]
 
 export default function CuboidAnnotator() {
@@ -142,10 +143,10 @@ export default function CuboidAnnotator() {
       <ProjectHero
         company="AI Data Startup"
         title="3D Cuboid Annotation Tool"
-        description="I redesigned precision workflows for autonomous vehicle data labeling. As the sole product designer, I transformed an engineer-built tool into an interface optimized for annotators, improving productivity by 33% and dramatically improving usability and accessibility."
+        description="As the sole product designer for an engineering-led AI startup, I owned design across the entire company—design system, data annotation platform, native annotator app, marketing site, internal tools, and learning management system. I also shipped production UI using Claude Code, transforming an engineer-built tool into an intuitive interface that significantly improved usability, accuracy, and productivity."
         role="Lead Product Designer"
         timeline="2025"
-        impact="33% increase in productivity"
+        impact="33% increase in productivity, 28% increase in accuracy"
         tools="Figma Make, Claude Code"
         coverImage="/assets/projects/cuboid-annotator/cover.webp"
         darkBanner
@@ -167,7 +168,7 @@ export default function CuboidAnnotator() {
       {/* Overview */}
       <ProjectSection id="overview" title="Overview">
         <ProjectText>
-          This AI data startup provides labeled training data for autonomous vehicles. Their cuboid annotation tool lets workers draw 3D bounding boxes around objects in LiDAR point cloud data, training the perception models that help self-driving cars understand their environment.
+          This AI startup provides labeled training data for enterprise AI teams across autonomous vehicles, robotics, and more. Their cuboid annotation tool lets workers draw 3D bounding boxes around objects in LiDAR point cloud data, training the perception models that help self-driving cars understand their environment.
         </ProjectText>
 
         <ProjectText>
@@ -175,7 +176,7 @@ export default function CuboidAnnotator() {
         </ProjectText>
 
         <ProjectCallout>
-          I joined as the sole product designer. The tool had been built by engineers focused on functionality, not usability. My goal was to make annotators faster and reduce errors.
+          I joined as the sole product designer, owning the design system and all product surfaces. The tool had been built by engineers focused on functionality, not usability. My goal was to make annotators faster and reduce errors.
         </ProjectCallout>
 
         <ProjectSubsection title="The Core Workflow">
@@ -698,10 +699,15 @@ export default function CuboidAnnotator() {
             </tbody>
           </table>
         </div>
+
       </ProjectSection>
 
       {/* Key Flows & Features */}
       <ProjectSection id="features" title="Key Flows & Features">
+        <ProjectText>
+          The interactive prototypes below were created using Figma Make, demonstrating key workflows and interactions across the platform.
+        </ProjectText>
+
         <ProjectSubsection title="Adaptive Workspace">
           <ProjectText>
             The same interface serves annotators, QA reviewers, and external engineers—each with role-based permissions but a shared foundation. A modular panel system lets users resize, collapse, expand, and rearrange views to focus on their specific workflow.
@@ -932,6 +938,33 @@ export default function CuboidAnnotator() {
             )
           })}
         </div>
+
+        <ProjectSubsection title="How I Measured" className="mb-0">
+          <ProjectText>
+            I leveraged existing systems and established baselines early in my research process to quantify improvements:
+          </ProjectText>
+          <ul className={`space-y-3 mt-4 font-satoshi text-[15px] md:text-base leading-relaxed ${isDark ? 'text-white/70' : 'text-[#3A3A3A]'}`}>
+            <li><strong className={isDark ? 'text-white/90' : 'text-black/80'}>Productivity:</strong> Internal tracking system. Annotators are paid per task, so we had granular throughput data for before/after comparison.</li>
+            <li><strong className={isDark ? 'text-white/90' : 'text-black/80'}>Ground alignment:</strong> Timed benchmark tasks during initial shadow sessions (~3 min), re-tested after shipping snap-to-ground feature (~30 sec).</li>
+            <li><strong className={isDark ? 'text-white/90' : 'text-black/80'}>SUS score:</strong> Standardized survey administered during discovery research, then re-administered after 1 week of usage with the redesigned tool.</li>
+            <li><strong className={isDark ? 'text-white/90' : 'text-black/80'}>Accuracy:</strong> Existing QA pipeline already tracked reviewer corrections per annotator. Fewer interventions needed after redesign.</li>
+          </ul>
+        </ProjectSubsection>
+      </ProjectSection>
+
+      {/* Design System */}
+      <ProjectSection id="design-system" title="Design System">
+        <ProjectText>
+          While working on the updated design for the tooling, I was simultaneously managing and updating our design system. I built it by consolidating scattered Figma components into a unified library, then tokenized colors, spacing, and typography using Claude Code. This let me ship reusable React components directly to production, ensuring visual consistency across the platform without waiting on engineering bandwidth.
+        </ProjectText>
+
+        {/* Video placeholder - hidden until rendered
+        <div className={`my-8 rounded-2xl aspect-video flex items-center justify-center ${isDark ? 'bg-white/[0.04] border border-white/[0.08]' : 'bg-black/[0.04] border border-black/[0.08]'}`}>
+          <span className={`font-mono text-sm ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+            [Video: Design System + Claude Code workflow]
+          </span>
+        </div>
+        */}
       </ProjectSection>
     </ProjectLayout>
   )

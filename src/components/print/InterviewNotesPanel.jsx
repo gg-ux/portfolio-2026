@@ -18,7 +18,7 @@ export default function InterviewNotesPanel({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('presentation')
 
   return (
-    <div className={`interview-panel ${isOpen ? 'open' : ''}`}>
+    <div className={`interview-panel no-print ${isOpen ? 'open' : ''}`}>
       <style>{`
         .interview-panel {
           width: 0;

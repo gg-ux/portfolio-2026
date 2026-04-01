@@ -316,6 +316,23 @@ With 7+ years of multi-platform design experience, a passion for the Apple desig
     },
   },
 
+  'apple-video': {
+    recipient: {
+      company: 'Apple',
+    },
+    content: {
+      greeting: 'Dear Video Applications Design Team,',
+
+      body: `I've spent my career distilling sophisticated technical challenges into intuitive, accessible design solutions, and the Product Designer role on Video Applications is exactly the kind of challenge I'm drawn to. The opportunity to shape how video creators worldwide tell their stories through Apple's software is deeply exciting.
+
+At Avala AI, I'm the sole designer for a multi-platform product (web and iOS), designing frame-based editing workflows with timeline navigation, playback controls, and cross-frame editing for 3D data sequences. This work requires deep understanding of creative tooling patterns familiar to video editors: scrubbing through frames, making precise edits across sequences, and managing complex multi-track data. I create high-fidelity prototypes with extraordinary attention to interaction design and visual craft. At Tesla, I designed across multiple platforms including responsive web and native iOS/Android applications, contributing to the Tesla Design System with component guidelines and visual specifications. I led the AI chatbot that boosted sales lead conversion by 120% and presented concepts to cross-functional teams including Senior Management. At Notetracks, I designed timeline-based interfaces for a collaborative audio arranging app, demonstrating my understanding of creative workflows. I've delivered in deadline-driven environments repeatedly: INDI EV's in-vehicle interface for LA Auto Show, and rapid iteration at a fast-paced startup.
+
+With 7+ years of multi-platform design experience, hands-on experience designing frame-based creative tools, and an MHCI+D from UC Irvine, I'm excited to bring my passion for accessible, transformational design to the Video Applications team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
   'apple-music': {
     recipient: {
       company: 'Apple',
@@ -328,6 +345,23 @@ With 7+ years of multi-platform design experience, a passion for the Apple desig
 At Notetracks, I designed UI for a collaborative cloud-based audio arranging app used by music producers and audio professionals, iteratively refining complex workflows through user feedback. At Avala AI, I'm the sole designer for a workflow-driven data management, visualization, and annotation platform, distilling intricate design challenges into elegant solutions for professional users handling deep, complex multi-step workflows. I create detailed visual specifications for engineering implementation and collaborate cross-functionally with product and engineering leadership. At Tesla, I designed native iOS and Android applications and an AI chatbot that boosted conversion by 120% through nuanced interaction design. I contributed to the Tesla Design System with component guidelines and presented UI concepts to cross-functional stakeholders and executives. At INDI EV, I led UI design for the in-vehicle interface from scratch, delivering a high-fidelity prototype with refined typography, layout, and motion behavior for LA Auto Show debut.
 
 With 7+ years of UI design experience across iOS, web, and native platforms, hands-on experience with music production software, and an MHCI+D from UC Irvine, I'm excited to bring my passion for elegant design and creative tools to the Music Creation Apps team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
+
+  'meta-research': {
+    recipient: {
+      company: 'Meta',
+    },
+    content: {
+      greeting: 'Dear Meta Research Platform Team,',
+
+      body: `I'm an AI-native designer who ships production code using Claude daily, and the opportunity to help build AI-first platforms for researchers across Meta is exactly the kind of challenge I thrive in. Building internal tooling that empowers teams to move faster requires both strong visual craft and the systems thinking to design platforms that scale.
+
+At Avala AI, an early-stage startup, I'm the sole designer building AI-native internal tools, operational dashboards, and learning systems that serve five distinct user types. I ship production UI using Claude Code and AI-assisted workflows, proactively solving problems without waiting for complete requirements. I author PRDs, collaborate with engineering leadership on product strategy, and maintain a design system with strong visual craft. At Tesla, I designed enterprise apps for Energy Installers and Powerwall Parts Store, building internal tooling that improved operational efficiency. I also led the AI chatbot that boosted sales lead conversion by 120%, demonstrating my ability to design AI-powered experiences. I contributed to the Tesla Design System with systematic patterns across platforms, partnering with 8+ cross-functional stakeholders. At Accurate Background, I designed enterprise platform tooling for internal operations teams, creating data-heavy compliance workflows.
+
+With 7+ years of experience in enterprise and internal tooling, hands-on AI adoption using Claude and Figma, and an MHCI+D from UC Irvine, I'm excited to bring my systems thinking and visual craft to the Central Product Platform team.`,
 
       signoff: 'Looking forward to connecting,',
     },
@@ -367,11 +401,13 @@ export const getAvailableTemplates = () => {
     { id: 'disney-ai', name: 'Disney (AI Enterprise)' },
     { id: 'apple-appstore', name: 'Apple (App Store)' },
     { id: 'apple-music', name: 'Apple (Music Creation)' },
+    { id: 'apple-video', name: 'Apple (Video Apps)' },
     { id: 'doordash', name: 'DoorDash' },
     { id: 'doordash-drive', name: 'DoorDash (Drive)' },
     { id: 'dropbox', name: 'Dropbox' },
     { id: 'hungryroot', name: 'Hungryroot' },
     { id: 'calendly', name: 'Calendly' },
+    { id: 'meta-research', name: 'Meta (Research Platform)' },
     { id: 'spotify', name: 'Spotify' },
     { id: 'waymo', name: 'Waymo' },
     { id: 'vercel', name: 'Vercel' },

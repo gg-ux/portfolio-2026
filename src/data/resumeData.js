@@ -744,6 +744,48 @@ export const resumeTemplateOverrides = {
     hideJobs: ['Accurate Background', 'Catalia Health'],
   },
 
+  'apple-video': {
+    title: 'Sr. Product Designer',
+    tagline: 'Sr. Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience designing across iOS, macOS, and web. Passionate about distilling complex creative workflows into intuitive, accessible solutions that empower storytellers.',
+    skills: {
+      design: ['User-Centered Design', 'Interaction Design', 'Visual Design', 'Prototyping', 'Accessibility (WCAG)', 'Design Systems'],
+      development: ['High-Fidelity Prototyping', 'HTML/CSS/JavaScript', 'AI-Assisted Development', 'Design Documentation'],
+      strategy: ['Cross-Functional Collaboration', 'Design Presentations', 'Iterative Design Process', 'User Research'],
+      tools: ['Figma', 'Sketch', 'Adobe Creative Suite', 'Keynote', 'Claude Code', 'Final Cut Pro'],
+    },
+    titleOverrides: {
+      'Avala AI': 'Sr. Product Designer',
+      'Tesla': 'Product Designer',
+      'Notetracks': 'Product Designer, Media Collaboration',
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer across data annotation platform, native mobile labeling app, marketing site, internal tools, and learning systems',
+        'Design frame-based editing workflows with timeline navigation, playback controls, and cross-frame editing for 3D data sequences, requiring deep understanding of creative tooling patterns',
+        'Create design mockups, prototypes, and production assets with extraordinary attention to interaction design, visual craft, and accessibility',
+        'Build and maintain design system with component library, ensuring consistency and scalability across all product surfaces',
+        'Collaborate cross-functionally with Engineering and Operations; present design concepts and documentation for proper implementation',
+      ],
+      'Tesla': [
+        'Designed across multiple platforms including responsive web (Tesla.com) and native iOS/Android applications reaching millions of users worldwide',
+        'Led design of AI chatbot with intuitive conversational interface, boosting sales lead conversion rates by 120% through user-centered design',
+        'Contributed to Tesla Design System with component guidelines, visual specifications, and documentation across web and native platforms',
+        'Led global launch of responsive product pages, translating complex technical information into clean, focused, understandable solutions',
+        'Presented design concepts to cross-functional teams including Engineering, Product Marketing, and Senior Management',
+      ],
+      'Notetracks': [
+        'Designed UI for collaborative cloud-based audio arranging and note-taking web app used by content creators and media professionals',
+        'Created timeline-based interfaces for audio collaboration, demonstrating understanding of creative workflows and iterative design process',
+        'Iteratively refined user experiences through BETA user feedback in dynamic, fast-paced environment',
+      ],
+      'INDI EV': [
+        'Led design of in-vehicle interface for debut electric car, establishing visual design language with attention to typography, color, and consistency',
+        'Delivered high-fidelity prototypes and production visual assets for LA Auto Show debut, working in deadline-driven environment',
+      ],
+    },
+    hideJobs: ['Accurate Background', 'Catalia Health'],
+  },
+
   'apple-music': {
     title: 'Senior UI Designer',
     tagline: 'Senior UI Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Classically trained pianist (Certificate of Merit Level 10) and music producer (Ableton) passionate about elegant interfaces, workflow-driven experiences, and crafting nuanced visual solutions for creative professionals.',
@@ -784,6 +826,42 @@ export const resumeTemplateOverrides = {
     },
     // Exclude Accurate Background and Catalia Health for this template - Notetracks is more relevant
     hideJobs: ['Accurate Background', 'Catalia Health'],
+  },
+
+  'meta-research': {
+    title: 'Senior Product Designer',
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about making complex systems feel effortless, merging function with aesthetics, and leveraging AI to build at the speed of thought.',
+    skills: {
+      design: ['Visual Craft', 'Design Systems', 'Internal Tooling', 'Platform Design', 'Interaction Design', 'Enterprise UX'],
+      development: ['Figma (Variables, Components)', 'AI-Assisted Development (Claude)', 'React/HTML/CSS/JS', 'Rapid Prototyping'],
+      strategy: ['Systems Thinking', 'Cross-Functional Collaboration', 'PRD Writing', 'Problem-First Approach'],
+      tools: ['Figma', 'Claude Code', 'GitHub', 'Jira', 'Confluence', 'Vercel'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer for AI-native data platform, building internal tools, learning systems, and operational dashboards that empower cross-functional teams',
+        'Ship production UI using Claude Code and AI-assisted development workflows, demonstrating hands-on AI adoption and rapid iteration',
+        'Design for five distinct user types with unique workflows, proactively solving problems without waiting for complete requirements',
+        'Build and maintain design system with component library in Figma, ensuring visual craft and systematic consistency across platform',
+        'Author PRDs and collaborate with engineering leadership to shape product roadmap and prioritize features',
+      ],
+      'Tesla': [
+        'Designed enterprise apps for Energy Installers and Powerwall Parts Store, building internal tooling that improved operational efficiency',
+        'Led design of AI chatbot, boosting sales lead conversion rates by 120% through intuitive conversational UX and AI-powered automation',
+        'Contributed to Tesla Design System with component guidelines and documentation, demonstrating systems thinking at scale',
+        'Led global launch of responsive product pages for Tesla.com, partnering cross-functionally with 8+ stakeholders across teams',
+      ],
+      'Accurate Background': [
+        'Designed enterprise platform serving internal operations teams, creating compliance-focused tooling that streamlined QA workflows',
+        'Built systematic solutions for complex data workflows, improving information architecture and verification processes',
+        'Collaborated cross-functionally with overseas engineering teams to align on requirements and ship platform improvements',
+      ],
+      'INDI EV': [
+        'Led 0-1 design of in-vehicle interface (HMI) for debut electric car, establishing UI and design system from scratch',
+        'Delivered high-fidelity prototype with key driver flows and vehicle control features for LA Auto Show debut',
+      ],
+    },
+    hideJobs: ['Notetracks', 'Catalia Health'],
   },
 }
 
