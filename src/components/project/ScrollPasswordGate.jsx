@@ -27,24 +27,29 @@ export default function ScrollPasswordGate({
   useEffect(() => {
     if (isAuthenticated) return
 
-    const handleScroll = () => {
-      if (gateTriggered.current) return
+    const section = document.getElementById(sectionId)
+    if (!section) return
 
-      const section = document.getElementById(sectionId)
-      if (!section) return
-
-      const sectionTop = section.getBoundingClientRect().top
-      const triggerPoint = window.innerHeight * 0.6
-
-      if (sectionTop < triggerPoint) {
-        gateTriggered.current = true
-        setShowGate(true)
-        document.body.style.overflow = 'hidden'
+    // Use Intersection Observer for reliable detection during fast scrolling
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !gateTriggered.current) {
+            gateTriggered.current = true
+            setShowGate(true)
+            document.body.style.overflow = 'hidden'
+          }
+        })
+      },
+      {
+        // Trigger when section is 40% from top of viewport
+        rootMargin: '-40% 0px -60% 0px',
+        threshold: 0,
       }
-    }
+    )
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    observer.observe(section)
+    return () => observer.disconnect()
   }, [isAuthenticated, sectionId])
 
   const handlePasswordSubmit = (e) => {
