@@ -134,9 +134,13 @@ export default function ScrollPasswordGate({
               type="button"
               onClick={() => {
                 setShowGate(false)
-                unlockScroll()
-                // Scroll up to get out of trigger zone
-                window.scrollBy({ top: -300, behavior: 'smooth' })
+                // Unlock body styles
+                document.body.style.overflow = ''
+                document.body.style.position = ''
+                document.body.style.top = ''
+                document.body.style.width = ''
+                // Scroll to position above trigger (where they were minus 300px)
+                window.scrollTo(0, Math.max(0, scrollYRef.current - 300))
                 // Reset trigger so it can re-fire if they scroll back down
                 setTimeout(() => {
                   gateTriggered.current = false
