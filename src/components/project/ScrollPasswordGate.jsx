@@ -114,22 +114,10 @@ export default function ScrollPasswordGate({
                 document.body.style.overflow = ''
                 // Scroll up to get out of trigger zone
                 window.scrollBy({ top: -300, behavior: 'smooth' })
-                // Wait for scroll to complete, then check if we're out of trigger zone
-                const checkAndReset = () => {
-                  const section = document.getElementById(sectionId)
-                  if (section) {
-                    const sectionTop = section.getBoundingClientRect().top
-                    const triggerPoint = window.innerHeight * 0.6
-                    // Only reset if we're safely out of the trigger zone
-                    if (sectionTop >= triggerPoint) {
-                      gateTriggered.current = false
-                    } else {
-                      // Still in trigger zone, try again
-                      setTimeout(checkAndReset, 100)
-                    }
-                  }
-                }
-                setTimeout(checkAndReset, 500)
+                // Reset trigger after scroll completes so popup re-appears if they scroll back down
+                setTimeout(() => {
+                  gateTriggered.current = false
+                }, 400)
               }}
               className={`absolute top-4 right-4 p-1 rounded-full transition-colors ${
                 isDark
