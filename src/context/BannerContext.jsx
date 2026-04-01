@@ -22,17 +22,34 @@ export function BannerProvider({ children }) {
       return
     }
 
+    const getEffectiveScrollY = () => {
+      // When body is position:fixed (scroll locked), read scroll from top style
+      if (document.body.style.position === 'fixed') {
+        const top = document.body.style.top
+        return top ? Math.abs(parseInt(top, 10)) : 0
+      }
+      return window.scrollY
+    }
+
     const handleScroll = () => {
       // Consider "in banner zone" when scroll is within the banner area
       // with some buffer for the nav height (~72px)
-      const scrollY = window.scrollY
+      const scrollY = getEffectiveScrollY()
       const threshold = bannerHeight - 72
       setIsInBannerZone(scrollY < threshold)
     }
 
     handleScroll() // Initial check
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    // Also observe body style changes for scroll lock
+    const observer = new MutationObserver(handleScroll)
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
   }, [bannerHeight])
 
   // Reset when navigating away

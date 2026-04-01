@@ -48,32 +48,53 @@ export default function ScrollPasswordGate({
     }
   }, [])
 
+  // Reset trigger state when navigating to a new page
+  useEffect(() => {
+    gateTriggered.current = false
+    setShowGate(false)
+  }, [sectionId])
+
   useEffect(() => {
     if (isAuthenticated) return
 
-    const section = document.getElementById(sectionId)
-    if (!section) return
+    let observer = null
+    let retryTimeout = null
 
-    // Use Intersection Observer for reliable detection during fast scrolling
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !gateTriggered.current) {
-            gateTriggered.current = true
-            setShowGate(true)
-            lockScroll()
-          }
-        })
-      },
-      {
-        // Trigger when section is 40% from top of viewport
-        rootMargin: '-40% 0px -60% 0px',
-        threshold: 0,
+    const setupObserver = () => {
+      const section = document.getElementById(sectionId)
+      if (!section) {
+        // Section not found yet, retry after a short delay
+        retryTimeout = setTimeout(setupObserver, 100)
+        return
       }
-    )
 
-    observer.observe(section)
-    return () => observer.disconnect()
+      // Use Intersection Observer for reliable detection during fast scrolling
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !gateTriggered.current) {
+              gateTriggered.current = true
+              setShowGate(true)
+              lockScroll()
+            }
+          })
+        },
+        {
+          // Trigger when section is 40% from top of viewport
+          rootMargin: '-40% 0px -60% 0px',
+          threshold: 0,
+        }
+      )
+
+      observer.observe(section)
+    }
+
+    setupObserver()
+
+    return () => {
+      if (observer) observer.disconnect()
+      if (retryTimeout) clearTimeout(retryTimeout)
+    }
   }, [isAuthenticated, sectionId, lockScroll])
 
   const handlePasswordSubmit = (e) => {
