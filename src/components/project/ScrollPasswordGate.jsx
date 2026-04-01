@@ -134,17 +134,21 @@ export default function ScrollPasswordGate({
               type="button"
               onClick={() => {
                 setShowGate(false)
-                // Unlock body styles
+                // Restore scroll position first, then unlock
+                const savedY = scrollYRef.current
                 document.body.style.overflow = ''
                 document.body.style.position = ''
                 document.body.style.top = ''
                 document.body.style.width = ''
-                // Scroll to position above trigger (where they were minus 300px)
-                window.scrollTo(0, Math.max(0, scrollYRef.current - 300))
+                // Restore to exact position, then smoothly scroll up
+                window.scrollTo(0, savedY)
+                requestAnimationFrame(() => {
+                  window.scrollBy({ top: -300, behavior: 'smooth' })
+                })
                 // Reset trigger so it can re-fire if they scroll back down
                 setTimeout(() => {
                   gateTriggered.current = false
-                }, 500)
+                }, 600)
               }}
               className={`absolute top-4 right-4 p-1 rounded-full transition-colors ${
                 isDark
