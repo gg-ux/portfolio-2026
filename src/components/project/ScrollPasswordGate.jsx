@@ -57,44 +57,29 @@ export default function ScrollPasswordGate({
   useEffect(() => {
     if (isAuthenticated) return
 
-    let observer = null
-    let retryTimeout = null
+    const triggerGate = () => {
+      if (gateTriggered.current) return
+      gateTriggered.current = true
+      setShowGate(true)
+      lockScroll()
+    }
 
-    const setupObserver = () => {
+    // Scroll-based detection (reliable fallback)
+    const handleScroll = () => {
+      if (gateTriggered.current) return
       const section = document.getElementById(sectionId)
-      if (!section) {
-        // Section not found yet, retry after a short delay
-        retryTimeout = setTimeout(setupObserver, 100)
-        return
+      if (!section) return
+      const rect = section.getBoundingClientRect()
+      if (rect.top < window.innerHeight * 0.6) {
+        triggerGate()
       }
-
-      // Use Intersection Observer for reliable detection during fast scrolling
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !gateTriggered.current) {
-              gateTriggered.current = true
-              setShowGate(true)
-              lockScroll()
-            }
-          })
-        },
-        {
-          // Trigger when section is 40% from top of viewport
-          rootMargin: '-40% 0px -60% 0px',
-          threshold: 0,
-        }
-      )
-
-      observer.observe(section)
     }
 
-    setupObserver()
+    // Run initial check in case already scrolled past
+    setTimeout(handleScroll, 100)
 
-    return () => {
-      if (observer) observer.disconnect()
-      if (retryTimeout) clearTimeout(retryTimeout)
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [isAuthenticated, sectionId, lockScroll])
 
   const handlePasswordSubmit = (e) => {
