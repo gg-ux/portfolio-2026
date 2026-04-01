@@ -25,27 +25,21 @@ export default function ScrollPasswordGate({
   const gateTriggered = useRef(false)
   const scrollYRef = useRef(0)
 
-  // Lock body scroll - required for iOS Safari
+  // Lock scroll without visual jump
   const lockScroll = useCallback(() => {
     scrollYRef.current = window.scrollY
+    document.body.style.overflow = 'hidden'
     document.body.style.position = 'fixed'
     document.body.style.top = `-${scrollYRef.current}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
-    document.body.style.overflow = 'hidden'
+    document.body.style.width = '100%'
   }, [])
 
-  // Unlock and restore position
-  const unlockScroll = useCallback((restorePosition = true) => {
-    const scrollY = scrollYRef.current
+  const unlockScroll = useCallback(() => {
+    document.body.style.overflow = ''
     document.body.style.position = ''
     document.body.style.top = ''
-    document.body.style.left = ''
-    document.body.style.right = ''
-    document.body.style.overflow = ''
-    if (restorePosition) {
-      window.scrollTo(0, scrollY)
-    }
+    document.body.style.width = ''
+    window.scrollTo(0, scrollYRef.current)
   }, [])
 
   // Reset trigger state when navigating to a new page
@@ -57,21 +51,15 @@ export default function ScrollPasswordGate({
   useEffect(() => {
     if (isAuthenticated) return
 
-    const triggerGate = () => {
-      if (gateTriggered.current) return
-      gateTriggered.current = true
-      setShowGate(true)
-      lockScroll()
-    }
-
-    // Scroll-based detection (reliable fallback)
     const handleScroll = () => {
       if (gateTriggered.current) return
       const section = document.getElementById(sectionId)
       if (!section) return
       const rect = section.getBoundingClientRect()
       if (rect.top < window.innerHeight * 0.6) {
-        triggerGate()
+        gateTriggered.current = true
+        setShowGate(true)
+        lockScroll()
       }
     }
 
@@ -90,7 +78,7 @@ export default function ScrollPasswordGate({
         sessionStorage.setItem(storageKey, 'true')
         setIsAuthenticated(true)
         setShowGate(false)
-        unlockScroll(true)
+        unlockScroll()
       }, 400)
       setPasswordError(false)
     } else {
@@ -146,31 +134,13 @@ export default function ScrollPasswordGate({
               type="button"
               onClick={() => {
                 setShowGate(false)
-                // Calculate safe scroll position (above trigger zone)
-                const section = document.getElementById(sectionId)
-                const safeY = section
-                  ? Math.max(0, section.offsetTop - window.innerHeight * 0.8)
-                  : Math.max(0, scrollYRef.current - 400)
-                // Unlock and go to safe position
-                unlockScroll(false)
-                window.scrollTo(0, safeY)
-                // Reset trigger and add scroll listener to re-show if they scroll back
-                gateTriggered.current = false
-                const recheck = () => {
-                  const sect = document.getElementById(sectionId)
-                  if (sect) {
-                    const rect = sect.getBoundingClientRect()
-                    if (rect.top < window.innerHeight * 0.6) {
-                      gateTriggered.current = true
-                      setShowGate(true)
-                      lockScroll()
-                      window.removeEventListener('scroll', recheck)
-                    }
-                  }
-                }
+                unlockScroll()
+                // Scroll up to get out of trigger zone
+                window.scrollBy({ top: -300, behavior: 'smooth' })
+                // Reset trigger so it can re-fire if they scroll back down
                 setTimeout(() => {
-                  window.addEventListener('scroll', recheck, { passive: true })
-                }, 100)
+                  gateTriggered.current = false
+                }, 500)
               }}
               className={`absolute top-4 right-4 p-1 rounded-full transition-colors ${
                 isDark
