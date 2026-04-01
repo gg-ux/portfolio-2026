@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 import { Button } from '../ui/Button'
 import { X } from '@phosphor-icons/react'
@@ -23,6 +23,30 @@ export default function ScrollPasswordGate({
   const [passwordError, setPasswordError] = useState(false)
   const [isAnimatingOut, setIsAnimatingOut] = useState(false)
   const gateTriggered = useRef(false)
+  const scrollYRef = useRef(0)
+
+  // Lock body scroll - required for iOS Safari
+  const lockScroll = useCallback(() => {
+    scrollYRef.current = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollYRef.current}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.overflow = 'hidden'
+  }, [])
+
+  // Unlock and restore position
+  const unlockScroll = useCallback((restorePosition = true) => {
+    const scrollY = scrollYRef.current
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.left = ''
+    document.body.style.right = ''
+    document.body.style.overflow = ''
+    if (restorePosition) {
+      window.scrollTo(0, scrollY)
+    }
+  }, [])
 
   useEffect(() => {
     if (isAuthenticated) return
@@ -37,7 +61,7 @@ export default function ScrollPasswordGate({
           if (entry.isIntersecting && !gateTriggered.current) {
             gateTriggered.current = true
             setShowGate(true)
-            document.body.style.overflow = 'hidden'
+            lockScroll()
           }
         })
       },
@@ -50,7 +74,7 @@ export default function ScrollPasswordGate({
 
     observer.observe(section)
     return () => observer.disconnect()
-  }, [isAuthenticated, sectionId])
+  }, [isAuthenticated, sectionId, lockScroll])
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault()
@@ -60,7 +84,7 @@ export default function ScrollPasswordGate({
         sessionStorage.setItem(storageKey, 'true')
         setIsAuthenticated(true)
         setShowGate(false)
-        document.body.style.overflow = ''
+        unlockScroll(true)
       }, 400)
       setPasswordError(false)
     } else {
@@ -116,28 +140,31 @@ export default function ScrollPasswordGate({
               type="button"
               onClick={() => {
                 setShowGate(false)
-                document.body.style.overflow = ''
-                // Scroll up to get out of trigger zone
-                window.scrollBy({ top: -300, behavior: 'smooth' })
+                // Calculate safe scroll position (above trigger zone)
+                const section = document.getElementById(sectionId)
+                const safeY = section
+                  ? Math.max(0, section.offsetTop - window.innerHeight * 0.8)
+                  : Math.max(0, scrollYRef.current - 400)
+                // Unlock and go to safe position
+                unlockScroll(false)
+                window.scrollTo(0, safeY)
                 // Reset trigger and add scroll listener to re-show if they scroll back
                 gateTriggered.current = false
                 const recheck = () => {
-                  const section = document.getElementById(sectionId)
-                  if (section) {
-                    const rect = section.getBoundingClientRect()
-                    // If section top is in upper 60% of viewport, re-trigger
+                  const sect = document.getElementById(sectionId)
+                  if (sect) {
+                    const rect = sect.getBoundingClientRect()
                     if (rect.top < window.innerHeight * 0.6) {
                       gateTriggered.current = true
                       setShowGate(true)
-                      document.body.style.overflow = 'hidden'
+                      lockScroll()
                       window.removeEventListener('scroll', recheck)
                     }
                   }
                 }
-                // Small delay before adding listener to avoid immediate re-trigger
                 setTimeout(() => {
                   window.addEventListener('scroll', recheck, { passive: true })
-                }, 500)
+                }, 100)
               }}
               className={`absolute top-4 right-4 p-1 rounded-full transition-colors ${
                 isDark
