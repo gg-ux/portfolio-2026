@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 import { Button } from '../ui/Button'
 import { X } from '@phosphor-icons/react'
@@ -23,24 +23,6 @@ export default function ScrollPasswordGate({
   const [passwordError, setPasswordError] = useState(false)
   const [isAnimatingOut, setIsAnimatingOut] = useState(false)
   const gateTriggered = useRef(false)
-  const scrollPositionRef = useRef(0)
-
-  // Robust scroll lock that works on mobile Safari
-  const lockScroll = useCallback(() => {
-    scrollPositionRef.current = window.scrollY
-    document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollPositionRef.current}px`
-    document.body.style.width = '100%'
-  }, [])
-
-  const unlockScroll = useCallback(() => {
-    document.body.style.overflow = ''
-    document.body.style.position = ''
-    document.body.style.top = ''
-    document.body.style.width = ''
-    window.scrollTo(0, scrollPositionRef.current)
-  }, [])
 
   useEffect(() => {
     if (isAuthenticated) return
@@ -57,13 +39,13 @@ export default function ScrollPasswordGate({
       if (sectionTop < triggerPoint) {
         gateTriggered.current = true
         setShowGate(true)
-        lockScroll()
+        document.body.style.overflow = 'hidden'
       }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isAuthenticated, sectionId, lockScroll])
+  }, [isAuthenticated, sectionId])
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault()
@@ -73,7 +55,7 @@ export default function ScrollPasswordGate({
         sessionStorage.setItem(storageKey, 'true')
         setIsAuthenticated(true)
         setShowGate(false)
-        unlockScroll()
+        document.body.style.overflow = ''
       }, 400)
       setPasswordError(false)
     } else {
@@ -129,7 +111,7 @@ export default function ScrollPasswordGate({
               type="button"
               onClick={() => {
                 setShowGate(false)
-                unlockScroll()
+                document.body.style.overflow = ''
                 // Scroll up to get out of trigger zone
                 window.scrollBy({ top: -300, behavior: 'smooth' })
                 // Wait for scroll to complete, then check if we're out of trigger zone
