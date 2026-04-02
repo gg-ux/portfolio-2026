@@ -894,8 +894,12 @@ export const resumeTemplateOverrides = {
         'Led 0-1 design of in-vehicle HMI, inventing patterns native to automotive context for LA Auto Show debut',
         'Shipped high-fidelity prototype with key driver flows, balancing craft with aggressive timeline',
       ],
+      'Catalia Health': [
+        'Designed HIPAA-compliant iOS app for heart failure patients, making complex health management feel approachable',
+        'Conducted user research with 42 participants to validate conversational UI patterns for sensitive health contexts',
+      ],
     },
-    hideJobs: ['Notetracks', 'Catalia Health'],
+    hideJobs: ['Notetracks'],
   },
 }
 
