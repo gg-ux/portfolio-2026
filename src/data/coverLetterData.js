@@ -380,7 +380,7 @@ At Avala AI, an early-stage startup, I'm the sole designer shipping fast across 
 
 With 7+ years of experience designing complex workflows, hands-on experience prototyping in code, and an MHCI+D from UC Irvine, I'm excited to bring my craft and shipping velocity to the design team.
 
-PS: Built my resume, cover letter, and portfolio website on Claude Code :)`,
+PS: Built my portfolio website with Claude Code :)`,
 
       signoff: 'Looking forward to connecting,',
     },
