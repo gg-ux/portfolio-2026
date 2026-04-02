@@ -892,6 +892,7 @@ export const resumeTemplateOverrides = {
       ],
       'INDI EV': [
         'Led 0-1 design of in-vehicle HMI, inventing patterns native to automotive context for LA Auto Show debut',
+        'Shipped high-fidelity prototype with key driver flows, balancing craft with aggressive timeline',
       ],
     },
     hideJobs: ['Notetracks', 'Catalia Health'],
