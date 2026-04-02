@@ -238,7 +238,7 @@ const projects = [
   {
     id: 5,
     name: 'Notetracks',
-    category: 'DAW Collaboration Platform',
+    category: 'Audio Collaboration Platform',
     image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&h=800&fit=crop',
     link: '/project/notetracks',
     bgDark: '#7c2d12',   // Deep orange

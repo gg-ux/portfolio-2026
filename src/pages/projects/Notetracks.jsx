@@ -29,7 +29,7 @@ export default function Notetracks() {
     <ProjectLayout sections={sections}>
       <ProjectHero
         company="Notetracks"
-        title="DAW Collaboration Platform"
+        title="Audio Collaboration Platform"
         description="Notetracks is a cloud-based collaboration platform that enables time-anchored feedback on audio sessions. As the sole product designer, I designed the core interaction toolkit—waveform visualization, timeline scrubbing, non-destructive editing, and track layering—balancing professional-grade precision with accessibility for first-time collaborators."
         role="Lead Product Designer (Sole Designer)"
         timeline="Nov 2019 – Jan 2021"
