@@ -866,7 +866,7 @@ export const resumeTemplateOverrides = {
 
   'anthropic': {
     title: 'Senior Product Designer',
-    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. I ship fast, prototype in code, and design AI products that feel native to how people actually work with AI.',
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. Passionate about making complex systems feel effortless, merging function with aesthetics, and leveraging AI to build at the speed of thought.',
     skills: {
       design: ['AI Product Design', 'Design Systems', 'Prototyping', 'Interaction Design', 'Visual Craft', 'Complex Workflows'],
       development: ['Prototyping in Code (React/HTML/CSS)', 'Claude Code', 'AI-Assisted Development', 'Front-End Development'],
