@@ -408,8 +408,8 @@ export const templates = {
     id: 'anthropic',
     name: 'Anthropic',
     colors: {
-      accent: '#D4A27F',
-      accentGradient: 'linear-gradient(90deg, #D4A27F, #C4956F)',
+      accent: '#B8654A',
+      accentGradient: 'linear-gradient(90deg, #B8654A, #A85A42)',
       text: '#1a1a1a',
       textSecondary: '#555',
       textMuted: '#666',
