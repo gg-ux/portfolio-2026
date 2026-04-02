@@ -863,6 +863,43 @@ export const resumeTemplateOverrides = {
     },
     hideJobs: ['Notetracks', 'Catalia Health'],
   },
+
+  'anthropic': {
+    title: 'Senior Product Designer',
+    tagline: 'Senior Product Designer, MHCI+D, based in Los Angeles with 7+ years of experience. I ship fast, prototype in code, and design AI products that feel native to how people actually work with AI.',
+    skills: {
+      design: ['AI Product Design', 'Design Systems', 'Prototyping', 'Interaction Design', 'Visual Craft', 'Complex Workflows'],
+      development: ['Prototyping in Code (React/HTML/CSS)', 'Claude Code', 'AI-Assisted Development', 'Front-End Development'],
+      strategy: ['Shipping Fast', 'Cross-Functional Collaboration', 'Designing in Ambiguity', 'User Empathy'],
+      tools: ['Figma', 'Claude Code', 'GitHub', 'Vercel', 'Warp', 'React'],
+    },
+    experienceOverrides: {
+      'Avala AI': [
+        'Lead all design as sole designer at early-stage AI startup, shipping fast across data annotation platform, native mobile app, marketing site, internal tools, and learning systems',
+        'Prototype and ship production UI using Claude Code daily, extending what I can build through AI-native workflows',
+        'Design complex annotation workflows for LiDAR and 3D spatial data, inventing new interaction patterns for emerging AI capabilities',
+        'Build and maintain design system with component library; balance craft and speed by knowing when to polish versus when to learn',
+        'Partner with engineering and operations leadership to shape product roadmap in fast-paced, ambiguous environment',
+      ],
+      'Tesla': [
+        'Shipped AI chatbot that boosted sales lead conversion by 120%, designing conversational UI that builds trust through clear, helpful interactions',
+        'Led global launch of responsive product pages for Tesla.com, iterating quickly based on analytics and user feedback',
+        'Contributed to Tesla Design System with component guidelines and documentation, elevating craft while maintaining shipping velocity',
+        'Designed enterprise apps for Energy Installers and in-store advisors, handling complex workflows across native iOS/Android platforms',
+        'Collaborated cross-functionally with engineering, product marketing, and senior leadership to define product vision',
+      ],
+      'Accurate Background': [
+        'Designed complex compliance workflows for enterprise background check platform, making intricate processes feel intuitive',
+        'Created error-detection tool that automatically flagged inconsistencies, improving QA efficiency through thoughtful interaction design',
+        'Collaborated cross-functionally with overseas engineering teams to ship platform improvements in resource-constrained environment',
+      ],
+      'INDI EV': [
+        'Led 0-1 design of in-vehicle HMI, questioning fundamental UI assumptions to invent patterns native to automotive context',
+        'Shipped high-fidelity prototype for LA Auto Show debut, balancing craft with aggressive timeline',
+      ],
+    },
+    hideJobs: ['Notetracks', 'Catalia Health'],
+  },
 }
 
 // Get resume data for a specific template

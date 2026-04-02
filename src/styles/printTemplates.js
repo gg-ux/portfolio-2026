@@ -403,6 +403,26 @@ export const templates = {
       mono: "'Azeret Mono', monospace",
     },
   },
+
+  'anthropic': {
+    id: 'anthropic',
+    name: 'Anthropic',
+    colors: {
+      accent: '#D4A27F',
+      accentGradient: 'linear-gradient(90deg, #D4A27F, #C4956F)',
+      text: '#1a1a1a',
+      textSecondary: '#555',
+      textMuted: '#666',
+      background: '#ffffff',
+      border: '#eee',
+      bulletColor: '#999',
+    },
+    fonts: {
+      display: "'Silk Serif', serif",
+      body: "'Satoshi', -apple-system, sans-serif",
+      mono: "'Azeret Mono', monospace",
+    },
+  },
 }
 
 /**

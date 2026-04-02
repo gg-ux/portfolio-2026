@@ -366,6 +366,23 @@ With 7+ years of experience in enterprise and internal tooling, hands-on AI adop
       signoff: 'Looking forward to connecting,',
     },
   },
+
+  'anthropic': {
+    recipient: {
+      company: 'Anthropic',
+    },
+    content: {
+      greeting: 'Dear Anthropic Design Team,',
+
+      body: `I use Claude Code to ship production UI every day. The opportunity to shape how millions of people experience Claude, to help it feel like a trusted collaborator rather than just a tool, is exactly the kind of challenge I want to spend my time on. I care deeply about building AI that earns trust through craft and thoughtful design.
+
+At Avala AI, an early-stage startup, I'm the sole designer shipping fast across a data annotation platform, native mobile app, and internal tools that serve five distinct user types. I prototype in code using Claude Code daily, extending what I can build through AI-native workflows. I design complex annotation interfaces for LiDAR and 3D spatial data, inventing new patterns for interactions that don't have established conventions yet. I balance craft with speed, knowing when to polish versus when to learn. At Tesla, I shipped an AI chatbot that boosted sales lead conversion by 120%, designing conversational UI that builds trust through helpful, clear interactions. I contributed to the Tesla Design System while maintaining shipping velocity, and collaborated cross-functionally with engineering, product marketing, and senior leadership to define product vision. I've built from scratch in ambiguous environments repeatedly: INDI EV's in-vehicle interface, enterprise compliance tools at Accurate Background, and the entire design infrastructure at Avala.
+
+With 7+ years of experience designing complex workflows, hands-on experience prototyping in code, and an MHCI+D from UC Irvine, I'm excited to bring my craft and shipping velocity to the design team.`,
+
+      signoff: 'Looking forward to connecting,',
+    },
+  },
 }
 
 /**
@@ -417,5 +434,6 @@ export const getAvailableTemplates = () => {
     { id: 'netflix', name: 'Netflix (Media Platform)' },
     { id: 'netflix-commerce', name: 'Netflix (Commerce)' },
     { id: 'stubhub', name: 'StubHub' },
+    { id: 'anthropic', name: 'Anthropic' },
   ]
 }
