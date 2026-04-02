@@ -260,7 +260,7 @@ function ATSResumeContent({ template }) {
           <span className="ats-contact-separator">|</span>
           <span>{personalInfo.linkedin}</span>
           <span className="ats-contact-separator">|</span>
-          <span>graceguo.io</span>
+          <a href="https://graceguo.io" target="_blank" rel="noopener noreferrer">graceguo.io</a>
         </div>
       </header>
 
@@ -763,7 +763,7 @@ export default function ResumeContent({ template, format = 'visual' }) {
                   </svg>
                 </span>
               </div>
-              <span className="header-qr-label">graceguo.io</span>
+              <a href="https://graceguo.io" target="_blank" rel="noopener noreferrer" className="header-qr-label">graceguo.io</a>
             </div>
           </div>
         </header>

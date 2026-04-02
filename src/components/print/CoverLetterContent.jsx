@@ -247,7 +247,7 @@ export default function CoverLetterContent({ template, content, onContentChange 
                 </svg>
               </span>
             </div>
-            <span className="header-qr-label">graceguo.io</span>
+            <a href="https://graceguo.io" target="_blank" rel="noopener noreferrer" className="header-qr-label">graceguo.io</a>
           </div>
         </div>
       </header>
