@@ -875,7 +875,7 @@ export const resumeTemplateOverrides = {
     },
     experienceOverrides: {
       'Avala AI': [
-        'Lead all design as sole designer, shipping fast across data annotation platform, native mobile app, internal tools, and learning systems',
+        'Lead all design as sole designer in fast-paced engineering-led startup, shipping across data annotation platform, native mobile app, internal tools, and learning systems',
         'Prototype and ship production UI using Claude Code daily, extending what I can build through AI-native workflows',
         'Design complex annotation workflows for LiDAR and 3D spatial data, inventing new interaction patterns for emerging capabilities',
         'Build and maintain design system; balance craft and speed by knowing when to polish versus when to learn',
