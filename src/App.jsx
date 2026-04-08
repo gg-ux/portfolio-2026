@@ -101,6 +101,7 @@ function AppContent() {
   if (isCuboidPresentation) {
     return (
       <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
+        <CustomCursor />
         <Routes>
           <Route path="/project/ai-tool/presentation" element={<CuboidPresentation />} />
         </Routes>

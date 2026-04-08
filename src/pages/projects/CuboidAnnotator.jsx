@@ -144,7 +144,7 @@ export default function CuboidAnnotator() {
         company="AI Data Startup"
         title="3D Cuboid Annotation Tool"
         description="As the sole product designer for an engineering-led AI startup, I owned design across the entire company—design system, data annotation platform, native annotator app, marketing site, internal tools, and learning management system. I also shipped production UI using Claude Code, transforming an engineer-built tool into an intuitive interface that significantly improved usability, accuracy, and productivity."
-        role="Lead Product Designer"
+        role="Sole Product Designer"
         timeline="2025"
         impact="33% increase in productivity, 28% increase in accuracy"
         tools="Figma Make, Claude Code"
@@ -582,44 +582,6 @@ export default function CuboidAnnotator() {
         </ProjectSubsection>
       </ProjectSection>
 
-      {/* Design Principles */}
-      <ProjectSection id="principles" title="Design Principles">
-        <ProjectText>
-          Based on my research findings, I developed these principles to guide the redesign:
-        </ProjectText>
-
-        {/* Bento Grid Layout - stays bento until mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-          {[
-            { title: 'Reduce Cognitive Load', description: 'Use clear hierarchy with intentional spacing, color, and discoverable keyboard shortcuts', icon: SquaresFour, span: 'md:col-span-2' },
-            { title: 'Customizable Layout', description: 'Offer a modular panel system that different user types can customize for their workflow', icon: SlidersHorizontal, span: 'md:col-span-2' },
-            { title: 'Enable Batch Operations', description: 'Allow annotators to apply changes to multiple objects at once to reduce clicks', icon: Stack, span: 'md:col-span-2' },
-            { title: 'Support User Agency', description: 'Provide undo/redo so annotators can try approaches without fear of mistakes', icon: ArrowCounterClockwise, span: 'md:col-span-3' },
-            { title: 'WCAG Accessibility', description: 'Meet color contrast ratios and typography standards for extended use sessions', icon: Eyeglasses, span: 'md:col-span-3' },
-          ].map((principle, index) => {
-            const Icon = principle.icon
-            return (
-              <div
-                key={index}
-                className={`relative rounded-2xl p-6 ${principle.span} ${
-                  isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
-                }`}
-              >
-                <div className={`absolute top-6 right-6 ${isDark ? 'text-white/20' : 'text-black/25'}`}>
-                  <Icon size={24} weight="light" />
-                </div>
-                <h4 className={`text-xl mb-3 theme-heading pr-10`} style={{ fontWeight: 600 }}>
-                  {principle.title}
-                </h4>
-                <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
-                  {principle.description}
-                </Body>
-              </div>
-            )
-          })}
-        </div>
-      </ProjectSection>
-
       {/* The Solution */}
       <ProjectSection id="solution" title="The Solution">
         <ProjectImageFullWidth
@@ -634,71 +596,121 @@ export default function CuboidAnnotator() {
           Guided by the design principles I established, I used Figma to redesign the interface to reduce cognitive load and help annotators work faster with less fatigue. Once approved by the founder, I used Claude Code to ship the UI updates, while engineers handled the backend complexity.
         </ProjectText>
 
-        {/* Comparison table */}
-        <div className={`mt-16 rounded-2xl p-6 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
-          <ChartTitle>Shipped Improvements</ChartTitle>
+        {/* Design Principles */}
+        <ProjectSubsection title="Design Principles" className="mt-16">
+          <ProjectText>
+            Based on my research findings, I developed these principles to guide the redesign:
+          </ProjectText>
 
-          {/* Table */}
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th
-                  className={`text-left pb-3 ${isDark ? 'text-white/50' : 'text-black/50'}`}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+            {[
+              { title: 'Reduce Cognitive Load', description: 'Use clear hierarchy with intentional spacing, color, and discoverable keyboard shortcuts', icon: SquaresFour, span: 'md:col-span-2', colorKey: 'amethyst' },
+              { title: 'Customizable Layout', description: 'Offer a modular panel system that different user types can customize for their workflow', icon: SlidersHorizontal, span: 'md:col-span-2', colorKey: 'lilac' },
+              { title: 'Enable Batch Operations', description: 'Allow annotators to apply changes to multiple objects at once to reduce clicks', icon: Stack, span: 'md:col-span-2', colorKey: 'rose' },
+              { title: 'Freedom to Experiment', description: 'Provide undo/redo so annotators can try approaches without fear of mistakes', icon: ArrowCounterClockwise, span: 'md:col-span-3', colorKey: 'gold' },
+              { title: 'WCAG Accessibility', description: 'Meet color contrast ratios and typography standards for extended use sessions', icon: Eyeglasses, span: 'md:col-span-3', colorKey: 'peridot' },
+            ].map((principle, index) => {
+              const Icon = principle.icon
+              const accentColor = getColor(principle.colorKey, isDark)
+              return (
+                <div
+                  key={index}
+                  className={`relative rounded-2xl p-6 ${principle.span} ${
+                    isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'
+                  }`}
                 >
-                </th>
-                <th
-                  className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
-                  style={{ width: '100px' }}
-                >
-                  Original
-                </th>
-                <th
-                  className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
-                  style={{ width: '100px' }}
-                >
-                  Redesign
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Clear visual hierarchy', icon: SquaresFour },
-                { feature: 'Discoverable keyboard shortcuts', icon: Keyboard },
-                { feature: 'Modular panel system', icon: GridFour },
-                { feature: 'Batch ground alignment', icon: Crosshair },
-                { feature: 'Undo/redo support', icon: ArrowCounterClockwise },
-                { feature: 'Resizable camera views', icon: VideoCamera },
-                { feature: 'Playback for frame navigation', icon: Play },
-                { feature: 'WCAG-compliant contrast & typography', icon: Eyeglasses },
-              ].map((row) => {
-                const Icon = row.icon
-                return (
-                  <tr
-                    key={row.feature}
-                    className={`border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
+                  <div className="absolute top-6 right-6" style={{ color: accentColor, opacity: 0.45 }}>
+                    <Icon size={24} weight="duotone" />
+                  </div>
+                  <h4 className="text-base md:text-lg mb-3 theme-heading pr-10" style={{ fontWeight: 600 }}>
+                    {principle.title}
+                  </h4>
+                  <Body size="sm" className={`mb-0 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                    {principle.description}
+                  </Body>
+                </div>
+              )
+            })}
+          </div>
+        </ProjectSubsection>
+
+        {/* Design System */}
+        <ProjectSubsection title="Design System">
+          <ProjectText>
+            I consolidated scattered Figma components into a unified library, then tokenized colors, spacing, and typography using Claude Code. This gave me a shared language between design and engineering, ensuring consistency across the tool and faster iteration going forward.
+          </ProjectText>
+
+          <ProjectVideo
+            src="/assets/projects/ai-tool/design-system.webm"
+            caption="Design system components and Claude Code workflow"
+            autoPlay
+          />
+        </ProjectSubsection>
+
+        {/* Shipped Improvements */}
+        <ProjectSubsection title="Shipped Improvements">
+          <div className={`rounded-2xl p-6 md:p-8 ${isDark ? 'bg-white/[0.02]' : 'bg-black/[0.02]'}`}>
+            <table className="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th
+                    className={`text-left pb-3 ${isDark ? 'text-white/50' : 'text-black/50'}`}
                   >
-                    <td className={`py-3 font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
-                      <div className="flex items-center gap-3">
-                        <Icon size={18} weight="regular" className={isDark ? 'text-white/30' : 'text-black/30'} />
-                        {row.feature}
-                      </div>
-                    </td>
-                    <td className="py-3" style={{ width: '100px' }}>
-                      <div className="flex justify-center">
-                        <X size={18} weight="bold" style={{ color: isDark ? '#EF4444' : '#DC2626' }} />
-                      </div>
-                    </td>
-                    <td className="py-3" style={{ width: '100px' }}>
-                      <div className="flex justify-center">
-                        <Check size={18} weight="bold" style={{ color: isDark ? '#22C55E' : '#16A34A' }} />
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+                  </th>
+                  <th
+                    className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                    style={{ width: '100px' }}
+                  >
+                    Original
+                  </th>
+                  <th
+                    className={`text-center pb-3 font-mono text-[11px] uppercase tracking-wide ${isDark ? 'text-white/50' : 'text-black/50'}`}
+                    style={{ width: '100px' }}
+                  >
+                    Redesign
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: 'Clear visual hierarchy', icon: SquaresFour },
+                  { feature: 'Discoverable keyboard shortcuts', icon: Keyboard },
+                  { feature: 'Modular panel system', icon: GridFour },
+                  { feature: 'Batch ground alignment', icon: Crosshair },
+                  { feature: 'Undo/redo support', icon: ArrowCounterClockwise },
+                  { feature: 'Resizable camera views', icon: VideoCamera },
+                  { feature: 'Playback for frame navigation', icon: Play },
+                  { feature: 'WCAG-compliant contrast & typography', icon: Eyeglasses },
+                ].map((row) => {
+                  const Icon = row.icon
+                  return (
+                    <tr
+                      key={row.feature}
+                      className={`border-t ${isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
+                    >
+                      <td className={`py-3 font-satoshi text-[15px] ${isDark ? 'text-white/90' : 'text-gray-800'}`}>
+                        <div className="flex items-center gap-3">
+                          <Icon size={18} weight="regular" className={isDark ? 'text-white/30' : 'text-black/30'} />
+                          {row.feature}
+                        </div>
+                      </td>
+                      <td className="py-3" style={{ width: '100px' }}>
+                        <div className="flex justify-center">
+                          <X size={18} weight="bold" style={{ color: isDark ? '#EF4444' : '#DC2626' }} />
+                        </div>
+                      </td>
+                      <td className="py-3" style={{ width: '100px' }}>
+                        <div className="flex justify-center">
+                          <Check size={18} weight="bold" style={{ color: isDark ? '#22C55E' : '#16A34A' }} />
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </ProjectSubsection>
 
       </ProjectSection>
 
@@ -708,9 +720,9 @@ export default function CuboidAnnotator() {
           The interactive prototypes below were created using Figma Make, demonstrating key workflows and interactions across the platform.
         </ProjectText>
 
-        <ProjectSubsection title="Adaptive Workspace">
+        <ProjectSubsection title="Modular Adaptive Workspace">
           <ProjectText>
-            The same interface serves annotators, QA reviewers, and external engineers—each with role-based permissions but a shared foundation. A modular panel system lets users resize, collapse, expand, and rearrange views to focus on their specific workflow.
+            A modular panel system that adapts to different user roles and screen sizes. Annotators, QA reviewers, and engineers each get the same foundation but can resize, collapse, and rearrange panels to fit their workflow and display.
           </ProjectText>
 
           <div className="flex flex-wrap gap-2 my-6">
@@ -751,9 +763,9 @@ export default function CuboidAnnotator() {
           />
         </ProjectSubsection>
 
-        <ProjectSubsection title="Selection & Transform Tools">
+        <ProjectSubsection title="Intuitive Editing Controls">
           <ProjectText>
-            Annotators adjust position, rotation, and scale with sub-meter precision. I audited existing 3D software like Blender and SketchUp to identify familiar patterns, then designed transform controls with RGB axis arrows and keyboard shortcuts.
+            Annotators adjust position, rotation, and scale with sub-meter precision. I audited Blender and SketchUp to identify familiar patterns, and added visible keyboard shortcut hints that can be shown or hidden so annotators learn faster and speed up over time.
           </ProjectText>
 
           <div className="flex flex-wrap gap-2 my-6">
@@ -790,7 +802,7 @@ export default function CuboidAnnotator() {
 
         <ProjectSubsection title="Ground Alignment">
           <ProjectText>
-            LiDAR ground planes aren't perfectly flat, forcing annotators to manually adjust every cuboid's vertical position. I designed Ground Alignment: set one cuboid as the "road plane," then snap others to match. What took minutes now takes seconds.
+            Ground alignment was the #1 pain point from user research. LiDAR ground planes aren't perfectly flat, so annotators spent minutes per scene manually adjusting every cuboid. I designed a tool to set one cuboid as the "road plane," then batch-snap others to match.
           </ProjectText>
 
           <div className="flex flex-wrap gap-2 my-6">
@@ -828,9 +840,9 @@ export default function CuboidAnnotator() {
           </ProjectCallout>
         </ProjectSubsection>
 
-        <ProjectSubsection title="Cross-Functional Design">
+        <ProjectSubsection title="Designing for Multiple Workflows">
           <ProjectText>
-            Annotators, QA, and engineers all use this tool differently. I designed the interface so each group can quickly access what they need without cluttering the view for others.
+            The same tool serves annotators labeling objects, QA reviewers flagging errors, and engineers debugging coordinates. I used progressive disclosure to surface role-specific features like detailed coordinates and bug reporting without cluttering the default view.
           </ProjectText>
 
           <div className="flex flex-wrap gap-2 my-6">
@@ -952,20 +964,6 @@ export default function CuboidAnnotator() {
         </ProjectSubsection>
       </ProjectSection>
 
-      {/* Design System */}
-      <ProjectSection id="design-system" title="Design System">
-        <ProjectText>
-          While working on the updated design for the tooling, I was simultaneously managing and updating our design system. I built it by consolidating scattered Figma components into a unified library, then tokenized colors, spacing, and typography using Claude Code. This let me ship reusable React components directly to production, ensuring visual consistency across the platform without waiting on engineering bandwidth.
-        </ProjectText>
-
-        {/* Video placeholder - hidden until rendered
-        <div className={`my-8 rounded-2xl aspect-video flex items-center justify-center ${isDark ? 'bg-white/[0.04] border border-white/[0.08]' : 'bg-black/[0.04] border border-black/[0.08]'}`}>
-          <span className={`font-mono text-sm ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-            [Video: Design System + Claude Code workflow]
-          </span>
-        </div>
-        */}
-      </ProjectSection>
     </ProjectLayout>
   )
 }
