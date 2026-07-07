@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import AnimatedLogo from './AnimatedLogo'
 
 export default function Loader({ onComplete }) {
   const [phase, setPhase] = useState('enter') // enter, loading, complete, exit
@@ -170,29 +171,19 @@ export default function Loader({ onComplete }) {
           />
         </svg>
 
-        {/* Logo with breathing pulse */}
-        <img
-          src="/assets/branding/logo.svg"
-          alt="Grace Guo"
-          className={`h-6 w-auto transition-all ${
-            phase === 'loading' ? 'animate-breathe' : ''
-          }`}
+        {/* Logo drawing itself on — the draw (0.4s–2.4s) finishes right at the
+            animation-ready gate, so the mark completes as the loader exits */}
+        <AnimatedLogo
+          duration={2}
+          delay={0.4}
+          className="h-6 w-auto transition-all"
           style={{
+            color: isDark ? '#DED5D0' : '#212A2F',
             transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
             transitionDuration: phase === 'exit' ? '800ms' : '500ms',
-            opacity: phase === 'enter' ? 0 : phase === 'exit' ? 0 : 1,
-            filter: `${isDark ? 'invert(1) ' : ''}${
-              phase === 'enter'
-                ? 'blur(8px)'
-                : phase === 'exit'
-                ? 'blur(16px)'
-                : 'blur(0)'
-            }`,
-            transform: phase === 'enter'
-              ? 'scale(0.8)'
-              : phase === 'exit'
-              ? 'scale(1.1)'
-              : 'scale(1)',
+            opacity: phase === 'exit' ? 0 : 1,
+            filter: phase === 'exit' ? 'blur(16px)' : 'blur(0)',
+            transform: phase === 'exit' ? 'scale(1.1)' : 'scale(1)',
           }}
         />
       </div>

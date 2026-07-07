@@ -4,6 +4,7 @@ import { H4, Body, Caption, SubtleContainer, Text, Display, Heading, Paragraph, 
 import { useTheme } from '../../context/ThemeContext'
 import { colors } from '../../constants/tokens'
 import DSLayout, { DSSection } from './DSLayout'
+import AnimatedLogo from '../../components/AnimatedLogo'
 import { Divider, SectionDivider } from '../../components/ui/Divider'
 import { FrostedContainer } from '../../components/ui'
 import {
@@ -85,6 +86,7 @@ const sections = [
   { id: 'tokens', label: 'Tokens' },
   { id: 'typography', label: 'Typography' },
   { id: 'colors', label: 'Colors' },
+  { id: 'logo', label: 'Logo' },
   { id: 'iconography', label: 'Iconography' },
   { id: 'spacing', label: 'Spacing' },
   { id: 'containers', label: 'Containers' },
@@ -201,6 +203,7 @@ export const getPaletteColors = (isDark) =>
 export default function FoundationPage() {
   const { isDark } = useTheme()
   const [copied, setCopied] = useState(false)
+  const [drawKey, setDrawKey] = useState(0)
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(tokensCode)
@@ -711,6 +714,84 @@ export default function FoundationPage() {
           </div>
         </div>
 
+      </DSSection>
+
+      {/* Logo */}
+      <DSSection id="logo" title="Logo">
+        <Paragraph className="mb-12 max-w-3xl">
+          The primary mark — a single-stroke G monogram. It sits in the top navigation on every page and inverts to stay legible across themes.
+        </Paragraph>
+
+        {/* Primary Mark */}
+        <div className="mb-12">
+          <H4 className="mb-2">Primary Mark</H4>
+          <Paragraph size="sm" className="mb-4">One asset, two themes — the mark is inked in near-black and inverted via CSS in dark mode.</Paragraph>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="group">
+              <div className={`aspect-[3/2] rounded-xl mb-1.5 flex items-center justify-center bg-[#FAF8F4] border ${borderClass} transition-transform duration-300 group-hover:scale-[1.02]`}>
+                <img
+                  src="/assets/branding/logo.svg"
+                  alt="Grace Guo logo on light background"
+                  className="h-12 w-auto"
+                />
+              </div>
+              <Mono uppercase>On Light</Mono>
+            </div>
+            <div className="group">
+              <div className={`aspect-[3/2] rounded-xl mb-1.5 flex items-center justify-center bg-[#0A0A0A] border ${borderClass} transition-transform duration-300 group-hover:scale-[1.02]`}>
+                <img
+                  src="/assets/branding/logo.svg"
+                  alt="Grace Guo logo on dark background"
+                  className="h-12 w-auto invert"
+                />
+              </div>
+              <Mono uppercase>On Dark</Mono>
+            </div>
+          </div>
+        </div>
+
+        {/* Animated Mark */}
+        <div className="mb-12">
+          <H4 className="mb-2">Animated Mark</H4>
+          <Paragraph size="sm" className="mb-4">The mark drawn as one continuous stroke — for loaders, page transitions, and moments that deserve a flourish.</Paragraph>
+          <div className={`relative rounded-xl border ${borderClass} flex items-center justify-center py-16`}>
+            <AnimatedLogo
+              key={drawKey}
+              className="h-28 w-auto"
+              style={{ color: isDark ? '#DED5D0' : '#212A2F' }}
+            />
+            <button
+              onClick={() => setDrawKey((k) => k + 1)}
+              className={`absolute bottom-4 right-4 font-mono text-xs px-3 py-1 rounded border transition-colors ${
+                isDark ? 'border-white/20 text-white/60 hover:border-white/40' : 'border-black/20 text-gray-500 hover:border-black/40'
+              }`}
+            >
+              Replay
+            </button>
+          </div>
+        </div>
+
+        {/* Asset Details */}
+        <div className={`p-6 border ${borderClass} rounded-xl`}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <Caption className="block mb-1" size="xs">Asset</Caption>
+              <Text size="label" color="body">logo.svg</Text>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Ink</Caption>
+              <Text size="label" color="body">#212A2F</Text>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Nav Height</Caption>
+              <Text size="label" color="body">24px</Text>
+            </div>
+            <div>
+              <Caption className="block mb-1" size="xs">Dark Mode</Caption>
+              <Text size="label" color="body">CSS invert</Text>
+            </div>
+          </div>
+        </div>
       </DSSection>
 
       {/* Iconography */}

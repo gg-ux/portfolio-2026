@@ -8,6 +8,7 @@ import { Button, ButtonWithArrow } from '../../components/ui/Button'
 import { Tag } from '../../components/ui'
 import { Input, Textarea, Select } from '../../components/ui/Input'
 import { Caption, H4, Paragraph } from '../../components/Typography'
+import AnimatedLogo from '../../components/AnimatedLogo'
 import { MagnifyingGlass, PencilSimple, Code, Person, ArrowsOut, X, ArrowUpRight } from '@phosphor-icons/react'
 
 const sections = [
@@ -335,7 +336,7 @@ export default function ComponentsPage() {
       <DSSection id="loaders" title="Loaders">
         <H4 className="mb-2">Welcome Loader</H4>
         <Paragraph size="sm" className="mb-4">
-          Page loader with progress ring, breathing logo, and bloom effect.
+          Page loader with progress ring, bloom effect, and the mark drawing itself on as one continuous stroke.
         </Paragraph>
 
         {/* Loader animation keyframes */}
@@ -420,12 +421,12 @@ export default function ComponentsPage() {
                   style={{ animation: 'loader-ring-fill 4s ease-in-out' }}
                 />
               </svg>
-              {/* Logo */}
-              <img
-                src="/assets/branding/logo.svg"
-                alt="Logo"
-                className={`h-6 w-auto relative ${isDark ? 'invert' : ''}`}
-                style={{ animation: 'loader-breathe 2s ease-in-out infinite, loader-fade 4s ease-in-out' }}
+              {/* Logo drawing itself on */}
+              <AnimatedLogo
+                duration={2}
+                delay={0.4}
+                className="h-6 w-auto relative"
+                style={{ color: isDark ? '#DED5D0' : '#212A2F', animation: 'loader-fade 4s ease-in-out' }}
               />
             </div>
             <button
